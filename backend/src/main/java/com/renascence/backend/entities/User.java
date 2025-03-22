@@ -4,19 +4,17 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import com.renascence.backend.enums.UserRole;
-import com.renascence.backend.enums.PaymentMethod;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Setter
 @Getter
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    private Integer id;
 
     private String name;
 
@@ -24,17 +22,21 @@ public class User {
 
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
-
     private String phoneNumber;
 
-    @Enumerated(EnumType.STRING)
-    private PaymentMethod paymentMethod;
+    @ManyToOne
+    @JoinColumn(name = "locationId", nullable = false)
+    private City location;
 
-    @Column(nullable = true)
-    private String address;
+    @OneToOne(mappedBy = "user")
+    private DeliveryGuy deliveryGuy;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private List<Restaurant> restaurants = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "usersRoles",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "roleId")
+    )
+    private Set<Role> roles = new HashSet<>();
+
 }

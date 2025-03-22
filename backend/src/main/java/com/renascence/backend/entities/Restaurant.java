@@ -4,20 +4,38 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 
 @Entity
-@Setter
 @Getter
+@Setter
+@Table(name = "restaurants")
 public class Restaurant {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long restaurant_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-        private String name;
-        private String address;
+    @Column(nullable = false)
+    private String name;
 
-        @ManyToOne
-        @JoinColumn(name = "user_id", nullable = false)
-        private User owner;
+    @Column(nullable = false)
+    private float rating;
 
+    @Column(nullable = false)
+    private double deliveryGuySalary;
+
+    @Column(nullable = false)
+    private String iban;
+
+    @ManyToOne
+    @JoinColumn(name = "cityId", nullable = false)
+    private City city;
+
+    @ManyToOne
+    @JoinColumn(name = "ownerId", nullable = false)
+    private User owner;
+
+    @OneToOne
+    @JoinColumn(name = "bonusId")
+    private Bonus bonus;
 }
