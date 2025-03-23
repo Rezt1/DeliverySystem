@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "deliveryGuyId", nullable = false)

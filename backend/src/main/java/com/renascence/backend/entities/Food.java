@@ -6,6 +6,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -13,7 +18,7 @@ import lombok.Setter;
 public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(nullable = false)
     private String name;
@@ -28,10 +33,13 @@ public class Food {
     private FoodCategory category;
 
     @ManyToOne
-    @JoinColumn(name = "cuisineId")
+    @JoinColumn(name = "cuisineId", nullable = false)
     private Cuisine cuisine;
 
     @ManyToOne
-    @JoinColumn(name = "restaurantId")
+    @JoinColumn(name = "restaurantId", nullable = false)
     private Restaurant restaurant;
+
+    @OneToMany(mappedBy = "food")
+    private List<DeliveryFood> deliveriesFoods = new ArrayList<>();
 }

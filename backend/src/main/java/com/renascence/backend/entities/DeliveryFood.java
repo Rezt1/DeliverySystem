@@ -11,7 +11,7 @@ import lombok.Setter;
 public class DeliveryFood {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "deliveryId", nullable = false)

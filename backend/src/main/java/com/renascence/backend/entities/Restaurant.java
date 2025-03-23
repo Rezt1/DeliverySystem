@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ import java.util.List;
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(nullable = false)
     private String name;
@@ -24,7 +25,7 @@ public class Restaurant {
     @Column(nullable = false)
     private double deliveryGuySalary;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50, unique = true)
     private String iban;
 
     @ManyToOne
@@ -36,6 +37,15 @@ public class Restaurant {
     private User owner;
 
     @OneToOne
-    @JoinColumn(name = "bonusId")
+    @JoinColumn(name = "bonusId", nullable = false)
     private Bonus bonus;
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<Delivery> deliveries = new ArrayList<>();
+
+    @OneToMany(mappedBy = "workPlace")
+    private List<DeliveryGuy> deliveryGuys = new ArrayList<>();
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<Food> foods = new ArrayList<>();
 }

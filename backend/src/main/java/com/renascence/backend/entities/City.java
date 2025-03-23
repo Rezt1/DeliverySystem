@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -11,8 +14,14 @@ import lombok.Setter;
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "location")
+    List<User> users = new ArrayList<>();
+
+    @OneToMany(mappedBy = "city")
+    List<Restaurant> restaurants = new ArrayList<>();
 }

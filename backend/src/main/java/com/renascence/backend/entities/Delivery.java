@@ -6,7 +6,10 @@ import com.renascence.backend.enums.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,7 +18,7 @@ import java.util.Date;
 public class Delivery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "receiverId", nullable = false)
@@ -42,4 +45,7 @@ public class Delivery {
 
     @Column(nullable = false)
     private Date date;
+
+    @OneToMany(mappedBy = "delivery")
+    private List<DeliveryFood> deliveriesFoods = new ArrayList<>();
 }

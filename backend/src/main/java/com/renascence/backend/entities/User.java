@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,18 +16,22 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String phoneNumber;
 
     @ManyToOne
-    @JoinColumn(name = "locationId", nullable = false)
+    @JoinColumn(name = "locationId")
     private City location;
 
     @OneToOne(mappedBy = "user")
@@ -39,4 +45,9 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "owner")
+    private List<Restaurant> restaurants = new ArrayList<>();
+
+    @OneToMany(mappedBy = "receiver")
+    private List<Delivery> deliveries = new ArrayList<>();
 }

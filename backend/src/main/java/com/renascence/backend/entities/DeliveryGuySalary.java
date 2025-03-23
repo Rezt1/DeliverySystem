@@ -7,17 +7,13 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "deliveryGuySalaries")
 @Getter
 @Setter
+@Table(name = "deliveryGuySalaries")
 public class DeliveryGuySalary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "deliveryGuyId", nullable = false)
-    private DeliveryGuy deliveryGuy;
+    private long id;
 
     @Column(nullable = false)
     private double amount;
@@ -28,4 +24,7 @@ public class DeliveryGuySalary {
     @Column(nullable = false)
     private LocalDate endDate;
 
+    @ManyToOne
+    @JoinColumn(name = "deliveryGuyId", nullable = false)
+    private DeliveryGuy deliveryGuy;
 }
