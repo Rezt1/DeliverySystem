@@ -1,37 +1,51 @@
 package com.renascence.backend.entities;
 
+import com.renascence.backend.enums.DeliveryStatus;
+import com.renascence.backend.enums.PaymentMethod;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import com.renascence.backend.enums.DeliveryStatus;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Setter
 @Getter
+@Setter
+@Table(name = "deliveries")
 public class Delivery {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "receiverId", nullable = false)
+    private User receiver;
 
     @ManyToOne
-    @JoinColumn(name = "deliveryguy_id", nullable = false)
-    private User deliveryGuy;
+    @JoinColumn(name = "deliveryGuyId", nullable = false)
+    private DeliveryGuy deliveryGuy;
 
     @ManyToOne
-    @JoinColumn(name = "food_id", nullable = false)
-    private Food food;
+    @JoinColumn(name = "restaurantId", nullable = false)
+    private Restaurant restaurant;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private DeliveryStatus status;
 
-    private String address;
-    private Date date;
-}
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PaymentMethod paymentMethod;
 
+    @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false)
+    private Date date;
+
+    @OneToMany(mappedBy = "delivery")
+    private List<DeliveryFood> deliveriesFoods = new ArrayList<>();
+}

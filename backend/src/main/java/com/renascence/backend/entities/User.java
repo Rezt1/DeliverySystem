@@ -4,37 +4,50 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import com.renascence.backend.enums.UserRole;
-import com.renascence.backend.enums.PaymentMethod;
-
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Setter
 @Getter
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    private long id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
-
+    @Column(nullable = false)
     private String phoneNumber;
 
-    @Enumerated(EnumType.STRING)
-    private PaymentMethod paymentMethod;
+    @ManyToOne
+    @JoinColumn(name = "locationId")
+    private City location;
 
-    @Column(nullable = true)
-    private String address;
+    @OneToOne(mappedBy = "user")
+    private DeliveryGuy deliveryGuy;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "usersRoles",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "roleId")
+    )
+    private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "owner")
     private List<Restaurant> restaurants = new ArrayList<>();
+
+    @OneToMany(mappedBy = "receiver")
+    private List<Delivery> deliveries = new ArrayList<>();
 }

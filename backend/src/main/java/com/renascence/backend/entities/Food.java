@@ -1,26 +1,45 @@
 package com.renascence.backend.entities;
 
+import com.renascence.backend.enums.FoodCategory;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import com.renascence.backend.enums.FoodType;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Setter
 @Getter
+@Setter
+@Table (name = "foods")
 public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long food_id;
+    private long id;
 
+    @Column(nullable = false)
     private String name;
-    private Double price;
+
+    @Column(nullable = false)
+    private double price;
+
+    private String description;
 
     @Enumerated(EnumType.STRING)
-    private FoodType type;
+    @Column(nullable = false)
+    private FoodCategory category;
 
     @ManyToOne
-    @JoinColumn(name = "menu_id")
-    private Menu menu;
+    @JoinColumn(name = "cuisineId", nullable = false)
+    private Cuisine cuisine;
+
+    @ManyToOne
+    @JoinColumn(name = "restaurantId", nullable = false)
+    private Restaurant restaurant;
+
+    @OneToMany(mappedBy = "food")
+    private List<DeliveryFood> deliveriesFoods = new ArrayList<>();
 }
