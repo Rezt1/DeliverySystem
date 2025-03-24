@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="./style.css" rel="stylesheet" />
+    <link href="./custom.css" rel="stylesheet" />
+
+    <title>Hexeats - Login</title>
+  </head>
+
+  <body>
+    <header
+      class="bg-[#006bb8] relative flex items-center justify-between py-3 px-2 md:max-h-[110px]"
+    >
+      <!-- Logo Section -->
+      <div class="flex items-center shrink-0">
+        <a href="#">
+          <img
+            class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
+            src="./Images/logo.PNG"
+            alt="logo"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Navigation (prevents buttons from going out of sight) -->
+      <nav
+        class="hidden md:flex flex-wrap justify-center lg:justify-between items-center flex-grow min-w-0 md:pl-[100px]"
+      >
+        <!-- Left Section -->
+        <div class="flex flex-wrap gap-3">
+          <button class="btn-primary">Home</button>
+          <button class="btn-primary">Restaurants</button>
+
+          <!-- Hidden deliveries button -->
+          <!-- To be shown only when delivery guy is logged in -->
+          <button id="deliveries-button" class="btn-primary hidden">
+            Deliveries
+          </button>
+        </div>
+
+        <!-- Right Section -->
+        <div class="flex flex-wrap gap-3 items-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            id="search-navbar-input"
+            class="btn-primary btn-search w-31 focus:outline-none"
+          />
+          <button
+            class="btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative"
+          >
+            <svg
+              class="btn-cart-icon w-8 h-8 text-[#006bb8]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              viewBox="0 0 24 24"
+            >
+              <path d="M4 10h16l-2 8H6l-2-8z" />
+              <path d="M9 10V6a3 3 0 0 1 6 0v4" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <line x1="9" y1="16" x2="15" y2="16" />
+            </svg>
+          </button>
+
+          <!-- Login/Reg/Account buttons -->
+          <button id="login-button" class="btn-primary">Login</button>
+          <button id="register-button" class="btn-primary">Register</button>
+          <button id="account-button" class="btn-primary hidden">
+            Account
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden flex items-center">
+        <button
+          type="button"
+          id="main-menu"
+          aria-label="Main menu"
+          aria-expanded="false"
+          class="btn-menu p-2 rounded-md text-white hover:bg-white hover:text-[#006bb8] transition"
+        >
+          <svg
+            class="btn-menu-icon h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Menu (hidden by default) -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden flex flex-col items-center bg-[#006bb8] absolute top-[100px] left-0 w-full p-4 space-y-4 transition-all duration-300 ease-in-out"
+      >
+        <input
+          type="text"
+          placeholder="Search..."
+          id="search-navbar-menu-input"
+          class="btn-primary w-full focus:outline-none focus:ring-1 focus:ring-[#006bb8]"
+        />
+        <button class="btn-primary w-full text-white text-lg py-2">Home</button>
+        <button class="btn-primary w-full text-white text-lg py-2">
+          Restaurants
+        </button>
+
+        <!-- Hidden button for Deliveries -->
+        <!-- To be shown only when delivery guy is logged in -->
+        <button
+          id="mobile-deliveries-button"
+          class="btn-primary w-full text-white text-lg py-2 hidden"
+        >
+          Deliveries
+        </button>
+        <button
+          id="mobile-cart-button"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Cart
+        </button>
+
+        <!-- Mobile Login/Account/Register Buttons -->
+        <button
+          id="mobile-login-button"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Login
+        </button>
+        <button
+          id="mobile-register-button"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Register
+        </button>
+        <button
+          id="mobile-account-button"
+          class="btn-primary w-full text-white text-lg py-2 hidden"
+        >
+          Account
+        </button>
+      </div>
+    </header>
+
+    <main class="flex flex-col items-center py-[24px] pb-0">
+      <h1 class="text-4xl md:text-7xl text-center font-extrabold my-10">
+        Hexeats Privacy Statement
+      </h1>
+      <p class="text-1xl md:text-2xl text-justify">
+        At Hexeats, we take data protection seriously. Privacy and information
+        security are at the heart of Hexeats. This Privacy Policy Statement
+        describes the key principles and practices we abide by to ensure your
+        privacy is respected while using our services. Hexeats Enterprises Oy,
+        local country-specific Hexeats companies, and DoorDash Inc., belonging
+        to the same group of companies (“Hexeats”, “we”), process personal data
+        of users of Hexeats’ food and retail ordering services ordered through
+        the Hexeats application (“Hexeats App”) and users of other Hexeats
+        delivery products and services, as well as visitors of the website
+        hexeats.com (“Website”). In this Privacy Statement, the term “Hexeats
+        Services” refers jointly to the Website, the Hexeats App, and other
+        services provided by Hexeats to users. In this Privacy Statement, the
+        term “User” or “you” refers jointly to our and our group companies’
+        customers, users of Hexeats delivery services, representatives, and
+        other authorized users of our customer organizations, potential
+        customers, and users of the Hexeats Services. Our Privacy Statement
+        explains, for example, the types of personal data we process, how we
+        process the personal data, and how you may exercise your rights as a
+        data subject (for example, the right to object or the right of access).
+        Some of our services might be subject to a separate privacy policy. If a
+        separate privacy policy applies to a particular service, we will post it
+        in connection with the service in question. This Privacy Statement may
+        be updated from time to time to reflect changes in data processing
+        practices or otherwise. You can find the current version on the Website.
+        We will not make substantial changes to this Privacy Statement or reduce
+        the rights of the Users under this Privacy Statement without providing
+        notice thereof. 1. Data Controllers This Privacy Statement applies to
+        the processing of personal data carried out by Hexeats. Hexeats is part
+        of DoorDash, Inc., a technology company with an official address at 303
+        2nd St, Suite 800, San Francisco, CA 94107, USA. In relation to the
+        processing of personal data of Users in the below countries, Hexeats
+        Enterprises Oy and the local Hexeats group company are acting as joint
+        data controllers. This means that Hexeats Enterprises Oy and the local
+        Hexeats group company together determine the purposes for and means by
+        which personal data is processed. The country-specific joint controllers
+        are listed below: Hexeats Enterprises Deutschland GmbH, Stralauer Allee
+        6, 10245 Berlin, Germany, if the User is located in Germany. Hexeats
+        Česko s.r.o., Bubenská 1477/1, Holešovice, PSČ 170 00 Praha 7, Czech
+        Republic, if the User is located in the Czech Republic. Hexeats Polska
+        sp. z o.o., ul. Złota 59, 00-120 Warsaw, Poland, if the User is located
+        in Poland. Hexeats Enterprises Israel Ltd., HaMelacha St. 8, 6721508 Tel
+        Aviv, Israel, if the User is located in Israel. Hexeats Technologies
+        Greece Provision of Food Services S.A., 80 Mihalakopoulou Street, P.O.,
+        11528 Athens, Greece, if the User is located in Greece. Hexeats d.o.o.
+        Beograd-Stari Grad, Masarikova 2-4, floor 3, building 1, 11000 Belgrade
+        (Savski Venac), Serbia, if the User is located in Serbia. Hexeats
+        Azerbaijan LLC, Yasamal district, Hyatt Tower 2, 4th floor, 8 Izmir
+        Street, AZ1065 Baku, Azerbaijan, if the User is located in Azerbaijan.
+        Hexeats Technologies Kazakhstan LLP, Adi Sharipov street 92, 5th floor,
+        050012, Almaty, Kazakhstan, if the User is located in Kazakhstan.
+        Hexeats Bulgaria s. r. o., Nivy Tower, Mlynske Nivy 188890/5, 811 09
+        Sofia, Bulgarian Republic, if the User is located in Bulgaria. Hexeats
+        Malta Limited, Level 2, Office 1, Trident Park, Triq l-Imdina,
+        Birkirkara CBD 2010, Malta, if the User is located in Malta. Hexeats
+        Norway AS, Kongens gate 4, 0153 Oslo, Norway, if the User is located in
+        Norway. Hexeats Latvija SIA, Krišjāņa Valdemāra iela 8-7 Rīga, LV-1010,
+        Latvia, if the User is located in Latvia. UAB Hexeats LT, A. Goštauto g.
+        12A, LT-01108 Vilnius, Lithuania, if the User is located in Lithuania.
+        Hexeats Japan K.K., 4-chōme-3-14 Ebisu, Shibuya City, Tokyo 150-0013,
+        Japan, if the User is located in Japan. Hexeats Georgia LLC, Chugureti
+        District, D. Agmashenebeli ave., N 61, 0179 Tbilisi, Georgia, if the
+        User is located in Georgia. Hexeats Eesti OÜ, Aia 10 a, 10111, Tallinn,
+        Estonia, if the User is located in Estonia. Hexeats Zagreb d.o.o.,
+        Kuzminečka ul. 10A, 3rd floor, 10000 Zagreb, Croatia, if the User is
+        located in Croatia. Hexeats Danmark ApS, Borgergade 10, 2 sal., 1300
+        Copenhagen K, Denmark, if the User is located in Denmark. Hexeats
+        Sverige AB, Solnavägen 3H, 113 63 Stockholm, Sweden, if the User is
+        located in Sweden. Hexeats Cyprus Limited, Digeni Akrita 26, 1055,
+        Nicosia, Cyprus, if the User is located in Cyprus. Hexeats, tehnologije
+        d.o.o. Ljubljana, Parmova ulica 53, 1000, Ljubljana, Slovenia, if the
+        User is located in Slovenia. Hexeats Magyarország Kft, Salétrom utca 4.
+        földszint, 1085 Budapest, Hungary, if the User is located in Hungary.
+        Hexeats Enterprises Iceland ehf, Efstaleiti 5, 103, Reykjavik, Iceland,
+        if the User is located in Iceland. Hexeats Austria GmbH, Zaunergasse
+        4-6, 1030 Wien, Austria, if the User is located in Austria. Hexeats
+        Luxembourg S.á r.l., 33 Boulevard Prince Henri, L-1724, Luxembourg, if
+        the User is located in Luxembourg. Hexeats Albania SHPK, Rr. Ibrahim
+        Rugova, Sky Tower, Floor 5, Suite 2, Tirana, Albania, if the User is
+        located in Albania. Hexeats Texnologiyalari FE LLC, Lazbak street, house
+        64A Shaykhontohur District, Tashkent city, Uzbekistan, if the User is
+        located in Uzbekistan. Hexeats Enterprises Oy has been appointed
+        responsible for handling all data subject requests and questions
+        relating to the personal data processing of the Hexeats group on behalf
+        of the local joint controllers. Hexeats also provides delivery as a
+        service to other companies (for example, Hexeats Drive API and eCommerce
+        integrations). In such cases, Hexeats is the data processor for the
+        parts of the processing activities related to receiving, managing, and
+        completing the delivery, as well as communicating and confirming the
+        delivery to the company in question. 2. Hexeats’ Contact Details Hexeats
+        Enterprises Oy Business ID: 2646674-9 Correspondence address: Pohjoinen
+        Rautatiekatu 21, 00100 Helsinki, Finland Email address:
+        support@hexeats.com Data Protection Officer: Hexeats has appointed a
+        data protection officer who you can reach through the above contact
+        details or by sending an email to privacy@hexeats.com. 3. Personal Data
+        Processed and Sources of Data We process personal data only to the
+        extent necessary and appropriate for the specific processing purpose.
+        The personal data collected and processed by us can be divided into two
+        general data categories: User Data and Usage Data. User Data User Data
+        is personal data collected directly from you or from our customer
+        organization on behalf of which you are using the Hexeats Services
+        (“Customer Organization”), as the case may be. We may collect User Data
+        from our Users and Customer Organizations in a variety of ways,
+        including after the conclusion of a service agreement with the Customer
+        Organization or when Users register for the Hexeats Services, subscribe
+        to a newsletter, or fill out a form. Further, please note that we also
+        collect details of any transactions and payments you carry out through
+        the Hexeats Services. User Data Necessary to Use the Hexeats Services
+        The following personal data collected and processed by us is necessary
+        for the proper performance of the contract between you and us, as well
+        as for our legitimate interest while fulfilling our contractual
+        obligations towards our Customer Organizations and for compliance with
+        our legal obligations: Full name Telephone number Email address
+        Information relating to your payment instrument(s), such as the number
+        of your payment instrument(s) and the expiration date of your payment
+        instrument(s) (required for ordering food and other products via the
+        Hexeats Services, but not stored by Hexeats, as Hexeats uses a
+        third-party payment service provider for processing payments). User Data
+        You Provide Voluntarily Your user or customer experience may be enhanced
+        by providing us with the following information: A picture Delivery
+        address Location data (if you consent to the processing of your location
+        data) Partner-specific bonus card or participation in other loyalty
+        programs, if applicable in your country Age (when ordering
+        age-restricted goods) Other information you provide when creating or
+        modifying your account profile. Other Information We may also process
+        other information provided by you voluntarily, such as: Information
+        related to your orders from Hexeats or through Hexeats Services (e.g.,
+        items purchased, special instructions, date and time of order, total
+        amount of order, and other order history). Information you provide when
+        submitting ratings, comments, or responding to surveys. Favorite
+        restaurants or merchants and other preferences. Marketing opt-ins and
+        opt-outs. Information you provide by phone, email, or chat
+        correspondence with us, including call recordings of your calls with our
+        customer service. In addition to User Data collected from you and the
+        Customer Organization, we process certain personal data provided by
+        third-party service providers about you. For example, for corporate
+        customers, we may process company contact person information to enable
+        communication and marketing with the company, as well as managing the
+        customer relationship. Such data is primarily obtained from public
+        sources such as local trade registers, companies providing this type of
+        information services, or the companies themselves. If your order
+        contains products or services that may imply a health condition or other
+        sensitive (special category) personal data, Hexeats needs to process
+        this data to provide the Hexeats Services to you. In addition to the
+        contents of the order, this may also include, for example, medical
+        prescription data in the case of prescription medicine. Hexeats adheres
+        to any additional safeguards that may apply to processing such personal
+        data under applicable laws and regulations. If required under applicable
+        laws, Hexeats will ask for separate consent for processing such personal
+        data, and you may withdraw such consent at any time through your profile
+        settings or by contacting Hexeats support at support@hexeats.com. If you
+        connect or log in to your account with Facebook, Facebook shares with us
+        personal information about you, such as your profile picture, a sample
+        of your Facebook friends, and your Facebook ID. While Hexeats maintains
+        its page on Facebook, both Hexeats and Facebook are joint controllers
+        for your personal data. More information on the processing of personal
+        data on Facebook is available at Meta Privacy Policy. Usage Data Usage
+        Data arises from User interactions with the Hexeats Services. Although
+        we do not normally use Usage Data to identify you as an individual, you
+        can in certain circumstances be identified from it, either alone or when
+        combined or linked with User Data. In such situations, Usage Data can
+        also be considered personal data under applicable laws, and we will
+        treat such data as personal data. We may automatically collect the
+        following Usage Data when you visit or interact with the Hexeats
+        Services: Information that describes your device or browser and Hexeats’
+        application, their versions, features, capabilities, and settings.
+        Information about your operator, Internet service provider, and network
+        connection type, including your IP address. Identifiers provided by your
+        device or third parties for application vendors or advertisers, or
+        identifiers we create ourselves. Country, locale, time zone, and geo-IP
+        level location information. Where you followed a link to Hexeats
+        Services, and links you followed from Hexeats Services. Details of your
+        interactions with, and usage of, Hexeats Services (e.g., usage patterns,
+        which features you use, advertisement participation, specific campaign
+        and offer impressions and interactions, and information on orders). Data
+        for tracking and reporting transactions initiated by our advertising
+        partners, including timestamps and identifiers mentioned above. For
+        details on how to control advertising and analytics identifiers on your
+        device, see below under the section “Cookies and Other Technologies”.
+        Cookies and Other Technologies We use various technologies to collect
+        and store Usage Data and other information when Users visit the Hexeats
+        Services, including cookies, storing website data, and using web and
+        application telemetry. Cookies and other website data saved on your
+        device allow us to identify visitors of the Hexeats Services and
+        facilitate the use of the Hexeats Services, as well as create aggregate
+        information about our visitors. This helps us improve the Hexeats
+        Services and better serve our Users. The cookies and other website data
+        will not harm your device or files. We use cookies and other website
+        data to tailor the Hexeats Services and the information we provide in
+        accordance with the individual interests of our Users. Please note that
+        the retention time of different cookies is limited and varies from less
+        than a minute to indefinitely, and when a specific cookie is deleted.
+        You can manage the cookie preferences you have submitted earlier by
+        clicking here. Users may choose to set their web browser to refuse
+        cookies. For example, the following links provide information on how to
+        adjust the cookie and other web data settings on some popular browsers:
+        Apple Safari Google Chrome Microsoft Edge Mozilla Firefox Please note
+        that some parts of the Hexeats Services may not function properly if the
+        use of cookies is refused. The Hexeats Services use pseudonymized
+        identifiers to track and predict your app and service usage and
+        preferences. Hexeats also uses session-only third-party tracking
+        technologies to verify and report transactions initiated by our
+        advertising partners. You can manage your cookie preferences through the
+        cookie banner on our websites. You can also manage your communication
+        and other privacy settings via the Hexeats App. Hexeats visitor
+        identifiers can be disabled on iOS and Android mobile devices by
+        changing your settings: For iOS: Settings → Hexeats → Hexeats settings →
+        Limit Tracking. For Android: Hexeats application → Profile tab →
+        Settings icon in the top-right corner. Generally, advertising
+        identifiers can be disabled on iOS mobile devices by turning on the
+        Limit Ad Tracking tab (Settings → Privacy → Advertising → Limit Ad
+        Tracking). For an overview and more information on the advertising
+        identifier, please see Apple Advertising and Privacy site. Hexeats uses
+        different third-party analytics and telemetry providers, marketing or
+        affiliate partners, and other services integrated into our client
+        software, listed below: Name Vendor Purpose Vendor Privacy Statement
+        Google Analytics Google Visitor and usage analytics Link Google AdSense
+        Google Ad targeting Link Google Tag Manager Google Analytics and
+        reporting Link Upwave Upwave Analytics, marketing, and reporting Link
+        AppsFlyer AppsFlyer Analytics, marketing, and reporting Link hCaptcha
+        Intuition Machines, Inc. Bot detection and avoidance Link Bugsnag
+        SmartBear Software Inc. Error event and performance tracking Link
+        Facebook Graph API Meta Ads management Link Facebook Pixel Meta
+        Advertising/conversion tracking Link Firebase Firebase Mobile and web
+        application development Link Intercom Intercom Chat with customer
+        support Link Ravelin Ravelin Anti-fraud Link Riskified Riskified Payment
+        fraud prevention Link Adform Adform Managing and delivering online ads
+        Link Floodlight Floodlight Advertising/conversion tracking Link
+        Microsoft Clarity Microsoft
+      </p>
+    </main>
+
+    <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
+      <button class="btn-footer">FAQ</button>
+      <button class="btn-footer">About</button>
+      <button class="btn-footer">Contacts</button>
+      <button class="btn-footer">Feedback</button>
+    </footer>
+
+    <script></script>
+  </body>
+</html>

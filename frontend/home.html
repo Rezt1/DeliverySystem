@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="./style.css" rel="stylesheet" />
+    <link href="./custom.css" rel="stylesheet" />
+
+    <title>Hexeats - Home</title>
+  </head>
+
+  <body>
+    <header
+      class="bg-[#006bb8] relative flex items-center justify-between py-3 px-2 md:max-h-[110px]"
+    >
+      <!-- Logo Section -->
+      <div class="flex items-center shrink-0">
+        <a href="#">
+          <img
+            class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
+            src="./Images/logo.PNG"
+            alt="logo"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Navigation (prevents buttons from going out of sight) -->
+      <nav
+        class="hidden md:flex flex-wrap justify-center lg:justify-between items-center flex-grow min-w-0 md:pl-[100px]"
+      >
+        <!-- Left Section -->
+        <div class="flex flex-wrap gap-3">
+          <button class="btn-primary">Home</button>
+          <button class="btn-primary">Restaurants</button>
+
+          <!-- Hidden deliveries button -->
+          <!-- To be shown only when delivery guy is logged in -->
+          <button id="deliveries-button" class="btn-primary hidden">
+            Deliveries
+          </button>
+        </div>
+
+        <!-- Right Section -->
+        <div class="flex flex-wrap gap-3 items-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            id="search-navbar-input"
+            class="btn-primary btn-search w-31 focus:outline-none"
+          />
+          <button
+            class="btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative"
+          >
+            <svg
+              class="btn-cart-icon w-8 h-8 text-[#006bb8]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              viewBox="0 0 24 24"
+            >
+              <path d="M4 10h16l-2 8H6l-2-8z" />
+              <path d="M9 10V6a3 3 0 0 1 6 0v4" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <line x1="9" y1="16" x2="15" y2="16" />
+            </svg>
+          </button>
+
+          <!-- Login/Reg/Account buttons -->
+          <button id="login-button" class="btn-primary">Login</button>
+          <button id="register-button" class="btn-primary">Register</button>
+          <button id="account-button" class="btn-primary hidden">
+            Account
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden flex items-center">
+        <button
+          type="button"
+          id="main-menu"
+          aria-label="Main menu"
+          aria-expanded="false"
+          class="btn-menu p-2 rounded-md text-white hover:bg-white hover:text-[#006bb8] transition"
+        >
+          <svg
+            class="btn-menu-icon h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Menu (hidden by default) -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden flex flex-col items-center bg-[#006bb8] absolute top-[100px] left-0 w-full p-4 space-y-4 transition-all duration-300 ease-in-out"
+      >
+        <input
+          type="text"
+          placeholder="Search..."
+          id="search-navbar-menu-input"
+          class="btn-search bg-white text-[#006bb8] px-[18px] py-[10px] rounded-3xl w-full font-extrabold hover:text-[#ff66c4] focus:outline-none focus:ring-1 focus:ring-[#006bb8]"
+        />
+        <button class="btn-primary w-full text-white text-lg py-2">Home</button>
+        <button class="btn-primary w-full text-white text-lg py-2">
+          Restaurants
+        </button>
+
+        <!-- Hidden button for Deliveries -->
+        <!-- To be shown only when delivery guy is logged in -->
+        <button
+          id="mobile-deliveries-button"
+          class="btn-primary w-full text-white text-lg py-2 hidden"
+        >
+          Deliveries
+        </button>
+        <button
+          id="mobile-cart-button"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Cart
+        </button>
+
+        <!-- Mobile Login/Account/Register Buttons -->
+        <button
+          id="mobile-login-button"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Login
+        </button>
+        <button
+          id="mobile-register-button"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Register
+        </button>
+        <button
+          id="mobile-account-button"
+          class="btn-primary w-full text-white text-lg py-2 hidden"
+        >
+          Account
+        </button>
+      </div>
+    </header>
+
+    <main class="grid grid-cols-3 gap-4 py-[24px] pb-0 text-[#006bb8]">
+      <div
+        id="row_1_col_1_&_2"
+        class="p-4 md:p-10 flex flex-col justify-center items-end col-span-2 row-span-1 ml-10 h-80"
+      >
+        <input
+          type="text"
+          placeholder="Search..."
+          id="search-main-input"
+          class="btn-secondary w-full focus:outline-none focus:ring-[1px] focus:ring-[#006bb8] hover:focus:ring-0"
+        />
+        <button
+          id="btn-search-main"
+          class="w-[35%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:border-2 hover:py-[10px] hover:bg-white hover:text-[#ff66c4] active:opacity-70"
+        >
+          Search
+        </button>
+      </div>
+
+      <div
+        id="row_1_col_3"
+        class="p-4 md:p-7 flex items-end h-80 overflow-hidden mr-10"
+      >
+        <div class="relative w-full h-full">
+          <h2
+            class="text-2xl md:text-4xl font-serif text-center font-bold absolute inset-0 opacity-0 transition-opacity"
+          >
+            Long day at work?
+          </h2>
+          <h2
+            class="text-2xl md:text-4xl font-serif text-center font-bold absolute inset-0 opacity-0 transition-opacity"
+          >
+            Hungry for more than food?
+          </h2>
+          <h2
+            class="text-2xl md:text-4xl font-serif text-center font-bold absolute inset-0 opacity-0 transition-opacity"
+          >
+            Everything you crave, delivered to you!
+          </h2>
+          <h2
+            class="text-2xl md:text-4xl font-serif text-center font-bold absolute inset-0 opacity-0 transition-opacity"
+          >
+            Because you deserve it.
+          </h2>
+        </div>
+      </div>
+
+      <div id="row_2_col_1" class="flex justify-end items-end h-95">
+        <img
+          src="./Images/courier_box_look.png"
+          alt="courier_box_look.png"
+          class="max-h-full w-auto"
+        />
+      </div>
+
+      <div
+        id="row_2_col_2"
+        class="flex justify-center items-start h-95 pt-16"
+      ></div>
+
+      <div id="row_2_col_3" class="flex justify-start items-end h-95">
+        <img
+          src="./Images/courier_bag_happy.png"
+          alt="courier_bag_happy.png"
+          class="max-h-full w-auto"
+        />
+      </div>
+    </main>
+
+    <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
+      <button class="btn-footer">FAQ</button>
+      <button class="btn-footer">About</button>
+      <button class="btn-footer">Contacts</button>
+      <button class="btn-footer">Feedback</button>
+    </footer>
+
+    <script>
+      const menuButton = document.getElementById("main-menu");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      // Add event listener for toggling the mobile menu
+      menuButton.addEventListener("click", function () {
+        const isMenuVisible = mobileMenu.classList.contains("hidden");
+
+        // Toggle visibility of the mobile menu
+        mobileMenu.classList.toggle("hidden");
+
+        // Update aria-expanded attribute
+        menuButton.setAttribute("aria-expanded", !isMenuVisible);
+      });
+
+      // Simulating login state (change this to actual login check logic)
+      let isLoggedIn = false; // Change to `true` when user logs in
+      let isDeliveryGuy = false; // Change to `true` when user is a delivery guy
+
+      // Elements for Login, Register, Account, and Deliveries buttons (Desktop and Mobile)
+      const loginButton = document.getElementById("login-button");
+      const registerButton = document.getElementById("register-button");
+      const accountButton = document.getElementById("account-button");
+      const deliveriesButton = document.getElementById("deliveries-button");
+      const mobileCartButton = document.getElementById("mobile-cart-button");
+      const mobileLoginButton = document.getElementById("mobile-login-button");
+      const mobileRegisterButton = document.getElementById(
+        "mobile-register-button"
+      );
+      const mobileAccountButton = document.getElementById(
+        "mobile-account-button"
+      );
+      const mobileDeliveriesButton = document.getElementById(
+        "mobile-deliveries-button"
+      );
+
+      // Toggle between Login/Register/Account buttons and Deliveries button
+      function toggleLoginState() {
+        if (isLoggedIn) {
+          // When logged in, show Account and hide Login/Register
+          loginButton.classList.add("hidden");
+          registerButton.classList.add("hidden");
+          accountButton.classList.remove("hidden");
+          mobileLoginButton.classList.add("hidden");
+          mobileRegisterButton.classList.add("hidden");
+          mobileAccountButton.classList.remove("hidden");
+
+          // Show or hide Deliveries button based on user type
+          if (isDeliveryGuy) {
+            deliveriesButton.classList.remove("hidden");
+            if (mobileDeliveriesButton)
+              mobileDeliveriesButton.classList.remove("hidden");
+          } else {
+            deliveriesButton.classList.add("hidden");
+            if (mobileDeliveriesButton)
+              mobileDeliveriesButton.classList.add("hidden");
+          }
+        } else {
+          // When not logged in, show Login/Register and hide Account
+          loginButton.classList.remove("hidden");
+          registerButton.classList.remove("hidden");
+          accountButton.classList.add("hidden");
+          mobileLoginButton.classList.remove("hidden");
+          mobileRegisterButton.classList.remove("hidden");
+          mobileAccountButton.classList.add("hidden");
+
+          // Hide Deliveries button
+          deliveriesButton.classList.add("hidden");
+          if (mobileDeliveriesButton)
+            mobileDeliveriesButton.classList.add("hidden");
+        }
+      }
+
+      // Call the function to set the initial state (login or account button)
+      toggleLoginState();
+
+      // For demonstration, you can change `isLoggedIn` and `isDeliveryGuy` manually to test the toggle
+      // Example: Simulate login as delivery guy
+      // isLoggedIn = true;
+      // isDeliveryGuy = true;
+      // toggleLoginState();
+
+      // Инфо за скрипта
+      // Код управляващ мобилното меню и бутоните за вход, регистрация и акаунт. Трябва да позволява скриване/показване на мобилното меню при кликване и превключва между бутоните Login/Register и Account в зависимост от състоянието на вход (влязъл или не). Добавяйки логика за вход, може да се променят стойностите на isLoggedIn и isDeliveryGuy, за да се тества функционалността на бутоните.
+
+      const texts = document.querySelectorAll("#row_1_col_3 h2");
+      console.log(texts); // Debugging: Check if elements are selected
+
+      let index = 0;
+
+      function showNextText() {
+        console.log("Showing next text"); // Debugging: Check if function is called
+        // Hide all texts
+        texts.forEach((text) => {
+          text.classList.remove("opacity-100");
+          console.log(text.textContent, "hidden"); // Debugging: Check if opacity is removed
+        });
+
+        // Show the current text
+        texts[index].classList.add("opacity-100");
+        console.log(texts[index].textContent, "shown"); // Debugging: Check if opacity is added
+
+        // Move to the next text
+        index = (index + 1) % texts.length;
+      }
+
+      // Show the first text immediately
+      showNextText();
+
+      // Set an interval to show the next text every 3 seconds (3000 milliseconds)
+      setInterval(showNextText, 3000);
+    </script>
+  </body>
+</html>
