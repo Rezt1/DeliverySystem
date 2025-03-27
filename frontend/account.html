@@ -160,32 +160,70 @@
     >
       <h1 class="text-5xl mb-18">Hello, <span id="user-name">Guest</span></h1>
 
-      <section id="user-info" class="w-full max-w-md space-y-4 px-4">
-        <!-- Name Field - Your custom layout -->
-        <div id="field-group-name" class="flex items-center">
-          <label for="name-field" class="block text-lg font-medium mr-5"
-            >Name:</label
-          >
+      <section class="grid grid-cols-[auto_1fr] gap-y-4 gap-x-6 items-center">
+        <!-- Name Field -->
+        <label for="name-field" class="text-lg font-medium whitespace-nowrap">
+          Name:
+        </label>
+        <div
+          id="name-field"
+          class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
+          contenteditable="false"
+          data-placeholder="Enter your name"
+        ></div>
+      
+        <!-- Email Field -->
+        <label for="email-field" class="text-lg font-medium whitespace-nowrap">
+          E-mail:
+        </label>
+        <div
+          id="email-field"
+          class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
+          contenteditable="false"
+          data-placeholder="Enter your e-mail"
+        ></div>
+      
+        <!-- Password Field -->
+        <label for="password-field" class="text-lg font-medium whitespace-nowrap">
+          Password:
+        </label>
+        
+        <div class="relative">
+          <!-- show password as dots -->        
           <div
-            id="name-field"
-            class="bg-white border-2 border-[#006bb8] p-4 w-full rounded"
-            contenteditable="false"
-            data-placeholder="Enter your name"
+          id="password-display"
+          class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
+          data-placeholder="Password hidden"
           ></div>
+          
+          <!-- if edit profile ->show input hide div -->
+          <input
+            type="password"
+            id="password-input"
+            class="absolute top-0 left-0 bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px] hidden"
+            placeholder="Enter new password"
+          >
+          <div id="repeat-password-container" class="hidden">
+            <input
+              type="password"
+              id="repeat-password-input"
+              class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
+              placeholder="Repeat new password"
+            >
+            <p id="password-match-error" class="text-red-500 text-sm mt-1 hidden">Passwords don't match!</p>
+          </div>
         </div>
 
-        <!-- Add more fields in the same pattern as needed -->
-        <!-- Example email field:
-          <div id="field-group-email" class="flex items-center mt-4">
-            <label for="email-field" class="block text-lg font-medium mr-5">Email:</label>
-            <div
-              id="email-field"
-              class="bg-white border-2 border-[#006bb8] p-4 w-full rounded"
-              contenteditable="false"
-              data-placeholder="Enter your email"
-            ></div>
-          </div>
-          -->
+        <!-- Phone Field -->
+        <label for="phone-field" class="text-lg font-medium whitespace-nowrap">
+          Phone:
+        </label>
+        <div
+        id="phone-field"
+        class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
+        contenteditable="false"
+        data-placeholder="Enter your phone"
+        ></div>
       </section>
 
       <!-- Edit/Save Buttons -->
