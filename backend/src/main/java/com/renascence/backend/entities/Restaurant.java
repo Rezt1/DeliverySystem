@@ -33,11 +33,11 @@ public class Restaurant {
     private City city;
 
     @ManyToOne
-    @JoinColumn(name = "ownerId", nullable = false)
+    @JoinColumn(name = "ownerId", nullable = true) // CHANGE TO FALSE!!!!
     private User owner;
 
     @OneToOne
-    @JoinColumn(name = "bonusId", nullable = false)
+    @JoinColumn(name = "bonusId", nullable = true) // CHANGE TO FALSE!!!!
     private Bonus bonus;
 
     @OneToMany(mappedBy = "restaurant")

@@ -7,8 +7,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -44,7 +44,7 @@ public class Delivery {
     private String address;
 
     @Column(nullable = false)
-    private Date date;
+    private LocalDateTime date;
 
     @OneToMany(mappedBy = "delivery")
     private List<DeliveryFood> deliveriesFoods = new ArrayList<>();

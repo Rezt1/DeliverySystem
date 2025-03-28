@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -19,10 +19,13 @@ public class DeliveryGuySalary {
     private double amount;
 
     @Column(nullable = false)
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @Column(nullable = false)
-    private LocalDate endDate;
+    private LocalDateTime endDate;
+
+    @Column
+    private boolean isBonus;                // ADDITIONAL FIELD -> IF WE DON'T NEED IT IN BONUS IMPL DELETE IT!!!
 
     @ManyToOne
     @JoinColumn(name = "deliveryGuyId", nullable = false)
