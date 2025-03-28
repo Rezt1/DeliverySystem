@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+      defer
+    ></script>
+    <script src="./nav.mjs" type="module" defer></script>
     <link href="./style.css" rel="stylesheet" />
     <link href="./custom.css" rel="stylesheet" />
 
@@ -16,7 +20,7 @@
     >
       <!-- Logo Section -->
       <div class="flex items-center shrink-0">
-        <a href="#">
+        <a href="home.html">
           <img
             class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
             src="./Images/logo.PNG"
@@ -113,7 +117,12 @@
           id="search-navbar-menu-input"
           class="btn-search bg-white text-[#006bb8] px-[18px] py-[10px] rounded-3xl w-full font-extrabold hover:text-[#ff66c4] focus:outline-none focus:ring-1 focus:ring-[#006bb8]"
         />
-        <button class="btn-primary w-full text-white text-lg py-2">Home</button>
+        <button
+          id="home-btn"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Home
+        </button>
         <button class="btn-primary w-full text-white text-lg py-2">
           Restaurants
         </button>
@@ -176,7 +185,7 @@
 
       <div
         id="row_1_col_3"
-        class="p-4 md:p-7 flex items-end h-80 overflow-hidden mr-10"
+        class="p-4 pr-10 md:p-7 text-center flex items-center md:items-end h-80 overflow-hidden"
       >
         <div class="relative w-full h-full">
           <h2
@@ -232,81 +241,6 @@
     </footer>
 
     <script>
-      const menuButton = document.getElementById("main-menu");
-      const mobileMenu = document.getElementById("mobile-menu");
-
-      // Add event listener for toggling the mobile menu
-      menuButton.addEventListener("click", function () {
-        const isMenuVisible = mobileMenu.classList.contains("hidden");
-
-        // Toggle visibility of the mobile menu
-        mobileMenu.classList.toggle("hidden");
-
-        // Update aria-expanded attribute
-        menuButton.setAttribute("aria-expanded", !isMenuVisible);
-      });
-
-      // Simulating login state (change this to actual login check logic)
-      let isLoggedIn = false; // Change to `true` when user logs in
-      let isDeliveryGuy = false; // Change to `true` when user is a delivery guy
-
-      // Elements for Login, Register, Account, and Deliveries buttons (Desktop and Mobile)
-      const loginButton = document.getElementById("login-button");
-      const registerButton = document.getElementById("register-button");
-      const accountButton = document.getElementById("account-button");
-      const deliveriesButton = document.getElementById("deliveries-button");
-      const mobileCartButton = document.getElementById("mobile-cart-button");
-      const mobileLoginButton = document.getElementById("mobile-login-button");
-      const mobileRegisterButton = document.getElementById(
-        "mobile-register-button"
-      );
-      const mobileAccountButton = document.getElementById(
-        "mobile-account-button"
-      );
-      const mobileDeliveriesButton = document.getElementById(
-        "mobile-deliveries-button"
-      );
-
-      // Toggle between Login/Register/Account buttons and Deliveries button
-      function toggleLoginState() {
-        if (isLoggedIn) {
-          // When logged in, show Account and hide Login/Register
-          loginButton.classList.add("hidden");
-          registerButton.classList.add("hidden");
-          accountButton.classList.remove("hidden");
-          mobileLoginButton.classList.add("hidden");
-          mobileRegisterButton.classList.add("hidden");
-          mobileAccountButton.classList.remove("hidden");
-
-          // Show or hide Deliveries button based on user type
-          if (isDeliveryGuy) {
-            deliveriesButton.classList.remove("hidden");
-            if (mobileDeliveriesButton)
-              mobileDeliveriesButton.classList.remove("hidden");
-          } else {
-            deliveriesButton.classList.add("hidden");
-            if (mobileDeliveriesButton)
-              mobileDeliveriesButton.classList.add("hidden");
-          }
-        } else {
-          // When not logged in, show Login/Register and hide Account
-          loginButton.classList.remove("hidden");
-          registerButton.classList.remove("hidden");
-          accountButton.classList.add("hidden");
-          mobileLoginButton.classList.remove("hidden");
-          mobileRegisterButton.classList.remove("hidden");
-          mobileAccountButton.classList.add("hidden");
-
-          // Hide Deliveries button
-          deliveriesButton.classList.add("hidden");
-          if (mobileDeliveriesButton)
-            mobileDeliveriesButton.classList.add("hidden");
-        }
-      }
-
-      // Call the function to set the initial state (login or account button)
-      toggleLoginState();
-
       // For demonstration, you can change `isLoggedIn` and `isDeliveryGuy` manually to test the toggle
       // Example: Simulate login as delivery guy
       // isLoggedIn = true;
@@ -317,21 +251,17 @@
       // Код управляващ мобилното меню и бутоните за вход, регистрация и акаунт. Трябва да позволява скриване/показване на мобилното меню при кликване и превключва между бутоните Login/Register и Account в зависимост от състоянието на вход (влязъл или не). Добавяйки логика за вход, може да се променят стойностите на isLoggedIn и isDeliveryGuy, за да се тества функционалността на бутоните.
 
       const texts = document.querySelectorAll("#row_1_col_3 h2");
-      console.log(texts); // Debugging: Check if elements are selected
 
       let index = 0;
 
       function showNextText() {
-        console.log("Showing next text"); // Debugging: Check if function is called
         // Hide all texts
         texts.forEach((text) => {
           text.classList.remove("opacity-100");
-          console.log(text.textContent, "hidden"); // Debugging: Check if opacity is removed
         });
 
         // Show the current text
         texts[index].classList.add("opacity-100");
-        console.log(texts[index].textContent, "shown"); // Debugging: Check if opacity is added
 
         // Move to the next text
         index = (index + 1) % texts.length;

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="./style.css" rel="stylesheet" />
+    <script src="./nav.mjs" type="module" defer></script>
     <link href="./custom.css" rel="stylesheet" />
 
     <title>Hexeats - Login</title>
@@ -169,12 +170,23 @@
             id="e-mail-input"
             class="btn-secondary w-full focus:outline-none focus:ring-[1px] focus:ring-[#006bb8] hover:focus:ring-0"
           />
-          <input
-            type="text"
-            placeholder="password"
-            id="password-input"
-            class="btn-secondary w-full focus:outline-none focus:ring-[1px] focus:ring-[#006bb8] hover:focus:ring-0"
-          />
+
+          <!-- Added button to show password -->
+          <div class="relative">
+            <input
+              type="password"
+              placeholder="password"
+              id="password-input"
+              class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8] pr-16"
+              autocomplete="current-password"
+            />
+            <button
+              type="button"
+              onclick="togglePassword()"
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-[#006bb8] hover:cursor-pointer hover:text-[#ff66c4] active:opacity-70"
+            >
+              Show
+            </button>
         </section>
         <button
           id="btn-login-main"
@@ -196,24 +208,7 @@
           to learn more about personal data processing at Hexeats. You can
           access the local Privacy Statement related to your Hexeats account
           after you have provided the country and language preferences
-          applicable to you during registration. This site is protected by
-          hCaptcha. The hCaptcha
-          <a
-            href="https://www.hcaptcha.com/privacy"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-blue-500 underline"
-            >Privacy Policy</a
-          >
-          and
-          <a
-            href="https://www.hcaptcha.com/terms"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-blue-500 underline"
-            >Terms of Service</a
-          >
-          apply.
+          applicable to you during registration.
         </p>
       </div>
       <div class="hidden w-[45%] justify-center items-end md:flex">
@@ -232,6 +227,5 @@
       <button class="btn-footer">Feedback</button>
     </footer>
 
-    <script></script>
   </body>
 </html>
