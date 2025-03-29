@@ -11,7 +11,7 @@ import lombok.*;
 @Setter
 public class CityDto {
 
-    private long id;
+    private Long id;
 
     @NotBlank(message = "City name is required")
     @Size(min = 2, max = 100, message = "City name must be between 2-100 characters")

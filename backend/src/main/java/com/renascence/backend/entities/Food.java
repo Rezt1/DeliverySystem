@@ -30,7 +30,7 @@ public class Food {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private FoodCategory category;
+    private FoodCategory foodCategory;
 
     @ManyToOne
     @JoinColumn(name = "cuisineId", nullable = false)
