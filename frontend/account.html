@@ -171,7 +171,7 @@
           contenteditable="false"
           data-placeholder="Enter your name"
         ></div>
-      
+
         <!-- Email Field -->
         <label for="email-field" class="text-lg font-medium whitespace-nowrap">
           E-mail:
@@ -182,35 +182,43 @@
           contenteditable="false"
           data-placeholder="Enter your e-mail"
         ></div>
-      
+
         <!-- Password Field -->
-        <label for="password-field" class="text-lg font-medium whitespace-nowrap">
+        <label
+          for="password-field"
+          class="text-lg font-medium whitespace-nowrap"
+        >
           Password:
         </label>
-        
+
         <div class="relative">
-          <!-- show password as dots -->        
+          <!-- show password as dots -->
           <div
-          id="password-display"
-          class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
-          data-placeholder="Password hidden"
+            id="password-display"
+            class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
+            data-placeholder="Password hidden"
           ></div>
-          
+
           <!-- if edit profile ->show input hide div -->
           <input
             type="password"
             id="password-input"
             class="absolute top-0 left-0 bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px] hidden"
             placeholder="Enter new password"
-          >
+          />
           <div id="repeat-password-container" class="hidden">
             <input
               type="password"
               id="repeat-password-input"
               class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
               placeholder="Repeat new password"
+            />
+            <p
+              id="password-match-error"
+              class="text-red-500 text-sm mt-1 hidden"
             >
-            <p id="password-match-error" class="text-red-500 text-sm mt-1 hidden">Passwords don't match!</p>
+              Passwords don't match!
+            </p>
           </div>
         </div>
 
@@ -219,10 +227,10 @@
           Phone:
         </label>
         <div
-        id="phone-field"
-        class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
-        contenteditable="false"
-        data-placeholder="Enter your phone"
+          id="phone-field"
+          class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
+          contenteditable="false"
+          data-placeholder="Enter your phone"
         ></div>
       </section>
 

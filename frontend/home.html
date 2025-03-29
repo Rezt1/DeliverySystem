@@ -169,15 +169,38 @@
         id="row_1_col_1_&_2"
         class="p-4 md:p-10 flex flex-col justify-center items-end col-span-2 row-span-1 ml-10 h-80"
       >
-        <input
-          type="text"
-          placeholder="Search..."
-          id="search-main-input"
-          class="btn-secondary w-full focus:outline-none focus:ring-[1px] focus:ring-[#006bb8] hover:focus:ring-0"
-        />
+        <div class="relative w-full">
+          <select
+            id="search-main-dropdown"
+            class="btn-drop-down w-full focus:outline-none focus:ring-[1px] focus:ring-[#006bb8] hover:focus:ring-0 appearance-none pl-4 pr-8 py-3"
+          >
+            <!-- Sashka -->
+            <!-- Sashka -->
+            <!-- Sashka -->
+            <!-- Sashka -->
+            <!-- Options from database  -->
+            <option value="" selected disabled hidden>
+              Select an option...
+            </option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+          >
+            <svg
+              class="fill-current h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
+
         <button
           id="btn-search-main"
-          class="w-[35%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:border-2 hover:py-[10px] hover:bg-white hover:text-[#ff66c4] active:opacity-70"
+          class="w-[35%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:border-2 hover:py-[10px] hover:bg-white hover:text-[#ff66c4] hover:cursor-pointer active:opacity-70"
         >
           Search
         </button>
