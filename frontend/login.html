@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="./style.css" rel="stylesheet" />
-    <script src="./nav.mjs" type="module" defer></script>
+    <script src="./src/nav.mjs" type="module" defer></script>
+    <script src="./src/loginSrc.js" type="module" defer></script>
     <link href="./custom.css" rel="stylesheet" />
 
     <title>Hexeats - Login</title>
@@ -181,8 +182,8 @@
               autocomplete="current-password"
             />
             <button
+              id = "password-show"
               type="button"
-              onclick="togglePassword()"
               class="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-[#006bb8] hover:cursor-pointer hover:text-[#ff66c4] active:opacity-70"
             >
               Show

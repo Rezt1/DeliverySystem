@@ -1,3 +1,5 @@
+import { ifLoggedIn } from "./userWork.mjs";
+
    
   export function navigationStuff(){
     let loginBtn = document.getElementById("mobile-login-button");
@@ -17,6 +19,13 @@
     let acctountBtnDe = document.getElementById("account-button");
     let homeBtnDe = document.getElementsByClassName("btn-primary")[0];
     
+
+    if(ifLoggedIn){
+      acctountBtn.classList.remove("hidden");
+      acctountBtnDe.classList.remove("hidden");
+    }
+
+
     loginBtnDe.addEventListener('click', loadLogin);
     registerBtnDe.addEventListener("click", loadRegister);
     acctountBtnDe.addEventListener("click", loadAccount);
