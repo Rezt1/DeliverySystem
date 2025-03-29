@@ -28,7 +28,7 @@
 
       <!-- Desktop Navigation (prevents buttons from going out of sight) -->
       <nav
-        class="hidden md:flex flex-wrap justify-center lg:justify-between items-center flex-grow min-w-0 md:pl-[100px]"
+        class="hidden md:flex flex-wrap justify-between items-center flex-grow min-w-0 md:pl-[100px]"
       >
         <!-- Left Section -->
         <div class="flex flex-wrap gap-3">
@@ -37,7 +37,7 @@
 
           <!-- Hidden deliveries button -->
           <!-- To be shown only when delivery guy is logged in -->
-          <button id="deliveries-button" class="btn-primary hidden">
+          <button id="deliveries-button" class="btn-primary !hidden">
             Deliveries
           </button>
         </div>
@@ -70,11 +70,11 @@
           </button>
 
           <!-- Login/Reg/Account buttons -->
-          <button id="login-button" class="btn-primary">Login</button>
-          <button id="register-button" class="btn-primary">Register</button>
-          <button id="account-button" class="btn-primary hidden">
-            Account
+          <button id="login-button" class="btn-primary !hidden">Login</button>
+          <button id="register-button" class="btn-primary !hidden">
+            Register
           </button>
+          <button id="account-button" class="btn-primary">Account</button>
         </div>
       </nav>
 
@@ -123,7 +123,7 @@
         <!-- To be shown only when delivery guy is logged in -->
         <button
           id="mobile-deliveries-button"
-          class="btn-primary w-full text-white text-lg py-2 hidden"
+          class="btn-primary w-full text-white text-lg py-2 !hidden"
         >
           Deliveries
         </button>
@@ -137,19 +137,19 @@
         <!-- Mobile Login/Account/Register Buttons -->
         <button
           id="mobile-login-button"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="btn-primary w-full text-white text-lg py-2 !hidden"
         >
           Login
         </button>
         <button
           id="mobile-register-button"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="btn-primary w-full text-white text-lg py-2 !hidden"
         >
           Register
         </button>
         <button
           id="mobile-account-button"
-          class="btn-primary w-full text-white text-lg py-2 hidden"
+          class="btn-primary w-full text-white text-lg py-2"
         >
           Account
         </button>

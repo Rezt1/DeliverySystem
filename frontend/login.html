@@ -18,7 +18,7 @@
     >
       <!-- Logo Section -->
       <div class="flex items-center shrink-0">
-        <a href="#">
+        <a href="home.html">
           <img
             class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
             src="./Images/logo.PNG"
@@ -29,7 +29,7 @@
 
       <!-- Desktop Navigation (prevents buttons from going out of sight) -->
       <nav
-        class="hidden md:flex flex-wrap justify-center lg:justify-between items-center flex-grow min-w-0 md:pl-[100px]"
+        class="hidden md:flex flex-wrap justify-between items-center flex-grow min-w-0 md:pl-[100px]"
       >
         <!-- Left Section -->
         <div class="flex flex-wrap gap-3">
@@ -38,7 +38,7 @@
 
           <!-- Hidden deliveries button -->
           <!-- To be shown only when delivery guy is logged in -->
-          <button id="deliveries-button" class="btn-primary hidden">
+          <button id="deliveries-button" class="btn-primary !hidden">
             Deliveries
           </button>
         </div>
@@ -73,7 +73,7 @@
           <!-- Login/Reg/Account buttons -->
           <button id="login-button" class="btn-primary">Login</button>
           <button id="register-button" class="btn-primary">Register</button>
-          <button id="account-button" class="btn-primary hidden">
+          <button id="account-button" class="btn-primary !hidden">
             Account
           </button>
         </div>
@@ -113,9 +113,14 @@
           type="text"
           placeholder="Search..."
           id="search-navbar-menu-input"
-          class="btn-primary w-full focus:outline-none focus:ring-1 focus:ring-[#006bb8]"
+          class="btn-search bg-white text-[#006bb8] px-[18px] py-[10px] rounded-3xl w-full font-extrabold hover:text-[#ff66c4] focus:outline-none focus:ring-1 focus:ring-[#006bb8]"
         />
-        <button class="btn-primary w-full text-white text-lg py-2">Home</button>
+        <button
+          id="home-btn"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Home
+        </button>
         <button class="btn-primary w-full text-white text-lg py-2">
           Restaurants
         </button>
@@ -124,7 +129,7 @@
         <!-- To be shown only when delivery guy is logged in -->
         <button
           id="mobile-deliveries-button"
-          class="btn-primary w-full text-white text-lg py-2 hidden"
+          class="btn-primary w-full text-white text-lg py-2 !hidden"
         >
           Deliveries
         </button>
@@ -150,7 +155,7 @@
         </button>
         <button
           id="mobile-account-button"
-          class="btn-primary w-full text-white text-lg py-2 hidden"
+          class="btn-primary w-full text-white text-lg py-2 !hidden"
         >
           Account
         </button>
