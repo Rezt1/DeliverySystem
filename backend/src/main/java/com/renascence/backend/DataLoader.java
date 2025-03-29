@@ -66,7 +66,7 @@ public class DataLoader implements CommandLineRunner {
         Food pizza = new Food();
         pizza.setName("Margherita Pizza");
         pizza.setPrice(12.99);
-        pizza.setCategory(FoodCategory.MAIN_COURSE);
+        pizza.setFoodCategory(FoodCategory.MAIN_COURSE);
         pizza.setDescription("Classic cheese and tomato");
         pizza.setCuisine(italian);
         pizza.setRestaurant(pizzaPalace);
@@ -75,7 +75,7 @@ public class DataLoader implements CommandLineRunner {
         Food sushi = new Food();
         sushi.setName("Salmon Sushi");
         sushi.setPrice(8.50);
-        sushi.setCategory(FoodCategory.APPETIZER);
+        sushi.setFoodCategory(FoodCategory.APPETIZER);
         sushi.setDescription("Fresh salmon with rice");
         sushi.setCuisine(japanese);
         sushi.setRestaurant(sushiWorld);

@@ -5,10 +5,6 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 public class CreateCityDto {
 
     @NotBlank(message = "City name is required")

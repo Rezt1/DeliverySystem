@@ -10,7 +10,8 @@ import java.util.List;
 @Repository
 public interface FoodRepository extends JpaRepository<Food, Long> {
 
+    List<Food> findByNameContainingIgnoreCase(String name);
+    List<Food> findByFoodCategory(FoodCategory category);
+    List<Food> findByNameContainingIgnoreCaseAndFoodCategory(String name, FoodCategory category);
     List<Food> findByRestaurantId(Long restaurantId);
-    List<Food> findByRestaurantIdAndCuisineIdAndCategory(Long restaurantId, Long cuisineId, FoodCategory category);
-    List<Food> findByCuisineId(Long cuisineId);
 }

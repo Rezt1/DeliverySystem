@@ -5,35 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/DataLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/CityController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/RestaurantController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/City/CityDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/City/CreateCityDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Restaurant/CreateRestaurantDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Restaurant/RestaurantDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/exceptionHandlers/ErrorResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/exceptionHandlers/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/CityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/RestaurantService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/FoodController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Food/CreateFoodDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Food/FoodDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/FoodService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/Cuisine.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/Cuisine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/Delivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/Delivery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/DeliveryGuySalary.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/DeliveryGuySalary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/Restaurant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/BonusRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/BonusRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/CityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/CityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/ContractRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/ContractRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/CuisineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/CuisineRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/DeliveryFoodRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/DeliveryFoodRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/DeliveryGuyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/DeliveryGuyRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/DeliveryGuySalaryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/DeliveryGuySalaryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/DeliveryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/DeliveryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/DataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/DataLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/City/CityDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/City/CityDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/City/CreateCityDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/City/CreateCityDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Restaurant/RestaurantDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Restaurant/RestaurantDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/Food.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/FoodRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/FoodRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/RestaurantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/RestaurantRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/RoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/UserRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
