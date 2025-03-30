@@ -20,7 +20,7 @@ async function onLogin(e){
             throw new Error("All fields must be filled!");
         }
 
-        let response = await login();
+       /* let response = await login();
         let resp = await response.json();
 
         if(response.status !== 200){
@@ -28,8 +28,9 @@ async function onLogin(e){
         }
 
         sessionStorageSet(resp);
+        */
+        sessionStorage.setItem(1,"logged");
         window.location.href = "./home.html";
-
     }
     catch(e){
         window.alert(e.message);
@@ -38,7 +39,8 @@ async function onLogin(e){
 
 async function login(email, password) {
 
-        let user = {
+
+       let user = {
             email,
             password
         }
