@@ -8,12 +8,14 @@ import { ifLoggedIn, logout } from "./userWork.mjs";
     let homeBtn = document.getElementsByClassName("btn-primary w-full text-white text-lg py-2")[0];
     document.getElementsByClassName("flex items-center shrink-0")[0].addEventListener('click', loadHome);
     let logoutBtn = document.getElementById("logout-button");
+    let restBtn = document.getElementById("restaurants-button");
     
     loginBtn.addEventListener('click', loadLogin);
     registerBtn.addEventListener("click", loadRegister);
     acctountBtn.addEventListener("click", loadAccount);
     homeBtn.addEventListener("click", loadHome);
     logoutBtn.addEventListener("click", logout);
+    restBtn.addEventListener("click", loadResturants);
 
 
     let loginBtnDe = document.getElementById("login-button");
@@ -63,6 +65,10 @@ function loadLogin(){
 
   function loadHome(){
     window.location.href = "./home.html";
+  }
+
+  function loadResturants(){
+    window.location.href = "./restaurants.html";
   }
 
     }
