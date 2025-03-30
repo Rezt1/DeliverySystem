@@ -37,4 +37,11 @@ public class CuisineController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/{name}")
+    public ResponseEntity<CuisineDto> getCuisineByName(@PathVariable String name) {
+        return cuisineService.getCuisineByName(name)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

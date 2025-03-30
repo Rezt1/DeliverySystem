@@ -36,6 +36,11 @@ public class CuisineService {
                 .map(this::convertToDto);
     }
 
+    public Optional<CuisineDto> getCuisineByName(String name) {
+        return cuisineRepository.findByName(name)
+                .map(this::convertToDto);
+    }
+
     private CuisineDto convertToDto(Cuisine cuisine) {
         return new CuisineDto(cuisine.getId(), cuisine.getName());
     }
