@@ -3,6 +3,7 @@ package com.renascence.backend.controllers;
 import com.renascence.backend.dtos.Authorization.LoginRequestDto;
 import com.renascence.backend.dtos.Authorization.RefreshTokenRequestDto;
 import com.renascence.backend.services.AuthService;
+import jakarta.annotation.security.PermitAll;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

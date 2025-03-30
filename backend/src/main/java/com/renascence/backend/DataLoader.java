@@ -1,20 +1,17 @@
 package com.renascence.backend;
 
-import com.renascence.backend.entities.City;
-import com.renascence.backend.entities.Cuisine;
-import com.renascence.backend.entities.Food;
-import com.renascence.backend.entities.Restaurant;
+import com.renascence.backend.entities.*;
 import com.renascence.backend.enums.FoodCategory;
-import com.renascence.backend.repositories.CityRepository;
-import com.renascence.backend.repositories.CuisineRepository;
-import com.renascence.backend.repositories.FoodRepository;
-import com.renascence.backend.repositories.RestaurantRepository;
+import com.renascence.backend.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataLoader implements CommandLineRunner {
+
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Autowired
     private CityRepository cityRepository;
@@ -24,9 +21,17 @@ public class DataLoader implements CommandLineRunner {
     private CuisineRepository cuisineRepository;
     @Autowired
     private FoodRepository foodRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public void run(String... args) throws Exception {
+        if (cityRepository.count() > 0){
+            return;
+        }
+
         // 1. Cities
         City sofia = new City();
         sofia.setName("Sofia");
@@ -327,6 +332,37 @@ public class DataLoader implements CommandLineRunner {
         simit.setCuisine(turkish);
         simit.setRestaurant(kebabHouse);
         foodRepository.save(simit);
+
+        //Roles
+        Role deliveryGuyRole = new Role();
+        deliveryGuyRole.setName(com.renascence.backend.enums.Role.DELIVERY_GUY.toString());
+        roleRepository.save(deliveryGuyRole);
+
+        Role ownerRole = new Role();
+        ownerRole.setName(com.renascence.backend.enums.Role.OWNER.toString());
+        roleRepository.save(ownerRole);
+
+        Role adminRole = new Role();
+        adminRole.setName(com.renascence.backend.enums.Role.ADMIN.toString());
+        roleRepository.save(adminRole);
+
+        //Users
+        User customer1 = new User();
+        customer1.setEmail("customer1@gmail.com");
+        customer1.setPassword(encoder.encode("customer1"));
+        customer1.setName("Gosho");
+        customer1.setPhoneNumber("+359 0594231552");
+        customer1.setLocation(sofia);
+        userRepository.save(customer1);
+
+        User admin1 = new User();
+        admin1.setEmail("admin1@gmail.com");
+        admin1.setPassword(encoder.encode("admin1"));
+        admin1.setName("Tosho");
+        admin1.setPhoneNumber("+359 0596131442");
+        admin1.setLocation(sofia);
+        admin1.getRoles().add(adminRole);
+        userRepository.save(admin1);
 
         System.out.println("Sample data loaded successfully!");
     }
