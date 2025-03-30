@@ -1,4 +1,4 @@
-import { ifLoggedIn } from "./userWork.mjs";
+import { ifLoggedIn, logout } from "./userWork.mjs";
 
    
   export function navigationStuff(){
@@ -7,11 +7,13 @@ import { ifLoggedIn } from "./userWork.mjs";
     let acctountBtn = document.getElementById("mobile-account-button");
     let homeBtn = document.getElementsByClassName("btn-primary w-full text-white text-lg py-2")[0];
     document.getElementsByClassName("flex items-center shrink-0")[0].addEventListener('click', loadHome);
+    let logoutBtn = document.getElementById("logout-button");
     
     loginBtn.addEventListener('click', loadLogin);
     registerBtn.addEventListener("click", loadRegister);
     acctountBtn.addEventListener("click", loadAccount);
     homeBtn.addEventListener("click", loadHome);
+    logoutBtn.addEventListener("click", logout);
 
 
     let loginBtnDe = document.getElementById("login-button");
@@ -20,9 +22,25 @@ import { ifLoggedIn } from "./userWork.mjs";
     let homeBtnDe = document.getElementsByClassName("btn-primary")[0];
     
 
-    if(ifLoggedIn){
+    if(ifLoggedIn()){
+      console.log("logged");
       acctountBtn.classList.remove("hidden");
       acctountBtnDe.classList.remove("hidden");
+      loginBtn.classList.add("hidden");
+      loginBtnDe.classList.add("hidden");
+      registerBtn.classList.add("hidden");
+      registerBtnDe.classList.add("hidden");
+      logoutBtn.classList.remove("hidden");
+    }
+    else{
+      console.log("not logged");
+      acctountBtn.classList.add("hidden");
+      acctountBtnDe.classList.add("hidden");
+      loginBtn.classList.remove("hidden");
+      loginBtnDe.classList.remove("hidden");
+      registerBtn.classList.remove("hidden");
+      registerBtnDe.classList.remove("hidden");
+      logoutBtn.classList.add("hidden");
     }
 
 
