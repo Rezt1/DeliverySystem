@@ -40,6 +40,6 @@ public class CityService {
 //    }
 
     private CityDto convertToDto(City city) {
-        return new CityDto(city.getId(), city.getName(), null, null);
+        return new CityDto(city.getId(), city.getName());
     }
 }

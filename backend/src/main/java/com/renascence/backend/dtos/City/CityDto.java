@@ -17,7 +17,7 @@ public class CityDto {
     @Size(min = 2, max = 100, message = "City name must be between 2-100 characters")
     private String name;
 
-    public CityDto(long id, String name, Object o, Object o1) {
+    public CityDto(long id, String name) {
         this.id = id;
         this.name = name;
     }

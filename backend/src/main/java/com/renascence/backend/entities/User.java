@@ -37,7 +37,7 @@ public class User {
     @OneToOne(mappedBy = "user")
     private DeliveryGuy deliveryGuy;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "usersRoles",
             joinColumns = @JoinColumn(name = "userId"),
