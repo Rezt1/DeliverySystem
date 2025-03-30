@@ -10,8 +10,4 @@ public class CreateCityDto {
     @NotBlank(message = "City name is required")
     @Size(min = 2, max = 100, message = "City name must be between 2-100 characters")
     private String name;
-
-    public CreateCityDto(String name, Object o, Object o1) {
-        this.name = name;
-    }
 }
