@@ -335,15 +335,15 @@ public class DataLoader implements CommandLineRunner {
 
         //Roles
         Role deliveryGuyRole = new Role();
-        deliveryGuyRole.setName(com.renascence.backend.enums.Role.DELIVERY_GUY.toString());
+        deliveryGuyRole.setName("ROLE_" + com.renascence.backend.enums.Role.DELIVERY_GUY.toString());
         roleRepository.save(deliveryGuyRole);
 
         Role ownerRole = new Role();
-        ownerRole.setName(com.renascence.backend.enums.Role.OWNER.toString());
+        ownerRole.setName("ROLE_" + com.renascence.backend.enums.Role.OWNER.toString());
         roleRepository.save(ownerRole);
 
         Role adminRole = new Role();
-        adminRole.setName(com.renascence.backend.enums.Role.ADMIN.toString());
+        adminRole.setName("ROLE_" + com.renascence.backend.enums.Role.ADMIN.toString());
         roleRepository.save(adminRole);
 
         //Users

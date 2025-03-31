@@ -21,7 +21,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -67,7 +66,7 @@ public class SecurityConfig {
                                 "/api/test/unsecured1",
                                 "/api/auth/login",
                                 "/api/auth/refresh").permitAll()
-                        .requestMatchers("/api/test/adminSecured").hasRole(Role.ADMIN.toString())
+                        .requestMatchers("/api/test/adminSecured").hasRole("ADMIN")
                         .anyRequest().authenticated()
             )
             .cors(customizer -> customizer.configurationSource(corsConfigurationSource()))

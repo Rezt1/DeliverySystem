@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "refreshTokens")
-public class RefreshToken {
+@Table(name = "accessTokens")
+public class AccessToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -28,9 +28,9 @@ public class RefreshToken {
     @JoinColumn(name = "userId")
     private User user;
 
-    public RefreshToken(){}
+    public AccessToken(){}
 
-    public RefreshToken(LocalDateTime expiryDate, String token, User user) {
+    public AccessToken(LocalDateTime expiryDate, String token, User user) {
         this.expiryDate = expiryDate;
         this.token = token;
         this.user = user;

@@ -1,5 +1,7 @@
 package com.renascence.backend.services;
 
+import com.renascence.backend.entities.AccessToken;
+import com.renascence.backend.repositories.AccessTokenRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -7,6 +9,7 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,24 +19,21 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.security.Key;
-import java.util.Base64;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class JwtService {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
+    private final AccessTokenRepository accessTokenRepository;
 
     @Value("${security.jwt.secret}")
     private String jwtSecret;
 
     @Value("${security.jwt.expiration-ms}")
     private long jwtExpirationInMs;
-
-    @Value("${security.jwt.refresh-expiration-ms}")
-    private long jwtRefreshExpirationInMs;
 
     private Key key;
 
@@ -61,18 +61,6 @@ public class JwtService {
                 .compact();
     }
 
-    public String generateRefreshToken(String email){
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + jwtRefreshExpirationInMs);
-
-        return Jwts.builder()
-                .subject(email)
-                .issuedAt(now)
-                .expiration(expiryDate)
-                .signWith(key)
-                .compact();
-    }
-
     public String getEmailFromToken(String token){
         return Jwts.parser()
                 .verifyWith((SecretKey) key)
@@ -88,6 +76,13 @@ public class JwtService {
                     .verifyWith((SecretKey) key)
                     .build()
                     .parseSignedClaims(token);
+
+            Optional<AccessToken> dbAccessToken = accessTokenRepository.findByToken(token);
+
+            if (dbAccessToken.isEmpty() || dbAccessToken.get().isRevoked()){
+                throw new MalformedJwtException("Invalid JWT token");
+            }
+
             return true;
         } catch (SignatureException ex) {
             logger.error("Invalid JWT signature");
@@ -103,7 +98,7 @@ public class JwtService {
         return false;
     }
 
-    public long getRefreshExpirationInMs() {
-        return jwtRefreshExpirationInMs;
+    public long getExpirationInMs() {
+        return jwtExpirationInMs;
     }
 }
