@@ -67,18 +67,10 @@
   border: 2px solid #006bb8;
   border-radius: 25px;
   font-weight: bolder;
-  transition: all 0.25s ease-in-out;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1rem;
   margin: 5px;
   margin-left: 0
-}
-
-.btn-drop-down:hover {
-  background-color: white;
-  border: 2px solid #ff66c4;
-  color: #ff66c4;
-  cursor: pointer;
 }
 
 .btn-drop-down:active {
