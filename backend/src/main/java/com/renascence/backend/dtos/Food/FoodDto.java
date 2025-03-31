@@ -1,7 +1,6 @@
 package com.renascence.backend.dtos.Food;
 
 import com.renascence.backend.enums.FoodCategory;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Data

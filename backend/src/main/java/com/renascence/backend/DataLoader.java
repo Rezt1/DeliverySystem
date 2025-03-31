@@ -90,7 +90,7 @@ public class DataLoader implements CommandLineRunner {
         kebabHouse.setName("Kebab House");
         kebabHouse.setDeliveryGuySalary(1000.00);
         kebabHouse.setIban("TR11985643");
-        kebabHouse.setRating(5.0f);
+        kebabHouse.setRating(4.0f);
         kebabHouse.setCity(burgas);
         restaurantRepository.save(kebabHouse);
 
@@ -184,14 +184,14 @@ public class DataLoader implements CommandLineRunner {
         coqAuVin.setRestaurant(vega);
         foodRepository.save(coqAuVin);
 
-        Food saladeNiçoise = new Food();
-        saladeNiçoise.setName("Salade niçoise");
-        saladeNiçoise.setPrice(9.29);
-        saladeNiçoise.setFoodCategory(FoodCategory.SALAD);
-        saladeNiçoise.setDescription("Traditionally made of tomatoes, hard-boiled eggs, Niçoise olives and anchovies or tuna, dressed with olive oil, or in some historical versions, a vinaigrette");
-        saladeNiçoise.setCuisine(french);
-        saladeNiçoise.setRestaurant(vega);
-        foodRepository.save(saladeNiçoise);
+        Food saladeNicoise = new Food();
+        saladeNicoise.setName("Salade niçoise");
+        saladeNicoise.setPrice(9.29);
+        saladeNicoise.setFoodCategory(FoodCategory.SALAD);
+        saladeNicoise.setDescription("Traditionally made of tomatoes, hard-boiled eggs, Niçoise olives and anchovies or tuna, dressed with olive oil, or in some historical versions, a vinaigrette");
+        saladeNicoise.setCuisine(french);
+        saladeNicoise.setRestaurant(vega);
+        foodRepository.save(saladeNicoise);
 
         Food quicheLorraine = new Food();
         quicheLorraine.setName("Quiche Lorraine");
