@@ -49,7 +49,9 @@ async function register(email, password, phone, username) {
 
     try{
 
-        let resp = await fetch("http://localhost:5501", settings);
+        let address = ip();
+
+        let resp = await fetch(`${address}/api/auth/register`, settings);
         return resp;
 
     }

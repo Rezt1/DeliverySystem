@@ -1,3 +1,4 @@
+import { ip } from "./ipSearch.mjs";
 import { sessionStorageSet } from "./userWork.mjs";
 import { togglePassword } from "./utils.mjs";
 
@@ -51,8 +52,10 @@ async function login(email, password) {
             mode: "no-cors"
         }
 
+        let address = ip();
+
         try{
-            let resp = await fetch("http://localhost:8080/api/auth/login", settings);
+            let resp = await fetch(`${address}/api/auth/login`, settings);
             return resp;
         }
         catch(e){

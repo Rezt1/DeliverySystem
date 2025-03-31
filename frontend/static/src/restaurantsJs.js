@@ -1,6 +1,9 @@
+import { ip } from "./ipSearch.mjs";
+
 async function fetchingRestaurants(){
 
-    let resp = await fetch(`http://localhost:8080/api/restaurants`, {
+  let address = ip();
+    let resp = await fetch(`${address}/api/restaurants`, {
       method: "Get",
       mode: "no-cors"
     });
