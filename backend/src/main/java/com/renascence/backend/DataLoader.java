@@ -158,7 +158,7 @@ public class DataLoader implements CommandLineRunner {
         royalDragon.setRating(4.5f);
         royalDragon.setCity(sofia);
         restaurantRepository.save(royalDragon);
---
+
         Restaurant indianTaste = new Restaurant();
         indianTaste.setName("Indian Taste");
         indianTaste.setDeliveryGuySalary(1200.75);
@@ -436,7 +436,7 @@ public class DataLoader implements CommandLineRunner {
         Food shopskaSalad = new Food();
         shopskaSalad.setName("Shopska Salad");
         shopskaSalad.setPrice(6.50);
-        shopskaSalad.setFoodCategory(FoodCategory.STARTER);
+        shopskaSalad.setFoodCategory(FoodCategory.SALAD);
         shopskaSalad.setDescription("Traditional Bulgarian salad with tomatoes, cucumbers, onion, peppers, and white cheese.");
         shopskaSalad.setCuisine(bulgarian);
         shopskaSalad.setRestaurant(bulgari);
@@ -445,7 +445,7 @@ public class DataLoader implements CommandLineRunner {
         Food tarator = new Food();
         tarator.setName("Tarator");
         tarator.setPrice(5.00);
-        tarator.setFoodCategory(FoodCategory.STARTER);
+        tarator.setFoodCategory(FoodCategory.APPETIZER);
         tarator.setDescription("Cold yogurt soup with cucumber, garlic, walnuts, and dill.");
         tarator.setCuisine(bulgarian);
         tarator.setRestaurant(bulgari);
@@ -481,7 +481,7 @@ public class DataLoader implements CommandLineRunner {
         Food tzatziki = new Food();
         tzatziki.setName("Tzatziki");
         tzatziki.setPrice(5.50);
-        tzatziki.setFoodCategory(FoodCategory.STARTER);
+        tzatziki.setFoodCategory(FoodCategory.APPETIZER);
         tzatziki.setDescription("Greek yogurt dip with cucumber, garlic, and dill.");
         tzatziki.setCuisine(greek);
         tzatziki.setRestaurant(kalos);
@@ -490,7 +490,7 @@ public class DataLoader implements CommandLineRunner {
         Food greekSalad = new Food();
         greekSalad.setName("Greek Salad");
         greekSalad.setPrice(7.00);
-        greekSalad.setFoodCategory(FoodCategory.STARTER);
+        greekSalad.setFoodCategory(FoodCategory.SALAD);
         greekSalad.setDescription("Fresh salad with tomatoes, cucumbers, olives, feta cheese, and olive oil.");
         greekSalad.setCuisine(greek);
         greekSalad.setRestaurant(kalos);
@@ -499,7 +499,7 @@ public class DataLoader implements CommandLineRunner {
         Food dolmadakia = new Food();
         dolmadakia.setName("Dolmadakia");
         dolmadakia.setPrice(8.00);
-        dolmadakia.setFoodCategory(FoodCategory.STARTER);
+        dolmadakia.setFoodCategory(FoodCategory.APPETIZER);
         dolmadakia.setDescription("Stuffed grape leaves with rice, herbs, and lemon.");
         dolmadakia.setCuisine(greek);
         dolmadakia.setRestaurant(kalos);
@@ -544,7 +544,7 @@ public class DataLoader implements CommandLineRunner {
         Food dimSum = new Food();
         dimSum.setName("Dim Sum");
         dimSum.setPrice(9.00);
-        dimSum.setFoodCategory(FoodCategory.STARTER);
+        dimSum.setFoodCategory(FoodCategory.APPETIZER);
         dimSum.setDescription("Steamed dumplings filled with meat, seafood, or vegetables.");
         dimSum.setCuisine(asian);
         dimSum.setRestaurant(royalDragon);
@@ -558,6 +558,51 @@ public class DataLoader implements CommandLineRunner {
         mochi.setCuisine(asian);
         mochi.setRestaurant(royalDragon);
         foodRepository.save(mochi);
+
+        Food naan = new Food();
+        naan.setName("Naan");
+        naan.setPrice(3.50);
+        naan.setFoodCategory(FoodCategory.BREAD);
+        naan.setDescription("Traditional Indian flatbread baked in a tandoor oven.");
+        naan.setCuisine(indian);
+        naan.setRestaurant(indianTaste);
+        foodRepository.save(naan);
+
+        Food samosa = new Food();
+        samosa.setName("Samosa");
+        samosa.setPrice(5.00);
+        samosa.setFoodCategory(FoodCategory.APPETIZER);
+        samosa.setDescription("Crispy pastry filled with spiced potatoes, peas, and herbs.");
+        samosa.setCuisine(indian);
+        samosa.setRestaurant(indianTaste);
+        foodRepository.save(samosa);
+
+        Food sambarTandoori = new Food();
+        sambarTandoori.setName("Sambar Tandoori");
+        sambarTandoori.setPrice(8.50);
+        sambarTandoori.setFoodCategory(FoodCategory.MAIN_COURSE);
+        sambarTandoori.setDescription("Spicy lentil-based vegetable stew, cooked with tamarind and aromatic spices.");
+        sambarTandoori.setCuisine(indian);
+        sambarTandoori.setRestaurant(indianTaste);
+        foodRepository.save(sambarTandoori);
+
+        Food butterChicken = new Food();
+        butterChicken.setName("Butter Chicken");
+        butterChicken.setPrice(12.00);
+        butterChicken.setFoodCategory(FoodCategory.MAIN_COURSE);
+        butterChicken.setDescription("Creamy tomato-based curry with tender pieces of tandoori chicken.");
+        butterChicken.setCuisine(indian);
+        butterChicken.setRestaurant(indianTaste);
+        foodRepository.save(butterChicken);
+
+        Food malaiKofta = new Food();
+        malaiKofta.setName("Malai Kofta");
+        malaiKofta.setPrice(11.50);
+        malaiKofta.setFoodCategory(FoodCategory.MAIN_COURSE);
+        malaiKofta.setDescription("Soft paneer and potato dumplings served in a rich, creamy tomato sauce.");
+        malaiKofta.setCuisine(indian);
+        malaiKofta.setRestaurant(indianTaste);
+        foodRepository.save(malaiKofta);
 
         Food risotto = new Food();
         risotto.setName("Risotto");
@@ -589,7 +634,7 @@ public class DataLoader implements CommandLineRunner {
         Food bruschetta = new Food();
         bruschetta.setName("Bruschetta");
         bruschetta.setPrice(7.00);
-        bruschetta.setFoodCategory(FoodCategory.STARTER);
+        bruschetta.setFoodCategory(FoodCategory.BREAD);
         bruschetta.setDescription("Toasted bread topped with diced tomatoes, garlic, basil, and olive oil.");
         bruschetta.setCuisine(italian);
         bruschetta.setRestaurant(bellaItalia);
@@ -604,7 +649,149 @@ public class DataLoader implements CommandLineRunner {
         gnocchi.setRestaurant(bellaItalia);
         foodRepository.save(gnocchi);
 
+        Food pide = new Food();
+        pide.setName("Pide");
+        pide.setPrice(9.50);
+        pide.setFoodCategory(FoodCategory.MAIN_COURSE);
+        pide.setDescription("Turkish-style flatbread with various toppings like minced meat, cheese, and vegetables.");
+        pide.setCuisine(turkish);
+        pide.setRestaurant(yemek);
+        foodRepository.save(pide);
 
+        Food gozleme = new Food();
+        gozleme.setName("Gözleme");
+        gozleme.setPrice(7.50);
+        gozleme.setFoodCategory(FoodCategory.MAIN_COURSE);
+        gozleme.setDescription("Traditional Turkish stuffed flatbread, filled with cheese, spinach, or minced meat.");
+        gozleme.setCuisine(turkish);
+        gozleme.setRestaurant(yemek);
+        foodRepository.save(gozleme);
+
+        Food mercimekCorbasi = new Food();
+        mercimekCorbasi.setName("Mercimek Çorbası");
+        mercimekCorbasi.setPrice(5.50);
+        mercimekCorbasi.setFoodCategory(FoodCategory.APPETIZER);
+        mercimekCorbasi.setDescription("Rich and creamy Turkish lentil soup, seasoned with spices.");
+        mercimekCorbasi.setCuisine(turkish);
+        mercimekCorbasi.setRestaurant(yemek);
+        foodRepository.save(mercimekCorbasi);
+
+        Food sultanKebab = new Food();
+        sultanKebab.setName("Sultan Kebab");
+        sultanKebab.setPrice(13.50);
+        sultanKebab.setFoodCategory(FoodCategory.MAIN_COURSE);
+        sultanKebab.setDescription("Slow-cooked lamb or beef kebab with vegetables, served with a creamy sauce.");
+        sultanKebab.setCuisine(turkish);
+        sultanKebab.setRestaurant(yemek);
+        foodRepository.save(sultanKebab);
+
+        Food croissant = new Food();
+        croissant.setName("Croissant");
+        croissant.setPrice(4.00);
+        croissant.setFoodCategory(FoodCategory.APPETIZER);
+        croissant.setDescription("Flaky, buttery pastry, perfect for breakfast or a light snack.");
+        croissant.setCuisine(french);
+        croissant.setRestaurant(frenchBaguette);
+        foodRepository.save(croissant);
+
+        Food ratatouille = new Food();
+        ratatouille.setName("Ratatouille");
+        ratatouille.setPrice(10.00);
+        ratatouille.setFoodCategory(FoodCategory.MAIN_COURSE);
+        ratatouille.setDescription("Traditional French vegetable stew made with eggplant, zucchini, and bell peppers.");
+        ratatouille.setCuisine(french);
+        ratatouille.setRestaurant(frenchBaguette);
+        foodRepository.save(ratatouille);
+
+        Food onionSoup = new Food();
+        onionSoup.setName("French Onion Soup");
+        onionSoup.setPrice(8.50);
+        onionSoup.setFoodCategory(FoodCategory.APPETIZER);
+        onionSoup.setDescription("Rich and savory soup made with caramelized onions, beef broth, and topped with melted cheese.");
+        onionSoup.setCuisine(french);
+        onionSoup.setRestaurant(frenchBaguette);
+        foodRepository.save(onionSoup);
+
+        Food cremeBrulee = new Food();
+        cremeBrulee.setName("Crème Brûlée");
+        cremeBrulee.setPrice(6.50);
+        cremeBrulee.setFoodCategory(FoodCategory.DESSERT);
+        cremeBrulee.setDescription("Classic French dessert with a creamy vanilla custard base and a caramelized sugar crust.");
+        cremeBrulee.setCuisine(french);
+        cremeBrulee.setRestaurant(frenchBaguette);
+        foodRepository.save(cremeBrulee);
+
+        Food kimchi = new Food();
+        kimchi.setName("Kimchi");
+        kimchi.setPrice(6.00);
+        kimchi.setFoodCategory(FoodCategory.SIDE);
+        kimchi.setDescription("Spicy fermented cabbage with chili peppers and garlic.");
+        kimchi.setCuisine(korean);
+        kimchi.setRestaurant(kkot);
+        foodRepository.save(kimchi);
+
+        Food bibimbap = new Food();
+        bibimbap.setName("Bibimbap");
+        bibimbap.setPrice(12.00);
+        bibimbap.setFoodCategory(FoodCategory.MAIN_COURSE);
+        bibimbap.setDescription("Rice bowl topped with sautéed vegetables, sliced meat, egg, and spicy gochujang sauce.");
+        bibimbap.setCuisine(korean);
+        bibimbap.setRestaurant(kkot);
+        foodRepository.save(bibimbap);
+
+        Food tteokbokki = new Food();
+        tteokbokki.setName("Tteokbokki");
+        tteokbokki.setPrice(9.50);
+        tteokbokki.setFoodCategory(FoodCategory.MAIN_COURSE);
+        tteokbokki.setDescription("Chewy rice cakes in a spicy and slightly sweet gochujang sauce.");
+        tteokbokki.setCuisine(korean);
+        tteokbokki.setRestaurant(kkot);
+        foodRepository.save(tteokbokki);
+
+        Food hotteok = new Food();
+        hotteok.setName("Hotteok");
+        hotteok.setPrice(5.50);
+        hotteok.setFoodCategory(FoodCategory.DESSERT);
+        hotteok.setDescription("Sweet Korean pancakes filled with brown sugar, cinnamon, and nuts.");
+        hotteok.setCuisine(korean);
+        hotteok.setRestaurant(kkot);
+        foodRepository.save(hotteok);
+
+        Food tacos = new Food();
+        tacos.setName("Tacos");
+        tacos.setPrice(10.00);
+        tacos.setFoodCategory(FoodCategory.MAIN_COURSE);
+        tacos.setDescription("Traditional Mexican dish made with corn tortillas filled with meat, vegetables, and salsa.");
+        tacos.setCuisine(mexican);
+        tacos.setRestaurant(amigo);
+        foodRepository.save(tacos);
+
+        Food burrito = new Food();
+        burrito.setName("Burrito");
+        burrito.setPrice(11.50);
+        burrito.setFoodCategory(FoodCategory.MAIN_COURSE);
+        burrito.setDescription("Large flour tortilla filled with rice, beans, meat, and cheese.");
+        burrito.setCuisine(mexican);
+        burrito.setRestaurant(amigo);
+        foodRepository.save(burrito);
+
+        Food quesadilla = new Food();
+        quesadilla.setName("Quesadilla");
+        quesadilla.setPrice(9.00);
+        quesadilla.setFoodCategory(FoodCategory.MAIN_COURSE);
+        quesadilla.setDescription("Grilled tortilla filled with melted cheese and other ingredients like chicken or vegetables.");
+        quesadilla.setCuisine(mexican);
+        quesadilla.setRestaurant(amigo);
+        foodRepository.save(quesadilla);
+
+        Food churros = new Food();
+        churros.setName("Churros");
+        churros.setPrice(6.50);
+        churros.setFoodCategory(FoodCategory.DESSERT);
+        churros.setDescription("Crispy fried dough pastries sprinkled with cinnamon sugar and served with chocolate sauce.");
+        churros.setCuisine(mexican);
+        churros.setRestaurant(amigo);
+        foodRepository.save(churros);
 
         //Roles
         Role deliveryGuyRole = new Role();
