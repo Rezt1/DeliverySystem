@@ -1,11 +1,13 @@
 package com.renascence.backend.config;
 
+import com.renascence.backend.enums.Role;
 import com.renascence.backend.filters.JwtAuthenticationEntryPoint;
 import com.renascence.backend.filters.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 @EnableWebSecurity
+@EnableGlobalAuthentication
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
@@ -39,7 +42,15 @@ public class SecurityConfig {
         //CsrfTokenRequestAttributeHandler csrfTokenRequestAttributeHandler = new CsrfTokenRequestAttributeHandler();
 
         http
-            .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
+            .authorizeHttpRequests(authorize ->
+                authorize
+                        .requestMatchers("/api/test/unsecured1",
+                                "/api/test/unsecured1",
+                                "/api/auth/login",
+                                "/api/auth/refresh").permitAll()
+                        .requestMatchers("/api/test/adminSecured").hasRole(Role.ADMIN.toString())
+                        .anyRequest().authenticated()
+            )
             .csrf(AbstractHttpConfigurer::disable)
             .cors(AbstractHttpConfigurer::disable)
             .exceptionHandling(exceptionHandler -> exceptionHandler.authenticationEntryPoint(jwtAuthenticationEntryPoint))

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+      defer
+    ></script>
+    <script src="./src/nav.mjs" type="module" defer></script>
+    <script src="./src/restaurantsJs.js" type="module" defer></script>
+    <link href="./style.css" rel="stylesheet" />
+    <link href="./custom.css" rel="stylesheet" />
+
+    <title>Hexeats - Restaurants</title>
+  </head>
+
+  <body>
+    <header
+      class="bg-[#006bb8] relative flex items-center justify-between py-3 px-2 md:max-h-[110px]"
+    >
+      <!-- Logo Section -->
+      <div class="flex justify-start items-center shrink-0">
+        <a href="home.html">
+          <img
+            class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
+            src="./Images/logo.PNG"
+            alt="logo"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Navigation (prevents buttons from going out of sight) -->
+      <nav
+        class="hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:justify-between md:pl-[100px]"
+      >
+        <!-- Left Section -->
+        <div class="flex flex-wrap gap-3">
+          <button class="btn-primary">Home</button>
+          <button id="restaurants-button" class="btn-primary">
+            Restaurants
+          </button>
+
+          <!-- Hidden deliveries button -->
+          <!-- To be shown only when delivery guy is logged in -->
+          <button id="deliveries-button" class="btn-primary !hidden">
+            Deliveries
+          </button>
+        </div>
+
+        <!-- Right Section -->
+        <div class="flex flex-wrap gap-3 items-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            id="search-navbar-input"
+            class="btn-primary btn-search w-31 focus:outline-none"
+          />
+          <button
+            class="btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative"
+          >
+            <svg
+              class="btn-cart-icon w-8 h-8 text-[#006bb8]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              viewBox="0 0 24 24"
+            >
+              <path d="M4 10h16l-2 8H6l-2-8z" />
+              <path d="M9 10V6a3 3 0 0 1 6 0v4" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <line x1="9" y1="16" x2="15" y2="16" />
+            </svg>
+          </button>
+
+          <!-- Login/Reg/Account buttons -->
+          <button id="login-button" class="btn-primary">Login</button>
+          <button id="register-button" class="btn-primary">Register</button>
+          <button id="account-button" class="btn-primary !hidden">
+            Account
+          </button>
+          <button id="logout-button" class="hidden btn-primary">Logout</button>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden flex items-center">
+        <button
+          type="button"
+          id="main-menu"
+          aria-label="Main menu"
+          aria-expanded="false"
+          class="btn-menu p-2 rounded-md text-white hover:bg-white hover:text-[#006bb8] transition"
+        >
+          <svg
+            class="btn-menu-icon h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Menu (hidden by default) -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden flex flex-col items-center bg-[#006bb8] absolute top-[100px] left-0 w-full p-4 space-y-4 transition-all duration-300 ease-in-out"
+      >
+        <input
+          type="text"
+          placeholder="Search..."
+          id="search-navbar-menu-input"
+          class="btn-search bg-white text-[#006bb8] px-[18px] py-[10px] rounded-3xl w-full font-extrabold hover:text-[#ff66c4] focus:outline-none focus:ring-1 focus:ring-[#006bb8]"
+        />
+        <button
+          id="home-btn"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Home
+        </button>
+        <button class="btn-primary w-full text-white text-lg py-2">
+          Restaurants
+        </button>
+
+        <!-- Hidden button for Deliveries -->
+        <!-- To be shown only when delivery guy is logged in -->
+        <button
+          id="mobile-deliveries-button"
+          class="btn-primary w-full text-white text-lg py-2 !hidden"
+        >
+          Deliveries
+        </button>
+        <button
+          id="mobile-cart-button"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Cart
+        </button>
+
+        <!-- Mobile Login/Account/Register Buttons -->
+        <button
+          id="mobile-login-button"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Login
+        </button>
+        <button
+          id="mobile-register-button"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Register
+        </button>
+        <button
+          id="mobile-account-button"
+          class="btn-primary w-full text-white text-lg py-2 !hidden"
+        >
+          Account
+        </button>
+      </div>
+    </header>
+
+    <main class="flex flex-col">
+      <div class="bg-white py-4 px-6 border-b border-gray-200">
+        <div
+          class="flex flex-col md:flex-row md:items-center md:justify-between"
+        >
+          <h1
+            class="text-2xl font-bold font-serif text-[#006bb8] opacity-85 mb-4 md:mb-0"
+          >
+            Filter
+          </h1>
+
+          <div
+            class="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4 text-[#006bb8]"
+          >
+            <!-- Sort Dropdown -->
+            <div class="relative">
+              <button
+                type="button"
+                class="inline-flex justify-between w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium hover:bg-gray-50 hover:text-[#ff66c4] hover:cursor-pointer hover:ring-2 hover:ring-[#ff66c4] active:opacity-70 focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4]"
+                id="sort-menu"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                Sort
+                <svg
+                  class="-mr-1 ml-2 h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              <div
+                class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="sort-menu"
+              >
+                <div class="py-1" role="none">
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm hover:bg-gray-100 hover:cursor-pointer hover:text-[#ff66c4]"
+                    role="menuitem"
+                    data-sort="name-asc"
+                    >Alphabetical (A-Z)</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm hover:bg-gray-100 hover:cursor-pointer hover:text-[#ff66c4]"
+                    role="menuitem"
+                    data-sort="name-desc"
+                    >Alphabetical (Z-A)</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:cursor-pointer hover:text-[#ff66c4]"
+                    role="menuitem"
+                    data-sort="rating-desc"
+                    >Highest Rated</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:cursor-pointer hover:text-[#ff66c4]"
+                    role="menuitem"
+                    data-sort="newest"
+                    >Newest First</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- City Filter (will be populated dynamically) -->
+            <div class="relative">
+              <button
+                type="button"
+                class="inline-flex justify-between w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium hover:bg-gray-50 hover:text-[#ff66c4] hover:cursor-pointer hover:ring-2 hover:ring-[#ff66c4] active:opacity-70 focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4]"
+                id="city-menu"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span id="city-selected">All Cities</span>
+                <svg
+                  class="-mr-1 ml-2 h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              <div
+                class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hover:cursor-pointer hover:text-[#ff66c4] focus:outline-none hidden"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="city-menu"
+              >
+                <div
+                  class="py-1 max-h-60 overflow-y-auto"
+                  role="none"
+                  id="city-options"
+                >
+                  <!-- Will be populated by JavaScript -->
+                  <div class="px-4 py-2 text-sm text-gray-500 italic">
+                    Loading cities...
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cuisine Filter (will be populated dynamically) -->
+            <div class="relative">
+              <button
+                type="button"
+                class="inline-flex justify-between w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium hover:bg-gray-50 hover:text-[#ff66c4] hover:cursor-pointer hover:ring-2 hover:ring-[#ff66c4] active:opacity-70 focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4]"
+                id="cuisine-menu"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span id="cuisine-selected">All Cuisines</span>
+                <svg
+                  class="-mr-1 ml-2 h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              <div
+                class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hover:cursor-pointer hover:text-[#ff66c4] focus:outline-none hidden"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="cuisine-menu"
+              >
+                <div
+                  class="py-1 max-h-60 overflow-y-auto"
+                  role="none"
+                  id="cuisine-options"
+                >
+                  <!-- Will be populated by JavaScript -->
+                  <div class="px-4 py-2 text-sm text-gray-500 italic">
+                    Loading cuisines...
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rating Filter -->
+            <div class="relative">
+              <button
+                type="button"
+                class="inline-flex justify-between w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium hover:bg-gray-50 hover:text-[#ff66c4] hover:cursor-pointer hover:ring-2 hover:ring-[#ff66c4] active:opacity-70 focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4]"
+                id="rating-menu"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span id="rating-selected">Any Rating</span>
+                <svg
+                  class="-mr-1 ml-2 h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              <div
+                class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hover:cursor-pointer hover:text-[#ff66c4] focus:outline-none hidden"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="rating-menu"
+              >
+                <div class="py-1" role="none">
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    role="menuitem"
+                    data-rating="0"
+                    >Any Rating</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    role="menuitem"
+                    data-rating="4"
+                  >
+                    <span class="flex items-center"> ★★★★☆ & Up </span>
+                  </a>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    role="menuitem"
+                    data-rating="3"
+                  >
+                    <span class="flex items-center"> ★★★☆☆ & Up </span>
+                  </a>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    role="menuitem"
+                    data-rating="2"
+                  >
+                    <span class="flex items-center"> ★★☆☆☆ & Up </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- deep^^^^^^ -->
+
+      <!-- <div
+        id="drop-down-menu-restaurants"
+        class="w-[45%] p-4 pb-0 flex flex-col items-center"
+      >
+        <div
+          class="w-full flex justify-between items-end md:items-center gap-1 flex-wrap"
+        >
+          <div class="relative w-[85%] md:w-[65%]">
+            <select
+              id="search-restaurants-dropdown"
+              class="btn-drop-down z-1001 w-full focus:outline-none focus:ring-[1px] focus:ring-[#006bb8] hover:focus:ring-0 appearance-none pl-4 pr-8 py-3"
+            >
+              Sashka -->
+      <!-- Sashka -->
+      <!-- Sashka -->
+      <!-- Sashka -->
+      <!-- Options from database 
+              <option value="" selected disabled hidden>
+                Select an option...
+              </option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+            >
+              <svg
+                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <button
+            id="btn-search-restaurants"
+            class="w-[45%] md:w-[30%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:border-2 hover:py-[10px] hover:bg-white hover:text-[#ff66c4] hover:cursor-pointer active:opacity-70"
+          >
+            Search
+          </button>
+        </div>
+
+        <div class="my-auto flex items-center justify-center">
+          <h2
+            class="text-1xl md:text-4xl text-[#006bb8] font-serif text-center font-bold"
+          >
+            Wondering what to eat?
+            <br />
+            Check out our Chef's Picks!
+          </h2>
+        </div>
+
+        <div
+          class="flex items-center p-3 mt-auto md:w-[60%] max-h-[400px] pb-0"
+        >
+          <img src="./Images/courier_bag_hmm.png" alt="courier_bag_hmm.png" />
+        </div>
+      </div> -->
+
+      <div class="flex justify-between mt-auto">
+        <div id="restaurants" class="w-[80%] md:w-[45%] flex flex-col mx-auto">
+          <h1
+            class="text-2xl md:text-5xl text-[#ff66c4] py-5 font-serif text-center font-bold"
+          >
+            Chef's Picks!
+          </h1>
+
+          <section
+            id="chefs-picks"
+            class="bg-white rounded-3xl shadow-md shadow-gray-700 h-[25%] flex justify-around items-center md:text-2xl"
+          >
+            <!-- Empty slots with loading state -->
+            <button
+              id="chef-pick-1"
+              class="chef-pick-btn h-[60%] w-[45%] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent flex items-center justify-center rounded-xl shadow-sm hover:shadow-md hover:cursor-pointer transition-all"
+              disabled
+            >
+              <span class="text-white italic">Loading...</span>
+            </button>
+
+            <button
+              id="chef-pick-2"
+              class="chef-pick-btn h-[60%] w-[45%] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent flex items-center justify-center rounded-xl shadow-sm hover:shadow-md hover:cursor-pointer transition-all"
+              disabled
+            >
+              <span class="text-white italic">Loading...</span>
+            </button>
+          </section>
+
+          <h2
+            class="text-2xl md:text-4xl pt-8 pb-5 text-[#006bb8] font-serif text-center font-bold"
+          >
+            All Restaurants!
+          </h2>
+
+          <div
+            id="list-with-restaurants"
+            class="bg-white rounded-3xl shadow-md shadow-gray-700 mb-5 flex-1 overflow-y-auto"
+          >
+            <!-- Loading state -->
+            <div id="restaurants-loading" class="grid gap-3 p-4">
+              <!-- Skeleton loader items -->
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+            </div>
+
+            <!-- Actual restaurants will be inserted here -->
+            <div id="restaurants-list" class="grid gap-3 p-4 hidden"></div>
+          </div>
+        </div>
+        <div class="hidden md:flex flex-col w-[45%] h-full">
+          <div class="my-auto flex items-center justify-center">
+            <h2
+              class="text-1xl md:text-5xl text-[#006bb8] font-serif text-center font-bold"
+            >
+              Wondering what to eat?
+              <br />
+              Check out our Chef's Picks!
+            </h2>
+          </div>
+          <div class="flex items-center justify-center p-3 mt-auto pb-0">
+            <img
+              src="./Images/courier_bag_hmm.png"
+              alt="courier_bag_hmm.png"
+              class="max-h-[400px]"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
+      <button class="btn-footer">FAQ</button>
+      <button class="btn-footer">About</button>
+      <button class="btn-footer">Contacts</button>
+      <button class="btn-footer">Feedback</button>
+    </footer>
+  </body>
+</html>

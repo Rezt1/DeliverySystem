@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="./style.css" rel="stylesheet" />
+    <script src="./src/nav.mjs" type="module" defer></script>
+    <script src="./src/loginSrc.js" type="module" defer></script>
+    <link href="./custom.css" rel="stylesheet" />
+
+    <title>Hexeats - Login</title>
+  </head>
+
+  <body>
+    <header
+      class="bg-[#006bb8] relative flex items-center justify-between py-3 px-2 md:max-h-[110px]"
+    >
+      <!-- Logo Section -->
+      <div class="flex items-center shrink-0">
+        <a href="home.html">
+          <img
+            class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
+            src="./Images/logo.PNG"
+            alt="logo"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Navigation (prevents buttons from going out of sight) -->
+      <nav
+      class="hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:justify-between md:pl-[100px]"
+      >
+        <!-- Left Section -->
+        <div class="flex flex-wrap gap-3">
+          <button class="btn-primary">Home</button>
+          <button class="btn-primary">Restaurants</button>
+
+          <!-- Hidden deliveries button -->
+          <!-- To be shown only when delivery guy is logged in -->
+          <button id="deliveries-button" class="btn-primary !hidden">
+            Deliveries
+          </button>
+        </div>
+
+        <!-- Right Section -->
+        <div class="flex flex-wrap gap-3 items-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            id="search-navbar-input"
+            class="btn-primary btn-search w-31 focus:outline-none"
+          />
+          <button
+            class="btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative"
+          >
+            <svg
+              class="btn-cart-icon w-8 h-8 text-[#006bb8]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              viewBox="0 0 24 24"
+            >
+              <path d="M4 10h16l-2 8H6l-2-8z" />
+              <path d="M9 10V6a3 3 0 0 1 6 0v4" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <line x1="9" y1="16" x2="15" y2="16" />
+            </svg>
+          </button>
+
+          <!-- Login/Reg/Account buttons -->
+          <button id="login-button" class="btn-primary">Login</button>
+          <button id="register-button" class="btn-primary">Register</button>
+          <button id="account-button" class="btn-primary hidden">
+            Account
+          </button><button id="logout-button" class="hidden btn-primary">
+            Logout
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden flex items-center">
+        <button
+          type="button"
+          id="main-menu"
+          aria-label="Main menu"
+          aria-expanded="false"
+          class="btn-menu p-2 rounded-md text-white hover:bg-white hover:text-[#006bb8] transition"
+        >
+          <svg
+            class="btn-menu-icon h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Menu (hidden by default) -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden flex flex-col items-center bg-[#006bb8] absolute top-[100px] left-0 w-full p-4 space-y-4 transition-all duration-300 ease-in-out"
+      >
+        <input
+          type="text"
+          placeholder="Search..."
+          id="search-navbar-menu-input"
+          class="btn-search bg-white text-[#006bb8] px-[18px] py-[10px] rounded-3xl w-full font-extrabold hover:text-[#ff66c4] focus:outline-none focus:ring-1 focus:ring-[#006bb8]"
+        />
+        <button
+          id="home-btn"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Home
+        </button>
+        <button  id = "restaurants-button" class="btn-primary w-full text-white text-lg py-2">
+          Restaurants
+        </button>
+
+        <!-- Hidden button for Deliveries -->
+        <!-- To be shown only when delivery guy is logged in -->
+        <button
+          id="mobile-deliveries-button"
+          class="btn-primary w-full text-white text-lg py-2 !hidden"
+        >
+          Deliveries
+        </button>
+        <button
+          id="mobile-cart-button"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Cart
+        </button>
+
+        <!-- Mobile Login/Account/Register Buttons -->
+        <button
+          id="mobile-login-button"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Login
+        </button>
+        <button
+          id="mobile-register-button"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
+          Register
+        </button>
+        <button
+          id="mobile-account-button"
+          class="btn-primary w-full text-white text-lg py-2 !hidden"
+        >
+          Account
+        </button>
+      </div>
+    </header>
+
+    <main class="flex justify-around py-[24px] pb-0 text-[#006bb8]">
+      <div class="w-[60%] md:w-[45%] flex flex-col justify-center items-center">
+        <img
+          class="w-[60%] object-contain"
+          src="./Images/logo.PNG"
+          alt="logo"
+        />
+        <section id="section-input-login-information" class="pb-5">
+          <input
+            type="text"
+            placeholder="e-mail"
+            id="e-mail-input"
+            class="btn-secondary w-full focus:outline-none focus:ring-[1px] focus:ring-[#006bb8] hover:focus:ring-0"
+          />
+
+          <!-- Added button to show password -->
+          <div class="relative">
+            <input
+              type="password"
+              placeholder="password"
+              id="password-input"
+              class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8] pr-16"
+              autocomplete="current-password"
+            />
+            <button
+              id = "password-show"
+              type="button"
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-[#006bb8] hover:cursor-pointer hover:text-[#ff66c4] active:opacity-70"
+            >
+              Show
+            </button>
+        </section>
+        <button
+          id="btn-login-main"
+          class="w-[50%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[10px] hover:border-2 active:opacity-70"
+        >
+          Login
+        </button>
+        <p
+          class="text-[8px] md:text-[10px] py-5 px-8 text-gray-500 text-justify"
+        >
+          Please visit
+          <a
+            href="./privacy_statement.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-500 underline"
+            >Hexeats Privacy Statement</a
+          >
+          to learn more about personal data processing at Hexeats. You can
+          access the local Privacy Statement related to your Hexeats account
+          after you have provided the country and language preferences
+          applicable to you during registration.
+        </p>
+      </div>
+      <div class="hidden w-[45%] justify-center items-end md:flex">
+        <img
+          src="./Images/courier_pizza_box_look.png"
+          alt="courier_pizza_box_look.png"
+          class="max-h-[85%]"
+        />
+      </div>
+    </main>
+
+    <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
+      <button class="btn-footer">FAQ</button>
+      <button class="btn-footer">About</button>
+      <button class="btn-footer">Contacts</button>
+      <button class="btn-footer">Feedback</button>
+    </footer>
+
+  </body>
+</html>

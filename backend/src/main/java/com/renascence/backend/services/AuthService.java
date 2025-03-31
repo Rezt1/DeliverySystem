@@ -1,6 +1,5 @@
 package com.renascence.backend.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.renascence.backend.dtos.Authorization.LoginRequestDto;
 import com.renascence.backend.dtos.Authorization.LoginResponseDto;
 import com.renascence.backend.dtos.Authorization.RefreshTokenRequestDto;
@@ -9,6 +8,7 @@ import com.renascence.backend.entities.RefreshToken;
 import com.renascence.backend.entities.User;
 import com.renascence.backend.exceptionHandlers.ErrorResponse;
 import com.renascence.backend.repositories.RefreshTokenRepository;
+import com.renascence.backend.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,21 +28,21 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final RefreshTokenRepository refreshTokenRepository;
+    private final UserRepository userRepository;
 
     public ResponseEntity<?> login(LoginRequestDto loginRequestDto) {
         try {
             Authentication authentication = authenticationManager
                   .authenticate(new UsernamePasswordAuthenticationToken(loginRequestDto.email(), loginRequestDto.password()));
 
-
-            User userDetails = (User) authentication.getPrincipal();
+            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
             String jwt = jwtService.generateToken(authentication);
 
-            String refreshToken = jwtService.generateRefreshToken(userDetails.getEmail());
+            String refreshToken = jwtService.generateRefreshToken(userDetails.getUsername());
             RefreshToken refreshTokenEntity = new RefreshToken(
                     LocalDateTime.now().plusSeconds(jwtService.getRefreshExpirationInMs() / 1000), //might cause trouble
                     refreshToken,
-                    userDetails
+                    userRepository.findByEmail(userDetails.getUsername()).get()
             );
 
             refreshTokenRepository.save(refreshTokenEntity);
