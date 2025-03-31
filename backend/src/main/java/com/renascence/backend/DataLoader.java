@@ -49,6 +49,10 @@ public class DataLoader implements CommandLineRunner {
         burgas.setName("Burgas");
         cityRepository.save(burgas);
 
+        City vratsa = new City();
+        vratsa.setName("Vratsa");
+        cityRepository.save(vratsa);
+
         // 2. Cuisines
         Cuisine italian = new Cuisine();
         italian.setName("Italian");
@@ -73,6 +77,22 @@ public class DataLoader implements CommandLineRunner {
         Cuisine turkish = new Cuisine();
         turkish.setName("Turkish");
         cuisineRepository.save(turkish);
+
+        Cuisine greek = new Cuisine();
+        turkish.setName("Greek");
+        cuisineRepository.save(greek);
+
+        Cuisine bulgarian = new Cuisine();
+        turkish.setName("Bulgarian");
+        cuisineRepository.save(bulgarian);
+
+        Cuisine korean = new Cuisine();
+        turkish.setName("Korean");
+        cuisineRepository.save(korean);
+
+        Cuisine indian = new Cuisine();
+        turkish.setName("Indian");
+        cuisineRepository.save(indian);
 
         // 3. Restaurants
         Restaurant italianFantasy = new Restaurant();
@@ -106,6 +126,86 @@ public class DataLoader implements CommandLineRunner {
         vega.setRating(5.0f);
         vega.setCity(varna);
         restaurantRepository.save(vega);
+
+        Restaurant bulgari = new Restaurant();
+        bulgari.setName("Bulgari");
+        bulgari.setDeliveryGuySalary(979.00);
+        bulgari.setIban("BG14574829");
+        bulgari.setRating(4.0f);
+        bulgari.setCity(sofia);
+        restaurantRepository.save(bulgari);
+
+        Restaurant kalos = new Restaurant();
+        kalos.setName("Kalos");
+        kalos.setDeliveryGuySalary(1050.00);
+        kalos.setIban("GR54424567");
+        kalos.setRating(4.2f);
+        kalos.setCity(plovdiv);
+        restaurantRepository.save(kalos);
+
+        Restaurant balkan = new Restaurant();
+        balkan.setName("Balkan");
+        balkan.setDeliveryGuySalary(1030.50);
+        balkan.setIban("GR55321237");
+        balkan.setRating(3.7f);
+        balkan.setCity(burgas);
+        restaurantRepository.save(balkan);
+
+        Restaurant royalDragon = new Restaurant();
+        royalDragon.setName("Royal Dragon");
+        royalDragon.setDeliveryGuySalary(1200.50);
+        royalDragon.setIban("JP56323674");
+        royalDragon.setRating(4.5f);
+        royalDragon.setCity(sofia);
+        restaurantRepository.save(royalDragon);
+--
+        Restaurant indianTaste = new Restaurant();
+        indianTaste.setName("Indian Taste");
+        indianTaste.setDeliveryGuySalary(1200.75);
+        indianTaste.setIban("IN15835374");
+        indianTaste.setRating(3.1f);
+        indianTaste.setCity(sofia);
+        restaurantRepository.save(indianTaste);
+
+        Restaurant bellaItalia = new Restaurant();
+        bellaItalia.setName("Bella Italia");
+        bellaItalia.setDeliveryGuySalary(1300.00);
+        bellaItalia.setIban("IT56382910");
+        bellaItalia.setRating(4.7f);
+        bellaItalia.setCity(vratsa);
+        restaurantRepository.save(bellaItalia);
+
+        Restaurant yemek = new Restaurant();
+        yemek.setName("Yemek");
+        yemek.setDeliveryGuySalary(1100.50);
+        yemek.setIban("TR41565423");
+        yemek.setRating(4.1f);
+        yemek.setCity(plovdiv);
+        restaurantRepository.save(yemek);
+
+        Restaurant frenchBaguette = new Restaurant();
+        frenchBaguette.setName("French Baguette");
+        frenchBaguette.setDeliveryGuySalary(1150.20);
+        frenchBaguette.setIban("FR16432897");
+        frenchBaguette.setRating(4.3f);
+        frenchBaguette.setCity(burgas);
+        restaurantRepository.save(frenchBaguette);
+
+        Restaurant kkot = new Restaurant();
+        kkot.setName("Kkot");
+        kkot.setDeliveryGuySalary(1250.30);
+        kkot.setIban("KR96321457");
+        kkot.setRating(3.6f);
+        kkot.setCity(varna);
+        restaurantRepository.save(kkot);
+
+        Restaurant amigo = new Restaurant();
+        amigo.setName("Amigo");
+        amigo.setDeliveryGuySalary(1180.45);
+        amigo.setIban("MX71394268");
+        amigo.setRating(3.3f);
+        amigo.setCity(sofia);
+        restaurantRepository.save(amigo);
 
         // 4. Foods
         Food pizza = new Food();
@@ -332,6 +432,179 @@ public class DataLoader implements CommandLineRunner {
         simit.setCuisine(turkish);
         simit.setRestaurant(kebabHouse);
         foodRepository.save(simit);
+
+        Food shopskaSalad = new Food();
+        shopskaSalad.setName("Shopska Salad");
+        shopskaSalad.setPrice(6.50);
+        shopskaSalad.setFoodCategory(FoodCategory.STARTER);
+        shopskaSalad.setDescription("Traditional Bulgarian salad with tomatoes, cucumbers, onion, peppers, and white cheese.");
+        shopskaSalad.setCuisine(bulgarian);
+        shopskaSalad.setRestaurant(bulgari);
+        foodRepository.save(shopskaSalad);
+
+        Food tarator = new Food();
+        tarator.setName("Tarator");
+        tarator.setPrice(5.00);
+        tarator.setFoodCategory(FoodCategory.STARTER);
+        tarator.setDescription("Cold yogurt soup with cucumber, garlic, walnuts, and dill.");
+        tarator.setCuisine(bulgarian);
+        tarator.setRestaurant(bulgari);
+        foodRepository.save(tarator);
+
+        Food grilledMeat = new Food();
+        grilledMeat.setName("Grilled Meat - Kyufte and Kebapche");
+        grilledMeat.setPrice(9.50);
+        grilledMeat.setFoodCategory(FoodCategory.MAIN_COURSE);
+        grilledMeat.setDescription("Traditional Bulgarian grilled minced meat patties - Kyufte and Kebapche.");
+        grilledMeat.setCuisine(bulgarian);
+        grilledMeat.setRestaurant(bulgari);
+        foodRepository.save(grilledMeat);
+
+        Food stuffedPeppers = new Food();
+        stuffedPeppers.setName("Stuffed Peppers with Minced Meat");
+        stuffedPeppers.setPrice(10.00);
+        stuffedPeppers.setFoodCategory(FoodCategory.MAIN_COURSE);
+        stuffedPeppers.setDescription("Bell peppers stuffed with minced meat and rice, baked in tomato sauce.");
+        stuffedPeppers.setCuisine(bulgarian);
+        stuffedPeppers.setRestaurant(bulgari);
+        foodRepository.save(stuffedPeppers);
+
+        Food moussaka = new Food();
+        moussaka.setName("Moussaka");
+        moussaka.setPrice(12.00);
+        moussaka.setFoodCategory(FoodCategory.MAIN_COURSE);
+        moussaka.setDescription("Greek dish made of layers of eggplant, minced meat, and béchamel sauce.");
+        moussaka.setCuisine(greek);
+        moussaka.setRestaurant(kalos);
+        foodRepository.save(moussaka);
+
+        Food tzatziki = new Food();
+        tzatziki.setName("Tzatziki");
+        tzatziki.setPrice(5.50);
+        tzatziki.setFoodCategory(FoodCategory.STARTER);
+        tzatziki.setDescription("Greek yogurt dip with cucumber, garlic, and dill.");
+        tzatziki.setCuisine(greek);
+        tzatziki.setRestaurant(kalos);
+        foodRepository.save(tzatziki);
+
+        Food greekSalad = new Food();
+        greekSalad.setName("Greek Salad");
+        greekSalad.setPrice(7.00);
+        greekSalad.setFoodCategory(FoodCategory.STARTER);
+        greekSalad.setDescription("Fresh salad with tomatoes, cucumbers, olives, feta cheese, and olive oil.");
+        greekSalad.setCuisine(greek);
+        greekSalad.setRestaurant(kalos);
+        foodRepository.save(greekSalad);
+
+        Food dolmadakia = new Food();
+        dolmadakia.setName("Dolmadakia");
+        dolmadakia.setPrice(8.00);
+        dolmadakia.setFoodCategory(FoodCategory.STARTER);
+        dolmadakia.setDescription("Stuffed grape leaves with rice, herbs, and lemon.");
+        dolmadakia.setCuisine(greek);
+        dolmadakia.setRestaurant(kalos);
+        foodRepository.save(dolmadakia);
+
+        Food gyuvetch = new Food();
+        gyuvetch.setName("Gyuvetch");
+        gyuvetch.setPrice(11.50);
+        gyuvetch.setFoodCategory(FoodCategory.MAIN_COURSE);
+        gyuvetch.setDescription("Balkan-style slow-cooked stew with meat and vegetables.");
+        gyuvetch.setCuisine(bulgarian);
+        gyuvetch.setRestaurant(balkan);
+        foodRepository.save(gyuvetch);
+
+        Food banitsa = new Food();
+        banitsa.setName("Banitsa");
+        banitsa.setPrice(4.00);
+        banitsa.setFoodCategory(FoodCategory.DESSERT);
+        banitsa.setDescription("Baked pastry with layers of filo dough filled with cheese and eggs.");
+        banitsa.setCuisine(bulgarian);
+        banitsa.setRestaurant(balkan);
+        foodRepository.save(banitsa);
+
+        Food skewers = new Food();
+        skewers.setName("Grilled Skewers");
+        skewers.setPrice(10.50);
+        skewers.setFoodCategory(FoodCategory.MAIN_COURSE);
+        skewers.setDescription("Juicy grilled meat skewers, a popular Balkan specialty.");
+        skewers.setCuisine(greek);
+        skewers.setRestaurant(balkan);
+        foodRepository.save(skewers);
+
+        Food ramen = new Food();
+        ramen.setName("Ramen");
+        ramen.setPrice(12.00);
+        ramen.setFoodCategory(FoodCategory.MAIN_COURSE);
+        ramen.setDescription("Traditional Japanese noodle soup with broth, meat, and vegetables.");
+        ramen.setCuisine(asian);
+        ramen.setRestaurant(royalDragon);
+        foodRepository.save(ramen);
+
+        Food dimSum = new Food();
+        dimSum.setName("Dim Sum");
+        dimSum.setPrice(9.00);
+        dimSum.setFoodCategory(FoodCategory.STARTER);
+        dimSum.setDescription("Steamed dumplings filled with meat, seafood, or vegetables.");
+        dimSum.setCuisine(asian);
+        dimSum.setRestaurant(royalDragon);
+        foodRepository.save(dimSum);
+
+        Food mochi = new Food();
+        mochi.setName("Mochi Ice Cream");
+        mochi.setPrice(6.50);
+        mochi.setFoodCategory(FoodCategory.DESSERT);
+        mochi.setDescription("Sweet rice cake filled with ice cream in various flavors.");
+        mochi.setCuisine(asian);
+        mochi.setRestaurant(royalDragon);
+        foodRepository.save(mochi);
+
+        Food risotto = new Food();
+        risotto.setName("Risotto");
+        risotto.setPrice(12.00);
+        risotto.setFoodCategory(FoodCategory.MAIN_COURSE);
+        risotto.setDescription("A creamy rice dish often cooked with broth, vegetables, and various seasonings.");
+        risotto.setCuisine(italian);
+        risotto.setRestaurant(bellaItalia);
+        foodRepository.save(risotto);
+
+        Food chickenParmesanWithPepperoni = new Food();
+        chickenParmesanWithPepperoni.setName("Chicken Parmesan with Pepperoni");
+        chickenParmesanWithPepperoni.setPrice(14.50);
+        chickenParmesanWithPepperoni.setFoodCategory(FoodCategory.MAIN_COURSE);
+        chickenParmesanWithPepperoni.setDescription("Breaded and fried chicken cutlet topped with marinara sauce, melted cheese, and pepperoni.");
+        chickenParmesanWithPepperoni.setCuisine(italian);
+        chickenParmesanWithPepperoni.setRestaurant(bellaItalia);
+        foodRepository.save(chickenParmesanWithPepperoni);
+
+        Food fettuccineAlfredo = new Food();
+        fettuccineAlfredo.setName("Fettuccine Alfredo");
+        fettuccineAlfredo.setPrice(13.00);
+        fettuccineAlfredo.setFoodCategory(FoodCategory.MAIN_COURSE);
+        fettuccineAlfredo.setDescription("Fettuccine pasta served with a creamy Alfredo sauce made with butter, cream, and Parmesan cheese.");
+        fettuccineAlfredo.setCuisine(italian);
+        fettuccineAlfredo.setRestaurant(bellaItalia);
+        foodRepository.save(fettuccineAlfredo);
+
+        Food bruschetta = new Food();
+        bruschetta.setName("Bruschetta");
+        bruschetta.setPrice(7.00);
+        bruschetta.setFoodCategory(FoodCategory.STARTER);
+        bruschetta.setDescription("Toasted bread topped with diced tomatoes, garlic, basil, and olive oil.");
+        bruschetta.setCuisine(italian);
+        bruschetta.setRestaurant(bellaItalia);
+        foodRepository.save(bruschetta);
+
+        Food gnocchi = new Food();
+        gnocchi.setName("Gnocchi");
+        gnocchi.setPrice(11.00);
+        gnocchi.setFoodCategory(FoodCategory.MAIN_COURSE);
+        gnocchi.setDescription("Soft potato dumplings, often served with various sauces like pesto, butter, or tomato.");
+        gnocchi.setCuisine(italian);
+        gnocchi.setRestaurant(bellaItalia);
+        foodRepository.save(gnocchi);
+
+
 
         //Roles
         Role deliveryGuyRole = new Role();
