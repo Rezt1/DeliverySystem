@@ -31,14 +31,14 @@
 
       <!-- Desktop Navigation (prevents buttons from going out of sight) -->
       <nav
-        class="hidden md:flex flex-wrap justify-between items-center flex-grow min-w-0 md:pl-[100px]"
+        class="hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:justify-between md:pl-[100px]"
       >
         <!-- Left Section -->
         <div class="flex flex-wrap gap-3">
           <button class="btn-primary">Home</button>
-          <button 
-          id = "restaurants-button"
-          class="btn-primary">Restaurants</button>
+          <button id="restaurants-button" class="btn-primary">
+            Restaurants
+          </button>
 
           <!-- Hidden deliveries button -->
           <!-- To be shown only when delivery guy is logged in -->
@@ -80,9 +80,7 @@
           <button id="account-button" class="hidden btn-primary">
             Account
           </button>
-          <button id="logout-button" class="hidden btn-primary">
-            Logout
-          </button>
+          <button id="logout-button" class="hidden btn-primary">Logout</button>
         </div>
       </nav>
 
@@ -128,9 +126,10 @@
         >
           Home
         </button>
-        <button 
-        id = "restaurants-button-mobile"
-        class="btn-primary w-full text-white text-lg py-2">
+        <button
+          id="restaurants-button-mobile"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
           Restaurants
         </button>
 

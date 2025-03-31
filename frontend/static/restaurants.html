@@ -20,7 +20,7 @@
       class="bg-[#006bb8] relative flex items-center justify-between py-3 px-2 md:max-h-[110px]"
     >
       <!-- Logo Section -->
-      <div class="flex items-center shrink-0">
+      <div class="flex justify-start items-center shrink-0">
         <a href="home.html">
           <img
             class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
@@ -32,7 +32,7 @@
 
       <!-- Desktop Navigation (prevents buttons from going out of sight) -->
       <nav
-        class="hidden md:flex flex-wrap justify-between items-center flex-grow min-w-0 md:pl-[100px]"
+        class="hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:justify-between md:pl-[100px]"
       >
         <!-- Left Section -->
         <div class="flex flex-wrap gap-3">
@@ -470,7 +470,7 @@
       <div class="flex justify-between mt-auto">
         <div id="restaurants" class="w-[80%] md:w-[45%] flex flex-col mx-auto">
           <h1
-            class="text-1xl md:text-5xl text-[#ff66c4] py-5 font-serif text-center font-bold"
+            class="text-2xl md:text-5xl text-[#ff66c4] py-5 font-serif text-center font-bold"
           >
             Chef's Picks!
           </h1>
@@ -482,23 +482,23 @@
             <!-- Empty slots with loading state -->
             <button
               id="chef-pick-1"
-              class="chef-pick-btn w-[45%] h-[55%] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent flex items-center justify-center rounded-xl shadow-sm hover:shadow-md hover:cursor-pointer transition-all"
+              class="chef-pick-btn h-[60%] w-[45%] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent flex items-center justify-center rounded-xl shadow-sm hover:shadow-md hover:cursor-pointer transition-all"
               disabled
             >
-              <span class="text-gray-400 italic absolute">Loading...</span>
+              <span class="text-white italic">Loading...</span>
             </button>
 
             <button
               id="chef-pick-2"
-              class="chef-pick-btn w-[45%] h-[55%] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent flex items-center justify-center rounded-xl shadow-sm hover:shadow-md hover:cursor-pointer transition-all"
+              class="chef-pick-btn h-[60%] w-[45%] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent flex items-center justify-center rounded-xl shadow-sm hover:shadow-md hover:cursor-pointer transition-all"
               disabled
             >
-              <span class="text-gray-400 italic absolute">Loading...</span>
+              <span class="text-white italic">Loading...</span>
             </button>
           </section>
 
           <h2
-            class="text-1xl md:text-4xl pt-8 pb-5 text-[#006bb8] font-serif text-center font-bold"
+            class="text-2xl md:text-4xl pt-8 pb-5 text-[#006bb8] font-serif text-center font-bold"
           >
             All Restaurants!
           </h2>
@@ -524,17 +524,19 @@
         <div class="hidden md:flex flex-col w-[45%] h-full">
           <div class="my-auto flex items-center justify-center">
             <h2
-              class="text-1xl md:text-4xl text-[#006bb8] font-serif text-center font-bold"
+              class="text-1xl md:text-5xl text-[#006bb8] font-serif text-center font-bold"
             >
               Wondering what to eat?
               <br />
               Check out our Chef's Picks!
             </h2>
           </div>
-          <div
-            class="flex items-center p-3 mt-auto md:w-[60%] max-h-[400px] pb-0"
-          >
-            <img src="./Images/courier_bag_hmm.png" alt="courier_bag_hmm.png" />
+          <div class="flex items-center justify-center p-3 mt-auto pb-0">
+            <img
+              src="./Images/courier_bag_hmm.png"
+              alt="courier_bag_hmm.png"
+              class="max-h-[400px]"
+            />
           </div>
         </div>
       </div>

@@ -174,10 +174,9 @@ footer {
 }
 
 .chef-pick-btn {
-  background: linear-gradient(45deg, #FF69B4, #FF1493); /* Gradient from light pink to deep pink */
-  color: white; /* Text color */
-  padding: 12px 25px; /* Larger padding for a bigger button */
-  border-radius: 12px; /* Rounded corners */
+  background: linear-gradient(45deg, #FF69B4, #FF1493); 
+  color: white;
+  border-radius: 12px;
   font-size: 18px; /* Larger font size */
   font-weight: bold; /* Bold font for emphasis */
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
@@ -185,9 +184,6 @@ footer {
   text-transform: uppercase; /* Uppercase text */
   transition: all 0.3s ease-in-out; /* Smooth transition effect */
   cursor: pointer; /* Pointer cursor to indicate interactivity */
-  width: 100%; /* Full width */
-  max-width: 350px; /* Max width to make it responsive */
-  margin: 10px auto; /* Center button horizontally */
 }
 
 /* Hover effect */
