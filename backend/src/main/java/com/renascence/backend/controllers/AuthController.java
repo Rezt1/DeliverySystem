@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "http://127.0.0.1:5501")
+// @CrossOrigin(origins = "http://127.0.0.1:5501")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/auth")

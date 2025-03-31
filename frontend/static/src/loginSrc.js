@@ -20,7 +20,7 @@ async function onLogin(e){
             throw new Error("All fields must be filled!");
         }
 
-       let response = await login();
+       let response = await login(email, password);
         let resp = await response.json();
 
         if(response.status !== 200){
@@ -47,7 +47,8 @@ async function login(email, password) {
         let settings = {
             method: "Post",
             headers: {"Content-Type":"application/json"},
-            body: JSON.stringify(user)
+            body: JSON.stringify(user),
+            mode: "no-cors"
         }
 
         try{
