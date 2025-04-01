@@ -1,3 +1,6 @@
+import { ip } from "./ipSearch.mjs";
+
+
 export function sessionStorageSet(response) {
     Object.keys(response).forEach(key => {
         if (key !== "password") { 
@@ -15,7 +18,7 @@ export function sessionStorageRemove(response){
 }
 
 export function ifLoggedIn(){
-    if(sessionStorage.length > 1){
+    if(sessionStorage.length != 0){
         return true;
     }
     return false;
@@ -24,16 +27,26 @@ export function ifLoggedIn(){
 
 export async function logout(e){
     e.preventDefault();
-    /*let settings = {
-        method: "Get",
-        headers: {"X-Authorization": sessionStorage.accessToken}
+    let settings = {
+        method: "Post",
+        headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem("accessToken")}`
+          },
+    }
+    let address = ip();
+    let response = await fetch(`${address}/api/auth/logout`, settings);
+
+
+    if (response.status === 401) {
+        sessionStorage.removeItem('accessToken');
+        window.location.reload();
+        return;
+    
     }
 
-    let response = await fetch("http", settings);
-    sessionStorageRemove(response.json());*/
-    
-    console.log('logout');
-    sessionStorage.removeItem(1, "logged");
-    window.location.href = "./home.html";
+    if (!response.ok) throw new Error('Logout failed');
+
+    sessionStorage.removeItem("accessToken");
+    window.location.reload();
 
 }

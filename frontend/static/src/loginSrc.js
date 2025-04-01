@@ -29,7 +29,7 @@ async function onLogin(e){
         }
 
         sessionStorageSet(resp);
-
+        window.location.href = "./home.html";
     }
     catch(e){
         window.alert(e.message);
@@ -48,8 +48,7 @@ async function login(email, password) {
         let settings = {
             method: "Post",
             headers: {"Content-Type":"application/json"},
-            body: JSON.stringify(user),
-            mode: "no-cors"
+            body: JSON.stringify(user)
         }
 
         let address = ip();
