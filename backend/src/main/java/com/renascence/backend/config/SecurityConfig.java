@@ -67,6 +67,7 @@ public class SecurityConfig {
                                 "/api/auth/login",
                                 "/api/auth/refresh").permitAll()
                         .requestMatchers("/api/test/adminSecured").hasRole("ADMIN")
+                        .requestMatchers("/api/delivery-guys/*").hasRole("OWNER")
                         .anyRequest().authenticated()
             )
             .cors(customizer -> customizer.configurationSource(corsConfigurationSource()))

@@ -5,18 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/config/CorsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Delivery/CreateDeliveryDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Delivery/DeliveryDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/DeliveryFood/CreateDeliveryFoodDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/DeliveryFood/DeliveryFoodDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/DeliveryGuy/CreateDeliveryGuyDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/DeliveryGuy/DeliveryGuyDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/OwnerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/OwnerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/DataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/DataLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Food/FoodDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Food/FoodDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/CityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/CityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/CuisineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/CuisineController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/RestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/RestaurantController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Delivery/CreateDeliveryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Delivery/CreateDeliveryDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Delivery/DeliveryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Delivery/DeliveryDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/DeliveryFood/CreateDeliveryFoodDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/DeliveryFood/CreateDeliveryFoodDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/DeliveryFood/DeliveryFoodDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/DeliveryFood/DeliveryFoodDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/DeliveryGuy/CreateDeliveryGuyDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/DeliveryGuy/CreateDeliveryGuyDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/DeliveryGuy/DeliveryGuyDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/DeliveryGuy/DeliveryGuyDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Restaurant/CreateRestaurantDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/Restaurant/CreateRestaurantDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/enums/FoodCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/enums/FoodCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/DeliveryGuyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/DeliveryGuyRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/CityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/CityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/CuisineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/CuisineService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

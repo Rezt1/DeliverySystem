@@ -4,6 +4,7 @@ import com.renascence.backend.dtos.Restaurant.CreateRestaurantDto;
 import com.renascence.backend.dtos.Restaurant.RestaurantDto;
 import com.renascence.backend.services.RestaurantService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +12,11 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://127.0.0.1:5501")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/restaurants")
 public class RestaurantController {
 
     private final RestaurantService restaurantService;
-
-    public RestaurantController(RestaurantService restaurantService) {
-        this.restaurantService = restaurantService;
-    }
 
     @GetMapping
     public ResponseEntity<List<RestaurantDto>> getAllRestaurants() {

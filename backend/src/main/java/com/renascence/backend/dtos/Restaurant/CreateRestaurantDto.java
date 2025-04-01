@@ -14,9 +14,9 @@ public class CreateRestaurantDto {
     @Positive(message = "City ID must be a positive number")
     private Long cityId;
 
-//    @NotNull(message = "Owner ID is required")
-//    @Positive(message = "Owner ID must be a positive number")
-//    private Long ownerId;
+    @NotNull(message = "Owner ID is required")
+    @Positive(message = "Owner ID must be a positive number")
+    private Long ownerId;
 
     @Size(max = 50, message = "IBAN must be less than 50 characters")
     private String iban;

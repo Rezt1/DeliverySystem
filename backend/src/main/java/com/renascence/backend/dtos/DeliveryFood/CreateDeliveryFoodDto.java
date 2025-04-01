@@ -1,6 +1,5 @@
 package com.renascence.backend.dtos.DeliveryFood;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
@@ -8,11 +7,10 @@ import lombok.Data;
 @Data
 public class CreateDeliveryFoodDto {
 
-    @NotNull
-    @Positive
+    @NotNull(message = "Food id is required")
     private Long foodId;
 
-    @NotNull
-    @Min(1)
+    @NotNull(message = "Food quantity is required")
+    @Positive
     private Integer quantity;
 }

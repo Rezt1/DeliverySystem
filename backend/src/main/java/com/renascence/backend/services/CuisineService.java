@@ -4,19 +4,17 @@ import com.renascence.backend.dtos.Cuisine.CreateCuisineDto;
 import com.renascence.backend.dtos.Cuisine.CuisineDto;
 import com.renascence.backend.entities.Cuisine;
 import com.renascence.backend.repositories.CuisineRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CuisineService {
 
     private final CuisineRepository cuisineRepository;
-
-    public CuisineService(CuisineRepository cuisineRepository) {
-        this.cuisineRepository = cuisineRepository;
-    }
 
     public CuisineDto createCuisine(CreateCuisineDto createCuisineDto) {
         Cuisine cuisine =new Cuisine();

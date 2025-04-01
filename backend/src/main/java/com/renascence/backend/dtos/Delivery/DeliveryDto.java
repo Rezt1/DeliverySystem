@@ -9,13 +9,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class DeliveryDto {
 
-    private Long id;
+    private Long deliveryId;
     private Long userId;
     private String address;
     private LocalDateTime date;

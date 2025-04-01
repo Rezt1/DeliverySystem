@@ -10,6 +10,4 @@ import java.util.List;
 @Repository
 public interface DeliveryGuyRepository extends JpaRepository<DeliveryGuy, Long> {
 
-    @Query("SELECT d FROM DeliveryGuy d WHERE SIZE(d.deliveries) = (SELECT MIN(SIZE(d2.deliveries)) FROM DeliveryGuy d2)")
-    List<DeliveryGuy> findLeastBusyDeliveryGuys();
 }

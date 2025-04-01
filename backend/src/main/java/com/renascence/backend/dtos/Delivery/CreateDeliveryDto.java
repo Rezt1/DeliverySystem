@@ -13,18 +13,18 @@ import java.util.List;
 @Data
 public class CreateDeliveryDto {
 
-    @NotNull
+    @NotNull(message = "User id is required")
     private Long userId;
 
-    @NotNull
+    @NotNull(message = "Delivery guy id is required")
     private Long deliveryGuyId;
 
-    @NotBlank
+    @NotBlank(message = "Address is required")
     private String address;
 
-    @NotNull
+    @NotNull(message = "Payment method is required")
     private PaymentMethod paymentMethod;
 
-    @NotEmpty
+    @NotEmpty(message = "At least 1 food is required")
     private List<CreateDeliveryFoodDto> foods;
 }

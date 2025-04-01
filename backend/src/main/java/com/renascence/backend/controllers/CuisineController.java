@@ -4,20 +4,18 @@ import com.renascence.backend.dtos.Cuisine.CreateCuisineDto;
 import com.renascence.backend.dtos.Cuisine.CuisineDto;
 import com.renascence.backend.services.CuisineService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("api/cuisines")
 public class CuisineController {
 
     private final CuisineService cuisineService;
-
-    public CuisineController(CuisineService cuisineService) {
-        this.cuisineService = cuisineService;
-    }
 
     @PostMapping
     public ResponseEntity<CuisineDto> createCuisine(@Valid @RequestBody CreateCuisineDto createCuisineDto) {

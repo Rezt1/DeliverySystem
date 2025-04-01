@@ -4,18 +4,16 @@ import com.renascence.backend.dtos.City.CityDto;
 import com.renascence.backend.dtos.City.CreateCityDto;
 import com.renascence.backend.entities.City;
 import com.renascence.backend.repositories.CityRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CityService {
 
     private final CityRepository cityRepository;
-
-    public CityService(CityRepository cityRepository) {
-        this.cityRepository = cityRepository;
-    }
 
     public CityDto createCity(CreateCityDto createCityDto) {
         City city = new City();
