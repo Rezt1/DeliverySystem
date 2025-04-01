@@ -2,6 +2,7 @@ package com.renascence.backend.controllers;
 
 import com.renascence.backend.dtos.DeliveryGuy.CreateDeliveryGuyDto;
 import com.renascence.backend.dtos.DeliveryGuy.DeliveryGuyDto;
+import com.renascence.backend.dtos.Food.FoodDto;
 import com.renascence.backend.entities.DeliveryGuy;
 import com.renascence.backend.services.OwnerService;
 import jakarta.validation.Valid;
@@ -39,6 +40,7 @@ public class OwnerController {
                 .map(deliveryGuy -> {
                     DeliveryGuyDto dto = new DeliveryGuyDto();
                     dto.setUserId(deliveryGuy.getUser().getId());
+                    dto.setIban(deliveryGuy.getIban());
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -47,13 +49,7 @@ public class OwnerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DeliveryGuyDto> getDeliveryGuyById(@PathVariable Long id) {
-        DeliveryGuy deliveryGuy = ownerService.getDeliveryGuyById(id);
-
-        // Map entity to DTO
-        DeliveryGuyDto deliveryGuyDto = new DeliveryGuyDto();
-        deliveryGuyDto.setUserId(deliveryGuy.getUser().getId());
-
-        return ResponseEntity.ok(deliveryGuyDto);
+    public ResponseEntity<DeliveryGuy> getDeliveryGuyById(@PathVariable Long id) {
+        return ResponseEntity.ok(ownerService.getDeliveryGuyById(id));
     }
 }

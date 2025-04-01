@@ -1,6 +1,7 @@
 package com.renascence.backend.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
