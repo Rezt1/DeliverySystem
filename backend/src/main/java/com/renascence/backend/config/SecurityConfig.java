@@ -65,11 +65,15 @@ public class SecurityConfig {
                         .requestMatchers("/api/test/unsecured1",
                                 "/api/test/unsecured1",
                                 "/api/auth/login",
-                                "/api/auth/refresh").permitAll()
+                                "/api/auth/register",
+                                "/error",
+                                "/error/**").permitAll()
                         .requestMatchers("/api/test/adminSecured").hasRole("ADMIN")
                         .requestMatchers("/api/delivery-guys/*").hasRole("OWNER")
                         .anyRequest().authenticated()
             )
+            .formLogin(AbstractHttpConfigurer::disable)
+            .httpBasic(AbstractHttpConfigurer::disable)
             .cors(customizer -> customizer.configurationSource(corsConfigurationSource()))
             .csrf(AbstractHttpConfigurer::disable)
             .exceptionHandling(exceptionHandler -> exceptionHandler.authenticationEntryPoint(jwtAuthenticationEntryPoint))

@@ -21,15 +21,15 @@ public class OwnerController {
     @Autowired
     private OwnerService ownerService;
 
-    @PostMapping("/create-delivery-guy")
-    public ResponseEntity<DeliveryGuyDto> createDeliveryGuy(@RequestBody @Valid CreateDeliveryGuyDto createDeliveryGuyDto) {
-        DeliveryGuy deliveryGuy = ownerService.createDeliveryGuy(createDeliveryGuyDto);
-
-        // Map Entity to DTO
-        DeliveryGuyDto deliveryGuyDto = new DeliveryGuyDto();
-        deliveryGuyDto.setUserId(deliveryGuy.getUser().getId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(deliveryGuyDto);
-    }
+//    @PostMapping("/create-delivery-guy")
+//    public ResponseEntity<DeliveryGuyDto> createDeliveryGuy(@RequestBody @Valid CreateDeliveryGuyDto createDeliveryGuyDto) {
+//        DeliveryGuy deliveryGuy = ownerService.createDeliveryGuy(createDeliveryGuyDto);
+//
+//        // Map Entity to DTO
+//        DeliveryGuyDto deliveryGuyDto = new DeliveryGuyDto();
+//        deliveryGuyDto.setUserId(deliveryGuy.getUser().getId());
+//        return ResponseEntity.status(HttpStatus.CREATED).body(deliveryGuyDto);
+//    }
 
     @GetMapping("/get-all-delivery-guys")
     public ResponseEntity<List<DeliveryGuyDto>> getAllDeliveryGuys() {

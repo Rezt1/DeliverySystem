@@ -1,39 +1,42 @@
 package com.renascence.backend.exceptionHandlers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     // Handle validation errors (e.g., @NotBlank, @NotNull)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidationExceptions(
+    public ResponseEntity<ValidationErrorResponse> handleValidationExceptions(
             MethodArgumentNotValidException ex) {
 
-        // Extract the first error message (e.g., "name" field error)
-        String errorMessage = ex.getBindingResult()
-                .getFieldErrors()
-                .stream()
-                .findFirst()
-                .map(fieldError -> {
-                    String field = fieldError.getField();
-                    String message = fieldError.getDefaultMessage();
-                    return String.format("%s: %s", field, message);
-                })
-                .orElse("Validation failed");
+        List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
 
+        Map<String, String> errors = fieldErrors.stream()
+                .collect(Collectors.toMap(
+                        FieldError::getField,
+                        fieldError -> fieldError.getDefaultMessage() != null ?
+                                fieldError.getDefaultMessage() :
+                                "Validation failed"
+                ));
 
-        ErrorResponse response = new ErrorResponse(
-                errorMessage,
+        ValidationErrorResponse ver = new ValidationErrorResponse(
+                "Validation failed",
+                errors,
                 LocalDateTime.now()
         );
-        return ResponseEntity.badRequest().body(response);
+
+        return ResponseEntity.badRequest().body(ver);
     }
 
     // Handle other exceptions (optional)

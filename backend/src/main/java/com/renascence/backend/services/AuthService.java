@@ -2,10 +2,14 @@ package com.renascence.backend.services;
 
 import com.renascence.backend.dtos.Authorization.LoginRequestDto;
 import com.renascence.backend.dtos.Authorization.LoginResponseDto;
+import com.renascence.backend.dtos.Authorization.RegisterDto;
 import com.renascence.backend.entities.AccessToken;
+import com.renascence.backend.entities.City;
 import com.renascence.backend.entities.CustomUserDetails;
+import com.renascence.backend.entities.User;
 import com.renascence.backend.exceptionHandlers.ErrorResponse;
 import com.renascence.backend.repositories.AccessTokenRepository;
+import com.renascence.backend.repositories.CityRepository;
 import com.renascence.backend.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +18,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -26,6 +34,8 @@ public class AuthService {
     private final JwtService jwtService;
     private final AccessTokenRepository accessTokenRepository;
     private final UserRepository userRepository;
+    private final CityRepository cityRepository;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public ResponseEntity<?> login(LoginRequestDto loginRequestDto) {
         try {
@@ -81,5 +91,48 @@ public class AuthService {
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("Logout failed !!", LocalDateTime.now()));
         }
+    }
+
+    public ResponseEntity<?> register(RegisterDto registerDto) {
+        List<User> users = userRepository.findAll();
+
+        for (User user : users){
+            if (user.getEmail().equalsIgnoreCase(registerDto.getEmail())){
+                return ResponseEntity.badRequest().body(new ErrorResponse("Email is already taken!", LocalDateTime.now()));
+            }
+        }
+
+        Optional<City> city = cityRepository.findById(registerDto.getLocationId());
+
+        if (city.isEmpty()){
+            return ResponseEntity.badRequest().body(new ErrorResponse("City does not exist!", LocalDateTime.now()));
+        }
+
+        User newUser = new User();
+        newUser.setName(registerDto.getName());
+        newUser.setEmail(registerDto.getEmail());
+        newUser.setPassword(passwordEncoder.encode(registerDto.getPassword()));
+        newUser.setPhoneNumber(registerDto.getPhoneNumber());
+        newUser.setLocation(city.get());
+
+        userRepository.save(newUser);
+
+        String jwt = jwtService.generateToken(new UsernamePasswordAuthenticationToken(newUser.getEmail(), registerDto.getPassword()));
+
+        AccessToken accessToken = new AccessToken(
+                LocalDateTime.now().plusSeconds(jwtService.getExpirationInMs() / 1000),
+                jwt,
+                newUser
+        );
+
+        accessTokenRepository.save(accessToken);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(newUser.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(new LoginResponseDto(jwt));
     }
 }
