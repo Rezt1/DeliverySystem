@@ -10,5 +10,4 @@ public class DeliveryFoodDto {
 
     private Long deliveryFoodId;
     private Integer quantity;
-    private String foodName;  // Added for client convenience
 }

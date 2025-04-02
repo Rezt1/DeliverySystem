@@ -2,27 +2,29 @@ package com.renascence.backend.services;
 
 import com.renascence.backend.dtos.Delivery.CreateDeliveryDto;
 import com.renascence.backend.dtos.Delivery.DeliveryDto;
-import com.renascence.backend.entities.Delivery;
-import com.renascence.backend.entities.Restaurant;
-import com.renascence.backend.entities.User;
+import com.renascence.backend.dtos.DeliveryFood.DeliveryFoodDto;
+import com.renascence.backend.entities.*;
 import com.renascence.backend.enums.DeliveryStatus;
-import com.renascence.backend.repositories.DeliveryRepository;
-import com.renascence.backend.repositories.RestaurantRepository;
-import com.renascence.backend.repositories.UserRepository;
+import com.renascence.backend.repositories.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class DeliveryService {
 
     private final DeliveryRepository deliveryRepository;
+    private final DeliveryFoodRepository deliveryFoodRepository;
     private final UserRepository userRepository;
     private final RestaurantRepository restaurantRepository;
+    private final FoodRepository foodRepository;
 
     @Transactional
     public DeliveryDto createDelivery(CreateDeliveryDto createDeliveryDto) {
@@ -52,6 +54,21 @@ public class DeliveryService {
         delivery.setStatus(DeliveryStatus.PENDING);
         deliveryRepository.save(delivery);
 
+        List<DeliveryFood> deliveryFoods = createDeliveryDto.getFoods().stream()
+                .map(deliveryFoodDto -> {
+                    Food food = foodRepository.findById(deliveryFoodDto.getFoodId())
+                            .orElseThrow(() -> new IllegalArgumentException("Food not found: " + deliveryFoodDto.getFoodId()));
+
+                    DeliveryFood deliveryFood = new DeliveryFood();
+                    deliveryFood.setDelivery(delivery);
+                    deliveryFood.setFood(food);
+                    deliveryFood.setFoodCount(deliveryFoodDto.getQuantity());
+
+                    return deliveryFood;
+                })
+                .collect(Collectors.toList());
+
+        deliveryFoodRepository.saveAll(deliveryFoods);
         return mapToDto(delivery);
     }
 
@@ -95,6 +112,18 @@ public class DeliveryService {
         dto.setDate(delivery.getDate());
         dto.setStatus(delivery.getStatus());
         dto.setPaymentMethod(delivery.getPaymentMethod());
+
+        // Map the related DeliveryFood entities to DeliveryFoodDto
+        List<DeliveryFoodDto> foodDtos = new ArrayList<>();
+        for (DeliveryFood deliveryFood : delivery.getDeliveriesFoods()) {
+            DeliveryFoodDto foodDto = new DeliveryFoodDto();
+            // Assuming you map necessary fields from deliveryFood to foodDto
+            foodDto.setDeliveryFoodId(deliveryFood.getFood().getId());
+            foodDto.setQuantity(deliveryFood.getFoodCount());
+            foodDtos.add(foodDto);
+        }
+        dto.setFoods(foodDtos);
+
         return dto;
     }
 }

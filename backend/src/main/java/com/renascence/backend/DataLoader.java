@@ -670,8 +670,8 @@ public class DataLoader implements CommandLineRunner {
         foodRepository.save(gnocchi);
 
 
-//        //Users
-//        //Customers
+        //Users
+        //Customers
 //        User customer1 = new User();
 //        customer1.setEmail("customer1@gmail.com");
 //        customer1.setPassword(encoder.encode("customer1"));
@@ -689,8 +689,8 @@ public class DataLoader implements CommandLineRunner {
 //        admin1.setLocation(sofia);
 //        admin1.getRoles().add(adminRole);
 //        userRepository.save(admin1);
-
-        //Owners
+//
+//        //Owners
 //        User owner = new User();
 //        owner.setEmail("owner1@gmail.com");
 //        owner.setPassword(encoder.encode("owner1"));
@@ -700,7 +700,7 @@ public class DataLoader implements CommandLineRunner {
 //        owner.getRestaurants().add(vega);
 //        owner.getRoles().add(ownerRole);
 //        userRepository.save(owner);
-
+//
 //        //Delivery guys
 //        User deliveryUser1 = new User();
 //        deliveryUser1.setEmail("deliveryGuy1@gmail.com");
@@ -717,7 +717,7 @@ public class DataLoader implements CommandLineRunner {
 //        deliveryGuy1.setIban("BG00094883");
 //        deliveryGuyRepository.save(deliveryGuy1);
 //        userRepository.save(deliveryUser1);
-
+//
 //        User deliveryGuy2 = new User();
 //        deliveryGuy2.setEmail("deliveryGuy2@gmail.com");
 //        deliveryGuy2.setPassword(encoder.encode("deliveryGuy2"));
