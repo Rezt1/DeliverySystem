@@ -63,7 +63,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize ->
                 authorize
                         .requestMatchers("/api/test/unsecured1",
-                                "/api/test/unsecured1",
+                                "/api/test/unsecured2",
                                 "/api/auth/login",
                                 "/api/auth/register",
                                 "/error",

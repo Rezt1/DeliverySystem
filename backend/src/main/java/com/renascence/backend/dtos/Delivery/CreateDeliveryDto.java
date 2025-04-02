@@ -19,6 +19,9 @@ public class CreateDeliveryDto {
     @NotNull(message = "Delivery guy id is required")
     private Long deliveryGuyId;
 
+    @NotNull(message = "Restaurant id is required")
+    private Long restaurantId;
+
     @NotBlank(message = "Address is required")
     private String address;
 
