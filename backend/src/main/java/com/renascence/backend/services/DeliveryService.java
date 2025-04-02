@@ -32,7 +32,6 @@ public class DeliveryService {
         Optional<User> deliveryGuyOpt = userRepository.findById(createDeliveryDto.getDeliveryGuyId());
         Optional<Restaurant> restaurantOpt = restaurantRepository.findById(createDeliveryDto.getRestaurantId());
 
-
         if (userOpt.isEmpty()) {
             throw new IllegalArgumentException("User not found");
         }
@@ -52,7 +51,7 @@ public class DeliveryService {
         delivery.setReceiver(userOpt.get());
         delivery.setRestaurant(restaurantOpt.get());
         delivery.setStatus(DeliveryStatus.PENDING);
-        deliveryRepository.save(delivery);
+//        deliveryRepository.save(delivery);
 
         List<DeliveryFood> deliveryFoods = createDeliveryDto.getFoods().stream()
                 .map(deliveryFoodDto -> {
@@ -68,6 +67,9 @@ public class DeliveryService {
                 })
                 .collect(Collectors.toList());
 
+        delivery.setDeliveriesFoods(deliveryFoods);
+
+        deliveryRepository.save(delivery);
         deliveryFoodRepository.saveAll(deliveryFoods);
         return mapToDto(delivery);
     }
@@ -108,6 +110,7 @@ public class DeliveryService {
         dto.setDeliveryId(delivery.getId());
         dto.setUserId(delivery.getReceiver().getId());
         dto.setDeliveryGuyId(delivery.getDeliveryGuy().getId());
+        dto.setRestaurantId(delivery.getRestaurant().getId());
         dto.setAddress(delivery.getAddress());
         dto.setDate(delivery.getDate());
         dto.setStatus(delivery.getStatus());

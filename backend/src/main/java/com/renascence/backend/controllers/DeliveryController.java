@@ -2,6 +2,7 @@ package com.renascence.backend.controllers;
 
 import com.renascence.backend.dtos.Delivery.CreateDeliveryDto;
 import com.renascence.backend.dtos.Delivery.DeliveryDto;
+import com.renascence.backend.entities.Delivery;
 import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.services.DeliveryService;
 import jakarta.validation.Valid;
