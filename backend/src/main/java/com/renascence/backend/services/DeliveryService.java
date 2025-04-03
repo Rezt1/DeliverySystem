@@ -1,6 +1,5 @@
 package com.renascence.backend.services;
 
-import com.renascence.backend.config.SecurityConfig;
 import com.renascence.backend.dtos.Delivery.CreateDeliveryDto;
 import com.renascence.backend.dtos.Delivery.DeliveryDto;
 import com.renascence.backend.dtos.DeliveryFood.DeliveryFoodDto;
@@ -103,6 +102,7 @@ public class DeliveryService {
         if (deliveryOpt.isPresent() && deliveryGuyOpt.isPresent()) {
             Delivery delivery = deliveryOpt.get();
             delivery.setDeliveryGuy(deliveryGuyOpt.get().getDeliveryGuy());
+            delivery.setStatus(DeliveryStatus.OUT_FOR_DELIVERY);
             deliveryRepository.save(delivery);
             return mapToDto(delivery);
         }
