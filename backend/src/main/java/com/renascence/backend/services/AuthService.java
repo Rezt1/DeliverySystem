@@ -1,7 +1,7 @@
 package com.renascence.backend.services;
 
+import com.renascence.backend.dtos.Authorization.AuthResponseDto;
 import com.renascence.backend.dtos.Authorization.LoginRequestDto;
-import com.renascence.backend.dtos.Authorization.LoginResponseDto;
 import com.renascence.backend.dtos.Authorization.RegisterDto;
 import com.renascence.backend.entities.AccessToken;
 import com.renascence.backend.entities.City;
@@ -47,6 +47,8 @@ public class AuthService {
 
             List<AccessToken> accessTokens = accessTokenRepository.findByUser_Email(userDetails.getUsername());
 
+            User currUser = userRepository.findByEmail(userDetails.getUsername()).get();
+
             if (!accessTokens.isEmpty()) {
                 for (AccessToken at : accessTokens){
                     at.setToken(accessToken);
@@ -58,13 +60,13 @@ public class AuthService {
                 AccessToken accessTokenEntity = new AccessToken(
                         LocalDateTime.now().plusSeconds(jwtService.getExpirationInMs() / 1000),
                         accessToken,
-                        userRepository.findByEmail(userDetails.getUsername()).get()
+                        currUser
                 );
 
                 accessTokenRepository.save(accessTokenEntity);
             }
 
-            return ResponseEntity.ok(new LoginResponseDto(accessToken));
+            return ResponseEntity.ok(new AuthResponseDto(accessToken, currUser.getEmail(), currUser.getName(), currUser.getPhoneNumber()));
 
         } catch (Exception ex){
             return ResponseEntity
@@ -133,6 +135,6 @@ public class AuthService {
                 .buildAndExpand(newUser.getId())
                 .toUri();
 
-        return ResponseEntity.created(location).body(new LoginResponseDto(jwt));
+        return ResponseEntity.created(location).body(new AuthResponseDto(jwt, newUser.getEmail(), newUser.getName(), newUser.getPhoneNumber()));
     }
 }

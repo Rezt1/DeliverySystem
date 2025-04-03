@@ -2,6 +2,8 @@ package com.renascence.backend.controllers;
 
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +23,11 @@ public class TestController {
     }
 
     @GetMapping("/basicSecured")
-    public String basicSecured(){
+    public String basicSecured() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        System.out.println(auth.getName());
+
         return "hello customer";
     }
 
