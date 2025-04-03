@@ -197,8 +197,18 @@
               autocomplete="current-password"
             />
             <button
+              id = "password-show"
               type="button"
-              onclick="togglePassword()"
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-[#006bb8] hover:cursor-pointer hover:text-[#ff66c4] active:opacity-70"
+            >
+              Show
+            </button>
+          </div>
+          <div class="relative">
+            <input type="password" id="repeat-password-input" placeholder="repeat password" class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8]">
+            <button
+              id = "password-show-2"
+              type="button"
               class="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-[#006bb8] hover:cursor-pointer hover:text-[#ff66c4] active:opacity-70"
             >
               Show
