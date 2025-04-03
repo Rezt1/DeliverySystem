@@ -1,7 +1,10 @@
 export function togglePassword(e){
     e.preventDefault();
-        let passField = document.getElementById("password-input");
-        let passBtn = document.getElementById("password-show");
+    console.log(e.target.parentNode);
+
+        let parent = e.target.parentNode;
+        let passField = parent.getElementsByTagName("input")[0];
+        let passBtn = parent.getElementsByTagName("button")[0];
 
         if(passField.type === "password"){
             passField.type = "text";
