@@ -1,5 +1,6 @@
 package com.renascence.backend.services;
 
+import com.renascence.backend.config.SecurityConfig;
 import com.renascence.backend.dtos.Delivery.CreateDeliveryDto;
 import com.renascence.backend.dtos.Delivery.DeliveryDto;
 import com.renascence.backend.dtos.DeliveryFood.DeliveryFoodDto;
@@ -8,6 +9,8 @@ import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.repositories.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,10 +29,12 @@ public class DeliveryService {
     private final RestaurantRepository restaurantRepository;
     private final FoodRepository foodRepository;
 
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
     @Transactional
     public DeliveryDto createDelivery(CreateDeliveryDto createDeliveryDto) {
-        Optional<User> userOpt = userRepository.findById(createDeliveryDto.getUserId());
-        Optional<User> deliveryGuyOpt = userRepository.findById(createDeliveryDto.getDeliveryGuyId());
+        Optional<User> userOpt = userRepository.findByEmail(auth.getName());
+        Optional<User> deliveryGuyOpt = userRepository.findByEmail(auth.getName());
         Optional<Restaurant> restaurantOpt = restaurantRepository.findById(createDeliveryDto.getRestaurantId());
 
         if (userOpt.isEmpty()) {
@@ -51,7 +56,6 @@ public class DeliveryService {
         delivery.setReceiver(userOpt.get());
         delivery.setRestaurant(restaurantOpt.get());
         delivery.setStatus(DeliveryStatus.PENDING);
-//        deliveryRepository.save(delivery);
 
         List<DeliveryFood> deliveryFoods = createDeliveryDto.getFoods().stream()
                 .map(deliveryFoodDto -> {
@@ -94,7 +98,7 @@ public class DeliveryService {
     @Transactional
     public DeliveryDto assignDeliveryGuy(Long id, Long deliveryGuyId) {
         Optional<Delivery> deliveryOpt = deliveryRepository.findById(id);
-        Optional<User> deliveryGuyOpt = userRepository.findById(deliveryGuyId);
+        Optional<User> deliveryGuyOpt = userRepository.findByEmail(auth.getName());
 
         if (deliveryOpt.isPresent() && deliveryGuyOpt.isPresent()) {
             Delivery delivery = deliveryOpt.get();
@@ -120,7 +124,6 @@ public class DeliveryService {
         List<DeliveryFoodDto> foodDtos = new ArrayList<>();
         for (DeliveryFood deliveryFood : delivery.getDeliveriesFoods()) {
             DeliveryFoodDto foodDto = new DeliveryFoodDto();
-            // Assuming you map necessary fields from deliveryFood to foodDto
             foodDto.setDeliveryFoodId(deliveryFood.getFood().getId());
             foodDto.setQuantity(deliveryFood.getFoodCount());
             foodDtos.add(foodDto);
