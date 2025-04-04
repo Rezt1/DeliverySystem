@@ -77,6 +77,12 @@
   opacity: 0.85;
 }
 
+.btn-drop-down-nav:hover{
+  box-shadow: #ff66c4 4px 4px 10px 1px;
+  transition: all 0.25s ease-in-out;
+
+}
+
 .btn-cart:hover {
   cursor: pointer;
   box-shadow: #ff66c4 4px 4px 10px 1px;
