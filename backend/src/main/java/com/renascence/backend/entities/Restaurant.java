@@ -22,9 +22,6 @@ public class Restaurant {
     @Column(nullable = false)
     private float rating;
 
-    @Column(nullable = false)
-    private double deliveryGuySalary;
-
     @Column(nullable = false, length = 50, unique = true)
     private String iban;
 
@@ -32,19 +29,8 @@ public class Restaurant {
     @JoinColumn(name = "cityId", nullable = false)
     private City city;
 
-    @ManyToOne
-    @JoinColumn(name = "ownerId", nullable = true) // CHANGE TO FALSE!!!!
-    private User owner;
-
-    @OneToOne
-    @JoinColumn(name = "bonusId", nullable = true) // CHANGE TO FALSE!!!!
-    private Bonus bonus;
-
     @OneToMany(mappedBy = "restaurant")
     private List<Delivery> deliveries = new ArrayList<>();
-
-    @OneToMany(mappedBy = "workPlace")
-    private List<DeliveryGuy> deliveryGuys = new ArrayList<>();
 
     @OneToMany(mappedBy = "restaurant")
     private List<Food> foods = new ArrayList<>();

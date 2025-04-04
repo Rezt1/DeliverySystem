@@ -24,4 +24,7 @@ public class City {
 
     @OneToMany(mappedBy = "city")
     List<Restaurant> restaurants = new ArrayList<>();
+
+    @OneToMany(mappedBy = "workCity")
+    List<DeliveryGuy> deliveryGuys = new ArrayList<>();
 }

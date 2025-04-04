@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -60,24 +62,24 @@ public class DataLoader implements CommandLineRunner {
         deliveryGuyRole.setName("ROLE_" + com.renascence.backend.enums.Role.DELIVERY_GUY.toString());
         roleRepository.save(deliveryGuyRole);
 
-        Role ownerRole = new Role();
-        ownerRole.setName("ROLE_" + com.renascence.backend.enums.Role.OWNER.toString());
-        roleRepository.save(ownerRole);
+//        Role ownerRole = new Role();
+//        ownerRole.setName("ROLE_" + com.renascence.backend.enums.Role.OWNER.toString());
+//        roleRepository.save(ownerRole);
 
         Role adminRole = new Role();
         adminRole.setName("ROLE_" + com.renascence.backend.enums.Role.ADMIN.toString());
         roleRepository.save(adminRole);
 
-        //Owners
-        User owner = new User();
-        owner.setEmail("owner1@gmail.com");
-        owner.setPassword(encoder.encode("owner1"));
-        owner.setName("Tosho");
-        owner.setPhoneNumber("+359 596131442");
-        owner.setLocation(sofia);
-        //owner.getRestaurants().add(vega);
-        owner.getRoles().add(ownerRole);
-        userRepository.save(owner);
+//        //Owners
+//        User owner = new User();
+//        owner.setEmail("owner1@gmail.com");
+//        owner.setPassword(encoder.encode("owner1"));
+//        owner.setName("Tosho");
+//        owner.setPhoneNumber("+359 596131442");
+//        owner.setLocation(sofia);
+//        //owner.getRestaurants().add(vega);
+//        owner.getRoles().add(ownerRole);
+//        userRepository.save(owner);
 
         //Users
         //Customers
@@ -144,7 +146,7 @@ public class DataLoader implements CommandLineRunner {
         // 3. Restaurants
         Restaurant italianFantasy = new Restaurant();
         italianFantasy.setName("Italian Fantasy");
-        italianFantasy.setDeliveryGuySalary(915.50);
+        //italianFantasy.setDeliveryGuySalary(915.50);
         italianFantasy.setIban("GB123456789");
         italianFantasy.setRating(4.5f);
         italianFantasy.setCity(sofia);
@@ -152,7 +154,7 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant sushiWorld = new Restaurant();
         sushiWorld.setName("Sushi World");
-        sushiWorld.setDeliveryGuySalary(1018.75);
+        //sushiWorld.setDeliveryGuySalary(1018.75);
         sushiWorld.setIban("JP987654321");
         sushiWorld.setRating(4.8f);
         sushiWorld.setCity(plovdiv);
@@ -160,7 +162,7 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant kebabHouse = new Restaurant();
         kebabHouse.setName("Kebab House");
-        kebabHouse.setDeliveryGuySalary(1000.00);
+        //kebabHouse.setDeliveryGuySalary(1000.00);
         kebabHouse.setIban("TR11985643");
         kebabHouse.setRating(4.0f);
         kebabHouse.setCity(burgas);
@@ -168,16 +170,16 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant vega = new Restaurant();
         vega.setName("Vega");
-        vega.setDeliveryGuySalary(1200.78);
+        //vega.setDeliveryGuySalary(1200.78);
         vega.setIban("BG10988143");
         vega.setRating(5.0f);
         vega.setCity(varna);
-        vega.setOwner(owner);
+        //vega.setOwner(owner);
         restaurantRepository.save(vega);
 
         Restaurant bulgari = new Restaurant();
         bulgari.setName("Bulgari");
-        bulgari.setDeliveryGuySalary(979.00);
+        //bulgari.setDeliveryGuySalary(979.00);
         bulgari.setIban("BG14574829");
         bulgari.setRating(4.0f);
         bulgari.setCity(sofia);
@@ -185,7 +187,7 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant kalos = new Restaurant();
         kalos.setName("Kalos");
-        kalos.setDeliveryGuySalary(1050.00);
+        //kalos.setDeliveryGuySalary(1050.00);
         kalos.setIban("GR54424567");
         kalos.setRating(4.2f);
         kalos.setCity(plovdiv);
@@ -193,7 +195,7 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant balkan = new Restaurant();
         balkan.setName("Balkan");
-        balkan.setDeliveryGuySalary(1030.50);
+        //balkan.setDeliveryGuySalary(1030.50);
         balkan.setIban("GR55321237");
         balkan.setRating(3.7f);
         balkan.setCity(burgas);
@@ -201,7 +203,7 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant royalDragon = new Restaurant();
         royalDragon.setName("Royal Dragon");
-        royalDragon.setDeliveryGuySalary(1200.50);
+        //royalDragon.setDeliveryGuySalary(1200.50);
         royalDragon.setIban("JP56323674");
         royalDragon.setRating(4.5f);
         royalDragon.setCity(sofia);
@@ -209,7 +211,7 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant indianTaste = new Restaurant();
         indianTaste.setName("Indian Taste");
-        indianTaste.setDeliveryGuySalary(1200.75);
+        //indianTaste.setDeliveryGuySalary(1200.75);
         indianTaste.setIban("IN15835374");
         indianTaste.setRating(3.1f);
         indianTaste.setCity(sofia);
@@ -217,7 +219,7 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant bellaItalia = new Restaurant();
         bellaItalia.setName("Bella Italia");
-        bellaItalia.setDeliveryGuySalary(1300.00);
+        //bellaItalia.setDeliveryGuySalary(1300.00);
         bellaItalia.setIban("IT56382910");
         bellaItalia.setRating(4.7f);
         bellaItalia.setCity(vratsa);
@@ -225,7 +227,7 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant yemek = new Restaurant();
         yemek.setName("Yemek");
-        yemek.setDeliveryGuySalary(1100.50);
+        //yemek.setDeliveryGuySalary(1100.50);
         yemek.setIban("TR41565423");
         yemek.setRating(4.1f);
         yemek.setCity(plovdiv);
@@ -233,7 +235,7 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant frenchBaguette = new Restaurant();
         frenchBaguette.setName("French Baguette");
-        frenchBaguette.setDeliveryGuySalary(1150.20);
+        //frenchBaguette.setDeliveryGuySalary(1150.20);
         frenchBaguette.setIban("FR16432897");
         frenchBaguette.setRating(4.3f);
         frenchBaguette.setCity(burgas);
@@ -241,7 +243,7 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant kkot = new Restaurant();
         kkot.setName("Kkot");
-        kkot.setDeliveryGuySalary(1250.30);
+        //kkot.setDeliveryGuySalary(1250.30);
         kkot.setIban("KR96321457");
         kkot.setRating(3.6f);
         kkot.setCity(varna);
@@ -249,7 +251,7 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant amigo = new Restaurant();
         amigo.setName("Amigo");
-        amigo.setDeliveryGuySalary(1180.45);
+        //amigo.setDeliveryGuySalary(1180.45);
         amigo.setIban("MX71394268");
         amigo.setRating(3.3f);
         amigo.setCity(sofia);
@@ -267,8 +269,10 @@ public class DataLoader implements CommandLineRunner {
 
         DeliveryGuy deliveryGuy1 = new DeliveryGuy();
         deliveryGuy1.setUser(deliveryUser1);
-        deliveryGuy1.setWorkPlace(vega);
+        deliveryGuy1.setWorkCity(varna);
         deliveryGuy1.setIban("BG00094883");
+        deliveryGuy1.setSalary(1600);
+        deliveryGuy1.setStartWorkDate(LocalDate.now());
         deliveryGuyRepository.save(deliveryGuy1);
         userRepository.save(deliveryUser1);
 

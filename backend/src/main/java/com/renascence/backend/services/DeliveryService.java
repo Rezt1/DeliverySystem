@@ -49,7 +49,7 @@ public class DeliveryService {
         Delivery delivery = new Delivery();
 
         delivery.setAddress(createDeliveryDto.getAddress());
-        delivery.setDate(LocalDateTime.now());
+        delivery.setCreationDate(LocalDateTime.now());
         delivery.setDeliveryGuy(deliveryGuyOpt.get().getDeliveryGuy());
         delivery.setPaymentMethod(createDeliveryDto.getPaymentMethod());
         delivery.setReceiver(userOpt.get());
@@ -116,7 +116,7 @@ public class DeliveryService {
         dto.setDeliveryGuyId(delivery.getDeliveryGuy().getId());
         dto.setRestaurantId(delivery.getRestaurant().getId());
         dto.setAddress(delivery.getAddress());
-        dto.setDate(delivery.getDate());
+        dto.setDate(delivery.getCreationDate());
         dto.setStatus(delivery.getStatus());
         dto.setPaymentMethod(delivery.getPaymentMethod());
 
