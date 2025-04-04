@@ -1,10 +1,7 @@
 package com.renascence.backend.dtos.Authorization;
 
 import com.renascence.backend.customAnnotations.PasswordMatcher;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Length;
 
@@ -28,6 +25,5 @@ public class RegisterDto {
     @Length(min = 7, max = 255, message = "Phone number should be at least 7 digits long!")
     private String phoneNumber;
 
-    @Positive
     private Long locationId;
 }
