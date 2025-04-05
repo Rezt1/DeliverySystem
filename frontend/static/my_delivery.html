@@ -3,11 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+      defer
+    ></script>
+    <script src="./nav.mjs" type="module" defer></script>
     <link href="./style.css" rel="stylesheet" />
     <link href="./custom.css" rel="stylesheet" />
 
-    <title>Hexeats - Privacy Statement</title>
+    <title>Hexeats - My Delivery</title>
   </head>
 
   <body>
@@ -92,14 +96,12 @@
           </button>
 
           <!-- Login/Reg/Account buttons -->
-          <button id="login-button" class="!flex btn-primary">Login</button>
-          <button id="register-button" class="!flex btn-primary">
+          <button id="login-button" class="!hidden btn-primary">Login</button>
+          <button id="register-button" class="!hidden btn-primary">
             Register
           </button>
-          <button id="account-button" class="!hidden btn-primary">
-            Account
-          </button>
-          <button id="logout-button" class="!hidden btn-primary">Logout</button>
+          <button id="account-button" class="!flex btn-primary">Account</button>
+          <button id="logout-button" class="!flex btn-primary">Logout</button>
         </div>
       </nav>
 
@@ -192,192 +194,125 @@
         <!-- Mobile Login/Account/Register Buttons -->
         <button
           id="mobile-login-button"
-          class="!flex btn-primary w-full text-white text-lg py-2"
+          class="!hidden btn-primary w-full text-white text-lg py-2"
         >
           Login
         </button>
         <button
           id="mobile-register-button"
-          class="!flex btn-primary w-full text-white text-lg py-2"
+          class="!hidden btn-primary w-full text-white text-lg py-2"
         >
           Register
         </button>
         <button
           id="mobile-account-button"
-          class="!hidden btn-primary w-full text-white text-lg py-2"
+          class="!flex btn-primary w-full text-white text-lg py-2"
         >
           Account
         </button>
         <button
           id="mobile-account-button"
-          class="!hidden btn-primary w-full text-white text-lg py-2"
+          class="!flex btn-primary w-full text-white text-lg py-2"
         >
           Logout
         </button>
       </div>
     </header>
 
-    <main class="flex flex-col items-center py-[24px] pb-0 mb-10">
-      <h1 class="text-4xl md:text-7xl text-center font-extrabold my-10">
-        Hexeats Privacy Statement
-      </h1>
+    <main class="flex justify-around">
+      <div
+        id="delievery-info"
+        class="bg-white rounded-3xl overflow-hidden shadow-md shadow-gray-700 h-[90%] w-[90%] m-auto text-[#006bb8] md:text-2xl"
+      >
+        <div
+          class="h-full w-full overflow-y-auto grid grid-cols-1 md:grid-cols-2 justify-around items-center"
+        >
+          <div class="flex flex-col justify-center items-center gap-2 p-4">
+            <div id="info" class="flex justify-around md:flex-col mb-auto mt-2">
+              <section id="delievery-info" class="flex flex-col gap-2 m-4 p-2">
+                <h1 class="text-2xl md:text-5xl">Delivery Information</h1>
+                <div
+                  class="flex flex-col justify-center items-start gap-1 p-2 text-1xl md:text-3xl"
+                >
+                  <div id="name-block" class="mb-2">
+                    <span>Name: </span>
+                    <span id="name" class="animate-pulse block md:inline"
+                      >Loading...</span
+                    >
+                  </div>
+                  <div id="address-block" class="mb-2">
+                    <span>Address: </span>
+                    <span id="address" class="animate-pulse block md:inline"
+                      >Loading...</span
+                    >
+                  </div>
+                  <div id="phone-block" class="mb-2">
+                    <span>Phone: </span>
+                    <span id="phone" class="animate-pulse block md:inline"
+                      >Loading...</span
+                    >
+                  </div>
+                </div>
+              </section>
+              <section id="order-info" class="flex flex-col gap-2 m-4 p-2">
+                <h1 class="text-2xl md:text-5xl">Order Information</h1>
+                <div
+                  class="flex flex-col justify-center items-start gap-1 p-2 text-1xl md:text-3xl"
+                >
+                  <div id="orer-id-block" class="mb-2">
+                    <span>Order-id: </span>
+                    <span id="order-id" class="animate-pulse block md:inline"
+                      >Loading...</span
+                    >
+                  </div>
+                  <div id="status-block" class="mb-2">
+                    <span>Status: </span>
+                    <span id="status" class="animate-pulse block md:inline"
+                      >Loading...</span
+                    >
+                  </div>
+                </div>
+              </section>
+            </div>
+            <button
+              id="btn-delivered-main"
+              class="w-[50%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[10px] hover:border-2 active:opacity-70"
+            >
+              Delivered
+            </button>
+          </div>
 
-      <div class="text-1xl md:text-2xl text-justify max-w-4xl px-4 space-y-6">
-        <p>
-          At Hexeats, we take data protection seriously. Privacy and information
-          security are at the heart of Hexeats. This Privacy Policy Statement
-          describes the key principles and practices we abide by to ensure your
-          privacy is respected while using our services.
-        </p>
+          <section
+            id="order-summery"
+            class="flex flex-col mt-15 md:mt-8 mb-auto"
+          >
+            <h1 class="text-3xl md:text-5xl text-center">Order Summary</h1>
 
-        <p>
-          Hexeats Enterprises Oy, local country-specific Hexeats companies, and
-          DoorDash Inc., belonging to the same group of companies ("Hexeats",
-          "we"), process personal data of users of Hexeats' food and retail
-          ordering services ordered through the Hexeats application ("Hexeats
-          App") and users of other Hexeats delivery products and services, as
-          well as visitors of the website hexeats.com ("Website").
-        </p>
+            <div
+              id="order-summary-info"
+              class="rounded-3xl h-[70%] flex-1 overflow-y-auto"
+            >
+              <!-- Loading state -->
+              <div id="order-summary-loading" class="grid gap-3 p-4">
+                <!-- Skeleton loader items -->
+                <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+                <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+                <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              </div>
 
-        <h2 class="text-2xl md:text-3xl font-bold mt-8">1. Data Controllers</h2>
-        <p>
-          This Privacy Statement applies to the processing of personal data
-          carried out by Hexeats. Hexeats is part of DoorDash, Inc., a
-          technology company with an official address at 303 2nd St, Suite 800,
-          San Francisco, CA 94107, USA.
-        </p>
-
-        <p>
-          In relation to the processing of personal data of Users in the below
-          countries, Hexeats Enterprises Oy and the local Hexeats group company
-          are acting as joint data controllers. This means that Hexeats
-          Enterprises Oy and the local Hexeats group company together determine
-          the purposes for and means by which personal data is processed.
-        </p>
-
-        <h3 class="text-xl md:text-2xl font-bold mt-6">
-          Country-specific joint controllers:
-        </h3>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>
-            Hexeats Enterprises Deutschland GmbH, Stralauer Allee 6, 10245
-            Berlin, Germany (Germany)
-          </li>
-          <li>
-            Hexeats Česko s.r.o., Bubenská 1477/1, Holešovice, PSČ 170 00 Praha
-            7, Czech Republic (Czech Republic)
-          </li>
-          <li>
-            Hexeats Polska sp. z o.o., ul. Złota 59, 00-120 Warsaw, Poland
-            (Poland)
-          </li>
-          <li>
-            Hexeats Enterprises Israel Ltd., HaMelacha St. 8, 6721508 Tel Aviv,
-            Israel (Israel)
-          </li>
-          <!-- Add all other countries in similar list items -->
-        </ul>
-
-        <h2 class="text-2xl md:text-3xl font-bold mt-8">
-          2. Hexeats' Contact Details
-        </h2>
-        <p>
-          <strong>Hexeats Enterprises Oy</strong><br />
-          Business ID: 2646674-9<br />
-          Correspondence address: Pohjoinen Rautatiekatu 21, 00100 Helsinki,
-          Finland<br />
-          Email address: support@hexeats.com
-        </p>
-
-        <p>
-          <strong>Data Protection Officer:</strong><br />
-          Hexeats has appointed a data protection officer who you can reach
-          through the above contact details or by sending an email to
-          privacy@hexeats.com.
-        </p>
-
-        <h2 class="text-2xl md:text-3xl font-bold mt-8">
-          3. Personal Data Processed and Sources of Data
-        </h2>
-        <p>
-          We process personal data only to the extent necessary and appropriate
-          for the specific processing purpose. The personal data collected and
-          processed by us can be divided into two general data categories: User
-          Data and Usage Data.
-        </p>
-
-        <h3 class="text-xl md:text-2xl font-bold mt-6">User Data</h3>
-        <p>
-          User Data is personal data collected directly from you or from our
-          customer organization on behalf of which you are using the Hexeats
-          Services ("Customer Organization").
-        </p>
-
-        <h4 class="text-lg md:text-xl font-semibold mt-4">
-          User Data Necessary to Use the Hexeats Services
-        </h4>
-        <p>
-          The following personal data collected and processed by us is necessary
-          for the proper performance of the contract between you and us:
-        </p>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>Full name</li>
-          <li>Telephone number</li>
-          <li>Email address</li>
-          <li>
-            Payment instrument information (processed by third-party providers)
-          </li>
-        </ul>
-
-        <h4 class="text-lg md:text-xl font-semibold mt-4">
-          User Data You Provide Voluntarily
-        </h4>
-        <p>Your user experience may be enhanced by providing:</p>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>Profile picture</li>
-          <li>Delivery address</li>
-          <li>Location data (with consent)</li>
-          <li>Loyalty program information</li>
-          <li>Age (for age-restricted goods)</li>
-        </ul>
-
-        <h2 class="text-2xl md:text-3xl font-bold mt-8">
-          Cookies and Other Technologies
-        </h2>
-        <p>
-          We use various technologies to collect and store Usage Data and other
-          information when Users visit the Hexeats Services, including cookies
-          and web telemetry.
-        </p>
-
-        <p>
-          You can manage your cookie preferences through the cookie banner on
-          our websites or via your browser settings. Please note that some
-          features may not function properly if cookies are disabled.
-        </p>
-
-        <h3 class="text-xl md:text-2xl font-bold mt-6">Third-Party Services</h3>
-        <p>We use the following third-party services:</p>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>Google Analytics - Visitor and usage analytics</li>
-          <li>Facebook Pixel - Advertising/conversion tracking</li>
-          <li>Intercom - Customer support chat</li>
-          <!-- Add other services as list items -->
-        </ul>
-
-        <p class="mt-8">
-          This Privacy Statement may be updated from time to time. The current
-          version is always available on our Website.
-        </p>
+              <!-- Actual order summary will be inserted here -->
+              <div id="order-summary-list" class="grid gap-3 p-4 hidden"></div>
+            </div>
+          </section>
+        </div>
       </div>
     </main>
+
     <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
       <button class="btn-footer">FAQ</button>
       <button class="btn-footer">About</button>
       <button class="btn-footer">Contacts</button>
       <button class="btn-footer">Feedback</button>
     </footer>
-
-    <script></script>
   </body>
 </html>

@@ -29,12 +29,14 @@
 
       <!-- Desktop Navigation (prevents buttons from going out of sight) -->
       <nav
-      class="hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:justify-between md:pl-[100px]"
+        class="max-md:!hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:!justify-between md:pl-[70px]"
       >
         <!-- Left Section -->
         <div class="flex flex-wrap gap-3">
           <button class="btn-primary">Home</button>
-          <button class="btn-primary">Restaurants</button>
+          <button id="restaurants-button" class="btn-primary">
+            Restaurants
+          </button>
 
           <!-- Hidden deliveries button -->
           <!-- To be shown only when delivery guy is logged in -->
@@ -45,12 +47,33 @@
 
         <!-- Right Section -->
         <div class="flex flex-wrap gap-3 items-center">
-          <input
-            type="text"
-            placeholder="Search..."
-            id="search-navbar-input"
-            class="btn-primary btn-search w-31 focus:outline-none"
-          />
+          <div class="relative w-35">
+            <select
+              id="search-main-dropdown"
+              class="btn-drop-down !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+            >
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Options from database  -->
+              <option value="" selected disabled hidden>City</option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+            >
+              <svg
+                class="fill-current h-4 w-4 text-[#006bb8]"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
+            </div>
+          </div>
+
           <button
             class="btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative"
           >
@@ -71,13 +94,14 @@
           </button>
 
           <!-- Login/Reg/Account buttons -->
-          <button id="login-button" class="btn-primary">Login</button>
-          <button id="register-button" class="btn-primary">Register</button>
-          <button id="account-button" class="btn-primary hidden">
-            Account
-          </button><button id="logout-button" class="hidden btn-primary">
-            Logout
+          <button id="login-button" class="!flex btn-primary">Login</button>
+          <button id="register-button" class="!flex btn-primary">
+            Register
           </button>
+          <button id="account-button" class="!hidden btn-primary">
+            Account
+          </button>
+          <button id="logout-button" class="!hidden btn-primary">Logout</button>
         </div>
       </nav>
 
@@ -111,19 +135,44 @@
         id="mobile-menu"
         class="hidden md:hidden flex flex-col items-center bg-[#006bb8] absolute top-[100px] left-0 w-full p-4 space-y-4 transition-all duration-300 ease-in-out"
       >
-        <input
-          type="text"
-          placeholder="Search..."
-          id="search-navbar-menu-input"
-          class="btn-search bg-white text-[#006bb8] px-[18px] py-[10px] rounded-3xl w-full font-extrabold hover:text-[#ff66c4] focus:outline-none focus:ring-1 focus:ring-[#006bb8]"
-        />
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+        <!-- change to DropDown -->
+        <div class="relative w-full">
+          <select
+            id="search-main-dropdown"
+            class="btn-drop-down text-center !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+          >
+            <!-- Sashka -->
+            <!-- Sashka -->
+            <!-- Sashka -->
+            <!-- Sashka -->
+            <!-- Options from database  -->
+            <option value="" selected disabled hidden>City</option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+          >
+            <svg
+              class="fill-current h-4 w-4 text-[#006bb8]"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
         <button
           id="home-btn"
           class="btn-primary w-full text-white text-lg py-2"
         >
           Home
         </button>
-        <button  id = "restaurants-button" class="btn-primary w-full text-white text-lg py-2">
+        <button
+          id="restaurants-button-mobile"
+          class="btn-primary w-full text-white text-lg py-2"
+        >
           Restaurants
         </button>
 
@@ -145,21 +194,27 @@
         <!-- Mobile Login/Account/Register Buttons -->
         <button
           id="mobile-login-button"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="!flex btn-primary w-full text-white text-lg py-2"
         >
           Login
         </button>
         <button
           id="mobile-register-button"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="!flex btn-primary w-full text-white text-lg py-2"
         >
           Register
         </button>
         <button
           id="mobile-account-button"
-          class="btn-primary w-full text-white text-lg py-2 !hidden"
+          class="!hidden btn-primary w-full text-white text-lg py-2 "
         >
           Account
+        </button>
+        <button
+          id="mobile-logout-button"
+          class="!hidden btn-primary w-full text-white text-lg py-2 "
+        >
+          Logout
         </button>
       </div>
     </header>

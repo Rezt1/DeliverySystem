@@ -60,7 +60,7 @@ public class RestaurantService {
         restaurant.setIban(createDto.getIban());
         restaurant.setRating(createDto.getRating());
 
-        restaurant.setDeliveryGuySalary(900.0);  // DEFAULT VALUE; IT IS POSSIBLE TO BE CHANGED BY THE ADMIN?
+        //restaurant.setDeliveryGuySalary(900.0);  // DEFAULT VALUE; IT IS POSSIBLE TO BE CHANGED BY THE ADMIN?
         //restaurant.setBonusId(null);           // SET LATER BY ADMIN
 
         Restaurant savedRestaurant = restaurantRepository.save(restaurant);

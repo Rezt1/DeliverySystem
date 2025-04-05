@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,16 +27,21 @@ public class DeliveryGuy {
     @Column(nullable = false, length = 50, unique = true)
     private String iban;
 
+    @Column(nullable = false)
+    private double salary;
+
+    @Column(nullable = false)
+    private LocalDate startWorkDate;
+
+    private LocalDate endWorkDate;
+
     @ManyToOne
-    @JoinColumn(name = "workPlaceId")
-    private Restaurant workPlace;
+    @JoinColumn(name = "workCityId", nullable = false)
+    private City workCity;
 
     @OneToMany(mappedBy = "deliveryGuy")
     List<DeliveryGuySalary> salaries = new ArrayList<>();
 
     @OneToMany(mappedBy = "deliveryGuy")
     List<Delivery> deliveries = new ArrayList<>();
-
-    @OneToMany(mappedBy = "deliveryGuy")
-    List<Contract> contracts = new ArrayList<>();
 }

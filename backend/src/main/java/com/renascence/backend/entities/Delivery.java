@@ -44,7 +44,11 @@ public class Delivery {
     private String address;
 
     @Column(nullable = false)
-    private LocalDateTime date;
+    private LocalDateTime creationDate;
+
+    private LocalDateTime takenByDeliveryGuyDate;
+
+    private LocalDateTime deliveredDate;
 
     @OneToMany(mappedBy = "delivery")
     private List<DeliveryFood> deliveriesFoods = new ArrayList<>();
