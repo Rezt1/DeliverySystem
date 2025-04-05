@@ -4,9 +4,12 @@ import { showOptions, toggleDropdown } from "./utils.mjs";
 
 async function fetchingRestaurants(){
 try{
-  let address = ip();
+  let address = `${ip()}/api/restaurants`;
   let token = sessionStorage.getItem("accessToken");
-    let resp = await fetch(`${address}/api/restaurants`, {
+  if("location-id" in sessionStorage){
+     address = `${ip()}/api/restaurants/by-city/${sessionStorage.getItem("location-id")}`;
+  }
+    let resp = await fetch(address, {
       method: "Get",
       headers: {
         'Content-Type': 'application/json',
@@ -88,13 +91,22 @@ try{
         buttonChef1.classList.add('text-black');  
         buttonChef1.disabled = false;
 
-        buttonChef1.textContent =  `${data[0].name} - Rating: ⭐${data[0].rating}`;
+        if(data[0] === undefined){
+          buttonChef1.textContent = "No available"
+        }
+        else{
+          buttonChef1.textContent =  `${data[0].name} - Rating: ⭐${data[0].rating}`;
+        }
 
         let buttonChef2 = document.getElementById("chef-pick-2");
         buttonChef2.classList.remove('text-transparent'); 
         buttonChef2.classList.add('text-black');  
         buttonChef2.disabled = false;
 
-        buttonChef2.textContent =  `${data[1].name} - Rating: ⭐${data[1].rating}`;
-
+        if(data[1] === undefined){
+          buttonChef2.textContent = "No available"
+        }
+        else{
+          buttonChef2.textContent =  `${data[1].name} - Rating: ⭐${data[1].rating}`;
+        }
     }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="./src/nav.mjs" type="module" defer></script>
+    <script src="./src/accountJs.js" type="module" defer></script>
     <link href="./style.css" rel="stylesheet" />
     <link href="./custom.css" rel="stylesheet" />
 
@@ -48,7 +49,7 @@
         <div class="flex flex-wrap gap-3 items-center">
           <div class="relative w-35">
             <select
-              id="search-main-dropdown"
+              id="search-main-dropdown-2"
               class="btn-drop-down !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
             >
               <!-- Sashka -->
@@ -100,7 +101,6 @@
           <button id="account-button" class="!flex btn-primary">
             Account
           </button>
-          <button id="logout-button" class="!flex btn-primary">Logout</button>
         </div>
       </nav>
 
@@ -138,7 +138,7 @@
         <!-- change to DropDown -->
         <div class="relative w-full">
           <select
-            id="search-main-dropdown"
+            id="search-main-dropdown-1"
             class="btn-drop-down text-center !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
           >
             <!-- Sashka -->
@@ -210,12 +210,6 @@
           Account
         </button>
       </div>
-        <button
-          id="mobile-logout-button"
-          class="!flex btn-primary w-full text-white text-lg py-2"
-        >
-          Logout
-        </button>
       </div>
     </header>
 
@@ -247,7 +241,7 @@
           data-placeholder="Enter your e-mail"
         ></div>
 
-        <!-- Password Field -->
+        <!-- Password Field 
         <label
           for="password-field"
           class="text-lg font-medium whitespace-nowrap"
@@ -256,13 +250,12 @@
         </label>
 
         <div class="relative">
-          <!-- show password as dots -->
           <div
             id="password-display"
             class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
             data-placeholder="Password hidden"
           ></div>
-
+        -->
           <!-- if edit profile ->show input hide div -->
           <input
             type="password"
@@ -347,12 +340,7 @@
         const userNameElement = document.getElementById("user-name");
         const nameField = document.getElementById("name-field");
 
-        // Initialize with default data
-        function loadUserData() {
-          const currentName = nameField.textContent || "John Doe";
-          userNameElement.textContent = currentName;
-          nameField.textContent = currentName;
-        }
+  
 
         // Enable edit mode
         editBtn.addEventListener("click", () => {
@@ -388,8 +376,7 @@
         // Cancel edits
         cancelBtn.addEventListener("click", () => {
           nameField.setAttribute("contenteditable", "false");
-          nameField.classList.remove("ring-2", "ring-[#006bb8]");
-          loadUserData(); // Reset to original name
+          nameField.classList.remove("ring-2", "ring-[#006bb8]"); // Reset to original name
 
           editBtn.classList.remove("hidden");
           saveBtn.classList.add("hidden");
@@ -404,7 +391,6 @@
         });
 
         // Initial load
-        loadUserData();
       });
     </script>
   </body>

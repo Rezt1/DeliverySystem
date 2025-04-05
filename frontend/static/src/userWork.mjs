@@ -47,6 +47,6 @@ export async function logout(e){
     if (!response.ok) throw new Error('Logout failed');
 
     sessionStorage.clear();
-    window.location.reload();
+    window.location.href = "./home.html";
 
 }
