@@ -1,4 +1,6 @@
 import { ip } from "./ipSearch.mjs";
+import { showOptions, toggleDropdown } from "./utils.mjs";
+
 
 async function fetchingRestaurants(){
 try{
@@ -26,9 +28,12 @@ try{
   }
 }
 
-        let btnRatingSort = document.getElementById("filter-button");
-        //btnRatingSort.addEventListener("click", filterByRating);
+        let btnRatingSort = document.getElementById("sort-menu");
+        btnRatingSort.addEventListener("click", filterByRating);
 
+        let optionsBtn = document.getElementById("options");
+        btnRatingSort.addEventListener("click", showOptions);
+        
 
         let data = await fetchingRestaurants();
         
