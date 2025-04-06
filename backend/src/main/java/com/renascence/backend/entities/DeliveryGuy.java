@@ -24,11 +24,8 @@ public class DeliveryGuy {
     @JoinColumn(name = "id")
     private User user;
 
-    @Column(nullable = false, length = 50, unique = true)
+    @Column(nullable = true, length = 50, unique = true)   // CONVERT TO FALSE IF IT WORKS
     private String iban;
-
-    @Column(nullable = false)
-    private double salary;
 
     @Column(nullable = false)
     private LocalDate startWorkDate;

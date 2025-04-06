@@ -2,6 +2,7 @@ package com.renascence.backend;
 
 import com.renascence.backend.entities.*;
 import com.renascence.backend.enums.FoodCategory;
+import com.renascence.backend.enums.PaymentMethod;
 import com.renascence.backend.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -29,6 +32,11 @@ public class DataLoader implements CommandLineRunner {
     private UserRepository userRepository;
     @Autowired
     private DeliveryGuyRepository deliveryGuyRepository;
+    @Autowired
+    private DeliveryRepository deliveryRepository;
+    @Autowired
+    private DeliveryFoodRepository deliveryFoodRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -36,52 +44,42 @@ public class DataLoader implements CommandLineRunner {
             return;
         }
 
-        // 1. Cities
+        // Cities
         City sofia = new City();
         sofia.setName("Sofia");
+        sofia.setSalary(1600);
         cityRepository.save(sofia);
 
         City varna = new City();
         varna.setName("Varna");
+        varna.setSalary(1300);
         cityRepository.save(varna);
 
         City plovdiv = new City();
         plovdiv.setName("Plovdiv");
+        plovdiv.setSalary(1300);
         cityRepository.save(plovdiv);
 
         City burgas = new City();
         burgas.setName("Burgas");
+        burgas.setSalary(1300);
         cityRepository.save(burgas);
 
         City vratsa = new City();
         vratsa.setName("Vratsa");
+        vratsa.setSalary(1150);
         cityRepository.save(vratsa);
 
-        //Roles
+        // Roles
         Role deliveryGuyRole = new Role();
         deliveryGuyRole.setName("ROLE_" + com.renascence.backend.enums.Role.DELIVERY_GUY.toString());
         roleRepository.save(deliveryGuyRole);
-
-//        Role ownerRole = new Role();
-//        ownerRole.setName("ROLE_" + com.renascence.backend.enums.Role.OWNER.toString());
-//        roleRepository.save(ownerRole);
 
         Role adminRole = new Role();
         adminRole.setName("ROLE_" + com.renascence.backend.enums.Role.ADMIN.toString());
         roleRepository.save(adminRole);
 
-//        //Owners
-//        User owner = new User();
-//        owner.setEmail("owner1@gmail.com");
-//        owner.setPassword(encoder.encode("owner1"));
-//        owner.setName("Tosho");
-//        owner.setPhoneNumber("+359 596131442");
-//        owner.setLocation(sofia);
-//        //owner.getRestaurants().add(vega);
-//        owner.getRoles().add(ownerRole);
-//        userRepository.save(owner);
-
-        //Users
+        // Users
         //Customers
         User customer1 = new User();
         customer1.setEmail("customer1@gmail.com");
@@ -174,7 +172,6 @@ public class DataLoader implements CommandLineRunner {
         vega.setIban("BG10988143");
         vega.setRating(5.0f);
         vega.setCity(varna);
-        //vega.setOwner(owner);
         restaurantRepository.save(vega);
 
         Restaurant bulgari = new Restaurant();
@@ -271,7 +268,6 @@ public class DataLoader implements CommandLineRunner {
         deliveryGuy1.setUser(deliveryUser1);
         deliveryGuy1.setWorkCity(varna);
         deliveryGuy1.setIban("BG00094883");
-        deliveryGuy1.setSalary(1600);
         deliveryGuy1.setStartWorkDate(LocalDate.now());
         deliveryGuyRepository.save(deliveryGuy1);
         userRepository.save(deliveryUser1);
@@ -674,54 +670,29 @@ public class DataLoader implements CommandLineRunner {
         foodRepository.save(gnocchi);
 
 
-        //Users
-        //Customers
-//        User customer1 = new User();
-//        customer1.setEmail("customer1@gmail.com");
-//        customer1.setPassword(encoder.encode("customer1"));
-//        customer1.setName("Gosho");
-//        customer1.setPhoneNumber("+359 594231552");
-//        customer1.setLocation(sofia);
-//        userRepository.save(customer1);
+        // Delivery
+//        Delivery delivery = new Delivery();
+//        delivery.setAddress("100 Vitosha Blvd");
+//        delivery.setRestaurant(vega);
+//        delivery.setReceiver(customer1);
+//        delivery.setPaymentMethod(PaymentMethod.CARD);
+//        delivery.setDeliveryGuy(deliveryGuy1);
 //
-//        //Admins
-//        User admin1 = new User();
-//        admin1.setEmail("admin1@gmail.com");
-//        admin1.setPassword(encoder.encode("admin1"));
-//        admin1.setName("Tosho");
-//        admin1.setPhoneNumber("+359 596131442");
-//        admin1.setLocation(sofia);
-//        admin1.getRoles().add(adminRole);
-//        userRepository.save(admin1);
+//        DeliveryFood deliveryFood = new DeliveryFood();
+//        deliveryFood.setFood(pizza);
+//        deliveryFood.setFoodCount(2);
+//        deliveryFood.setDelivery(delivery);
 //
-//        //Owners
-//        User owner = new User();
-//        owner.setEmail("owner1@gmail.com");
-//        owner.setPassword(encoder.encode("owner1"));
-//        owner.setName("Tosho");
-//        owner.setPhoneNumber("+359 596131442");
-//        owner.setLocation(sofia);
-//        owner.getRestaurants().add(vega);
-//        owner.getRoles().add(ownerRole);
-//        userRepository.save(owner);
+//        List<DeliveryFood> deliveryFoods = new ArrayList<>();
+//        deliveryFoods.add(deliveryFood);
+//        delivery.setDeliveriesFoods(deliveryFoods);
 //
-//        //Delivery guys
-//        User deliveryUser1 = new User();
-//        deliveryUser1.setEmail("deliveryGuy1@gmail.com");
-//        deliveryUser1.setPassword(encoder.encode("deliveryGuy1"));
-//        deliveryUser1.setName("Ivan Todorov");
-//        deliveryUser1.setLocation(sofia);
-//        deliveryUser1.getRoles().add(deliveryGuyRole);
-//        deliveryUser1.setPhoneNumber("+359 877908142");
-//
-//
-//        DeliveryGuy deliveryGuy1 = new DeliveryGuy();
-//        deliveryGuy1.setUser(deliveryUser1);
-//        deliveryGuy1.setWorkPlace(vega);
-//        deliveryGuy1.setIban("BG00094883");
-//        deliveryGuyRepository.save(deliveryGuy1);
-//        userRepository.save(deliveryUser1);
-//
+//        deliveryRepository.save(delivery);
+//        deliveryFoodRepository.saveAll(deliveryFoods);
+
+
+
+
 //        User deliveryGuy2 = new User();
 //        deliveryGuy2.setEmail("deliveryGuy2@gmail.com");
 //        deliveryGuy2.setPassword(encoder.encode("deliveryGuy2"));

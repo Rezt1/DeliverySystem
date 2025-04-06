@@ -16,12 +16,6 @@ public class CuisineService {
 
     private final CuisineRepository cuisineRepository;
 
-    public CuisineDto createCuisine(CreateCuisineDto createCuisineDto) {
-        Cuisine cuisine =new Cuisine();
-        cuisine.setName(createCuisineDto.getName());
-        Cuisine savedCuisine = cuisineRepository.save(cuisine);
-        return convertToDto(savedCuisine);
-    }
 
     public List<CuisineDto> getAllCuisines() {
         return cuisineRepository.findAll().stream()

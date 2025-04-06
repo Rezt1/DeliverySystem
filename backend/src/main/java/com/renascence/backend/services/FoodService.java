@@ -60,27 +60,6 @@ public class FoodService {
         return convertToDto(food);
     }
 
-    public FoodDto createFood(CreateFoodDto dto) {
-        // Validate Cuisine and Restaurant exist
-        Cuisine cuisine = cuisineRepository.findById(dto.getCuisineId())
-                .orElseThrow(() -> new IllegalArgumentException("Cuisine not found"));
-
-        Restaurant restaurant = restaurantRepository.findById(dto.getRestaurantId())
-                .orElseThrow(() -> new IllegalArgumentException("Restaurant not found"));
-
-        // Convert DTO to Entity
-        Food food = new Food();
-        food.setName(dto.getName());
-        food.setPrice(dto.getPrice());
-        food.setDescription(dto.getDescription());
-        food.setFoodCategory(dto.getFoodCategory());
-        food.setCuisine(cuisine);
-        food.setRestaurant(restaurant);
-
-        Food savedFood = foodRepository.save(food);
-        return convertToDto(savedFood);
-    }
-
     private FoodDto convertToDto(Food food) {
         FoodDto dto = new FoodDto();
         dto.setId(food.getId());

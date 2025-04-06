@@ -46,36 +46,12 @@ public class RestaurantService {
                 .toList();
     }
 
-    public RestaurantDto createRestaurant(CreateRestaurantDto createDto) {
-        // Validate city exists
-        City city = cityRepository.findById(createDto.getCityId())
-                .orElseThrow(() -> new IllegalArgumentException("City not found with ID: " + createDto.getCityId()));
-
-        // Validate owner exists  // SET LATER BY ADMIN
-
-        Restaurant restaurant = new Restaurant();
-        restaurant.setName(createDto.getName());
-        restaurant.setCity(city);
-        //restaurant.setOwner(owner);
-        restaurant.setIban(createDto.getIban());
-        restaurant.setRating(createDto.getRating());
-
-        //restaurant.setDeliveryGuySalary(900.0);  // DEFAULT VALUE; IT IS POSSIBLE TO BE CHANGED BY THE ADMIN?
-        //restaurant.setBonusId(null);           // SET LATER BY ADMIN
-
-        Restaurant savedRestaurant = restaurantRepository.save(restaurant);
-        return convertToDto(savedRestaurant);
-    }
-
     private RestaurantDto convertToDto(Restaurant restaurant) {
         RestaurantDto dto = new RestaurantDto();
         dto.setId(restaurant.getId());
         dto.setName(restaurant.getName());
         dto.setCityId(restaurant.getCity().getId());
         dto.setRating(restaurant.getRating());
-        //dto.setOwnerId(restaurant.getOwner().getId());
-        //dto.setIban(restaurant.getIban());
-        //dto.setDeliveryGuySalary(restaurant.getDeliveryGuySalary());
         return dto;
     }
 }

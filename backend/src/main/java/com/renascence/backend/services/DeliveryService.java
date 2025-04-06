@@ -6,6 +6,7 @@ import com.renascence.backend.dtos.DeliveryFood.DeliveryFoodDto;
 import com.renascence.backend.entities.*;
 import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.repositories.*;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -28,10 +29,11 @@ public class DeliveryService {
     private final RestaurantRepository restaurantRepository;
     private final FoodRepository foodRepository;
 
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
     @Transactional
     public DeliveryDto createDelivery(CreateDeliveryDto createDeliveryDto) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
         Optional<User> userOpt = userRepository.findByEmail(auth.getName());
         Optional<User> deliveryGuyOpt = userRepository.findByEmail(auth.getName());
         Optional<Restaurant> restaurantOpt = restaurantRepository.findById(createDeliveryDto.getRestaurantId());
@@ -94,20 +96,29 @@ public class DeliveryService {
         return null;
     }
 
-    @Transactional
-    public DeliveryDto assignDeliveryGuy(Long id, Long deliveryGuyId) {
-        Optional<Delivery> deliveryOpt = deliveryRepository.findById(id);
-        Optional<User> deliveryGuyOpt = userRepository.findByEmail(auth.getName());
+    public DeliveryDto getCurrentDeliveryForDeliveryGuy() {
 
-        if (deliveryOpt.isPresent() && deliveryGuyOpt.isPresent()) {
-            Delivery delivery = deliveryOpt.get();
-            delivery.setDeliveryGuy(deliveryGuyOpt.get().getDeliveryGuy());
-            delivery.setStatus(DeliveryStatus.OUT_FOR_DELIVERY);
-            deliveryRepository.save(delivery);
-            return mapToDto(delivery);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String email = auth.getName();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        DeliveryGuy deliveryGuy = user.getDeliveryGuy();
+        if (deliveryGuy == null) {
+            throw new IllegalStateException("User is not a delivery guy");
         }
-        return null;
+
+        Optional<Delivery> activeDeliveryOpt = deliveryRepository
+                .findFirstByDeliveryGuyIdAndStatusOrderByCreationDateAsc(
+                        deliveryGuy.getId(), DeliveryStatus.OUT_FOR_DELIVERY
+                );
+
+        return activeDeliveryOpt
+                .map(this::mapToDto)
+                .orElse(null);
     }
+
 
     private DeliveryDto mapToDto(Delivery delivery) {
         DeliveryDto dto = new DeliveryDto();
