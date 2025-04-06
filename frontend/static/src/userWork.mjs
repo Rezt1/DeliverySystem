@@ -38,7 +38,7 @@ export async function logout(e){
 
 
     if (response.status === 401) {
-        sessionStorage.removeItem('accessToken');
+        sessionStorage.clear();
         window.location.reload();
         return;
     
@@ -46,7 +46,7 @@ export async function logout(e){
 
     if (!response.ok) throw new Error('Logout failed');
 
-    sessionStorage.removeItem("accessToken");
-    window.location.reload();
+    sessionStorage.clear();
+    window.location.href = "./home.html";
 
 }

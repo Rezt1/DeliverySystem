@@ -8,6 +8,7 @@
       defer
     ></script>
     <script src="./src/nav.mjs" type="module" defer></script>
+    <script src="./src/homeJs.js" type="module" defer></script>
     <link href="./style.css" rel="stylesheet" />
     <link href="./custom.css" rel="stylesheet" />
 
@@ -51,7 +52,7 @@
         <div class="flex flex-wrap gap-3 items-center">
           <div class="!hidden relative w-35">
             <select
-              id="search-main-dropdown"
+              id="search-main-dropdown-1"
               class="btn-drop-down !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
             >
               <!-- Sashka -->
@@ -59,7 +60,7 @@
               <!-- Sashka -->
               <!-- Sashka -->
               <!-- Options from database  -->
-              <option value="" selected disabled hidden>City</option>
+              <option  value="" selected disabled hidden>City</option>
             </select>
             <div
               class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
@@ -96,14 +97,13 @@
           </button>
 
           <!-- Login/Reg/Account buttons -->
-          <button id="login-button" class="!flex btn-primary">Login</button>
-          <button id="register-button" class="!flex btn-primary">
+          <button id="login-button" class="flex btn-primary">Login</button>
+          <button id="register-button" class="flex btn-primary">
             Register
           </button>
-          <button id="account-button" class="!hidden btn-primary">
+          <button id="account-button" class="hidden btn-primary">
             Account
           </button>
-          <button id="logout-button" class="!hidden btn-primary">Logout</button>
         </div>
       </nav>
 
@@ -139,7 +139,7 @@
       >
         <div class="!hidden relative w-full">
           <select
-            id="search-main-dropdown"
+            id="search-main-dropdown-2"
             class="btn-drop-down text-center !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
           >
             <!-- Sashka -->
@@ -210,12 +210,6 @@
         >
           Account
         </button>
-        <button
-          id="mobile-logout-button"
-          class="!hidden btn-primary w-full text-white text-lg py-2"
-        >
-          Logout
-        </button>
       </div>
     </header>
 
@@ -226,7 +220,8 @@
       >
         <div class="relative w-full">
           <select
-            id="search-main-dropdown"
+          data-custom-info="nottoggled"
+            id="search-main-dropdown-3"
             class="btn-drop-down w-full hover:!border-2 hover:!border-[#ff66c4] hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
           >
             <!-- Sashka -->
@@ -234,7 +229,7 @@
             <!-- Sashka -->
             <!-- Sashka -->
             <!-- Options from database  -->
-            <option value="" selected disabled hidden>City</option>
+            <option id = 'option-city' value="" selected disabled hidden>City</option>
           </select>
           <div
             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"

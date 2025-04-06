@@ -52,7 +52,7 @@
         <div class="flex flex-wrap gap-3 items-center">
           <div class="relative w-35">
             <select
-              id="search-main-dropdown"
+              id="search-main-dropdown-1"
               class="btn-drop-down !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
             >
               <!-- Sashka -->
@@ -102,7 +102,6 @@
             Register
           </button>
           <button id="account-button" class="!flex btn-primary">Account</button>
-          <button id="logout-button" class="!flex btn-primary">Logout</button>
         </div>
       </nav>
 
@@ -140,7 +139,7 @@
         <!-- change to DropDown -->
         <div class="relative w-full">
           <select
-            id="search-main-dropdown"
+            id="search-main-dropdown-2"
             class="btn-drop-down text-center !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
           >
             <!-- Sashka -->
@@ -211,12 +210,6 @@
         >
           Account
         </button>
-        <button
-          id="mobile-account-button"
-          class="!flex btn-primary w-full text-white text-lg py-2"
-        >
-          Logout
-        </button>
       </div>
     </header>
 
@@ -260,6 +253,7 @@
               </button>
 
               <div
+                id="options"
                 class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
                 role="menu"
                 aria-orientation="vertical"
@@ -537,7 +531,7 @@
               class="chef-pick-btn h-[60%] w-[45%] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent flex items-center justify-center rounded-xl shadow-sm hover:shadow-md hover:cursor-pointer transition-all"
               disabled
             >
-              <span class="text-white italic">Loading...</span>
+              <span id = "loading-1" class="text-white italic">Loading...</span>
             </button>
 
             <button
@@ -545,7 +539,7 @@
               class="chef-pick-btn h-[60%] w-[45%] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent flex items-center justify-center rounded-xl shadow-sm hover:shadow-md hover:cursor-pointer transition-all"
               disabled
             >
-              <span class="text-white italic">Loading...</span>
+              <span id = "loading-2" class="text-white italic">Loading...</span>
             </button>
           </section>
 

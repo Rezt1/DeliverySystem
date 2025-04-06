@@ -15,3 +15,30 @@ export function togglePassword(e){
             passBtn.textContent = "Show";
         }
     }
+
+
+export function toggleDropdown(e){
+    
+    let dropdown = document.getElementById("sort-dropdown");
+    let button = document.getElementById("sort-menu");
+
+    dropdown.classList.toggle('hidden');
+
+    let isExpanded = button.getAttribute("aria-expanded") === true;
+    button.setAttribute("aria-expanded", !isExpanded);
+
+}
+
+export function showOptions(e){
+    e.preventDefault();
+    let target = e.target;
+    let parent = target.parentNode;
+    let options = parent.getElementsByTagName("div")[0];
+    console.log(options);
+    if(options.classList.contains("hidden")){
+        options.classList.toggle("hidden", false);
+    }
+    else{
+        options.classList.toggle("hidden", true);
+    }
+}
