@@ -38,10 +38,4 @@ public class FoodController {
         List<FoodDto> foods = foodService.searchFoods(name, category);
         return ResponseEntity.ok(foods);
     }
-
-    @PostMapping
-    public ResponseEntity<FoodDto> createFood(@Valid @RequestBody CreateFoodDto dto) {
-        FoodDto savedFood = foodService.createFood(dto);
-        return ResponseEntity.ok(savedFood);
-    }
 }

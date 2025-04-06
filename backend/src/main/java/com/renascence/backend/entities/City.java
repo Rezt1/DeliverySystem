@@ -19,6 +19,9 @@ public class City {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private double salary;
+
     @OneToMany(mappedBy = "location")
     List<User> users = new ArrayList<>();
 

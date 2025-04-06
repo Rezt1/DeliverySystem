@@ -12,16 +12,10 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/cuisines")
+@RequestMapping("/api/cuisines")
 public class CuisineController {
 
     private final CuisineService cuisineService;
-
-    @PostMapping
-    public ResponseEntity<CuisineDto> createCuisine(@Valid @RequestBody CreateCuisineDto createCuisineDto) {
-        CuisineDto savedCuisine = cuisineService.createCuisine(createCuisineDto);
-        return ResponseEntity.ok(savedCuisine);
-    }
 
     @GetMapping
     public ResponseEntity<List<CuisineDto>> getAllCuisines() {

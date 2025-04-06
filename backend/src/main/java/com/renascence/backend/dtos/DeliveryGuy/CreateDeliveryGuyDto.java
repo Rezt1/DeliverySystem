@@ -14,7 +14,7 @@ public class CreateDeliveryGuyDto {
     @NotBlank(message = "IBAN is required")
     private String iban;
 
-    @NotNull(message = "Restaurant id is required")
+    @NotNull(message = "City id is required")
     @Positive
-    private Long restaurantId;
+    private Long cityId;
 }

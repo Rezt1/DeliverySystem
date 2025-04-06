@@ -44,11 +44,4 @@ public class RestaurantController {
         List<RestaurantDto> results = restaurantService.searchByCuisineName(name);
         return ResponseEntity.ok(results);
     }
-
-    @PostMapping
-    public ResponseEntity<RestaurantDto> createRestaurant(
-            @Valid @RequestBody CreateRestaurantDto createDto) {
-        RestaurantDto savedRestaurant = restaurantService.createRestaurant(createDto);
-        return ResponseEntity.ok(savedRestaurant);
-    }
 }

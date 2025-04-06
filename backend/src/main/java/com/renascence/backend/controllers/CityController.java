@@ -16,12 +16,6 @@ public class CityController {
 
     private final CityService cityService;
 
-    @PostMapping
-    public ResponseEntity<CityDto> createCity(@Valid @RequestBody CreateCityDto createCityDto) {
-        CityDto savedCity = cityService.createCity(createCityDto);
-        return ResponseEntity.ok(savedCity);
-    }
-
     @GetMapping
     public ResponseEntity<List<CityDto>> getAllCities() {
         List<CityDto> cities = cityService.getAllCities();

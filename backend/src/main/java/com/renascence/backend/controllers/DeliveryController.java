@@ -12,13 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/deliveries")
 @RequiredArgsConstructor
+@RequestMapping("/api/deliveries")
 public class DeliveryController {
 
     private final DeliveryService deliveryService;
 
-    @PostMapping
+    @PostMapping("/create-delivery")
     @ResponseStatus(HttpStatus.CREATED)
     public DeliveryDto createDelivery(@RequestBody @Valid CreateDeliveryDto createDeliveryDto) {
         return deliveryService.createDelivery(createDeliveryDto);
@@ -34,9 +34,12 @@ public class DeliveryController {
         return deliveryService.updateDeliveryStatus(id, status);
     }
 
-    @PutMapping("/{id}/assign")
-    public ResponseEntity<DeliveryDto> assignDeliveryGuy(@PathVariable Long id, @RequestParam Long deliveryGuyId) {
-        DeliveryDto updatedDelivery = deliveryService.assignDeliveryGuy(id, deliveryGuyId);
-        return updatedDelivery != null ? ResponseEntity.ok(updatedDelivery) : ResponseEntity.notFound().build();
+    @GetMapping("/my-active-delivery")
+    public ResponseEntity<DeliveryDto> getCurrentDeliveryForDeliveryGuy() {
+        DeliveryDto dto = deliveryService.getCurrentDeliveryForDeliveryGuy();
+        if (dto == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(dto);
     }
 }

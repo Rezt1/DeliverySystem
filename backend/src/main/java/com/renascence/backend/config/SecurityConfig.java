@@ -69,7 +69,9 @@ public class SecurityConfig {
                                 "/error",
                                 "/error/**").permitAll()
                         .requestMatchers("/api/test/adminSecured").hasRole("ADMIN")
-                        .requestMatchers("/api/delivery-guys/*").hasRole("OWNER")
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/delivery-guys/**").hasRole("DELIVERY_GUY")
+                        .requestMatchers("/api/deliveries/**").hasRole("DELIVERY_GUY")
                         .anyRequest().authenticated()
             )
             .formLogin(AbstractHttpConfigurer::disable)
