@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/delivery-guys")
 @RequiredArgsConstructor
@@ -32,5 +34,12 @@ public class DeliveryGuyController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/pending-deliveries")
+    public ResponseEntity<List<DeliveryDto>> getPendingDeliveries(){
+        List<DeliveryDto> deliveries = deliveryGuyService.getPendingDeliveries();
+
+        return ResponseEntity.ok(deliveries);
     }
 }

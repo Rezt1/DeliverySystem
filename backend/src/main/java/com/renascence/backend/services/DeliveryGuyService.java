@@ -11,6 +11,7 @@ import com.renascence.backend.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -93,6 +95,14 @@ public class DeliveryGuyService {
         Delivery delivery = deliveryRepository.findById(deliveryId)
                 .orElseThrow(() -> new EntityNotFoundException("Delivery not found"));
 
+        Delivery correctDeliveryToFinish = deliveryRepository
+                .findFirstByDeliveryGuyIdAndStatusOrderByCreationDateAsc(deliveryGuy.getId(), DeliveryStatus.OUT_FOR_DELIVERY)
+                .orElseThrow(() -> new EntityNotFoundException("All deliveries have been made"));
+
+        if (correctDeliveryToFinish.getId() != deliveryId){
+            throw new IllegalStateException("Already delivered, still not its turn or not taken");
+        }
+
         // Mark as delivered
         delivery.setStatus(DeliveryStatus.DELIVERED);
         delivery.setDeliveredDate(LocalDateTime.now());
@@ -130,6 +140,23 @@ public class DeliveryGuyService {
                 .orElse(null);
     }
 
+    public List<DeliveryDto> getPendingDeliveries() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = userRepository.findByEmail(auth.getName())
+                .orElseThrow(() -> new EntityNotFoundException("User does not exists"));
+
+        DeliveryGuy deliveryGuy = user.getDeliveryGuy();
+
+        if (deliveryGuy == null){
+            throw new IllegalStateException("User is not a delivery guy");
+        }
+
+        List<Delivery> deliveries = deliveryRepository.findByStatus(DeliveryStatus.PENDING);
+
+        return deliveries.stream().map(this::mapToDeliveryDto).collect(Collectors.toList());
+    }
+
     private DeliveryDto mapToDeliveryGuyDto(Delivery delivery) {
         DeliveryDto dto = new DeliveryDto();
         dto.setDeliveryId(delivery.getId());
@@ -158,7 +185,7 @@ public class DeliveryGuyService {
         DeliveryDto dto = new DeliveryDto();
         dto.setDeliveryId(delivery.getId());
         dto.setUserId(delivery.getReceiver().getId());
-        dto.setDeliveryGuyId(delivery.getDeliveryGuy().getId());
+        //dto.setDeliveryGuyId(delivery.getDeliveryGuy().getId());
         dto.setRestaurantId(delivery.getRestaurant().getId());
         dto.setAddress(delivery.getAddress());
         dto.setDate(delivery.getCreationDate());

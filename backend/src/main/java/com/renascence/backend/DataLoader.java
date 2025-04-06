@@ -38,7 +38,6 @@ public class DataLoader implements CommandLineRunner {
             return;
         }
 
-
         // Cities
         City sofia = new City();
         sofia.setName("Sofia");
@@ -723,7 +722,7 @@ public class DataLoader implements CommandLineRunner {
         Delivery delivery = new Delivery();
         delivery.setAddress("100 Vitosha Blvd");
         delivery.setCreationDate(LocalDateTime.now());
-        delivery.setDeliveryGuy(deliveryGuy3);
+        //delivery.setDeliveryGuy(deliveryGuy3);
         delivery.setPaymentMethod(PaymentMethod.CARD);
         delivery.setReceiver(customer1);
         delivery.setRestaurant(vega);
@@ -745,7 +744,7 @@ public class DataLoader implements CommandLineRunner {
         Delivery delivery2 = new Delivery();
         delivery2.setAddress("12 Bulgaria Blvd");
         delivery2.setCreationDate(LocalDateTime.now());
-        delivery2.setDeliveryGuy(deliveryGuy1);
+        //delivery2.setDeliveryGuy(deliveryGuy1);
         delivery2.setPaymentMethod(PaymentMethod.CASH);
         delivery2.setReceiver(customer2);
         delivery2.setRestaurant(italianFantasy);

@@ -25,7 +25,7 @@ public class Delivery {
     private User receiver;
 
     @ManyToOne
-    @JoinColumn(name = "deliveryGuyId", nullable = false)
+    @JoinColumn(name = "deliveryGuyId")
     private DeliveryGuy deliveryGuy;
 
     @ManyToOne
