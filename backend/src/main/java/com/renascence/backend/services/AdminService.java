@@ -39,7 +39,7 @@ public class AdminService {
     public CuisineDto createCuisine(CreateCuisineDto createCuisineDto) {
         Cuisine cuisine =new Cuisine();
         cuisine.setName(createCuisineDto.getName());
-        Cuisine savedCuisine = cuisineRepository.save(cuisine);
+        cuisineRepository.save(cuisine);
         return new CuisineDto(cuisine.getId(), cuisine.getName());
     }
 

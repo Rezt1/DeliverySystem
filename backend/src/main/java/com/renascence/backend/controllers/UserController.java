@@ -32,6 +32,7 @@ public class UserController {
     public ResponseEntity<String> applyToBeDeliveryGuy(@RequestBody @Valid CreateDeliveryGuyDto createDeliveryGuyDto) {
         try {
             userService.applyToBeDeliveryGuy(createDeliveryGuyDto);
+
             return ResponseEntity.ok("You have successfully applied to be a delivery guy.");
         } catch (IllegalStateException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

@@ -5,7 +5,6 @@ import com.renascence.backend.dtos.User.UserDto;
 import com.renascence.backend.entities.City;
 import com.renascence.backend.entities.DeliveryGuy;
 import com.renascence.backend.entities.User;
-import com.renascence.backend.enums.Role;
 import com.renascence.backend.repositories.CityRepository;
 import com.renascence.backend.repositories.DeliveryGuyRepository;
 import com.renascence.backend.repositories.UserRepository;
@@ -16,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 
 @Service
@@ -77,6 +78,7 @@ public class UserService {
         deliveryGuy.setUser(user); // Associate the delivery guy with the user
         deliveryGuy.setWorkCity(applyCity);
         deliveryGuy.setIban(createDeliveryGuyDto.getIban());
+        deliveryGuy.setStartWorkDate(LocalDate.now());
 
         deliveryGuyRepository.save(deliveryGuy);
 
