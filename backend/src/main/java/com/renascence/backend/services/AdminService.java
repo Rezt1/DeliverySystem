@@ -5,12 +5,14 @@ import com.renascence.backend.dtos.City.CreateCityDto;
 import com.renascence.backend.dtos.Cuisine.CreateCuisineDto;
 import com.renascence.backend.dtos.Cuisine.CuisineDto;
 import com.renascence.backend.dtos.DeliveryGuy.CreateDeliveryGuyDto;
+import com.renascence.backend.dtos.DeliveryGuy.DeliveryGuyDto;
 import com.renascence.backend.dtos.Food.CreateFoodDto;
 import com.renascence.backend.dtos.Food.FoodDto;
 import com.renascence.backend.dtos.Restaurant.CreateRestaurantDto;
 import com.renascence.backend.dtos.Restaurant.RestaurantDto;
 import com.renascence.backend.entities.*;
 import com.renascence.backend.repositories.*;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -84,9 +86,23 @@ public class AdminService {
         return deliveryGuyRepository.findAll();
     }
 
-    public DeliveryGuy getDeliveryGuyById(Long id) {
-        return deliveryGuyRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Delivery Guy not found with ID: " + id));
+    public DeliveryGuyDto getDeliveryGuyById(Long id) {
+//        return deliveryGuyRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("Delivery Guy not found with ID: " + id));
+
+        DeliveryGuy deliveryGuy = deliveryGuyRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Delivery guy not found"));
+
+        User user = deliveryGuy.getUser(); // assuming DeliveryGuy is linked to User
+
+        DeliveryGuyDto dto = new DeliveryGuyDto();
+        dto.setUserId(deliveryGuy.getId());
+        dto.setIban(deliveryGuy.getIban());
+        //dto.se(user.getFullName());
+        //dto.setEmail(user.getEmail());
+        //dto.setPhoneNumber(user.getPhoneNumber());
+
+        return dto;
     }
 
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {

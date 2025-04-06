@@ -39,7 +39,7 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUser(UserDto dto) {
+    public UserDto updateUser(UserDto dto) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -54,7 +54,8 @@ public class UserService {
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
         }
 
-        return userRepository.save(user);
+        userRepository.save(user);
+        return mapToUserDto(user);
     }
 
     @Transactional
@@ -90,4 +91,14 @@ public class UserService {
     private UserDto convertToDto(User user) {
         return new UserDto(user.getName(), user.getEmail(), user.getPhoneNumber(), user.getLocation().getId(), user.getPassword());
     }
+
+    private UserDto mapToUserDto(User user) {
+        UserDto dto = new UserDto();
+        dto.setName(user.getName());
+        dto.setEmail(user.getEmail());
+        dto.setPhoneNumber(user.getPhoneNumber());
+        // Add other fields you want to expose
+        return dto;
+    }
+
 }

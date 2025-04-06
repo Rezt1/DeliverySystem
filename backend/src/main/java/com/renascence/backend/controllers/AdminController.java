@@ -24,12 +24,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/admin")
 public class AdminController {
 
-    @Autowired
-    private AdminService adminService;
-
+    private final AdminService adminService;
 
     @PostMapping("/create-city")
     public ResponseEntity<CityDto> createCity(@Valid @RequestBody CreateCityDto createCityDto) {
@@ -74,7 +73,7 @@ public class AdminController {
     }
 
     @GetMapping("/get-delivery-guys/{id}")
-    public ResponseEntity<DeliveryGuy> getDeliveryGuyById(@PathVariable Long id) {
+    public ResponseEntity<DeliveryGuyDto> getDeliveryGuyById(@PathVariable Long id) {
         return ResponseEntity.ok(adminService.getDeliveryGuyById(id));
     }
 }

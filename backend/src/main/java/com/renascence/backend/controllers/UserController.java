@@ -17,8 +17,9 @@ public class UserController {
     private final UserService userService;
 
     @PutMapping("/update-account")
-    public ResponseEntity<User> updateAccount(@RequestBody UserDto dto) {
-        User updatedUser = userService.updateUser(dto);
+    public ResponseEntity<UserDto> updateAccount(@RequestBody UserDto dto) {
+        UserDto updatedUser = userService.updateUser(dto);
+        //UserDto responseDto = mapToUserDto(updatedUser);
         return ResponseEntity.ok(updatedUser);
     }
 
