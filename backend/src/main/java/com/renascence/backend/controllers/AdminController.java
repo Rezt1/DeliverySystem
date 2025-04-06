@@ -30,15 +30,6 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @PostMapping("/create-delivery-guy")
-    public ResponseEntity<DeliveryGuyDto> createDeliveryGuy(@RequestBody @Valid CreateDeliveryGuyDto createDeliveryGuyDto) {
-        DeliveryGuy deliveryGuy = adminService.createDeliveryGuy(createDeliveryGuyDto);
-
-        // Map Entity to DTO
-        DeliveryGuyDto deliveryGuyDto = new DeliveryGuyDto();
-        deliveryGuyDto.setUserId(deliveryGuy.getUser().getId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(deliveryGuyDto);
-    }
 
     @PostMapping("/create-city")
     public ResponseEntity<CityDto> createCity(@Valid @RequestBody CreateCityDto createCityDto) {

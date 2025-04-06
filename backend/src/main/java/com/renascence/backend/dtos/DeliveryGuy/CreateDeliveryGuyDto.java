@@ -7,10 +7,6 @@ import lombok.Data;
 @Data
 public class CreateDeliveryGuyDto {
 
-    @NotNull(message = "Delivery guy id is required")
-    @Positive
-    private Long userId;
-
     @NotBlank(message = "IBAN is required")
     private String iban;
 

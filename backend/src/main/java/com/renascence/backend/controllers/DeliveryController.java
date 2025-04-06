@@ -29,17 +29,4 @@ public class DeliveryController {
         return deliveryService.getDeliveryById(id);
     }
 
-    @PutMapping("/{id}/status")
-    public DeliveryDto updateDeliveryStatus(@PathVariable Long id, @RequestParam DeliveryStatus status) {
-        return deliveryService.updateDeliveryStatus(id, status);
-    }
-
-    @GetMapping("/my-active-delivery")
-    public ResponseEntity<DeliveryDto> getCurrentDeliveryForDeliveryGuy() {
-        DeliveryDto dto = deliveryService.getCurrentDeliveryForDeliveryGuy();
-        if (dto == null) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(dto);
-    }
 }

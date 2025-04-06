@@ -23,7 +23,6 @@ import java.util.List;
 public class AdminService {
 
     private final DeliveryGuyRepository deliveryGuyRepository;
-    private final UserRepository userRepository;
     private final RestaurantRepository restaurantRepository;
     private final CityRepository cityRepository;
     private final CuisineRepository cuisineRepository;
@@ -79,34 +78,6 @@ public class AdminService {
         Restaurant savedRestaurant = restaurantRepository.save(restaurant);
         return convertToRestaurantDto(savedRestaurant);
     }
-
-    public DeliveryGuy createDeliveryGuy(CreateDeliveryGuyDto createDeliveryGuyDto) {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        // Validate and fetch User
-        User user = userRepository.findByEmail(auth.getName())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        // Validate and fetch City
-        City city = cityRepository.findById(createDeliveryGuyDto.getCityId())
-                .orElseThrow(() -> new RuntimeException("City not found"));
-
-        // Map DTO to Entity
-        DeliveryGuy deliveryGuy = new DeliveryGuy();
-        deliveryGuy.setUser(user);
-
-        if (createDeliveryGuyDto.getIban() == null) {
-            throw new IllegalArgumentException("IBAN is required for delivery guys!");
-        }
-
-        deliveryGuy.setIban(createDeliveryGuyDto.getIban());
-        deliveryGuy.setWorkCity(city);
-
-        // Save and return the entity
-        return deliveryGuyRepository.save(deliveryGuy);
-    }
-
 
 
     public List<DeliveryGuy> getAllDeliveryGuys() {

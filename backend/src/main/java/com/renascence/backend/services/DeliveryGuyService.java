@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -106,8 +107,54 @@ public class DeliveryGuyService {
         return mapToDeliveryGuyDto(delivery);
     }
 
+    public DeliveryDto getCurrentDeliveryForDeliveryGuy() {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String email = auth.getName();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        DeliveryGuy deliveryGuy = user.getDeliveryGuy();
+        if (deliveryGuy == null) {
+            throw new IllegalStateException("User is not a delivery guy");
+        }
+
+        Optional<Delivery> activeDeliveryOpt = deliveryRepository
+                .findFirstByDeliveryGuyIdAndStatusOrderByCreationDateAsc(
+                        deliveryGuy.getId(), DeliveryStatus.OUT_FOR_DELIVERY
+                );
+
+        return activeDeliveryOpt
+                .map(this::mapToDeliveryDto)
+                .orElse(null);
+    }
 
     private DeliveryDto mapToDeliveryGuyDto(Delivery delivery) {
+        DeliveryDto dto = new DeliveryDto();
+        dto.setDeliveryId(delivery.getId());
+        dto.setUserId(delivery.getReceiver().getId());
+        dto.setDeliveryGuyId(delivery.getDeliveryGuy().getId());
+        dto.setRestaurantId(delivery.getRestaurant().getId());
+        dto.setAddress(delivery.getAddress());
+        dto.setDate(delivery.getCreationDate());
+        dto.setStatus(delivery.getStatus());
+        dto.setPaymentMethod(delivery.getPaymentMethod());
+
+        // Map the related DeliveryFood entities to DeliveryFoodDto
+        List<DeliveryFoodDto> foodDtos = new ArrayList<>();
+        for (DeliveryFood deliveryFood : delivery.getDeliveriesFoods()) {
+            DeliveryFoodDto foodDto = new DeliveryFoodDto();
+            foodDto.setDeliveryFoodId(deliveryFood.getFood().getId());
+            foodDto.setQuantity(deliveryFood.getFoodCount());
+            foodDtos.add(foodDto);
+        }
+        dto.setFoods(foodDtos);
+
+        return dto;
+    }
+
+    private DeliveryDto mapToDeliveryDto(Delivery delivery) {
         DeliveryDto dto = new DeliveryDto();
         dto.setDeliveryId(delivery.getId());
         dto.setUserId(delivery.getReceiver().getId());

@@ -84,42 +84,6 @@ public class DeliveryService {
         return deliveryOpt.map(this::mapToDto).orElse(null);
     }
 
-    @Transactional
-    public DeliveryDto updateDeliveryStatus(Long id, DeliveryStatus status) {
-        Optional<Delivery> deliveryOpt = deliveryRepository.findById(id);
-        if (deliveryOpt.isPresent()) {
-            Delivery delivery = deliveryOpt.get();
-            delivery.setStatus(status);
-            deliveryRepository.save(delivery);
-            return mapToDto(delivery);
-        }
-        return null;
-    }
-
-    public DeliveryDto getCurrentDeliveryForDeliveryGuy() {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        String email = auth.getName();
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
-
-        DeliveryGuy deliveryGuy = user.getDeliveryGuy();
-        if (deliveryGuy == null) {
-            throw new IllegalStateException("User is not a delivery guy");
-        }
-
-        Optional<Delivery> activeDeliveryOpt = deliveryRepository
-                .findFirstByDeliveryGuyIdAndStatusOrderByCreationDateAsc(
-                        deliveryGuy.getId(), DeliveryStatus.OUT_FOR_DELIVERY
-                );
-
-        return activeDeliveryOpt
-                .map(this::mapToDto)
-                .orElse(null);
-    }
-
-
     private DeliveryDto mapToDto(Delivery delivery) {
         DeliveryDto dto = new DeliveryDto();
         dto.setDeliveryId(delivery.getId());

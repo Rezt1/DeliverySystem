@@ -1,8 +1,10 @@
 package com.renascence.backend.controllers;
 
+import com.renascence.backend.dtos.DeliveryGuy.CreateDeliveryGuyDto;
 import com.renascence.backend.dtos.User.UserDto;
 import com.renascence.backend.entities.User;
 import com.renascence.backend.services.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +29,9 @@ public class UserController {
     }
 
     @PostMapping("/apply-delivery-guy")
-    public ResponseEntity<String> applyToBeDeliveryGuy() {
+    public ResponseEntity<String> applyToBeDeliveryGuy(@RequestBody @Valid CreateDeliveryGuyDto createDeliveryGuyDto) {
         try {
-            userService.applyToBeDeliveryGuy();
+            userService.applyToBeDeliveryGuy(createDeliveryGuyDto);
             return ResponseEntity.ok("You have successfully applied to be a delivery guy.");
         } catch (IllegalStateException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

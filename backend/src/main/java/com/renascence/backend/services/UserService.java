@@ -1,9 +1,12 @@
 package com.renascence.backend.services;
 
+import com.renascence.backend.dtos.DeliveryGuy.CreateDeliveryGuyDto;
 import com.renascence.backend.dtos.User.UserDto;
+import com.renascence.backend.entities.City;
 import com.renascence.backend.entities.DeliveryGuy;
 import com.renascence.backend.entities.User;
 import com.renascence.backend.enums.Role;
+import com.renascence.backend.repositories.CityRepository;
 import com.renascence.backend.repositories.DeliveryGuyRepository;
 import com.renascence.backend.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -21,6 +24,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final DeliveryGuyRepository deliveryGuyRepository;
+    private final CityRepository cityRepository;
     private final PasswordEncoder passwordEncoder;
 
     public UserDto getUserInformation() {
@@ -53,7 +57,7 @@ public class UserService {
     }
 
     @Transactional
-    public void applyToBeDeliveryGuy() {
+    public void applyToBeDeliveryGuy(CreateDeliveryGuyDto createDeliveryGuyDto) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -65,15 +69,20 @@ public class UserService {
             throw new IllegalStateException("You are already a delivery guy");
         }
 
+        City applyCity = cityRepository.findById(createDeliveryGuyDto.getCityId())
+                .orElseThrow(() -> new EntityNotFoundException("City not found"));
+
         // Create a new delivery guy record and associate it with the user
         DeliveryGuy deliveryGuy = new DeliveryGuy();
         deliveryGuy.setUser(user); // Associate the delivery guy with the user
+        deliveryGuy.setWorkCity(applyCity);
+        deliveryGuy.setIban(createDeliveryGuyDto.getIban());
 
         deliveryGuyRepository.save(deliveryGuy);
 
-        user.setDeliveryGuy(deliveryGuy);
-
-        userRepository.save(user);
+//        user.setDeliveryGuy(deliveryGuy); MAYBE NOT NEEDED, TESTING REQUIRED
+//
+//        userRepository.save(user);
     }
 
     private UserDto convertToDto(User user) {

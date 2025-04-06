@@ -4,10 +4,7 @@ import com.renascence.backend.dtos.Delivery.DeliveryDto;
 import com.renascence.backend.services.DeliveryGuyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/delivery-guys")
@@ -26,5 +23,14 @@ public class DeliveryGuyController {
     public ResponseEntity<DeliveryDto> markAsDelivered(@PathVariable Long id) {
         DeliveryDto delivery = deliveryGuyService.markAsDelivered(id);
         return ResponseEntity.ok(delivery);
+    }
+
+    @GetMapping("/my-active-delivery")
+    public ResponseEntity<DeliveryDto> getCurrentDeliveryForDeliveryGuy() {
+        DeliveryDto dto = deliveryGuyService.getCurrentDeliveryForDeliveryGuy();
+        if (dto == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(dto);
     }
 }
