@@ -1,6 +1,7 @@
 package com.renascence.backend;
 
 import com.renascence.backend.entities.*;
+import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.enums.FoodCategory;
 import com.renascence.backend.enums.PaymentMethod;
 import com.renascence.backend.repositories.*;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -671,24 +673,26 @@ public class DataLoader implements CommandLineRunner {
 
 
         // Delivery
-//        Delivery delivery = new Delivery();
-//        delivery.setAddress("100 Vitosha Blvd");
-//        delivery.setRestaurant(vega);
-//        delivery.setReceiver(customer1);
-//        delivery.setPaymentMethod(PaymentMethod.CARD);
-//        delivery.setDeliveryGuy(deliveryGuy1);
-//
-//        DeliveryFood deliveryFood = new DeliveryFood();
-//        deliveryFood.setFood(pizza);
-//        deliveryFood.setFoodCount(2);
-//        deliveryFood.setDelivery(delivery);
-//
-//        List<DeliveryFood> deliveryFoods = new ArrayList<>();
-//        deliveryFoods.add(deliveryFood);
-//        delivery.setDeliveriesFoods(deliveryFoods);
-//
-//        deliveryRepository.save(delivery);
-//        deliveryFoodRepository.saveAll(deliveryFoods);
+        Delivery delivery = new Delivery();
+        delivery.setAddress("100 Vitosha Blvd");
+        delivery.setCreationDate(LocalDateTime.now());
+        delivery.setDeliveryGuy(deliveryGuy1);
+        delivery.setPaymentMethod(PaymentMethod.CARD);
+        delivery.setReceiver(customer1);
+        delivery.setRestaurant(vega);
+        delivery.setStatus(DeliveryStatus.PENDING);
+
+        DeliveryFood deliveryFood = new DeliveryFood();
+        deliveryFood.setFood(pizza);
+        deliveryFood.setFoodCount(2);
+        deliveryFood.setDelivery(delivery);
+
+        List<DeliveryFood> deliveryFoods = new ArrayList<>();
+        deliveryFoods.add(deliveryFood);
+        delivery.setDeliveriesFoods(deliveryFoods);
+
+        deliveryRepository.save(delivery);
+        deliveryFoodRepository.saveAll(deliveryFoods);
 
 
 
