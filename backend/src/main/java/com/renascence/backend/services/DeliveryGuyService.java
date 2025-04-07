@@ -30,23 +30,6 @@ public class DeliveryGuyService {
     private final DeliveryRepository deliveryRepository;
     private final UserRepository userRepository;
 
-//    @Transactional
-//    public DeliveryDto acceptOrder(Long id, Long deliveryGuyId) {
-
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        Optional<Delivery> deliveryOpt = deliveryRepository.findById(id);
-//        Optional<User> deliveryGuyOpt = userRepository.findByEmail(auth.getName());
-//
-//        if (deliveryOpt.isPresent() && deliveryGuyOpt.isPresent()) {
-//            Delivery delivery = deliveryOpt.get();
-//            delivery.setDeliveryGuy(deliveryGuyOpt.get().getDeliveryGuy());
-//            delivery.setStatus(DeliveryStatus.OUT_FOR_DELIVERY);
-//            deliveryRepository.save(delivery);
-//            return mapToDeliveryGuyDto(delivery);
-//        }
-//        return null;
-//    }
-
     @Transactional
     public DeliveryDto assignDelivery(Long deliveryId) {
 

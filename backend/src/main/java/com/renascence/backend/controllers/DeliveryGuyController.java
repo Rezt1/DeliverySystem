@@ -24,6 +24,7 @@ public class DeliveryGuyController {
     @PutMapping("/deliveries/{id}/delivered")
     public ResponseEntity<DeliveryDto> markAsDelivered(@PathVariable Long id) {
         DeliveryDto delivery = deliveryGuyService.markAsDelivered(id);
+
         return ResponseEntity.ok(delivery);
     }
 
