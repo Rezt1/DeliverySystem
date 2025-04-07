@@ -48,10 +48,10 @@ public class AdminService {
     public FoodDto createFood(CreateFoodDto dto) {
         // Validate Cuisine and Restaurant exist
         Cuisine cuisine = cuisineRepository.findById(dto.getCuisineId())
-                .orElseThrow(() -> new IllegalArgumentException("Cuisine not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Cuisine not found"));
 
         Restaurant restaurant = restaurantRepository.findById(dto.getRestaurantId())
-                .orElseThrow(() -> new IllegalArgumentException("Restaurant not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Restaurant not found"));
 
         // Convert DTO to Entity
         Food food = new Food();
@@ -69,7 +69,7 @@ public class AdminService {
     public RestaurantDto createRestaurant(CreateRestaurantDto createDto) {
         // Validate city exists
         City city = cityRepository.findById(createDto.getCityId())
-                .orElseThrow(() -> new IllegalArgumentException("City not found with ID: " + createDto.getCityId()));
+                .orElseThrow(() -> new EntityNotFoundException("City not found with ID: " + createDto.getCityId()));
 
         Restaurant restaurant = new Restaurant();
         restaurant.setName(createDto.getName());

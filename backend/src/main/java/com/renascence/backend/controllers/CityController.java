@@ -29,9 +29,4 @@ public class CityController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteCity(@PathVariable Long id) {
-//        cityService.deleteCity(id);
-//        return ResponseEntity.noContent().build();
-//    }
 }

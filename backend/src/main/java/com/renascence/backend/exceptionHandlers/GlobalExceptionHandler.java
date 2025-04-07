@@ -1,5 +1,6 @@
 package com.renascence.backend.exceptionHandlers;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -40,6 +41,20 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.badRequest().body(ver);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleEntityNotFound(EntityNotFoundException ex){
+        return ResponseEntity
+                .badRequest()
+                .body(new ErrorResponse(ex.getMessage(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalState(IllegalStateException ex){
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(new ErrorResponse(ex.getMessage(), LocalDateTime.now()));
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)

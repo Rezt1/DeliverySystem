@@ -35,24 +35,20 @@ public class DeliveryService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         Optional<User> userOpt = userRepository.findByEmail(auth.getName());
-        Optional<User> deliveryGuyOpt = userRepository.findByEmail(auth.getName());
         Optional<Restaurant> restaurantOpt = restaurantRepository.findById(createDeliveryDto.getRestaurantId());
 
         if (userOpt.isEmpty()) {
-            throw new IllegalArgumentException("User not found");
+            throw new EntityNotFoundException("User not found");
         }
-        if (deliveryGuyOpt.isEmpty()) {
-            throw new IllegalArgumentException("Delivery guy not found");
-        }
+
         if (restaurantOpt.isEmpty()) {
-            throw new IllegalArgumentException("Restaurant not found");
+            throw new EntityNotFoundException("Restaurant not found");
         }
 
         Delivery delivery = new Delivery();
 
         delivery.setAddress(createDeliveryDto.getAddress());
         delivery.setCreationDate(LocalDateTime.now());
-        delivery.setDeliveryGuy(deliveryGuyOpt.get().getDeliveryGuy());
         delivery.setPaymentMethod(createDeliveryDto.getPaymentMethod());
         delivery.setReceiver(userOpt.get());
         delivery.setRestaurant(restaurantOpt.get());
@@ -61,7 +57,7 @@ public class DeliveryService {
         List<DeliveryFood> deliveryFoods = createDeliveryDto.getFoods().stream()
                 .map(deliveryFoodDto -> {
                     Food food = foodRepository.findById(deliveryFoodDto.getFoodId())
-                            .orElseThrow(() -> new IllegalArgumentException("Food not found: " + deliveryFoodDto.getFoodId()));
+                            .orElseThrow(() -> new EntityNotFoundException("Food not found: " + deliveryFoodDto.getFoodId()));
 
                     DeliveryFood deliveryFood = new DeliveryFood();
                     deliveryFood.setDelivery(delivery);
@@ -80,8 +76,8 @@ public class DeliveryService {
     }
 
     public DeliveryDto getDeliveryById(Long id) {
-        Optional<Delivery> deliveryOpt = deliveryRepository.findById(id);
-        return deliveryOpt.map(this::mapToDto).orElse(null);
+        Delivery delivery = deliveryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Delivery not found"));
+        return mapToDto(delivery);
     }
 
     private DeliveryDto mapToDto(Delivery delivery) {

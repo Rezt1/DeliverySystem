@@ -722,7 +722,6 @@ public class DataLoader implements CommandLineRunner {
         Delivery delivery = new Delivery();
         delivery.setAddress("100 Vitosha Blvd");
         delivery.setCreationDate(LocalDateTime.now());
-        //delivery.setDeliveryGuy(deliveryGuy3);
         delivery.setPaymentMethod(PaymentMethod.CARD);
         delivery.setReceiver(customer1);
         delivery.setRestaurant(vega);
@@ -744,7 +743,6 @@ public class DataLoader implements CommandLineRunner {
         Delivery delivery2 = new Delivery();
         delivery2.setAddress("12 Bulgaria Blvd");
         delivery2.setCreationDate(LocalDateTime.now());
-        //delivery2.setDeliveryGuy(deliveryGuy1);
         delivery2.setPaymentMethod(PaymentMethod.CASH);
         delivery2.setReceiver(customer2);
         delivery2.setRestaurant(italianFantasy);
@@ -761,6 +759,26 @@ public class DataLoader implements CommandLineRunner {
 
         deliveryRepository.save(delivery2);
         deliveryFoodRepository.saveAll(deliveryFoods2);
+
+        Delivery delivery3 = new Delivery();
+        delivery3.setAddress("12 Bulgaria hehe");
+        delivery3.setCreationDate(LocalDateTime.now());
+        delivery3.setPaymentMethod(PaymentMethod.CASH);
+        delivery3.setReceiver(customer2);
+        delivery3.setRestaurant(kebabHouse);
+        delivery3.setStatus(DeliveryStatus.PENDING);
+
+        DeliveryFood deliveryFood3 = new DeliveryFood();
+        deliveryFood3.setFood(shishKebab);
+        deliveryFood3.setFoodCount(4);
+        deliveryFood3.setDelivery(delivery3);
+
+        List<DeliveryFood> deliveryFoods3 = new ArrayList<>();
+        deliveryFoods3.add(deliveryFood3);
+        delivery2.setDeliveriesFoods(deliveryFoods3);
+
+        deliveryRepository.save(delivery3);
+        deliveryFoodRepository.saveAll(deliveryFoods3);
 
         System.out.println("Sample data loaded successfully!");
     }

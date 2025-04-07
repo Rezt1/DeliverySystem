@@ -14,5 +14,5 @@ public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
 
     Optional<Delivery> findFirstByDeliveryGuyIdAndStatusOrderByCreationDateAsc(Long id, DeliveryStatus status);
 
-    List<Delivery> findByStatus(DeliveryStatus status);
+    List<Delivery> findByStatusAndRestaurant_City_Id(DeliveryStatus status, long id);
 }
