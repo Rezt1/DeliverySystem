@@ -49,6 +49,13 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponse(ex.getMessage(), LocalDateTime.now()));
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException ex){
+        return ResponseEntity
+                .badRequest()
+                .body(new ErrorResponse(ex.getMessage(), LocalDateTime.now()));
+    }
+
     @ExceptionHandler(IllegalStateException.class)
     public ResponseEntity<ErrorResponse> handleIllegalState(IllegalStateException ex){
         return ResponseEntity

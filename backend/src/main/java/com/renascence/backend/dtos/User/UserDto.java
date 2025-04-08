@@ -11,16 +11,9 @@ import lombok.*;
 @Setter
 public class UserDto {
 
-    @NotBlank(message = "Email is required")
     private String email;
-
-    @NotBlank(message = "Name is required")
     private String name;
-
-    @NotBlank(message = "Phone number is required")
     private String phoneNumber;
+    private String cityName;
 
-    private Long locationId;
-
-    private String password; // If the user want to change it
 }

@@ -1,6 +1,7 @@
 package com.renascence.backend.controllers;
 
 import com.renascence.backend.dtos.DeliveryGuy.CreateDeliveryGuyDto;
+import com.renascence.backend.dtos.User.UpdateUserDto;
 import com.renascence.backend.dtos.User.UserDto;
 import com.renascence.backend.entities.User;
 import com.renascence.backend.services.UserService;
@@ -17,9 +18,9 @@ public class UserController {
     private final UserService userService;
 
     @PutMapping("/update-account")
-    public ResponseEntity<UserDto> updateAccount(@RequestBody UserDto dto) {
+    public ResponseEntity<UserDto> updateAccount(@RequestBody @Valid UpdateUserDto dto) {
         UserDto updatedUser = userService.updateUser(dto);
-        //UserDto responseDto = mapToUserDto(updatedUser);
+
         return ResponseEntity.ok(updatedUser);
     }
 
@@ -31,12 +32,8 @@ public class UserController {
 
     @PostMapping("/apply-delivery-guy")
     public ResponseEntity<String> applyToBeDeliveryGuy(@RequestBody @Valid CreateDeliveryGuyDto createDeliveryGuyDto) {
-        try {
-            userService.applyToBeDeliveryGuy(createDeliveryGuyDto);
+        userService.applyToBeDeliveryGuy(createDeliveryGuyDto);
 
-            return ResponseEntity.ok("You have successfully applied to be a delivery guy.");
-        } catch (IllegalStateException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok("You have successfully applied to be a delivery guy.");
     }
 }
