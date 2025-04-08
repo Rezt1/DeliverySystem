@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -26,13 +24,14 @@ public class GlobalExceptionHandler {
 
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
 
-        Map<String, String> errors = fieldErrors.stream()
-                .collect(Collectors.toMap(
-                        FieldError::getField,
-                        fieldError -> fieldError.getDefaultMessage() != null ?
-                                fieldError.getDefaultMessage() :
-                                "Validation failed"
-                ));
+        Map<String, List<String>> errors = new HashMap<>();
+
+        for (FieldError error : fieldErrors) {
+            String field = error.getField();
+            String message = error.getDefaultMessage() != null ? error.getDefaultMessage() : "Validation failed";
+
+            errors.computeIfAbsent(field, key -> new ArrayList<>()).add(message);
+        }
 
         ValidationErrorResponse ver = new ValidationErrorResponse(
                 "Validation failed",

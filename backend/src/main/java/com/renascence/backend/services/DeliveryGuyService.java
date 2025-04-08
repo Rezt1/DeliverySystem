@@ -148,11 +148,12 @@ public class DeliveryGuyService {
     private DeliveryDto mapToDeliveryDto(Delivery delivery) {
         DeliveryDto dto = new DeliveryDto();
         dto.setDeliveryId(delivery.getId());
-        dto.setUserId(delivery.getReceiver().getId());
-        //dto.setDeliveryGuyId(delivery.getDeliveryGuy().getId());
-        dto.setRestaurantId(delivery.getRestaurant().getId());
+        dto.setUsername(delivery.getReceiver().getName());
+        dto.setUserPhoneNumber(delivery.getReceiver().getPhoneNumber());
+        dto.setDeliveryGuyName(delivery.getDeliveryGuy() != null ? delivery.getDeliveryGuy().getUser().getName() : "No delivery guy yet");
+        dto.setRestaurantName(delivery.getRestaurant().getName());
         dto.setAddress(delivery.getAddress());
-        dto.setDate(delivery.getCreationDate());
+        dto.setCreationDate(delivery.getCreationDate());
         dto.setStatus(delivery.getStatus());
         dto.setPaymentMethod(delivery.getPaymentMethod());
 
@@ -160,10 +161,14 @@ public class DeliveryGuyService {
         List<DeliveryFoodDto> foodDtos = new ArrayList<>();
         for (DeliveryFood deliveryFood : delivery.getDeliveriesFoods()) {
             DeliveryFoodDto foodDto = new DeliveryFoodDto();
+
             foodDto.setDeliveryFoodId(deliveryFood.getFood().getId());
+            foodDto.setFoodName(deliveryFood.getFood().getName());
             foodDto.setQuantity(deliveryFood.getFoodCount());
+
             foodDtos.add(foodDto);
         }
+
         dto.setFoods(foodDtos);
 
         return dto;

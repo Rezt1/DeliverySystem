@@ -16,12 +16,14 @@ import java.util.List;
 public class DeliveryDto {
 
     private Long deliveryId;
-    private Long userId;
+    private String username;
     private String address;
-    private LocalDateTime date;
+    private String userPhoneNumber;
+    private LocalDateTime creationDate;
     private DeliveryStatus status;
     private PaymentMethod paymentMethod;
-    private Long deliveryGuyId;
-    private Long restaurantId;
+    private String deliveryGuyName;
+    private String restaurantName;
     private List<DeliveryFoodDto> foods;
+
 }

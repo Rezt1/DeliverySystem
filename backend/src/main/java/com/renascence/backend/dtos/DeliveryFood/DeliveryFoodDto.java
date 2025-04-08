@@ -9,5 +9,7 @@ import lombok.*;
 public class DeliveryFoodDto {
 
     private Long deliveryFoodId;
+    private String foodName;
     private Integer quantity;
+
 }

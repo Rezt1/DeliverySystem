@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class CreateDeliveryFoodDto {
 
-    @NotNull(message = "Food id is required")
+    @NotNull(message = "Food is required")
     private Long foodId;
 
     @NotNull(message = "Food quantity is required")

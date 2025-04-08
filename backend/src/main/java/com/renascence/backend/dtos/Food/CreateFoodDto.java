@@ -21,11 +21,11 @@ public class CreateFoodDto {
     @Size(max = 255, message = "Description must be less than 255 characters")
     private String description;
 
-    @NotNull(message = "Cuisine ID is required")
+    @NotNull(message = "Cuisine is required")
     @Positive
     private Long cuisineId;
 
-    @NotNull(message = "Restaurant ID is required")
+    @NotNull(message = "Restaurant is required")
     @Positive
     private Long restaurantId;
 }

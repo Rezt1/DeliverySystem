@@ -62,13 +62,15 @@ public class FoodService {
 
     private FoodDto convertToDto(Food food) {
         FoodDto dto = new FoodDto();
+
         dto.setId(food.getId());
         dto.setName(food.getName());
         dto.setPrice(food.getPrice());
         dto.setDescription(food.getDescription());
         dto.setFoodCategory(food.getFoodCategory());
-        dto.setCuisineId(food.getCuisine().getId());
-        dto.setRestaurantId(food.getRestaurant().getId());
+        dto.setCuisineName(food.getCuisine().getName());
+        dto.setRestaurantName(food.getRestaurant().getName());
+
         return dto;
     }
 }

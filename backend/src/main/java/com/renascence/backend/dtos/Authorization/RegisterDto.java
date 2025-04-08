@@ -9,7 +9,8 @@ import org.hibernate.validator.constraints.Length;
 @PasswordMatcher
 public class RegisterDto {
 
-    @Length(min = 2, max = 255, message = "Name must be between 2 and 255 characters!")
+    @NotBlank(message = "Name is required!")
+    @Size(min = 2, max = 255, message = "Name must be between 2 and 255 characters!")
     private String name;
 
     @NotBlank(message = "Email must contain letters!")
@@ -22,7 +23,8 @@ public class RegisterDto {
 
     private String repeatPassword;
 
-    @Length(min = 7, max = 255, message = "Phone number should be at least 7 digits long!")
+    @NotBlank(message = "Phone is required")
+    @Size(min = 7, max = 255, message = "Phone number should be at least 7 digits long!")
     private String phoneNumber;
 
     private Long locationId;

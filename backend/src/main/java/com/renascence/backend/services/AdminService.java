@@ -81,35 +81,26 @@ public class AdminService {
         return convertToRestaurantDto(savedRestaurant);
     }
 
-
-    public List<DeliveryGuy> getAllDeliveryGuys() {
-        return deliveryGuyRepository.findAll();
+    public List<DeliveryGuyDto> getAllDeliveryGuys() {
+        return deliveryGuyRepository
+                .findAll()
+                .stream()
+                .map(this::convertToDeliveryGuyDto)
+                .toList();
     }
 
     public DeliveryGuyDto getDeliveryGuyById(Long id) {
-//        return deliveryGuyRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Delivery Guy not found with ID: " + id));
-
         DeliveryGuy deliveryGuy = deliveryGuyRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Delivery guy not found"));
 
-        User user = deliveryGuy.getUser(); // assuming DeliveryGuy is linked to User
-
-        DeliveryGuyDto dto = new DeliveryGuyDto();
-        dto.setUserId(deliveryGuy.getId());
-        dto.setIban(deliveryGuy.getIban());
-        //dto.se(user.getFullName());
-        //dto.setEmail(user.getEmail());
-        //dto.setPhoneNumber(user.getPhoneNumber());
-
-        return dto;
+        return convertToDeliveryGuyDto(deliveryGuy);
     }
 
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {
         RestaurantDto dto = new RestaurantDto();
         dto.setId(restaurant.getId());
         dto.setName(restaurant.getName());
-        dto.setCityId(restaurant.getCity().getId());
+        dto.setCityName(restaurant.getCity().getName());
         dto.setRating(restaurant.getRating());
         return dto;
     }
@@ -121,8 +112,19 @@ public class AdminService {
         dto.setPrice(food.getPrice());
         dto.setDescription(food.getDescription());
         dto.setFoodCategory(food.getFoodCategory());
-        dto.setCuisineId(food.getCuisine().getId());
-        dto.setRestaurantId(food.getRestaurant().getId());
+        dto.setCuisineName(food.getCuisine().getName());
+        dto.setRestaurantName(food.getRestaurant().getName());
+        return dto;
+    }
+
+    private DeliveryGuyDto convertToDeliveryGuyDto(DeliveryGuy deliveryGuy){
+        DeliveryGuyDto dto = new DeliveryGuyDto();
+        dto.setUserId(deliveryGuy.getId());
+        dto.setDeliveryGuyName(deliveryGuy.getUser().getName());
+        dto.setDeliveryGuyPhoneNumber(deliveryGuy.getUser().getPhoneNumber());
+        dto.setWorkCity(deliveryGuy.getWorkCity().getName());
+        dto.setIban(deliveryGuy.getIban());
+
         return dto;
     }
 }

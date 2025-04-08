@@ -4,6 +4,7 @@ import com.renascence.backend.dtos.Cuisine.CreateCuisineDto;
 import com.renascence.backend.dtos.Cuisine.CuisineDto;
 import com.renascence.backend.entities.Cuisine;
 import com.renascence.backend.repositories.CuisineRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +24,11 @@ public class CuisineService {
                 .toList();
     }
 
-    public Optional<CuisineDto> getCuisineById(Long id) {
-        return cuisineRepository.findById(id)
-                .map(this::convertToDto);
+    public CuisineDto getCuisineById(Long id) {
+        Cuisine cuisine = cuisineRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cuisine not found"));
+
+        return convertToDto(cuisine);
     }
 
     public Optional<CuisineDto> getCuisineByName(String name) {

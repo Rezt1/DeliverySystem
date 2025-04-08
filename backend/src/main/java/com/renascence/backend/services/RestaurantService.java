@@ -75,7 +75,7 @@ public class RestaurantService {
         RestaurantDto dto = new RestaurantDto();
         dto.setId(restaurant.getId());
         dto.setName(restaurant.getName());
-        dto.setCityId(restaurant.getCity().getId());
+        dto.setCityName(restaurant.getCity().getName());
         dto.setRating(restaurant.getRating());
         return dto;
     }

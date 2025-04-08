@@ -57,19 +57,9 @@ public class AdminController {
 
     @GetMapping("/get-all-delivery-guys")
     public ResponseEntity<List<DeliveryGuyDto>> getAllDeliveryGuys() {
-        List<DeliveryGuy> deliveryGuys = adminService.getAllDeliveryGuys();
+        List<DeliveryGuyDto> deliveryGuys = adminService.getAllDeliveryGuys();
 
-        // Map entities to DTOs
-        List<DeliveryGuyDto> deliveryGuyDtos = deliveryGuys.stream()
-                .map(deliveryGuy -> {
-                    DeliveryGuyDto dto = new DeliveryGuyDto();
-                    dto.setUserId(deliveryGuy.getUser().getId());
-                    dto.setIban(deliveryGuy.getIban());
-                    return dto;
-                })
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(deliveryGuyDtos);
+        return ResponseEntity.ok(deliveryGuys);
     }
 
     @GetMapping("/get-delivery-guys/{id}")

@@ -3,6 +3,7 @@ package com.renascence.backend.services;
 import com.renascence.backend.dtos.City.CityDto;
 import com.renascence.backend.entities.City;
 import com.renascence.backend.repositories.CityRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -20,9 +21,11 @@ public class CityService {
                 .toList();
     }
 
-    public Optional<CityDto> getCityById(Long id) {
-        return cityRepository.findById(id)
-                .map(this::convertToDto);
+    public CityDto getCityById(Long id) {
+        City city = cityRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("City not found"));
+
+        return convertToDto(city);
     }
 
     private CityDto convertToDto(City city) {

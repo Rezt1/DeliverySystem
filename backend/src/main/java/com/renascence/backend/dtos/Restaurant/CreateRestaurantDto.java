@@ -4,7 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
-public class CreateRestaurantDto {
+public class  CreateRestaurantDto {
 
     @NotBlank(message = "Restaurant name is required")
     @Size(max = 100, message = "Name must be less than 100 characters")

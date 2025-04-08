@@ -34,24 +34,19 @@ public class DeliveryService {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        Optional<User> userOpt = userRepository.findByEmail(auth.getName());
-        Optional<Restaurant> restaurantOpt = restaurantRepository.findById(createDeliveryDto.getRestaurantId());
-
-        if (userOpt.isEmpty()) {
-            throw new EntityNotFoundException("User not found");
-        }
-
-        if (restaurantOpt.isEmpty()) {
-            throw new EntityNotFoundException("Restaurant not found");
-        }
+        User user = userRepository.findByEmail(auth.getName())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Food firstFood = foodRepository.findById(createDeliveryDto.getFoods().getFirst().getFoodId())
+                .orElseThrow(() -> new EntityNotFoundException("Food not found"));
+        Restaurant restaurant = firstFood.getRestaurant();
 
         Delivery delivery = new Delivery();
 
         delivery.setAddress(createDeliveryDto.getAddress());
         delivery.setCreationDate(LocalDateTime.now());
         delivery.setPaymentMethod(createDeliveryDto.getPaymentMethod());
-        delivery.setReceiver(userOpt.get());
-        delivery.setRestaurant(restaurantOpt.get());
+        delivery.setReceiver(user);
+        delivery.setRestaurant(restaurant);
         delivery.setStatus(DeliveryStatus.PENDING);
 
         List<DeliveryFood> deliveryFoods = createDeliveryDto.getFoods().stream()
@@ -83,11 +78,12 @@ public class DeliveryService {
     private DeliveryDto mapToDto(Delivery delivery) {
         DeliveryDto dto = new DeliveryDto();
         dto.setDeliveryId(delivery.getId());
-        dto.setUserId(delivery.getReceiver().getId());
-        dto.setDeliveryGuyId(delivery.getDeliveryGuy().getId());
-        dto.setRestaurantId(delivery.getRestaurant().getId());
+        dto.setUsername(delivery.getReceiver().getName());
+        dto.setUserPhoneNumber(delivery.getReceiver().getPhoneNumber());
+        dto.setDeliveryGuyName(delivery.getDeliveryGuy() != null ? delivery.getDeliveryGuy().getUser().getName() : "No delivery guy yet");
+        dto.setRestaurantName(delivery.getRestaurant().getName());
         dto.setAddress(delivery.getAddress());
-        dto.setDate(delivery.getCreationDate());
+        dto.setCreationDate(delivery.getCreationDate());
         dto.setStatus(delivery.getStatus());
         dto.setPaymentMethod(delivery.getPaymentMethod());
 
@@ -95,10 +91,14 @@ public class DeliveryService {
         List<DeliveryFoodDto> foodDtos = new ArrayList<>();
         for (DeliveryFood deliveryFood : delivery.getDeliveriesFoods()) {
             DeliveryFoodDto foodDto = new DeliveryFoodDto();
+
             foodDto.setDeliveryFoodId(deliveryFood.getFood().getId());
+            foodDto.setFoodName(deliveryFood.getFood().getName());
             foodDto.setQuantity(deliveryFood.getFoodCount());
+
             foodDtos.add(foodDto);
         }
+
         dto.setFoods(foodDtos);
 
         return dto;

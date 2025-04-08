@@ -15,6 +15,7 @@ public class FoodDto {
     private FoodCategory foodCategory;
     private Double price;
     private String description;
-    private Long cuisineId;
-    private Long restaurantId;
+    private String cuisineName;
+    private String restaurantName;
+
 }

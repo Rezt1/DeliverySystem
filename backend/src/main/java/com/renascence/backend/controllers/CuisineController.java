@@ -25,11 +25,10 @@ public class CuisineController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CuisineDto> getCuisineById(@PathVariable Long id) {
-        return cuisineService.getCuisineById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(cuisineService.getCuisineById(id));
     }
 
+    //probably not needed!
     @GetMapping("/{name}")
     public ResponseEntity<CuisineDto> getCuisineByName(@PathVariable String name) {
         return cuisineService.getCuisineByName(name)

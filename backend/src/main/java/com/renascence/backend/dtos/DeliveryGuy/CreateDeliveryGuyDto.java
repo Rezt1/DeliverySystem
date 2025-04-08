@@ -10,7 +10,7 @@ public class CreateDeliveryGuyDto {
     @NotBlank(message = "IBAN is required")
     private String iban;
 
-    @NotNull(message = "City id is required")
+    @NotNull(message = "City is required")
     @Positive
     private Long cityId;
 }

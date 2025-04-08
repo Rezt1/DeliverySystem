@@ -11,4 +11,5 @@ public class CuisineDto {
 
     private Long id;
     private String name;
+
 }

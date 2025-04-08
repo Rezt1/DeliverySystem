@@ -13,5 +13,6 @@ public class RestaurantDto {
     private Long id;
     private String name;
     private Float rating;
-    private Long cityId;
+    private String cityName;
+
 }
