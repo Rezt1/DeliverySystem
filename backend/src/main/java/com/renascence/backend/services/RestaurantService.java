@@ -24,8 +24,8 @@ public class RestaurantService {
     private final CityRepository cityRepository;
     private final CuisineRepository cuisineRepository;
 
-    public List<RestaurantDto> getAllRestaurants(long cityId, long cuisineId) {
-        List<Restaurant> restaurants = restaurantRepository.findAll();
+    public List<RestaurantDto> getAllRestaurants(long cityId, long cuisineId, int restaurantCount) {
+        List<Restaurant> restaurants = restaurantRepository.findAllByOrderByRatingDesc();
 
         if (cityId != -1){
             City filterCity = cityRepository.findById(cityId)
@@ -44,6 +44,10 @@ public class RestaurantService {
                 }
                 return false;
             }).toList();
+        }
+
+        if (restaurantCount >= 0){
+            restaurants = restaurants.stream().limit(restaurantCount).toList();
         }
 
         return restaurants

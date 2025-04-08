@@ -58,7 +58,6 @@ public class AdminController {
     @GetMapping("/get-all-delivery-guys")
     public ResponseEntity<List<DeliveryGuyDto>> getAllDeliveryGuys() {
         List<DeliveryGuyDto> deliveryGuys = adminService.getAllDeliveryGuys();
-
         return ResponseEntity.ok(deliveryGuys);
     }
 
