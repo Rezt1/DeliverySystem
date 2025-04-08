@@ -1,6 +1,6 @@
 package com.renascence.backend.customAnnotations;
 
-import com.renascence.backend.dtos.Authorization.RegisterDto;
+import com.renascence.backend.dtos.authorization.RegisterDto;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

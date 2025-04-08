@@ -1,8 +1,8 @@
 package com.renascence.backend.services;
 
 
-import com.renascence.backend.dtos.Delivery.DeliveryDto;
-import com.renascence.backend.dtos.DeliveryFood.DeliveryFoodDto;
+import com.renascence.backend.dtos.delivery.DeliveryDto;
+import com.renascence.backend.dtos.deliveryFood.DeliveryFoodDto;
 import com.renascence.backend.entities.*;
 import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.repositories.DeliveryGuySalaryRepository;
@@ -11,7 +11,6 @@ import com.renascence.backend.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

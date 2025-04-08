@@ -1,6 +1,6 @@
 package com.renascence.backend.controllers;
 
-import com.renascence.backend.dtos.Restaurant.RestaurantDto;
+import com.renascence.backend.dtos.restaurant.RestaurantDto;
 import com.renascence.backend.services.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

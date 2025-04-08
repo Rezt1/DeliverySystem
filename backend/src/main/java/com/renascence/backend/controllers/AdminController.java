@@ -1,27 +1,23 @@
 package com.renascence.backend.controllers;
 
-import com.renascence.backend.dtos.City.CityDto;
-import com.renascence.backend.dtos.City.CreateCityDto;
-import com.renascence.backend.dtos.Cuisine.CreateCuisineDto;
-import com.renascence.backend.dtos.Cuisine.CuisineDto;
-import com.renascence.backend.dtos.DeliveryGuy.CreateDeliveryGuyDto;
-import com.renascence.backend.dtos.DeliveryGuy.DeliveryGuyDto;
-import com.renascence.backend.dtos.Food.CreateFoodDto;
-import com.renascence.backend.dtos.Food.FoodDto;
-import com.renascence.backend.dtos.Restaurant.CreateRestaurantDto;
-import com.renascence.backend.dtos.Restaurant.RestaurantDto;
-import com.renascence.backend.entities.DeliveryGuy;
+import com.renascence.backend.dtos.city.CityDto;
+import com.renascence.backend.dtos.city.CreateCityDto;
+import com.renascence.backend.dtos.cuisine.CreateCuisineDto;
+import com.renascence.backend.dtos.cuisine.CuisineDto;
+import com.renascence.backend.dtos.deliveryGuy.DeliveryGuyDto;
+import com.renascence.backend.dtos.deliveryGuySalary.CreateDeliveryGuySalaryDto;
+import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
+import com.renascence.backend.dtos.food.CreateFoodDto;
+import com.renascence.backend.dtos.food.FoodDto;
+import com.renascence.backend.dtos.restaurant.CreateRestaurantDto;
+import com.renascence.backend.dtos.restaurant.RestaurantDto;
 import com.renascence.backend.services.AdminService;
-import com.renascence.backend.services.CityService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -64,5 +60,10 @@ public class AdminController {
     @GetMapping("/get-delivery-guys/{id}")
     public ResponseEntity<DeliveryGuyDto> getDeliveryGuyById(@PathVariable Long id) {
         return ResponseEntity.ok(adminService.getDeliveryGuyById(id));
+    }
+
+    @PostMapping("/pay-delivery-guy/{id}")
+    public ResponseEntity<DeliveryGuySalaryDto> payDeliveryGuy(@Valid @RequestBody CreateDeliveryGuySalaryDto dto, @PathVariable Long id){
+        return ResponseEntity.ok(adminService.payDeliveryGuy(dto, id));
     }
 }

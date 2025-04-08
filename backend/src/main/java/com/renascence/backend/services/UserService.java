@@ -1,8 +1,8 @@
 package com.renascence.backend.services;
 
-import com.renascence.backend.dtos.DeliveryGuy.CreateDeliveryGuyDto;
-import com.renascence.backend.dtos.User.UpdateUserDto;
-import com.renascence.backend.dtos.User.UserDto;
+import com.renascence.backend.dtos.deliveryGuy.CreateDeliveryGuyDto;
+import com.renascence.backend.dtos.user.UpdateUserDto;
+import com.renascence.backend.dtos.user.UserDto;
 import com.renascence.backend.entities.City;
 import com.renascence.backend.entities.DeliveryGuy;
 import com.renascence.backend.entities.User;
@@ -16,7 +16,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.time.LocalDate;
 

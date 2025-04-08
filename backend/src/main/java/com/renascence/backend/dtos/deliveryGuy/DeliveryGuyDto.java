@@ -1,4 +1,4 @@
-package com.renascence.backend.dtos.DeliveryGuy;
+package com.renascence.backend.dtos.deliveryGuy;
 
 
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.renascence.backend.dtos.Authorization;
+package com.renascence.backend.dtos.authorization;
 
 public record AuthResponseDto
         (String accessToken,

@@ -1,9 +1,7 @@
 package com.renascence.backend.controllers;
 
-import com.renascence.backend.dtos.Cuisine.CreateCuisineDto;
-import com.renascence.backend.dtos.Cuisine.CuisineDto;
+import com.renascence.backend.dtos.cuisine.CuisineDto;
 import com.renascence.backend.services.CuisineService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

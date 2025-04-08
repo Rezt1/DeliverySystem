@@ -1,4 +1,4 @@
-package com.renascence.backend.dtos.Restaurant;
+package com.renascence.backend.dtos.restaurant;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.renascence.backend.dtos.Cuisine;
+package com.renascence.backend.dtos.city;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class CuisineDto {
+public class CityDto {
 
     private Long id;
     private String name;

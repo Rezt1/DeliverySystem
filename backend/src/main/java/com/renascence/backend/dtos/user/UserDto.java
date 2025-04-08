@@ -1,7 +1,5 @@
-package com.renascence.backend.dtos.User;
+package com.renascence.backend.dtos.user;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Data

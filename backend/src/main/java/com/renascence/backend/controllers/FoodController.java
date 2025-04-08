@@ -1,10 +1,8 @@
 package com.renascence.backend.controllers;
 
-import com.renascence.backend.dtos.Food.CreateFoodDto;
-import com.renascence.backend.dtos.Food.FoodDto;
+import com.renascence.backend.dtos.food.FoodDto;
 import com.renascence.backend.enums.FoodCategory;
 import com.renascence.backend.services.FoodService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,8 @@
 package com.renascence.backend.services;
 
-import com.renascence.backend.dtos.Delivery.CreateDeliveryDto;
-import com.renascence.backend.dtos.Delivery.DeliveryDto;
-import com.renascence.backend.dtos.DeliveryFood.DeliveryFoodDto;
+import com.renascence.backend.dtos.delivery.CreateDeliveryDto;
+import com.renascence.backend.dtos.delivery.DeliveryDto;
+import com.renascence.backend.dtos.deliveryFood.DeliveryFoodDto;
 import com.renascence.backend.entities.*;
 import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.repositories.*;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

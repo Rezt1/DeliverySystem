@@ -1,7 +1,6 @@
 package com.renascence.backend.services;
 
-import com.renascence.backend.dtos.Restaurant.CreateRestaurantDto;
-import com.renascence.backend.dtos.Restaurant.RestaurantDto;
+import com.renascence.backend.dtos.restaurant.RestaurantDto;
 import com.renascence.backend.entities.City;
 import com.renascence.backend.entities.Cuisine;
 import com.renascence.backend.entities.Food;
@@ -14,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service

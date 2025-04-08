@@ -1,9 +1,8 @@
 package com.renascence.backend.controllers;
 
-import com.renascence.backend.dtos.DeliveryGuy.CreateDeliveryGuyDto;
-import com.renascence.backend.dtos.User.UpdateUserDto;
-import com.renascence.backend.dtos.User.UserDto;
-import com.renascence.backend.entities.User;
+import com.renascence.backend.dtos.deliveryGuy.CreateDeliveryGuyDto;
+import com.renascence.backend.dtos.user.UpdateUserDto;
+import com.renascence.backend.dtos.user.UserDto;
 import com.renascence.backend.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

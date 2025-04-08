@@ -1,4 +1,4 @@
-package com.renascence.backend.dtos.DeliveryGuy;
+package com.renascence.backend.dtos.deliveryGuy;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
