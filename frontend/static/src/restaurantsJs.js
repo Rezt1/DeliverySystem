@@ -8,12 +8,14 @@ try{
   let address = `${ip()}/api/restaurants`;
   let token = sessionStorage.getItem("accessToken");
   let cityOptionsContainer = document.getElementById('city-selected');
-  if("location-id" in sessionStorage){
-     address = `${ip()}/api/restaurants/?cityId=${sessionStorage.getItem("location-id")}`;
+  if("location-id" in sessionStorage){  
+
+
+     address = `${ip()}/api/restaurants/by-city/${sessionStorage.getItem("location-id")}`;
   }
   if( cityOptionsContainer.textContent != "All Cities"){
     let id = parseInt(cityOptionsContainer.dataset.cityId);
-    address = `${ip()}/api/restaurants/?cityId=${id}`
+    address = `${ip()}/api/restaurants/by-city/${id}`
   }
     let resp = await fetch(address, {
       method: "Get",
@@ -36,9 +38,6 @@ try{
     console.error(e);
   }
 }
-
-
-    
   
         let btnRatingSort = document.getElementById("sort-menu");
         btnRatingSort.addEventListener("click", showOptions);

@@ -26,3 +26,46 @@ export async function fetchingCities(){
         console.error(e);
     }
 }
+
+export async function fetchingFood(){
+
+  let token = sessionStorage.getItem("accessToken");
+  let resp = await fetch(`${ip()}/api/foods/restaurant/1`, {
+    method: "Get",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  let data = await resp.json();
+  return data;
+}
+
+export async function fettchUser() {
+  let token = sessionStorage.getItem("accessToken");
+  let resp = await fetch(`${ip()}/api/users/me`, {
+    method: "Get",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  let data = await resp.json();
+  return data;
+}
+
+export async function fetchDelivery(id) {
+  let token = sessionStorage.getItem("accessToken");
+  let resp = await fetch(`${ip()}/api/deliveries/${id}`, {
+    method: "Get",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  let data = await resp.json();
+  return data;
+}

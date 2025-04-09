@@ -50,3 +50,13 @@ export async function logout(e){
     window.location.href = "./home.html";
 
 }
+
+export function ifDeliveryGuy(){
+    let email = sessionStorage.getItem("email");
+    if(/deliveryGuy[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
