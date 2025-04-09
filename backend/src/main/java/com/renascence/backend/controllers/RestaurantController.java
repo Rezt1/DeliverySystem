@@ -15,16 +15,16 @@ public class RestaurantController {
 
     private final RestaurantService restaurantService;
 
-  @GetMapping("")
-    public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
-            @RequestParam(defaultValue = "-1") long cityId,
-            @RequestParam(defaultValue = "-1") long cuisineId,
-            @RequestParam(defaultValue = "-1") int restaurantCount) {
-        List<RestaurantDto> restaurants = restaurantService.getAllRestaurants(cityId, cuisineId, restaurantCount);
-        return ResponseEntity.ok(restaurants);
-    }
+//    @GetMapping("")
+//    public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
+//            @RequestParam(defaultValue = "-1") long cityId,
+//            @RequestParam(defaultValue = "-1") long cuisineId,
+//            @RequestParam(defaultValue = "-1") int restaurantCount) {
+//        List<RestaurantDto> restaurants = restaurantService.getAllRestaurants(cityId, cuisineId, restaurantCount);
+//        return ResponseEntity.ok(restaurants);
+//    }
 
- /*  @GetMapping("/by-city/{cityId}")
+    @GetMapping("/by-city/{cityId}")
     public ResponseEntity<List<RestaurantDto>> getRestaurantsByCity(
             @PathVariable Long cityId) {
         List<RestaurantDto> restaurants = restaurantService.getRestaurantsByCityId(cityId);
@@ -43,6 +43,5 @@ public class RestaurantController {
             @RequestParam String name) {
         List<RestaurantDto> results = restaurantService.searchByCuisineName(name);
         return ResponseEntity.ok(results);
-   }
-   */
+    }
 }
