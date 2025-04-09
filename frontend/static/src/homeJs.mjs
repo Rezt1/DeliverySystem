@@ -38,7 +38,7 @@ catch(e){
     target.dataset.customInfo = "nottoggled";
 }
 }
-    
+
 async function picked(e) {
     e.preventDefault();
     let target = e.target;
