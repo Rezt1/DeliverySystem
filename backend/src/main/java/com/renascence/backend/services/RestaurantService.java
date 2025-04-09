@@ -22,56 +22,56 @@ public class RestaurantService {
     private final CityRepository cityRepository;
     private final CuisineRepository cuisineRepository;
 
-//    public List<RestaurantDto> getAllRestaurants(long cityId, long cuisineId, int restaurantCount) {
-//        List<Restaurant> restaurants = restaurantRepository.findAllByOrderByRatingDesc();
-//
-//        if (cityId != -1){
-//            City filterCity = cityRepository.findById(cityId)
-//                    .orElseThrow(() -> new EntityNotFoundException("city not found"));
-//
-//            restaurants = restaurants.stream().filter(r -> r.getCity().getId() == filterCity.getId()).toList();
-//        }
-//
-//        if (cuisineId != -1){
-//            Cuisine filterCuisine =  cuisineRepository.findById(cuisineId)
-//                    .orElseThrow(() -> new EntityNotFoundException("cuisine not found"));
-//
-//            restaurants = restaurants.stream().filter(r -> {
-//                for (Food food : r.getFoods()){
-//                    return food.getCuisine().getId() == filterCuisine.getId();
-//                }
-//                return false;
-//            }).toList();
-//        }
-//
-//        if (restaurantCount >= 0){
-//            restaurants = restaurants.stream().limit(restaurantCount).toList();
-//        }
-//
-//        return restaurants
-//                .stream()
-//                .map(this::convertToDto)
-//                .toList();
-//    }
+    public List<RestaurantDto> getAllRestaurants(long cityId, long cuisineId, int restaurantCount) {
+        List<Restaurant> restaurants = restaurantRepository.findAllByOrderByRatingDesc();
 
-    public List<RestaurantDto> getRestaurantsByCityId(Long cityId) {
-        return restaurantRepository.findByCityId(cityId).stream()
-                .map(this::convertToDto)
-                .toList();
-    }
+        if (cityId != -1){
+            City filterCity = cityRepository.findById(cityId)
+                    .orElseThrow(() -> new EntityNotFoundException("city not found"));
 
-    public List<RestaurantDto> getTopRatedRestaurants(int count) {
-        return restaurantRepository.findTopRatedRestaurants(count).stream()
-                .map(this::convertToDto)
-                .toList();
-    }
+            restaurants = restaurants.stream().filter(r -> r.getCity().getId() == filterCity.getId()).toList();
+        }
 
-    public List<RestaurantDto> searchByCuisineName(String cuisineName) {
-        return restaurantRepository.findByCuisineNameContainingIgnoreCase(cuisineName)
+        if (cuisineId != -1){
+            Cuisine filterCuisine =  cuisineRepository.findById(cuisineId)
+                    .orElseThrow(() -> new EntityNotFoundException("cuisine not found"));
+
+            restaurants = restaurants.stream().filter(r -> {
+                for (Food food : r.getFoods()){
+                    return food.getCuisine().getId() == filterCuisine.getId();
+                }
+                return false;
+            }).toList();
+        }
+
+        if (restaurantCount >= 0){
+            restaurants = restaurants.stream().limit(restaurantCount).toList();
+        }
+
+        return restaurants
                 .stream()
                 .map(this::convertToDto)
                 .toList();
     }
+
+//    public List<RestaurantDto> getRestaurantsByCityId(Long cityId) {
+//        return restaurantRepository.findByCityId(cityId).stream()
+//                .map(this::convertToDto)
+//                .toList();
+//    }
+//
+//    public List<RestaurantDto> getTopRatedRestaurants(int count) {
+//        return restaurantRepository.findTopRatedRestaurants(count).stream()
+//                .map(this::convertToDto)
+//                .toList();
+//    }
+//
+//    public List<RestaurantDto> searchByCuisineName(String cuisineName) {
+//        return restaurantRepository.findByCuisineNameContainingIgnoreCase(cuisineName)
+//                .stream()
+//                .map(this::convertToDto)
+//                .toList();
+//    }
 
     private RestaurantDto convertToDto(Restaurant restaurant) {
         RestaurantDto dto = new RestaurantDto();

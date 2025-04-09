@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/CityServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/CuisineServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/RestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/RestaurantController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/RestaurantService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/DeliveryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/controllers/DeliveryController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +63,10 @@
     "JUnit.CityServiceTest.executor": "Run",
     "JUnit.CityServiceTest.getAllCities_ShouldReturnAllCitiesAsDtos.executor": "Run",
     "JUnit.CityServiceTest.getCityById_WithExistingId_ShouldReturnCityDto.executor": "Run",
+    "JUnit.CuisineServiceTest.executor": "Run",
+    "JUnit.CuisineServiceTest.getAllCuisines_ShouldReturnAllCuisinesAsDtos.executor": "Run",
+    "JUnit.CuisineServiceTest.getAllCuisines_WhenNoCuisinesExist_ShouldReturnEmptyList.executor": "Run",
+    "JUnit.CuisineServiceTest.getCuisineById_WithExistingId_ShouldReturnConvertedDto.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -83,40 +86,8 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.CityServiceTest">
-    <configuration name="CityRepositoryTest.cityRepository_saveCity_ShouldReturnSavedCity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.repository.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.repository.CityRepositoryTest" />
-      <option name="METHOD_NAME" value="cityRepository_saveCity_ShouldReturnSavedCity" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CityRepositoryTest.saveCity_ShouldPersist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.repository.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.repository.CityRepositoryTest" />
-      <option name="METHOD_NAME" value="saveCity_ShouldPersist" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CityServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CuisineServiceTest">
+    <configuration name="CuisineServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -125,13 +96,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CityServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CuisineServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CityServiceTest.getAllCities_ShouldReturnAllCitiesAsDtos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CuisineServiceTest.getCuisineById_WithExistingId_ShouldReturnConvertedDto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -140,14 +111,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CityServiceTest" />
-      <option name="METHOD_NAME" value="getAllCities_ShouldReturnAllCitiesAsDtos" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CuisineServiceTest" />
+      <option name="METHOD_NAME" value="getCuisineById_WithExistingId_ShouldReturnConvertedDto" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CityServiceTest.getCityById_WithExistingId_ShouldReturnCityDto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CuisineServiceTest.getCuisineById_WithNonExistentId_ShouldThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -156,8 +127,40 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CityServiceTest" />
-      <option name="METHOD_NAME" value="getCityById_WithExistingId_ShouldReturnCityDto" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CuisineServiceTest" />
+      <option name="METHOD_NAME" value="getCuisineById_WithNonExistentId_ShouldThrowException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CuisineServiceTest.getCuisineByName_WithExistingName_ShouldReturnOptionalDto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CuisineServiceTest" />
+      <option name="METHOD_NAME" value="getCuisineByName_WithExistingName_ShouldReturnOptionalDto" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CuisineServiceTest.getCuisineByName_WithNonExistentName_ShouldReturnEmptyOptional" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CuisineServiceTest" />
+      <option name="METHOD_NAME" value="getCuisineByName_WithNonExistentName_ShouldReturnEmptyOptional" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -172,11 +175,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CityServiceTest" />
-        <item itemvalue="JUnit.CityServiceTest.getAllCities_ShouldReturnAllCitiesAsDtos" />
-        <item itemvalue="JUnit.CityServiceTest.getCityById_WithExistingId_ShouldReturnCityDto" />
-        <item itemvalue="JUnit.CityRepositoryTest.cityRepository_saveCity_ShouldReturnSavedCity" />
-        <item itemvalue="JUnit.CityRepositoryTest.saveCity_ShouldPersist" />
+        <item itemvalue="JUnit.CuisineServiceTest" />
+        <item itemvalue="JUnit.CuisineServiceTest.getCuisineByName_WithExistingName_ShouldReturnOptionalDto" />
+        <item itemvalue="JUnit.CuisineServiceTest.getCuisineByName_WithNonExistentName_ShouldReturnEmptyOptional" />
+        <item itemvalue="JUnit.CuisineServiceTest.getCuisineById_WithNonExistentId_ShouldThrowException" />
+        <item itemvalue="JUnit.CuisineServiceTest.getCuisineById_WithExistingId_ShouldReturnConvertedDto" />
       </list>
     </recent_temporary>
   </component>

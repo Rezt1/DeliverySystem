@@ -25,5 +25,4 @@ public class DeliveryController {
     public DeliveryDto getDeliveryById(@PathVariable Long id) {
         return deliveryService.getDeliveryById(id);
     }
-
 }
