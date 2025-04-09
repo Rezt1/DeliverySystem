@@ -38,8 +38,15 @@ public class DeliveryGuyController {
     }
 
     @GetMapping("/pending-deliveries")
-    public ResponseEntity<List<DeliveryDto>> getPendingDeliveries(){
+    public ResponseEntity<List<DeliveryDto>> getPendingDeliveries() {
         List<DeliveryDto> deliveries = deliveryGuyService.getPendingDeliveries();
+
+        return ResponseEntity.ok(deliveries);
+    }
+
+    @GetMapping("/my-finished-deliveries")
+    public ResponseEntity<List<DeliveryDto>> getMyFinishedDeliveries() {
+        List<DeliveryDto> deliveries = deliveryGuyService.getFinishedDeliveries();
 
         return ResponseEntity.ok(deliveries);
     }

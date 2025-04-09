@@ -143,6 +143,24 @@ public class DeliveryGuyService {
         return mapToDeliveryDto(delivery);
     }
 
+    public List<DeliveryDto> getFinishedDeliveries(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = userRepository.findByEmail(auth.getName())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        DeliveryGuy deliveryGuy = user.getDeliveryGuy();
+        if (deliveryGuy == null) {
+            throw new IllegalStateException("User is not a delivery guy");
+        }
+
+        return deliveryGuy
+                .getDeliveries()
+                .stream()
+                .filter(d -> d.getStatus() == DeliveryStatus.DELIVERED)
+                .map(this::mapToDeliveryDto)
+                .toList();
+    }
 
     private DeliveryDto mapToDeliveryDto(Delivery delivery) {
         DeliveryDto dto = new DeliveryDto();
