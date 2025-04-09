@@ -5,9 +5,11 @@ import com.renascence.backend.dtos.user.UpdateUserDto;
 import com.renascence.backend.dtos.user.UserDto;
 import com.renascence.backend.entities.City;
 import com.renascence.backend.entities.DeliveryGuy;
+import com.renascence.backend.entities.Role;
 import com.renascence.backend.entities.User;
 import com.renascence.backend.repositories.CityRepository;
 import com.renascence.backend.repositories.DeliveryGuyRepository;
+import com.renascence.backend.repositories.RoleRepository;
 import com.renascence.backend.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -27,6 +29,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final DeliveryGuyRepository deliveryGuyRepository;
     private final CityRepository cityRepository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     public UserDto getUserInformation() {
@@ -51,10 +54,10 @@ public class UserService {
         user.setPhoneNumber(dto.getPhoneNumber());
         user.setEmail(dto.getEmail());
 
-        if (!dto.getPassword().isBlank()
+        if (dto.getPassword() != null
                 && dto.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")) {
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
-        } else if (!dto.getPassword().isBlank()
+        } else if (dto.getPassword() != null
                 && !dto.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")) {
             throw new IllegalArgumentException("Password should contain at least: 1 lowercase letter, 1 uppercase letter, 1 digit, no spaces and tabs and should be at least 6 characters long!");
         }
@@ -93,11 +96,14 @@ public class UserService {
         deliveryGuy.setIban(createDeliveryGuyDto.getIban());
         deliveryGuy.setStartWorkDate(LocalDate.now());
 
+        Role role = roleRepository.findByName("ROLE_" + com.renascence.backend.enums.Role.DELIVERY_GUY.toString())
+                .orElseThrow(() -> new EntityNotFoundException("Delivery guy role not found???????????????"));
+        user.getRoles().add(role);
+
         deliveryGuyRepository.save(deliveryGuy);
+        userRepository.save(user);
 
 //        user.setDeliveryGuy(deliveryGuy); MAYBE NOT NEEDED, TESTING REQUIRED
-//
-//        userRepository.save(user);
     }
 
     private UserDto mapToUserDto(User user) {

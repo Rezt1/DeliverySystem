@@ -3,6 +3,7 @@ package com.renascence.backend.exceptionHandlers;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -51,6 +52,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException ex){
+        return ResponseEntity
+                .badRequest()
+                .body(new ErrorResponse(ex.getMessage(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleUsernameNotFound(UsernameNotFoundException ex){
         return ResponseEntity
                 .badRequest()
                 .body(new ErrorResponse(ex.getMessage(), LocalDateTime.now()));

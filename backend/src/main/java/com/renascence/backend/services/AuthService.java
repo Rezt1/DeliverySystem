@@ -11,13 +11,16 @@ import com.renascence.backend.exceptionHandlers.ErrorResponse;
 import com.renascence.backend.repositories.AccessTokenRepository;
 import com.renascence.backend.repositories.CityRepository;
 import com.renascence.backend.repositories.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -38,6 +41,12 @@ public class AuthService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public ResponseEntity<?> login(LoginRequestDto loginRequestDto) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are logged in");
+        }
+
         try {
             Authentication authentication = authenticationManager
                   .authenticate(new UsernamePasswordAuthenticationToken(loginRequestDto.email(), loginRequestDto.password()));
@@ -47,7 +56,8 @@ public class AuthService {
 
             List<AccessToken> accessTokens = accessTokenRepository.findByUser_Email(userDetails.getUsername());
 
-            User currUser = userRepository.findByEmail(userDetails.getUsername()).get();
+            User currUser = userRepository.findByEmail(userDetails.getUsername())
+                    .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
             if (!accessTokens.isEmpty()) {
                 for (AccessToken at : accessTokens){
@@ -96,6 +106,12 @@ public class AuthService {
     }
 
     public ResponseEntity<?> register(RegisterDto registerDto) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are logged in");
+        }
+
         List<User> users = userRepository.findAll();
 
         for (User user : users){

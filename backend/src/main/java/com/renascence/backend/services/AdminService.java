@@ -30,19 +30,26 @@ public class AdminService {
     private final CityRepository cityRepository;
     private final CuisineRepository cuisineRepository;
     private final FoodRepository foodRepository;
+    private final DeliveryGuySalaryRepository deliveryGuySalaryRepository;
 
     public CityDto createCity(CreateCityDto createCityDto) {
         City city = new City();
+
         city.setName(createCityDto.getName());
         city.setSalary(createCityDto.getSalary());
+
         cityRepository.save(city);
+
         return new CityDto(city.getId(), city.getName());
     }
 
     public CuisineDto createCuisine(CreateCuisineDto createCuisineDto) {
         Cuisine cuisine =new Cuisine();
+
         cuisine.setName(createCuisineDto.getName());
+
         cuisineRepository.save(cuisine);
+
         return new CuisineDto(cuisine.getId(), cuisine.getName());
     }
 
@@ -64,6 +71,7 @@ public class AdminService {
         food.setRestaurant(restaurant);
 
         Food savedFood = foodRepository.save(food);
+
         return convertToFoodDto(savedFood);
     }
 
@@ -79,6 +87,7 @@ public class AdminService {
         restaurant.setRating(createDto.getRating());
 
         Restaurant savedRestaurant = restaurantRepository.save(restaurant);
+
         return convertToRestaurantDto(savedRestaurant);
     }
 
@@ -101,7 +110,7 @@ public class AdminService {
         DeliveryGuy deliveryGuy = deliveryGuyRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Delivery guy not found"));
 
-        if (deliveryGuy.getStartWorkDate().isBefore(dto.getSalaryStartDate())){
+        if (deliveryGuy.getStartWorkDate().isAfter(dto.getSalaryStartDate())){
             throw new IllegalArgumentException("Cannot pay salary for a period before the delivery guy started working");
         }
 
@@ -120,6 +129,8 @@ public class AdminService {
         deliveryGuySalary.setStartDate(dto.getSalaryStartDate());
         deliveryGuySalary.setEndDate(dto.getSalaryEndDate());
         deliveryGuySalary.setDeliveryGuy(deliveryGuy);
+
+        deliveryGuySalaryRepository.save(deliveryGuySalary);
 
         return convertToDeliveryGuySalaryDto(deliveryGuySalary, bonus);
     }

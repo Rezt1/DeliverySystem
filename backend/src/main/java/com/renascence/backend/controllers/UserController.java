@@ -33,6 +33,6 @@ public class UserController {
     public ResponseEntity<String> applyToBeDeliveryGuy(@RequestBody @Valid CreateDeliveryGuyDto createDeliveryGuyDto) {
         userService.applyToBeDeliveryGuy(createDeliveryGuyDto);
 
-        return ResponseEntity.ok("You have successfully applied to be a delivery guy.");
+        return ResponseEntity.ok("You have successfully become a delivery guy.");
     }
 }

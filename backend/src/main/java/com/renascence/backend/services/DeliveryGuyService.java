@@ -101,7 +101,7 @@ public class DeliveryGuyService {
         }
 
         Optional<Delivery> activeDeliveryOpt = deliveryRepository
-                .findFirstByDeliveryGuyIdAndStatusOrderByCreationDateAsc(
+                .findFirstByDeliveryGuyIdAndStatusOrderByTakenByDeliveryGuyDateAsc(
                         deliveryGuy.getId(), DeliveryStatus.OUT_FOR_DELIVERY
                 );
 
@@ -128,7 +128,7 @@ public class DeliveryGuyService {
                 .orElseThrow(() -> new EntityNotFoundException("Delivery not found"));
 
         Delivery correctDeliveryToFinish = deliveryRepository
-                .findFirstByDeliveryGuyIdAndStatusOrderByCreationDateAsc(deliveryGuy.getId(), DeliveryStatus.OUT_FOR_DELIVERY)
+                .findFirstByDeliveryGuyIdAndStatusOrderByTakenByDeliveryGuyDateAsc(deliveryGuy.getId(), DeliveryStatus.OUT_FOR_DELIVERY)
                 .orElseThrow(() -> new EntityNotFoundException("Your deliveries have been made"));
 
         if (correctDeliveryToFinish.getId() != deliveryId){
