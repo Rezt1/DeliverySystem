@@ -3,13 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="./style.css" rel="stylesheet" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+      defer
+    ></script>
     <script src="./src/nav.mjs" type="module" defer></script>
-    <script src="./src/registerSrc.js" type="module" defer></script>
+    <script src="./src/deliveryJs.js" type="module" defer></script>
+    <link href="./style.css" rel="stylesheet" />
     <link href="./custom.css" rel="stylesheet" />
 
-    <title>Hexeats - Register</title>
+    <title>Hexeats - My Delivery</title>
   </head>
 
   <body>
@@ -94,13 +97,12 @@
           </button>
 
           <!-- Login/Reg/Account buttons -->
-          <button id="login-button" class="!flex btn-primary">Login</button>
-          <button id="register-button" class="!flex btn-primary">
+          <button id="login-button" class="!hidden btn-primary">Login</button>
+          <button id="register-button" class="!hidden btn-primary">
             Register
           </button>
-          <button id="account-button" class="!hidden btn-primary">
-            Account
-          </button>
+          <button id="account-button" class="!flex btn-primary">Account</button>
+          <button id="logout-button" class="!flex btn-primary">Logout</button>
         </div>
       </nav>
 
@@ -193,114 +195,101 @@
         <!-- Mobile Login/Account/Register Buttons -->
         <button
           id="mobile-login-button"
-          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
+          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
         >
           Login
         </button>
         <button
           id="mobile-register-button"
-          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
+          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
         >
           Register
         </button>
         <button
           id="mobile-account-button"
-          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
         >
           Account
+        </button>
+        <button
+          id="mobile-account-button"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Logout
         </button>
       </div>
     </header>
 
-    <main class="flex justify-around py-[24px] pb-0 text-[#006bb8]">
-      <div class="w-[60%] md:w-[45%] flex flex-col justify-center items-center">
-        <img
-          class="w-[60%] object-contain"
-          src="./Images/logo.PNG"
-          alt="logo"
-        />
-        <section id="section-input-login-information" class="pb-5">
-          <input
-            type="text"
-            placeholder="name"
-            id="name-input"
-            class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8]"
-          />
-          <input
-            type="text"
-            placeholder="phone"
-            id="phone-input"
-            class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8]"
-          />
-          <input
-            type="text"
-            placeholder="e-mail"
-            id="e-mail-input"
-            class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8]"
-          />
+    <main class="flex justify-around">
+      <div
+        id="delievery-info"
+        class="flex flex-col items-center bg-white rounded-3xl overflow-hidden shadow-md shadow-gray-700 h-[90%] w-[90%] m-auto text-[#006bb8] md:text-2xl"
+      >
+        <h1 class="text-4xl md:text-5xl text-center p-5 font-bold">
+          Deliveries
+        </h1>
 
-          <!-- Added button to show password -->
-          <div class="relative">
-            <input
-              type="password"
-              placeholder="password"
-              id="password-input"
-              class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8] pr-16"
-              autocomplete="current-password"
-            />
-            <button
-              id="password-show"
-              type="button"
-              class="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-[#006bb8] hover:cursor-pointer hover:text-[#ff66c4] active:opacity-70"
-            >
-              Show
-            </button>
+        <section
+          id="list-of-orders"
+          class="flex flex-col justify-between w-[80%] p-5 overflow-y-auto"
+        >
+          <!-- Loading state - make hidden if data is loaded -->
+          <div id="orders-loading" class="!hidden grid gap-3 p-4">
+            <!-- Skeleton loader items -->
+            <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+            <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+            <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+            <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+            <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
           </div>
-          <div class="relative">
-            <input
-              type="password"
-              id="repeat-password-input"
-              placeholder="repeat password"
-              class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8]"
-            />
-            <button
-              id="password-show-2"
-              type="button"
-              class="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-[#006bb8] hover:cursor-pointer hover:text-[#ff66c4] active:opacity-70"
+
+          <!-- Actual order summary will be inserted here -->
+          <div
+            class="flex items-center justify-between gap-4 p-2 text-2xl md:text-3xl"
+          >
+            <!-- Order info box -->
+            <div
+              id="orders-list"
+              class="flex-1 flex items-center justify-between p-4 bg-gray-200 rounded-lg"
             >
-              Show
+              <div>
+                <h3 id="order-number" class="font-bold">Order #1234</h3>
+                <!-- Order #1234 -->
+                <span
+                  id="qty-and-price"
+                  class="text-xs md:text-sm text-gray-600"
+                  >2 items • $24.50</span
+                >
+                <!-- 2 items • $24.50 -->
+              </div>
+              <span id="time-ago" class="text-xs md:text-sm text-gray-500"
+                >10 min ago</span
+              >
+              <!-- 10 min ago -->
+            </div>
+
+            <!-- Accept button -->
+            <button
+              id="accept-order-button"
+              class="w-[90px] h-full flex-shrink-0 bg-[#006bb8] text-white rounded-lg font-bold flex justify-center items-center hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:border-2 hover:border-[#ff66c4] active:opacity-70 transition-all"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
             </button>
           </div>
         </section>
-        <button
-          id="btn-login-main"
-          class="w-[50%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[10px] hover:border-2 active:opacity-70"
-        >
-          Register
-        </button>
-        <p
-          class="text-[8px] md:text-[10px] py-5 px-8 text-gray-500 text-justify"
-        >
-          Please visit
-          <a
-            href="./privacy_statement.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-blue-500 underline"
-            >Hexeats Privacy Statement</a
-          >
-          to learn more about personal data processing at Hexeats. You can
-          access the local Privacy Statement related to your Hexeats account
-          after you have provided the country and language preferences
-          applicable to you during registration.
-        </p>
-      </div>
-      <div class="hidden w-[45%] justify-center items-end md:flex">
-        <img
-          src="./Images/female_courier_box_happy.png"
-          alt="female_courier_box_happy.png"
-          class="max-h-[85%]"
-        />
       </div>
     </main>
 
@@ -310,7 +299,5 @@
       <button class="btn-footer">Contacts</button>
       <button class="btn-footer">Feedback</button>
     </footer>
-
-    <script></script>
   </body>
 </html>
