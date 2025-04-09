@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
+    List<Restaurant> findAllByOrderByRatingDesc();
+
     List<Restaurant> findByCityId(Long cityId);
 
     @Query("SELECT r FROM Restaurant r ORDER BY r.rating DESC LIMIT :count")

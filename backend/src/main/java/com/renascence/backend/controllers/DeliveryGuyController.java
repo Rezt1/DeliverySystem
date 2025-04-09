@@ -1,6 +1,6 @@
 package com.renascence.backend.controllers;
 
-import com.renascence.backend.dtos.Delivery.DeliveryDto;
+import com.renascence.backend.dtos.delivery.DeliveryDto;
 import com.renascence.backend.services.DeliveryGuyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

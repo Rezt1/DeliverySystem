@@ -1,4 +1,4 @@
-package com.renascence.backend.dtos.Food;
+package com.renascence.backend.dtos.food;
 
 import com.renascence.backend.enums.FoodCategory;
 import jakarta.validation.constraints.*;

@@ -1,7 +1,6 @@
 package com.renascence.backend.services;
 
-import com.renascence.backend.dtos.Restaurant.CreateRestaurantDto;
-import com.renascence.backend.dtos.Restaurant.RestaurantDto;
+import com.renascence.backend.dtos.restaurant.RestaurantDto;
 import com.renascence.backend.entities.City;
 import com.renascence.backend.entities.Cuisine;
 import com.renascence.backend.entities.Food;
@@ -14,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -24,8 +22,8 @@ public class RestaurantService {
     private final CityRepository cityRepository;
     private final CuisineRepository cuisineRepository;
 
-    public List<RestaurantDto> getAllRestaurants(long cityId, long cuisineId) {
-        List<Restaurant> restaurants = restaurantRepository.findAll();
+    public List<RestaurantDto> getAllRestaurants(long cityId, long cuisineId, int restaurantCount) {
+        List<Restaurant> restaurants = restaurantRepository.findAllByOrderByRatingDesc();
 
         if (cityId != -1){
             City filterCity = cityRepository.findById(cityId)
@@ -44,6 +42,10 @@ public class RestaurantService {
                 }
                 return false;
             }).toList();
+        }
+
+        if (restaurantCount >= 0){
+            restaurants = restaurants.stream().limit(restaurantCount).toList();
         }
 
         return restaurants

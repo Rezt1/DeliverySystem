@@ -1,4 +1,4 @@
-package com.renascence.backend.dtos.Cuisine;
+package com.renascence.backend.dtos.cuisine;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

@@ -1,14 +1,11 @@
 package com.renascence.backend.controllers;
 
-import com.renascence.backend.dtos.Delivery.CreateDeliveryDto;
-import com.renascence.backend.dtos.Delivery.DeliveryDto;
-import com.renascence.backend.entities.Delivery;
-import com.renascence.backend.enums.DeliveryStatus;
+import com.renascence.backend.dtos.delivery.CreateDeliveryDto;
+import com.renascence.backend.dtos.delivery.DeliveryDto;
 import com.renascence.backend.services.DeliveryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

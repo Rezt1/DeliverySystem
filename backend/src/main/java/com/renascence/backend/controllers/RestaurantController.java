@@ -1,6 +1,6 @@
 package com.renascence.backend.controllers;
 
-import com.renascence.backend.dtos.Restaurant.RestaurantDto;
+import com.renascence.backend.dtos.restaurant.RestaurantDto;
 import com.renascence.backend.services.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +15,12 @@ public class RestaurantController {
 
     private final RestaurantService restaurantService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
             @RequestParam(defaultValue = "-1") long cityId,
-            @RequestParam(defaultValue = "-1") long cuisineId) {
-        List<RestaurantDto> restaurants = restaurantService.getAllRestaurants(cityId, cuisineId);
+            @RequestParam(defaultValue = "-1") long cuisineId,
+            @RequestParam(defaultValue = "-1") int restaurantCount) {
+        List<RestaurantDto> restaurants = restaurantService.getAllRestaurants(cityId, cuisineId, restaurantCount);
         return ResponseEntity.ok(restaurants);
     }
 

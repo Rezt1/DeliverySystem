@@ -1,8 +1,8 @@
 package com.renascence.backend.services;
 
-import com.renascence.backend.dtos.Authorization.AuthResponseDto;
-import com.renascence.backend.dtos.Authorization.LoginRequestDto;
-import com.renascence.backend.dtos.Authorization.RegisterDto;
+import com.renascence.backend.dtos.authorization.AuthResponseDto;
+import com.renascence.backend.dtos.authorization.LoginRequestDto;
+import com.renascence.backend.dtos.authorization.RegisterDto;
 import com.renascence.backend.entities.AccessToken;
 import com.renascence.backend.entities.City;
 import com.renascence.backend.entities.CustomUserDetails;

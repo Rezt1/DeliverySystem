@@ -1,6 +1,6 @@
-package com.renascence.backend.dtos.Delivery;
+package com.renascence.backend.dtos.delivery;
 
-import com.renascence.backend.dtos.DeliveryFood.DeliveryFoodDto;
+import com.renascence.backend.dtos.deliveryFood.DeliveryFoodDto;
 import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.enums.PaymentMethod;
 import lombok.*;

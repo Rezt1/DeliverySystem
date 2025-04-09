@@ -1,7 +1,8 @@
 package com.renascence.backend.services;
 
-import com.renascence.backend.dtos.DeliveryGuy.CreateDeliveryGuyDto;
-import com.renascence.backend.dtos.User.UserDto;
+import com.renascence.backend.dtos.deliveryGuy.CreateDeliveryGuyDto;
+import com.renascence.backend.dtos.user.UpdateUserDto;
+import com.renascence.backend.dtos.user.UserDto;
 import com.renascence.backend.entities.City;
 import com.renascence.backend.entities.DeliveryGuy;
 import com.renascence.backend.entities.User;
@@ -35,23 +36,34 @@ public class UserService {
         User user = userRepository.findByEmail(auth.getName())
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        return convertToDto(user);
+        return mapToUserDto(user);
     }
 
     @Transactional
-    public UserDto updateUser(UserDto dto) {
+    public UserDto updateUser(UpdateUserDto dto) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         User user = userRepository.findByEmail(auth.getName())
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        if (dto.getName() != null) user.setName(dto.getName());
-        if (dto.getPhoneNumber() != null) user.setPhoneNumber(dto.getPhoneNumber());
-        if (dto.getEmail() != null) user.setEmail(dto.getEmail());
+        user.setName(dto.getName());
+        user.setPhoneNumber(dto.getPhoneNumber());
+        user.setEmail(dto.getEmail());
 
-        if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
+        if (!dto.getPassword().isBlank()
+                && dto.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")) {
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        } else if (!dto.getPassword().isBlank()
+                && !dto.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")) {
+            throw new IllegalArgumentException("Password should contain at least: 1 lowercase letter, 1 uppercase letter, 1 digit, no spaces and tabs and should be at least 6 characters long!");
+        }
+
+        if (dto.getLocationId() != null){
+            City city = cityRepository.findById(dto.getLocationId())
+                    .orElseThrow(() -> new EntityNotFoundException("City not found"));
+
+            user.setLocation(city);
         }
 
         userRepository.save(user);
@@ -88,15 +100,12 @@ public class UserService {
 //        userRepository.save(user);
     }
 
-    private UserDto convertToDto(User user) {
-        return new UserDto(user.getName(), user.getEmail(), user.getPhoneNumber(), user.getLocation().getId(), user.getPassword());
-    }
-
     private UserDto mapToUserDto(User user) {
         UserDto dto = new UserDto();
         dto.setName(user.getName());
         dto.setEmail(user.getEmail());
         dto.setPhoneNumber(user.getPhoneNumber());
+        dto.setCityName(user.getLocation() != null ? user.getLocation().getName() : "No city chosen");
         // Add other fields you want to expose
         return dto;
     }

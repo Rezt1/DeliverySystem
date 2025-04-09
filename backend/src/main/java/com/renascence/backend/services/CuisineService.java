@@ -1,7 +1,6 @@
 package com.renascence.backend.services;
 
-import com.renascence.backend.dtos.Cuisine.CreateCuisineDto;
-import com.renascence.backend.dtos.Cuisine.CuisineDto;
+import com.renascence.backend.dtos.cuisine.CuisineDto;
 import com.renascence.backend.entities.Cuisine;
 import com.renascence.backend.repositories.CuisineRepository;
 import jakarta.persistence.EntityNotFoundException;

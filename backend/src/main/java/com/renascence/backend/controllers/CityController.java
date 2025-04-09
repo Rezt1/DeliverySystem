@@ -1,12 +1,11 @@
 package com.renascence.backend.controllers;
 
-import com.renascence.backend.dtos.City.CityDto;
-import com.renascence.backend.dtos.City.CreateCityDto;
+import com.renascence.backend.dtos.city.CityDto;
 import com.renascence.backend.services.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
+
 import java.util.List;
 
 @RestController

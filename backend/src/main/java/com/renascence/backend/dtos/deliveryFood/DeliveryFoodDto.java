@@ -1,4 +1,4 @@
-package com.renascence.backend.dtos.DeliveryFood;
+package com.renascence.backend.dtos.deliveryFood;
 import lombok.*;
 
 @Data

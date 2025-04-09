@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/test")
 public class TestController {
 
+    //TESTING
     @GetMapping("/unsecured1")
     public String unsecured1(){
         return "accessed unsecured1";

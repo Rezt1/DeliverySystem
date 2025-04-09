@@ -1,10 +1,7 @@
 package com.renascence.backend.services;
 
-import com.renascence.backend.dtos.Food.CreateFoodDto;
-import com.renascence.backend.dtos.Food.FoodDto;
-import com.renascence.backend.entities.Cuisine;
+import com.renascence.backend.dtos.food.FoodDto;
 import com.renascence.backend.entities.Food;
-import com.renascence.backend.entities.Restaurant;
 import com.renascence.backend.enums.FoodCategory;
 import com.renascence.backend.repositories.CuisineRepository;
 import com.renascence.backend.repositories.FoodRepository;

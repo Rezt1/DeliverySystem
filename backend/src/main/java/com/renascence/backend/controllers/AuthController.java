@@ -1,15 +1,12 @@
 package com.renascence.backend.controllers;
 
-import com.renascence.backend.dtos.Authorization.LoginRequestDto;
-import com.renascence.backend.dtos.Authorization.RegisterDto;
+import com.renascence.backend.dtos.authorization.LoginRequestDto;
+import com.renascence.backend.dtos.authorization.RegisterDto;
 import com.renascence.backend.services.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

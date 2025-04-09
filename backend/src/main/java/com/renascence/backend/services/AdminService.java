@@ -1,21 +1,22 @@
 package com.renascence.backend.services;
 
-import com.renascence.backend.dtos.City.CityDto;
-import com.renascence.backend.dtos.City.CreateCityDto;
-import com.renascence.backend.dtos.Cuisine.CreateCuisineDto;
-import com.renascence.backend.dtos.Cuisine.CuisineDto;
-import com.renascence.backend.dtos.DeliveryGuy.CreateDeliveryGuyDto;
-import com.renascence.backend.dtos.DeliveryGuy.DeliveryGuyDto;
-import com.renascence.backend.dtos.Food.CreateFoodDto;
-import com.renascence.backend.dtos.Food.FoodDto;
-import com.renascence.backend.dtos.Restaurant.CreateRestaurantDto;
-import com.renascence.backend.dtos.Restaurant.RestaurantDto;
+import com.renascence.backend.dtos.city.CityDto;
+import com.renascence.backend.dtos.city.CreateCityDto;
+import com.renascence.backend.dtos.cuisine.CreateCuisineDto;
+import com.renascence.backend.dtos.cuisine.CuisineDto;
+import com.renascence.backend.dtos.deliveryGuy.DeliveryGuyDto;
+import com.renascence.backend.dtos.deliveryGuySalary.CreateDeliveryGuySalaryDto;
+import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
+import com.renascence.backend.dtos.food.CreateFoodDto;
+import com.renascence.backend.dtos.food.FoodDto;
+import com.renascence.backend.dtos.restaurant.CreateRestaurantDto;
+import com.renascence.backend.dtos.restaurant.RestaurantDto;
 import com.renascence.backend.entities.*;
+import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.repositories.*;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -96,6 +97,33 @@ public class AdminService {
         return convertToDeliveryGuyDto(deliveryGuy);
     }
 
+    public DeliveryGuySalaryDto payDeliveryGuy(CreateDeliveryGuySalaryDto dto, Long id) {
+        DeliveryGuy deliveryGuy = deliveryGuyRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Delivery guy not found"));
+
+        if (deliveryGuy.getStartWorkDate().isBefore(dto.getSalaryStartDate())){
+            throw new IllegalArgumentException("Cannot pay salary for a period before the delivery guy started working");
+        }
+
+        long count = deliveryGuy.getDeliveries().stream().filter(d ->
+            d.getStatus() == DeliveryStatus.DELIVERED
+            && !d.getDeliveredDate().toLocalDate().isBefore(dto.getSalaryStartDate())
+            && !d.getDeliveredDate().toLocalDate().isAfter(dto.getSalaryEndDate())
+        ).count();
+
+        double standardSalary = deliveryGuy.getWorkCity().getSalary();
+        double bonus = count * 1.50;
+        double wholeSalary = standardSalary + bonus;
+
+        DeliveryGuySalary deliveryGuySalary = new DeliveryGuySalary();
+        deliveryGuySalary.setAmount(wholeSalary);
+        deliveryGuySalary.setStartDate(dto.getSalaryStartDate());
+        deliveryGuySalary.setEndDate(dto.getSalaryEndDate());
+        deliveryGuySalary.setDeliveryGuy(deliveryGuy);
+
+        return convertToDeliveryGuySalaryDto(deliveryGuySalary, bonus);
+    }
+
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {
         RestaurantDto dto = new RestaurantDto();
         dto.setId(restaurant.getId());
@@ -124,6 +152,18 @@ public class AdminService {
         dto.setDeliveryGuyPhoneNumber(deliveryGuy.getUser().getPhoneNumber());
         dto.setWorkCity(deliveryGuy.getWorkCity().getName());
         dto.setIban(deliveryGuy.getIban());
+
+        return dto;
+    }
+
+    private DeliveryGuySalaryDto convertToDeliveryGuySalaryDto(DeliveryGuySalary deliveryGuySalary, double bonus){
+        DeliveryGuySalaryDto dto = new DeliveryGuySalaryDto();
+
+        dto.setDeliveryGuyName(deliveryGuySalary.getDeliveryGuy().getUser().getName());
+        dto.setAmount(deliveryGuySalary.getAmount());
+        dto.setBonusAmount(bonus);
+        dto.setStartDate(deliveryGuySalary.getStartDate());
+        dto.setEndDate(deliveryGuySalary.getEndDate());
 
         return dto;
     }

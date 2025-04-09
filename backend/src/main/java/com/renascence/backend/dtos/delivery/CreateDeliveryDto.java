@@ -1,6 +1,6 @@
-package com.renascence.backend.dtos.Delivery;
+package com.renascence.backend.dtos.delivery;
 
-import com.renascence.backend.dtos.DeliveryFood.CreateDeliveryFoodDto;
+import com.renascence.backend.dtos.deliveryFood.CreateDeliveryFoodDto;
 import com.renascence.backend.enums.PaymentMethod;
 import jakarta.validation.constraints.*;
 import lombok.Data;
