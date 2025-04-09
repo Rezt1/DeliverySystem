@@ -9,11 +9,11 @@ try{
   let token = sessionStorage.getItem("accessToken");
   let cityOptionsContainer = document.getElementById('city-selected');
   if("location-id" in sessionStorage){
-     address = `${ip()}/api/restaurants/by-city/${sessionStorage.getItem("location-id")}`;
+     address = `${ip()}/api/restaurants/?cityId=${sessionStorage.getItem("location-id")}`;
   }
   if( cityOptionsContainer.textContent != "All Cities"){
     let id = parseInt(cityOptionsContainer.dataset.cityId);
-    address = `${ip()}/api/restaurants/by-city/${id}`
+    address = `${ip()}/api/restaurants/?cityId=${id}`
   }
     let resp = await fetch(address, {
       method: "Get",
@@ -45,6 +45,7 @@ try{
         
 
         let data = await fetchingRestaurants();
+        renderRest(data);
         
         console.log(data);
 
@@ -57,7 +58,7 @@ try{
 
        restaurantsList.innerHTML = '';
     
-        console.log(restaurantsList);
+        console.log(data);
 
 
         data.forEach(data => {
@@ -67,12 +68,10 @@ try{
             restaurantsList.appendChild(div);
         });
       
-        chefsPick();
+        chefsPick(data);
       }
 
-      renderRest(data);
-
-    async function  chefsPick() {
+    async function  chefsPick(data) {
         data.sort((a, b) => b.rating - a.rating);
         
         let loading1 = document.getElementById("loading-1");
@@ -119,6 +118,16 @@ try{
 
     async function sorting(e){
       let target = e.target;
+      let restaurantsList = document.getElementById("restaurants-list");
+      console.log(restaurantsList);
+      /*const restaurants = Array.from(restaurantsList.querySelectorAll("restaurants-list")).map(item => {
+        return {
+          name: item.querySelector('strong').textContent,
+          rating: parseFloat(item.textContent.match(/⭐(\d\.\d)/)[1])
+        };
+      });
+      */
+      console.log(restaurants);
       if(target.textContent == "Alphabetical (Z-A)"){
         data.sort((a, b) => b.name.localeCompare(a.name));
       }
@@ -159,12 +168,14 @@ async function cityShow(e) {
       option.textContent = city.name;
       option.classList.add('px-4', 'py-2', 'text-sm', 'hover:bg-gray-100', 'hover:text-[#ff66c4]');
 
-      option.addEventListener("click", () => {
+      option.addEventListener("click", async () => {
         document.getElementById('city-selected').textContent = city.name;
         document.getElementById('city-selected').dataset.cityId = city.id;
         document.querySelector('.origin-top-right').classList.add('hidden');
-        let data1 = fetchingRestaurants();
+        let data1 = await fetchingRestaurants();
+        console.log(data1)
         renderRest(data1);
+        chefsPick(data1);
         showHide(cityOptionsContainer);
       });
 
