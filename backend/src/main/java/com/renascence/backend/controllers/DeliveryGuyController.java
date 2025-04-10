@@ -4,6 +4,7 @@ import com.renascence.backend.dtos.delivery.DeliveryDto;
 import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
 import com.renascence.backend.services.DeliveryGuyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,7 @@ public class DeliveryGuyController {
         if (dto == null) {
             return ResponseEntity.noContent().build();
         }
+
         return ResponseEntity.ok(dto);
     }
 

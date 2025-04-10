@@ -7,6 +7,7 @@ import com.renascence.backend.dtos.user.UserDto;
 import com.renascence.backend.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,9 @@ public class UserController {
     public ResponseEntity<String> applyToBeDeliveryGuy(@RequestBody @Valid CreateDeliveryGuyDto createDeliveryGuyDto) {
         userService.applyToBeDeliveryGuy(createDeliveryGuyDto);
 
-        return ResponseEntity.ok("You have successfully become a delivery guy.");
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body("You have successfully become a delivery guy.");
     }
 
     @GetMapping("/my-active-orders")

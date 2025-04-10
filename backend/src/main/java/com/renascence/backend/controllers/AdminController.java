@@ -14,6 +14,7 @@ import com.renascence.backend.dtos.restaurant.RestaurantDto;
 import com.renascence.backend.services.AdminService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,26 +30,34 @@ public class AdminController {
     @PostMapping("/create-city")
     public ResponseEntity<CityDto> createCity(@Valid @RequestBody CreateCityDto createCityDto) {
         CityDto savedCity = adminService.createCity(createCityDto);
-        return ResponseEntity.ok(savedCity);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(savedCity);
     }
 
     @PostMapping("/create-cuisine")
     public ResponseEntity<CuisineDto> createCuisine(@Valid @RequestBody CreateCuisineDto createCuisineDto) {
         CuisineDto savedCuisine = adminService.createCuisine(createCuisineDto);
-        return ResponseEntity.ok(savedCuisine);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(savedCuisine);
     }
 
     @PostMapping("/create-food")
     public ResponseEntity<FoodDto> createFood(@Valid @RequestBody CreateFoodDto dto) {
         FoodDto savedFood = adminService.createFood(dto);
-        return ResponseEntity.ok(savedFood);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(savedFood);
     }
 
     @PostMapping("/create-restaurant")
     public ResponseEntity<RestaurantDto> createRestaurant(
             @Valid @RequestBody CreateRestaurantDto createDto) {
         RestaurantDto savedRestaurant = adminService.createRestaurant(createDto);
-        return ResponseEntity.ok(savedRestaurant);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(savedRestaurant);
     }
 
     @GetMapping("/get-all-delivery-guys")
@@ -64,6 +73,8 @@ public class AdminController {
 
     @PostMapping("/pay-delivery-guy/{id}")
     public ResponseEntity<DeliveryGuySalaryDto> payDeliveryGuy(@Valid @RequestBody CreateDeliveryGuySalaryDto dto, @PathVariable Long id){
-        return ResponseEntity.ok(adminService.payDeliveryGuy(dto, id));
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(adminService.payDeliveryGuy(dto, id));
     }
 }

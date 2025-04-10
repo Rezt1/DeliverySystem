@@ -70,7 +70,18 @@ public class DeliveryService {
     }
 
     public DeliveryDto getDeliveryById(Long id) {
-        Delivery delivery = deliveryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Delivery not found"));
+        Delivery delivery = deliveryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Delivery not found"));
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = userRepository.findByEmail(auth.getName())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        if (!user.getDeliveries().contains(delivery)){
+            throw new IllegalStateException("Delivery is not yours");
+        }
+
         return mapToDto(delivery);
     }
 
