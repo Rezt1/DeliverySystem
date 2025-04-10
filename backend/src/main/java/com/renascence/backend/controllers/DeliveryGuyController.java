@@ -1,6 +1,7 @@
 package com.renascence.backend.controllers;
 
 import com.renascence.backend.dtos.delivery.DeliveryDto;
+import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
 import com.renascence.backend.services.DeliveryGuyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -49,5 +50,12 @@ public class DeliveryGuyController {
         List<DeliveryDto> deliveries = deliveryGuyService.getFinishedDeliveries();
 
         return ResponseEntity.ok(deliveries);
+    }
+
+    @GetMapping("/my-salaries")
+    public ResponseEntity<List<DeliveryGuySalaryDto>> getSalaries(){
+        List<DeliveryGuySalaryDto> salaries = deliveryGuyService.getSalaries();
+
+        return ResponseEntity.ok(salaries);
     }
 }

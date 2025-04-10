@@ -3,6 +3,7 @@ package com.renascence.backend.services;
 
 import com.renascence.backend.dtos.delivery.DeliveryDto;
 import com.renascence.backend.dtos.deliveryFood.DeliveryFoodDto;
+import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
 import com.renascence.backend.entities.*;
 import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.repositories.DeliveryGuySalaryRepository;
@@ -143,7 +144,7 @@ public class DeliveryGuyService {
         return mapToDeliveryDto(delivery);
     }
 
-    public List<DeliveryDto> getFinishedDeliveries(){
+    public List<DeliveryDto> getFinishedDeliveries() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         User user = userRepository.findByEmail(auth.getName())
@@ -159,6 +160,24 @@ public class DeliveryGuyService {
                 .stream()
                 .filter(d -> d.getStatus() == DeliveryStatus.DELIVERED)
                 .map(this::mapToDeliveryDto)
+                .toList();
+    }
+
+    public List<DeliveryGuySalaryDto> getSalaries() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = userRepository.findByEmail(auth.getName())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        DeliveryGuy deliveryGuy = user.getDeliveryGuy();
+        if (deliveryGuy == null) {
+            throw new IllegalStateException("User is not a delivery guy");
+        }
+
+        return deliveryGuy
+                .getSalaries()
+                .stream()
+                .map(this::convertToDeliveryGuySalaryDto)
                 .toList();
     }
 
@@ -187,6 +206,17 @@ public class DeliveryGuyService {
         }
 
         dto.setFoods(foodDtos);
+
+        return dto;
+    }
+
+    private DeliveryGuySalaryDto convertToDeliveryGuySalaryDto(DeliveryGuySalary deliveryGuySalary){
+        DeliveryGuySalaryDto dto = new DeliveryGuySalaryDto();
+
+        dto.setDeliveryGuyName(deliveryGuySalary.getDeliveryGuy().getUser().getName());
+        dto.setAmount(deliveryGuySalary.getAmount());
+        dto.setStartDate(deliveryGuySalary.getStartDate());
+        dto.setEndDate(deliveryGuySalary.getEndDate());
 
         return dto;
     }
