@@ -3,6 +3,7 @@ package com.renascence.backend.exceptionHandlers;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -55,6 +56,13 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .badRequest()
                 .body(new ErrorResponse(ex.getMessage(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<?> handleEnumConversionError(HttpMessageNotReadableException ex) {
+        return ResponseEntity
+                .badRequest()
+                .body("Invalid paying method provided, " + ex.getMessage());
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)

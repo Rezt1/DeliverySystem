@@ -1,5 +1,6 @@
 package com.renascence.backend.controllers;
 
+import com.renascence.backend.dtos.delivery.DeliveryDto;
 import com.renascence.backend.dtos.deliveryGuy.CreateDeliveryGuyDto;
 import com.renascence.backend.dtos.user.UpdateUserDto;
 import com.renascence.backend.dtos.user.UserDto;
@@ -8,6 +9,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,5 +37,12 @@ public class UserController {
         userService.applyToBeDeliveryGuy(createDeliveryGuyDto);
 
         return ResponseEntity.ok("You have successfully become a delivery guy.");
+    }
+
+    @GetMapping("/my-active-orders")
+    public ResponseEntity<List<DeliveryDto>> getActiveDeliveries() {
+        List<DeliveryDto> deliveries = userService.getActiveDeliveries();
+
+        return ResponseEntity.ok(deliveries);
     }
 }

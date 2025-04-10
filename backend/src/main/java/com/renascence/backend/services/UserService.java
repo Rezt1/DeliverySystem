@@ -1,12 +1,12 @@
 package com.renascence.backend.services;
 
+import com.renascence.backend.dtos.delivery.DeliveryDto;
+import com.renascence.backend.dtos.deliveryFood.DeliveryFoodDto;
 import com.renascence.backend.dtos.deliveryGuy.CreateDeliveryGuyDto;
 import com.renascence.backend.dtos.user.UpdateUserDto;
 import com.renascence.backend.dtos.user.UserDto;
-import com.renascence.backend.entities.City;
-import com.renascence.backend.entities.DeliveryGuy;
-import com.renascence.backend.entities.Role;
-import com.renascence.backend.entities.User;
+import com.renascence.backend.entities.*;
+import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.repositories.CityRepository;
 import com.renascence.backend.repositories.DeliveryGuyRepository;
 import com.renascence.backend.repositories.RoleRepository;
@@ -20,6 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -106,6 +108,20 @@ public class UserService {
 //        user.setDeliveryGuy(deliveryGuy); MAYBE NOT NEEDED, TESTING REQUIRED
     }
 
+    public List<DeliveryDto> getActiveDeliveries() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = userRepository.findByEmail(auth.getName())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        return user.getDeliveries()
+                .stream()
+                .filter(d -> d.getStatus() == DeliveryStatus.PENDING
+                    || d.getStatus() == DeliveryStatus.OUT_FOR_DELIVERY)
+                .map(this::mapToDeliveryDto)
+                .toList();
+    }
+
     private UserDto mapToUserDto(User user) {
         UserDto dto = new UserDto();
         dto.setName(user.getName());
@@ -116,4 +132,32 @@ public class UserService {
         return dto;
     }
 
+    private DeliveryDto mapToDeliveryDto(Delivery delivery) {
+        DeliveryDto dto = new DeliveryDto();
+        dto.setDeliveryId(delivery.getId());
+        dto.setUsername(delivery.getReceiver().getName());
+        dto.setUserPhoneNumber(delivery.getReceiver().getPhoneNumber());
+        dto.setDeliveryGuyName(delivery.getDeliveryGuy() != null ? delivery.getDeliveryGuy().getUser().getName() : "No delivery guy yet");
+        dto.setRestaurantName(delivery.getRestaurant().getName());
+        dto.setAddress(delivery.getAddress());
+        dto.setCreationDate(delivery.getCreationDate());
+        dto.setStatus(delivery.getStatus());
+        dto.setPaymentMethod(delivery.getPaymentMethod());
+
+        // Map the related DeliveryFood entities to DeliveryFoodDto
+        List<DeliveryFoodDto> foodDtos = new ArrayList<>();
+        for (DeliveryFood deliveryFood : delivery.getDeliveriesFoods()) {
+            DeliveryFoodDto foodDto = new DeliveryFoodDto();
+
+            foodDto.setDeliveryFoodId(deliveryFood.getFood().getId());
+            foodDto.setFoodName(deliveryFood.getFood().getName());
+            foodDto.setQuantity(deliveryFood.getFoodCount());
+
+            foodDtos.add(foodDto);
+        }
+
+        dto.setFoods(foodDtos);
+
+        return dto;
+    }
 }
