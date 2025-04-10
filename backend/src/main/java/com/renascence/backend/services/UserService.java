@@ -122,6 +122,19 @@ public class UserService {
                 .toList();
     }
 
+    public List<DeliveryDto> getPastDeliveries() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = userRepository.findByEmail(auth.getName())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        return user.getDeliveries()
+                .stream()
+                .filter(d -> d.getStatus() == DeliveryStatus.DELIVERED)
+                .map(this::mapToDeliveryDto)
+                .toList();
+    }
+
     private UserDto mapToUserDto(User user) {
         UserDto dto = new UserDto();
         dto.setName(user.getName());

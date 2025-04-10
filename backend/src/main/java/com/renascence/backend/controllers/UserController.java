@@ -45,4 +45,11 @@ public class UserController {
 
         return ResponseEntity.ok(deliveries);
     }
+
+    @GetMapping("/my-past-orders")
+    public ResponseEntity<List<DeliveryDto>> getPastDeliveries() {
+        List<DeliveryDto> deliveries = userService.getPastDeliveries();
+
+        return ResponseEntity.ok(deliveries);
+    }
 }
