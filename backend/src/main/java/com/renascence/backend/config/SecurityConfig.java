@@ -57,21 +57,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        //CsrfTokenRequestAttributeHandler csrfTokenRequestAttributeHandler = new CsrfTokenRequestAttributeHandler();
-
         http
             .authorizeHttpRequests(authorize ->
                 authorize
-                        .requestMatchers("/api/test/unsecured1",
-                                "/api/test/unsecured2",
-                                "/api/auth/login",
-                                "/api/auth/register",
-                                "/error",
-                                "/error/**").permitAll()
-                        .requestMatchers("/api/test/adminSecured").hasRole("ADMIN")
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/auth/logout",
+                                "/api/deliveries/**",
+                                "/api/users/**").authenticated()
                         .requestMatchers("/api/delivery-guys/**").hasRole("DELIVERY_GUY")
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .anyRequest().permitAll()
             )
             .formLogin(AbstractHttpConfigurer::disable)
             .httpBasic(AbstractHttpConfigurer::disable)
