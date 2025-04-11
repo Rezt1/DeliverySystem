@@ -9,6 +9,8 @@ import com.renascence.backend.dtos.deliveryGuySalary.CreateDeliveryGuySalaryDto;
 import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
 import com.renascence.backend.dtos.food.CreateFoodDto;
 import com.renascence.backend.dtos.food.FoodDto;
+import com.renascence.backend.dtos.report.DeliveryGuyIncomeDto;
+import com.renascence.backend.dtos.report.DeliveryGuyIncomeForPeriodOfTimeDto;
 import com.renascence.backend.dtos.report.IncomeForPeriodOfTimeDto;
 import com.renascence.backend.dtos.restaurant.CreateRestaurantDto;
 import com.renascence.backend.dtos.restaurant.RestaurantDto;
@@ -155,6 +157,35 @@ public class AdminService {
         dto.setAmount(totalIncome);
 
         return dto;
+    }
+
+    public List<DeliveryGuyIncomeDto> getIncomeByDeliveryGuy(DeliveryGuyIncomeForPeriodOfTimeDto dto){
+        List<DeliveryGuy> deliveryGuys = deliveryGuyRepository.findAll();
+
+        return deliveryGuys
+                .stream()
+                .map(dg -> {
+                   DeliveryGuyIncomeDto incomeDto = new DeliveryGuyIncomeDto();
+                   incomeDto.setDeliveryGuyId(dg.getId());
+                   incomeDto.setDeliveryGuyName(dg.getUser().getName());
+                   incomeDto.setPhoneNumber(dg.getUser().getPhoneNumber());
+                   incomeDto.setStartDate(dto.getStartDate());
+                   incomeDto.setEndDate(dto.getEndDate());
+
+                   double amount = dg.getDeliveries()
+                           .stream()
+                           .filter(d -> d.getStatus() == DeliveryStatus.DELIVERED
+                                   && !d.getDeliveredDate().toLocalDate().isAfter(dto.getEndDate())
+                                   && !d.getDeliveredDate().toLocalDate().isBefore(dto.getStartDate()))
+                           .flatMap(d -> d.getDeliveriesFoods().stream())
+                           .mapToDouble(df -> df.getFood().getPrice() * df.getFoodCount())
+                           .sum();
+
+                   incomeDto.setAmount(amount);
+
+                   return incomeDto;
+                })
+                .toList();
     }
 
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {

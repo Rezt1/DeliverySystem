@@ -9,6 +9,8 @@ import com.renascence.backend.dtos.deliveryGuySalary.CreateDeliveryGuySalaryDto;
 import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
 import com.renascence.backend.dtos.food.CreateFoodDto;
 import com.renascence.backend.dtos.food.FoodDto;
+import com.renascence.backend.dtos.report.DeliveryGuyIncomeDto;
+import com.renascence.backend.dtos.report.DeliveryGuyIncomeForPeriodOfTimeDto;
 import com.renascence.backend.dtos.report.IncomeForPeriodOfTimeDto;
 import com.renascence.backend.dtos.restaurant.CreateRestaurantDto;
 import com.renascence.backend.dtos.restaurant.RestaurantDto;
@@ -82,5 +84,10 @@ public class AdminController {
     @GetMapping("/get-income")
     public ResponseEntity<IncomeForPeriodOfTimeDto> getReportForIncome(@Valid @RequestBody IncomeForPeriodOfTimeDto dto){
         return ResponseEntity.ok(adminService.getIncome(dto));
+    }
+
+    @GetMapping("/get-income-by-delivery-guys")
+    public ResponseEntity<List<DeliveryGuyIncomeDto>> getReportForIncomeByDeliveryGuy(@Valid @RequestBody DeliveryGuyIncomeForPeriodOfTimeDto dto) {
+        return ResponseEntity.ok(adminService.getIncomeByDeliveryGuy(dto));
     }
 }
