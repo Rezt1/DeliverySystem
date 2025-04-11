@@ -9,6 +9,7 @@ import com.renascence.backend.dtos.deliveryGuySalary.CreateDeliveryGuySalaryDto;
 import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
 import com.renascence.backend.dtos.food.CreateFoodDto;
 import com.renascence.backend.dtos.food.FoodDto;
+import com.renascence.backend.dtos.report.IncomeForPeriodOfTimeDto;
 import com.renascence.backend.dtos.restaurant.CreateRestaurantDto;
 import com.renascence.backend.dtos.restaurant.RestaurantDto;
 import com.renascence.backend.entities.*;
@@ -31,6 +32,7 @@ public class AdminService {
     private final CuisineRepository cuisineRepository;
     private final FoodRepository foodRepository;
     private final DeliveryGuySalaryRepository deliveryGuySalaryRepository;
+    private final DeliveryRepository deliveryRepository;
 
     public CityDto createCity(CreateCityDto createCityDto) {
         City city = new City();
@@ -133,6 +135,26 @@ public class AdminService {
         deliveryGuySalaryRepository.save(deliveryGuySalary);
 
         return convertToDeliveryGuySalaryDto(deliveryGuySalary, bonus);
+    }
+
+    public IncomeForPeriodOfTimeDto getIncome(IncomeForPeriodOfTimeDto dto){
+        List<Delivery> deliveries = deliveryRepository
+                .findAll()
+                .stream()
+                .filter(d -> d.getStatus() == DeliveryStatus.DELIVERED
+                        && !d.getDeliveredDate().toLocalDate().isAfter(dto.getEndDate())
+                        && !d.getDeliveredDate().toLocalDate().isBefore(dto.getStartDate()))
+                .toList();
+
+        double totalIncome = deliveries
+                .stream()
+                .flatMap(d -> d.getDeliveriesFoods().stream())
+                .mapToDouble(df -> df.getFood().getPrice() * df.getFoodCount())
+                .sum();
+
+        dto.setAmount(totalIncome);
+
+        return dto;
     }
 
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {

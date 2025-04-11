@@ -1,17 +1,21 @@
-package com.renascence.backend.dtos.deliveryGuySalary;
+package com.renascence.backend.dtos.report;
 
 import com.renascence.backend.customAnnotations.AfterDate;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Getter
+@Setter
 @AfterDate
-public class CreateDeliveryGuySalaryDto {
+public class IncomeForPeriodOfTimeDto {
     @NotNull(message = "Start date is required")
-    private LocalDate salaryStartDate;
+    private LocalDate startDate;
 
     @NotNull(message = "End date is required")
-    private LocalDate salaryEndDate;
+    private LocalDate endDate;
+
+    private Double amount;
 }
