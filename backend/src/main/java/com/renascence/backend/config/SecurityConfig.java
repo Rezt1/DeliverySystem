@@ -1,6 +1,5 @@
 package com.renascence.backend.config;
 
-import com.renascence.backend.enums.Role;
 import com.renascence.backend.filters.JwtAuthenticationEntryPoint;
 import com.renascence.backend.filters.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,6 @@ import java.util.List;
 @EnableGlobalAuthentication
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Bean

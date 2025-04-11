@@ -4,6 +4,6 @@ const app = express();
 
 app.use("/", express.static("./static"));
 
-app.listen(process.env.PORT || 8082, () => {
-    console.log("Server running");
+app.listen(8082, () => {
+    console.log("Server running on PORT 8082");
 })
