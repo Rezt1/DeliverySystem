@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="./src/nav.mjs" type="module" defer></script>
-    <script src="./src/accountJs.js" type="module" defer></script>
     <link href="./style.css" rel="stylesheet" />
+    <script src="./src/nav.mjs" type="module" defer></script>
+    <script src="./src/loginSrc.js" type="module" defer></script>
     <link href="./custom.css" rel="stylesheet" />
 
-    <title>Hexeats - Account</title>
+    <title>Hexeats - Apply As Courier</title>
   </head>
 
   <body>
@@ -40,7 +40,7 @@
 
           <!-- Hidden deliveries button -->
           <!-- To be shown only when delivery guy is logged in -->
-          <button id="deliveries-button" class="btn-primary hidden">
+          <button id="deliveries-button" class="btn-primary !hidden">
             Deliveries
           </button>
         </div>
@@ -94,11 +94,11 @@
           </button>
 
           <!-- Login/Reg/Account buttons -->
-          <button id="login-button" class="!hidden btn-primary">Login</button>
-          <button id="register-button" class="!hidden btn-primary">
+          <button id="login-button" class="!flex btn-primary">Login</button>
+          <button id="register-button" class="!flex btn-primary">
             Register
           </button>
-          <button id="account-button" class="!flex btn-primary">
+          <button id="account-button" class="!hidden btn-primary">
             Account
           </button>
         </div>
@@ -189,124 +189,90 @@
         <!-- Mobile Login/Account/Register Buttons -->
         <button
           id="mobile-login-button"
-          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
         >
           Login
         </button>
         <button
           id="mobile-register-button"
-          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
         >
           Register
         </button>
         <button
           id="mobile-account-button"
-          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
+          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
         >
           Account
         </button>
       </div>
-      </div>
     </header>
 
     <main
-      class="flex flex-col justify-center items-center pt-[24px] pb-0 text-[#006bb8]"
+      class="flex flex-col items-center py-[24px] text-[#006bb8] overflow-y-auto"
     >
-      <h1 class="text-5xl mb-18">Hello, <span id="user-name">Guest</span></h1>
-
-      <section class="grid grid-cols-[auto_1fr] gap-y-4 gap-x-6 items-center">
-        <!-- Name Field -->
-        <label for="name-field" class="text-lg font-medium whitespace-nowrap">
-          Name:
-        </label>
+      <!-- Dotted Progress Bar -->
+      <div class="relative pb-8 w-[30%]">
+        <!-- Progress Line -->
         <div
-          id="name-field"
-          class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
-          contenteditable="false"
-          data-placeholder="Enter your name"
+          class="progress-track w-full"
+          style="background-position: 30% bottom"
         ></div>
 
-        <!-- Email Field -->
-        <label for="email-field" class="text-lg font-medium whitespace-nowrap">
-          E-mail:
-        </label>
-        <div
-          id="email-field"
-          class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
-          contenteditable="false"
-          data-placeholder="Enter your e-mail"
-        ></div>
-
-          <!-- if edit profile ->show input hide div -->
-          <input
-            type="password"
-            id="password-input"
-            class="absolute top-0 left-0 bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px] hidden"
-            placeholder="Enter new password"
-          />
-          <div id="repeat-password-container" class="!hidden">
-            <input
-              type="password"
-              id="repeat-password-input"
-              class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
-              placeholder="Repeat new password"
-            />
-            <p
-              id="password-match-error"
-              class="text-red-500 text-sm mt-1 hidden"
-            >
-              Passwords don't match!
-            </p>
-          </div>
+        <!-- Dots Container -->
+        <div class="flex justify-between absolute w-full top-0">
+          <!-- Filled Dot -->
+          <div class="w-4 h-4 rounded-full bg-blue-500"></div>
+          <!-- Empty Dot (current) -->
+          <div
+            class="w-4 h-4 rounded-full border-2 border-blue-500 bg-white"
+          ></div>
+          <!-- Empty Dot -->
+          <!-- <div
+            class="w-4 h-4 rounded-full border-2 border-gray-300 bg-white"
+          ></div> -->
+          <!-- Empty Dot -->
+          <div
+            class="w-4 h-4 rounded-full border-2 border-gray-300 bg-white"
+          ></div>
         </div>
-
-        <!-- Phone Field -->
-        <label for="phone-field" class="text-lg font-medium whitespace-nowrap">
-          Phone:
-        </label>
-        <div
-          id="phone-field"
-          class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
-          contenteditable="false"
-          data-placeholder="Enter your phone"
-        ></div>
-      </section>
-
-      <!-- Edit/Save Buttons -->
-      <div class="mt-8 flex gap-4">
-        <button
-          id="edit-btn"
-          class="px-6 py-2 bg-[#006bb8] text-white rounded-md hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[6px] hover:px-[22px] hover:border-2 active:opacity-70 transition"
-        >
-          Edit Profile
-        </button>
-        <button
-          id="save-btn"
-          class="px-6 py-2 bg-green-600 text-white rounded-md hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[6px] hover:px-[22px] hover:border-2 active:opacity-70 transition hidden"
-        >
-          Save Changes
-        </button>
-        <button
-          id="cancel-btn"
-          class="px-6 py-2 border-2 border-gray-500 text-gray-700 rounded-md hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:border-[#ff66c4] hover:py-[8px] hover:px-[24px] active:opacity-70 transition hidden"
-        >
-          Cancel
-        </button>
-        <!-- Logout Button -->
-        <button
-          id="logout-btn"
-          class="px-6 py-2 bg-[#006bb8] text-white rounded-md hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[6px] hover:px-[22px] hover:border-2 active:opacity-70 transition"
-        >
-          Logout
-        </button>
       </div>
 
-      <button
-      id="become-delivery-guy-btn"
-      class="px-6 py-2 mt-8 bg-[#ff66c4] text-white rounded-md hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[6px] hover:px-[22px] hover:border-2 active:opacity-70 transition"
-    >
-      Become a Delivery Guy
-    </button>
+      <div class="flex flex-col gap-4 py-4 w-[80%]">
+        <section id="delivery-info" class="flex flex-col gap-4 w-full">
+            <h2 class="text-3xl pb-2">Delivery information</h2>
+            <div class="flex gap-4 text-md">
+                <div id="first-name-block" class="flex flex-col gap-2">
+                <label for="">First name</label>
+                <input type="text" name="first-name" id="first-name-input" class="border border-gray-300 rounded px-2 py-1 w-full" />
+                </div>
+                <div id="last-name-block" class="flex flex-col gap-2">
+                <label for="">Last name</label>
+                <input type="text" name="last-name" id="last-name-input" class="border border-gray-300 rounded px-2 py-1 w-full" />
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <div class="flex gap-2">
+                <label for="delivery-address">Delivery Address:</label>
+                <input
+                  type="text"
+                  id="delivery-address"
+                  placeholder="Enter delivery address"
+                  class="border border-gray-300 rounded px-2 py-1 w-full"
+                />
+              </div>
+              <div class="flex gap-2">
+                <label for="delivery-time">Delivery Time:</label>
+                <input
+                  type="datetime-local"
+                  id="delivery-time"
+                  class="border border-gray-300 rounded px-2 py-1 w-full"
+                />
+              </div>
+        </section>
+        <section id="payment-info"></section>
+      </div>
     </main>
 
     <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
@@ -315,68 +281,5 @@
       <button class="btn-footer">Contacts</button>
       <button class="btn-footer">Feedback</button>
     </footer>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // DOM Elements
-        const editBtn = document.getElementById("edit-btn");
-        const saveBtn = document.getElementById("save-btn");
-        const cancelBtn = document.getElementById("cancel-btn");
-        const userNameElement = document.getElementById("user-name");
-        const nameField = document.getElementById("name-field");
-
-  
-
-        // Enable edit mode
-        editBtn.addEventListener("click", () => {
-          nameField.setAttribute("contenteditable", "true");
-          nameField.classList.add("ring-2", "ring-[#006bb8]");
-          nameField.focus(); // Focus the field for immediate editing
-
-          editBtn.classList.add("hidden");
-          saveBtn.classList.remove("hidden");
-          cancelBtn.classList.remove("hidden");
-        });
-
-        // Save changes
-        saveBtn.addEventListener("click", () => {
-          const newName = nameField.textContent.trim();
-
-          if (!newName) {
-            alert("Name cannot be empty!");
-            return;
-          }
-
-          userNameElement.textContent = newName;
-          nameField.setAttribute("contenteditable", "false");
-          nameField.classList.remove("ring-2", "ring-[#006bb8]");
-
-          editBtn.classList.remove("hidden");
-          saveBtn.classList.add("hidden");
-          cancelBtn.classList.add("hidden");
-
-          alert("Name updated successfully!");
-        });
-
-        // Cancel edits
-        cancelBtn.addEventListener("click", () => {
-          nameField.setAttribute("contenteditable", "false");
-          nameField.classList.remove("ring-2", "ring-[#006bb8]"); // Reset to original name
-
-          editBtn.classList.remove("hidden");
-          saveBtn.classList.add("hidden");
-          cancelBtn.classList.add("hidden");
-        });
-
-        // Prevent new lines when editing
-        nameField.addEventListener("keydown", function (e) {
-          if (e.key === "Enter") {
-            e.preventDefault();
-          }
-        });
-
-        // Initial load
-      });
-    </script>
   </body>
 </html>
