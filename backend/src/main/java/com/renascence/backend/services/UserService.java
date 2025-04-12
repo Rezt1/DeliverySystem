@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -103,6 +105,16 @@ public class UserService {
 
         if (applyCity.isDeleted()) {
             throw new EntityNotFoundException("City no longer exists in our system");
+        }
+
+        Set<String> ibans = deliveryGuyRepository
+                .findAll()
+                .stream()
+                .map(DeliveryGuy::getIban)
+                .collect(Collectors.toSet());
+
+        if (ibans.contains(createDeliveryGuyDto.getIban())) {
+            throw new IllegalArgumentException("Such iban already exists in our system");
         }
 
         // Create a new delivery guy record and associate it with the user

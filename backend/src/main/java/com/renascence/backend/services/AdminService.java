@@ -25,6 +25,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -88,6 +90,16 @@ public class AdminService {
         // Validate city exists
         City city = cityRepository.findById(createDto.getCityId())
                 .orElseThrow(() -> new EntityNotFoundException("City not found with ID: " + createDto.getCityId()));
+
+        Set<String> ibans = restaurantRepository
+                .findAll()
+                .stream()
+                .map(Restaurant::getIban)
+                .collect(Collectors.toSet());
+
+        if (ibans.contains(createDto.getIban())) {
+            throw new IllegalArgumentException("Such iban already exists in our system");
+        }
 
         Restaurant restaurant = new Restaurant();
         restaurant.setName(createDto.getName());
@@ -357,6 +369,16 @@ public class AdminService {
 
         if (restaurant.isDeleted()) {
             throw new EntityNotFoundException("Restaurant no longer exists");
+        }
+
+        Set<String> ibans = restaurantRepository
+                .findAll()
+                .stream()
+                .map(Restaurant::getIban)
+                .collect(Collectors.toSet());
+
+        if (ibans.contains(dto.getIban())) {
+            throw new IllegalArgumentException("Such iban already exists in our system");
         }
 
         restaurant.setName(dto.getName());
