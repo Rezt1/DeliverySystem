@@ -2,6 +2,7 @@ package com.renascence.backend.services;
 
 import com.renascence.backend.dtos.city.CityDto;
 import com.renascence.backend.dtos.city.CreateCityDto;
+import com.renascence.backend.dtos.city.EditCityDto;
 import com.renascence.backend.dtos.cuisine.CreateCuisineDto;
 import com.renascence.backend.dtos.cuisine.CuisineDto;
 import com.renascence.backend.dtos.deliveryGuy.DeliveryGuyDto;
@@ -309,6 +310,27 @@ public class AdminService {
         cuisineDto.setName(dto.getName());
 
         return cuisineDto;
+    }
+
+    public EditCityDto editCity(CreateCityDto dto, Long id) {
+        City city = cityRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("City not found"));
+
+        if (city.isDeleted()) {
+            throw new EntityNotFoundException("City no longer exists");
+        }
+
+        city.setName(dto.getName());
+        city.setSalary(dto.getSalary());
+
+        cityRepository.save(city);
+
+        EditCityDto cityDto = new EditCityDto();
+        cityDto.setId(city.getId());
+        cityDto.setName(city.getName());
+        cityDto.setSalary(city.getSalary());
+
+        return cityDto;
     }
 
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {

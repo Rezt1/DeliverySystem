@@ -2,6 +2,7 @@ package com.renascence.backend.controllers;
 
 import com.renascence.backend.dtos.city.CityDto;
 import com.renascence.backend.dtos.city.CreateCityDto;
+import com.renascence.backend.dtos.city.EditCityDto;
 import com.renascence.backend.dtos.cuisine.CreateCuisineDto;
 import com.renascence.backend.dtos.cuisine.CuisineDto;
 import com.renascence.backend.dtos.deliveryGuy.DeliveryGuyDto;
@@ -94,6 +95,11 @@ public class AdminController {
     @PutMapping("/edit-cuisine/{id}")
     public ResponseEntity<CuisineDto> editCuisine(@Valid @RequestBody CreateCuisineDto dto, @PathVariable Long id) {
         return ResponseEntity.ok(adminService.editCuisine(dto, id));
+    }
+
+    @PutMapping("/edit-city/{id}")
+    public ResponseEntity<EditCityDto> editCity(@Valid @RequestBody CreateCityDto dto, @PathVariable Long id) {
+        return ResponseEntity.ok(adminService.editCity(dto, id));
     }
 
     @DeleteMapping("/remove-restaurant/{id}")
