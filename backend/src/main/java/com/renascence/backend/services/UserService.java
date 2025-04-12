@@ -91,6 +91,10 @@ public class UserService {
         City applyCity = cityRepository.findById(createDeliveryGuyDto.getCityId())
                 .orElseThrow(() -> new EntityNotFoundException("City not found"));
 
+        if (applyCity.isDeleted()) {
+            throw new EntityNotFoundException("City no longer exists in our system");
+        }
+
         // Create a new delivery guy record and associate it with the user
         DeliveryGuy deliveryGuy = new DeliveryGuy();
         deliveryGuy.setUser(user); // Associate the delivery guy with the user

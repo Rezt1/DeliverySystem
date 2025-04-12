@@ -95,4 +95,9 @@ public class AdminController {
     public ResponseEntity<String> removeRestaurant(@PathVariable Long id) {
         return ResponseEntity.ok(adminService.removeRestaurant(id));
     }
+
+    @DeleteMapping("/remove-city/{id}")
+    public ResponseEntity<String> removeCity(@PathVariable Long id) {
+        return ResponseEntity.ok(adminService.removeCity(id));
+    }
 }

@@ -192,11 +192,34 @@ public class AdminService {
         Restaurant restaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("restaurant not found"));
 
+        if (restaurant.isDeleted()) {
+            throw new EntityNotFoundException("restaurant has already been removed");
+        }
+
         restaurant.setDeleted(true);
 
         restaurantRepository.save(restaurant);
 
         return String.format("restaurant %s with id %d has been removed successfully", restaurant.getName(), restaurant.getId());
+    }
+
+    public String removeCity(Long id) {
+        City city = cityRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("city not found"));
+
+        if (city.isDeleted()) {
+            throw new EntityNotFoundException("city has already been removed");
+        }
+
+        List<Restaurant> restaurantsToRemove = restaurantRepository.findAllByCityIdAndIsDeleted(id, false);
+        restaurantsToRemove.forEach(r -> r.setDeleted(true));
+
+        city.setDeleted(true);
+
+        restaurantRepository.saveAll(restaurantsToRemove);
+        cityRepository.save(city);
+
+        return String.format("city %s with id %d has been removed successfully", city.getName(), city.getId());
     }
 
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {

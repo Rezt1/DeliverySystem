@@ -29,26 +29,30 @@ public class RestaurantService {
                 .filter(r -> !r.isDeleted())
                 .toList();
 
-        if (cityId != -1){
+        if (cityId != -1) {
             City filterCity = cityRepository.findById(cityId)
                     .orElseThrow(() -> new EntityNotFoundException("city not found"));
+
+            if (filterCity.isDeleted()) {
+                throw new EntityNotFoundException("City no longer exists in our system");
+            }
 
             restaurants = restaurants.stream().filter(r -> r.getCity().getId() == filterCity.getId()).toList();
         }
 
-        if (cuisineId != -1){
+        if (cuisineId != -1) {
             Cuisine filterCuisine =  cuisineRepository.findById(cuisineId)
                     .orElseThrow(() -> new EntityNotFoundException("cuisine not found"));
 
             restaurants = restaurants.stream().filter(r -> {
-                for (Food food : r.getFoods()){
+                for (Food food : r.getFoods()) {
                     return food.getCuisine().getId() == filterCuisine.getId();
                 }
                 return false;
             }).toList();
         }
 
-        if (restaurantCount >= 0){
+        if (restaurantCount >= 0) {
             restaurants = restaurants.stream().limit(restaurantCount).toList();
         }
 

@@ -15,7 +15,10 @@ public class CityService {
     private final CityRepository cityRepository;
 
     public List<CityDto> getAllCities() {
-        return cityRepository.findAll().stream()
+        return cityRepository
+                .findAll()
+                .stream()
+                .filter(c -> !c.isDeleted())
                 .map(this::convertToDto)
                 .toList();
     }
@@ -23,6 +26,10 @@ public class CityService {
     public CityDto getCityById(Long id) {
         City city = cityRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("City not found"));
+
+        if (city.isDeleted()){
+            throw new EntityNotFoundException("City no longer exists in our system");
+        }
 
         return convertToDto(city);
     }

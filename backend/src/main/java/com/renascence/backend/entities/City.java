@@ -22,6 +22,9 @@ public class City {
     @Column(nullable = false)
     private double salary;
 
+    @Column(nullable = false)
+    private boolean isDeleted;
+
     @OneToMany(mappedBy = "location")
     List<User> users = new ArrayList<>();
 
