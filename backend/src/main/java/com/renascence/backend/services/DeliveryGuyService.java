@@ -6,9 +6,7 @@ import com.renascence.backend.dtos.deliveryFood.DeliveryFoodDto;
 import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
 import com.renascence.backend.entities.*;
 import com.renascence.backend.enums.DeliveryStatus;
-import com.renascence.backend.repositories.DeliveryGuySalaryRepository;
-import com.renascence.backend.repositories.DeliveryRepository;
-import com.renascence.backend.repositories.UserRepository;
+import com.renascence.backend.repositories.*;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +26,11 @@ import java.util.stream.Collectors;
 public class DeliveryGuyService {
 
     private final DeliveryGuySalaryRepository deliveryGuySalaryRepository;
+    private final DeliveryGuyRepository deliveryGuyRepository;
     private final DeliveryRepository deliveryRepository;
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final AccessTokenRepository accessTokenRepository;
 
     public List<DeliveryDto> getPendingDeliveries() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -183,6 +185,35 @@ public class DeliveryGuyService {
                 .stream()
                 .map(this::convertToDeliveryGuySalaryDto)
                 .toList();
+    }
+
+    public String quit() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = userRepository.findByEmail(auth.getName())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        DeliveryGuy deliveryGuy = user.getDeliveryGuy();
+        if (deliveryGuy == null) {
+            throw new IllegalStateException("User is not a delivery guy");
+        }
+
+        deliveryGuy.setFired(true);
+        deliveryGuy.setEndWorkDate(LocalDate.now());
+
+        Role role = roleRepository.findByName("ROLE_" + com.renascence.backend.enums.Role.DELIVERY_GUY)
+                .orElseThrow(() -> new EntityNotFoundException("delivery guy role not found?????????"));
+
+        deliveryGuy.getUser().getRoles().remove(role);
+
+        AccessToken accessToken = accessTokenRepository.findByUserId(deliveryGuy.getId());
+        accessToken.setRevoked(true);
+
+        accessTokenRepository.save(accessToken);
+        deliveryGuyRepository.save(deliveryGuy);
+
+        return String.format("Delivery guy %s with id %d has quit successfully",
+                deliveryGuy.getUser().getName(), deliveryGuy.getId());
     }
 
     private DeliveryDto mapToDeliveryDto(Delivery delivery) {

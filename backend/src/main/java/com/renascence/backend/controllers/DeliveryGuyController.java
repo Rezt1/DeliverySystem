@@ -17,19 +17,6 @@ public class DeliveryGuyController {
 
     private final DeliveryGuyService deliveryGuyService;
 
-    @PutMapping("/deliveries/{id}/assign")
-    public ResponseEntity<DeliveryDto> assignDelivery(@PathVariable Long id) {
-        DeliveryDto delivery = deliveryGuyService.assignDelivery(id);
-        return ResponseEntity.ok(delivery);
-    }
-
-    @PutMapping("/deliveries/{id}/delivered")
-    public ResponseEntity<DeliveryDto> markAsDelivered(@PathVariable Long id) {
-        DeliveryDto delivery = deliveryGuyService.markAsDelivered(id);
-
-        return ResponseEntity.ok(delivery);
-    }
-
     @GetMapping("/my-active-delivery")
     public ResponseEntity<DeliveryDto> getCurrentDeliveryForDeliveryGuy() {
         DeliveryDto dto = deliveryGuyService.getCurrentDeliveryForDeliveryGuy();
@@ -59,5 +46,23 @@ public class DeliveryGuyController {
         List<DeliveryGuySalaryDto> salaries = deliveryGuyService.getSalaries();
 
         return ResponseEntity.ok(salaries);
+    }
+
+    @PutMapping("/deliveries/{id}/assign")
+    public ResponseEntity<DeliveryDto> assignDelivery(@PathVariable Long id) {
+        DeliveryDto delivery = deliveryGuyService.assignDelivery(id);
+        return ResponseEntity.ok(delivery);
+    }
+
+    @PutMapping("/deliveries/{id}/delivered")
+    public ResponseEntity<DeliveryDto> markAsDelivered(@PathVariable Long id) {
+        DeliveryDto delivery = deliveryGuyService.markAsDelivered(id);
+
+        return ResponseEntity.ok(delivery);
+    }
+
+    @PutMapping("/quit")
+    public ResponseEntity<String> quit() {
+        return ResponseEntity.ok(deliveryGuyService.quit());
     }
 }

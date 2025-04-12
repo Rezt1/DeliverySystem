@@ -20,11 +20,18 @@ public class UserController {
 
     private final UserService userService;
 
-    @PutMapping("/update-account")
-    public ResponseEntity<UserDto> updateAccount(@RequestBody @Valid UpdateUserDto dto) {
-        UserDto updatedUser = userService.updateUser(dto);
+    @GetMapping("/my-active-orders")
+    public ResponseEntity<List<DeliveryDto>> getActiveDeliveries() {
+        List<DeliveryDto> deliveries = userService.getActiveDeliveries();
 
-        return ResponseEntity.ok(updatedUser);
+        return ResponseEntity.ok(deliveries);
+    }
+
+    @GetMapping("/my-past-orders")
+    public ResponseEntity<List<DeliveryDto>> getPastDeliveries() {
+        List<DeliveryDto> deliveries = userService.getPastDeliveries();
+
+        return ResponseEntity.ok(deliveries);
     }
 
     @GetMapping("/me")
@@ -42,17 +49,10 @@ public class UserController {
                 .body("You have successfully become a delivery guy.");
     }
 
-    @GetMapping("/my-active-orders")
-    public ResponseEntity<List<DeliveryDto>> getActiveDeliveries() {
-        List<DeliveryDto> deliveries = userService.getActiveDeliveries();
+    @PutMapping("/update-account")
+    public ResponseEntity<UserDto> updateAccount(@RequestBody @Valid UpdateUserDto dto) {
+        UserDto updatedUser = userService.updateUser(dto);
 
-        return ResponseEntity.ok(deliveries);
-    }
-
-    @GetMapping("/my-past-orders")
-    public ResponseEntity<List<DeliveryDto>> getPastDeliveries() {
-        List<DeliveryDto> deliveries = userService.getPastDeliveries();
-
-        return ResponseEntity.ok(deliveries);
+        return ResponseEntity.ok(updatedUser);
     }
 }
