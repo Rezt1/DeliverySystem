@@ -91,6 +91,11 @@ public class AdminController {
                 .body(adminService.payDeliveryGuy(dto, id));
     }
 
+    @PutMapping("/edit-cuisine/{id}")
+    public ResponseEntity<CuisineDto> editCuisine(@Valid @RequestBody CreateCuisineDto dto, @PathVariable Long id) {
+        return ResponseEntity.ok(adminService.editCuisine(dto, id));
+    }
+
     @DeleteMapping("/remove-restaurant/{id}")
     public ResponseEntity<String> removeRestaurant(@PathVariable Long id) {
         return ResponseEntity.ok(adminService.removeRestaurant(id));

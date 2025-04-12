@@ -296,6 +296,21 @@ public class AdminService {
                 deliveryGuy.getUser().getName(), deliveryGuy.getUser().getId());
     }
 
+    public CuisineDto editCuisine(CreateCuisineDto dto, Long id) {
+        Cuisine cuisine = cuisineRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cuisine not found"));
+
+        cuisine.setName(dto.getName());
+
+        cuisineRepository.save(cuisine);
+
+        CuisineDto cuisineDto = new CuisineDto();
+        cuisineDto.setId(id);
+        cuisineDto.setName(dto.getName());
+
+        return cuisineDto;
+    }
+
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {
         RestaurantDto dto = new RestaurantDto();
         dto.setId(restaurant.getId());
