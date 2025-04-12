@@ -139,7 +139,7 @@ public class AdminService {
         return convertToDeliveryGuySalaryDto(deliveryGuySalary, bonus);
     }
 
-    public IncomeForPeriodOfTimeDto getIncome(IncomeForPeriodOfTimeDto dto){
+    public IncomeForPeriodOfTimeDto getIncome(IncomeForPeriodOfTimeDto dto) {
         List<Delivery> deliveries = deliveryRepository
                 .findAll()
                 .stream()
@@ -159,7 +159,7 @@ public class AdminService {
         return dto;
     }
 
-    public List<DeliveryGuyIncomeDto> getIncomeByDeliveryGuy(DeliveryGuyIncomeForPeriodOfTimeDto dto){
+    public List<DeliveryGuyIncomeDto> getIncomeByDeliveryGuy(DeliveryGuyIncomeForPeriodOfTimeDto dto) {
         List<DeliveryGuy> deliveryGuys = deliveryGuyRepository.findAll();
 
         return deliveryGuys
@@ -186,6 +186,17 @@ public class AdminService {
                    return incomeDto;
                 })
                 .toList();
+    }
+
+    public String removeRestaurant(Long id) {
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("restaurant not found"));
+
+        restaurant.setDeleted(true);
+
+        restaurantRepository.save(restaurant);
+
+        return String.format("restaurant %s with id %d has been removed successfully", restaurant.getName(), restaurant.getId());
     }
 
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {

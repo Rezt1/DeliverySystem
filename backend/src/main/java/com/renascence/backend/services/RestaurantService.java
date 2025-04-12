@@ -23,7 +23,11 @@ public class RestaurantService {
     private final CuisineRepository cuisineRepository;
 
     public List<RestaurantDto> getAllRestaurants(long cityId, long cuisineId, int restaurantCount) {
-        List<Restaurant> restaurants = restaurantRepository.findAllByOrderByRatingDesc();
+        List<Restaurant> restaurants = restaurantRepository
+                .findAllByOrderByRatingDesc()
+                .stream()
+                .filter(r -> !r.isDeleted())
+                .toList();
 
         if (cityId != -1){
             City filterCity = cityRepository.findById(cityId)

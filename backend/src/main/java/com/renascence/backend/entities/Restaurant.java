@@ -25,6 +25,9 @@ public class Restaurant {
     @Column(nullable = false, length = 50, unique = true)
     private String iban;
 
+    @Column(nullable = false)
+    private boolean isDeleted;
+
     @ManyToOne
     @JoinColumn(name = "cityId", nullable = false)
     private City city;

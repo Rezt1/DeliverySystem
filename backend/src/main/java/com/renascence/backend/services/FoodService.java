@@ -2,6 +2,7 @@ package com.renascence.backend.services;
 
 import com.renascence.backend.dtos.food.FoodDto;
 import com.renascence.backend.entities.Food;
+import com.renascence.backend.entities.Restaurant;
 import com.renascence.backend.enums.FoodCategory;
 import com.renascence.backend.repositories.CuisineRepository;
 import com.renascence.backend.repositories.FoodRepository;
@@ -39,9 +40,11 @@ public class FoodService {
     }
 
     public List<FoodDto> getFoodsByRestaurant(Long restaurantId) {
-        // Validate restaurant exists (optional)
-        if (!restaurantRepository.existsById(restaurantId)) {
-            throw new EntityNotFoundException("Restaurant not found with ID: " + restaurantId);
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new EntityNotFoundException("Restaurant not found with ID: " + restaurantId));
+
+        if (restaurant.isDeleted()) {
+            throw new EntityNotFoundException("Restaurant no longer exists with ID: " + restaurantId);
         }
 
         List<Food> foods = foodRepository.findByRestaurantId(restaurantId);

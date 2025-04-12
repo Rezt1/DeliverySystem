@@ -39,6 +39,10 @@ public class DeliveryService {
                 .orElseThrow(() -> new EntityNotFoundException("Food not found"));
         Restaurant restaurant = firstFood.getRestaurant();
 
+        if (restaurant.isDeleted()){
+            throw new EntityNotFoundException("Restaurant no longer exists in our system");
+        }
+
         Delivery delivery = new Delivery();
 
         delivery.setAddress(createDeliveryDto.getAddress());

@@ -30,6 +30,27 @@ public class AdminController {
 
     private final AdminService adminService;
 
+    @GetMapping("/get-income")
+    public ResponseEntity<IncomeForPeriodOfTimeDto> getReportForIncome(@Valid @RequestBody IncomeForPeriodOfTimeDto dto){
+        return ResponseEntity.ok(adminService.getIncome(dto));
+    }
+
+    @GetMapping("/get-income-by-delivery-guys")
+    public ResponseEntity<List<DeliveryGuyIncomeDto>> getReportForIncomeByDeliveryGuy(@Valid @RequestBody DeliveryGuyIncomeForPeriodOfTimeDto dto) {
+        return ResponseEntity.ok(adminService.getIncomeByDeliveryGuy(dto));
+    }
+
+    @GetMapping("/get-all-delivery-guys")
+    public ResponseEntity<List<DeliveryGuyDto>> getAllDeliveryGuys() {
+        List<DeliveryGuyDto> deliveryGuys = adminService.getAllDeliveryGuys();
+        return ResponseEntity.ok(deliveryGuys);
+    }
+
+    @GetMapping("/get-delivery-guys/{id}")
+    public ResponseEntity<DeliveryGuyDto> getDeliveryGuyById(@PathVariable Long id) {
+        return ResponseEntity.ok(adminService.getDeliveryGuyById(id));
+    }
+
     @PostMapping("/create-city")
     public ResponseEntity<CityDto> createCity(@Valid @RequestBody CreateCityDto createCityDto) {
         CityDto savedCity = adminService.createCity(createCityDto);
@@ -63,17 +84,6 @@ public class AdminController {
                 .body(savedRestaurant);
     }
 
-    @GetMapping("/get-all-delivery-guys")
-    public ResponseEntity<List<DeliveryGuyDto>> getAllDeliveryGuys() {
-        List<DeliveryGuyDto> deliveryGuys = adminService.getAllDeliveryGuys();
-        return ResponseEntity.ok(deliveryGuys);
-    }
-
-    @GetMapping("/get-delivery-guys/{id}")
-    public ResponseEntity<DeliveryGuyDto> getDeliveryGuyById(@PathVariable Long id) {
-        return ResponseEntity.ok(adminService.getDeliveryGuyById(id));
-    }
-
     @PostMapping("/pay-delivery-guy/{id}")
     public ResponseEntity<DeliveryGuySalaryDto> payDeliveryGuy(@Valid @RequestBody CreateDeliveryGuySalaryDto dto, @PathVariable Long id){
         return ResponseEntity
@@ -81,13 +91,8 @@ public class AdminController {
                 .body(adminService.payDeliveryGuy(dto, id));
     }
 
-    @GetMapping("/get-income")
-    public ResponseEntity<IncomeForPeriodOfTimeDto> getReportForIncome(@Valid @RequestBody IncomeForPeriodOfTimeDto dto){
-        return ResponseEntity.ok(adminService.getIncome(dto));
-    }
-
-    @GetMapping("/get-income-by-delivery-guys")
-    public ResponseEntity<List<DeliveryGuyIncomeDto>> getReportForIncomeByDeliveryGuy(@Valid @RequestBody DeliveryGuyIncomeForPeriodOfTimeDto dto) {
-        return ResponseEntity.ok(adminService.getIncomeByDeliveryGuy(dto));
+    @DeleteMapping("/remove-restaurant/{id}")
+    public ResponseEntity<String> removeRestaurant(@PathVariable Long id) {
+        return ResponseEntity.ok(adminService.removeRestaurant(id));
     }
 }
