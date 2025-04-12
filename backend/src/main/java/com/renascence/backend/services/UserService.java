@@ -7,10 +7,7 @@ import com.renascence.backend.dtos.user.UpdateUserDto;
 import com.renascence.backend.dtos.user.UserDto;
 import com.renascence.backend.entities.*;
 import com.renascence.backend.enums.DeliveryStatus;
-import com.renascence.backend.repositories.CityRepository;
-import com.renascence.backend.repositories.DeliveryGuyRepository;
-import com.renascence.backend.repositories.RoleRepository;
-import com.renascence.backend.repositories.UserRepository;
+import com.renascence.backend.repositories.*;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +29,7 @@ public class UserService {
     private final DeliveryGuyRepository deliveryGuyRepository;
     private final CityRepository cityRepository;
     private final RoleRepository roleRepository;
+    private final AccessTokenRepository accessTokenRepository;
     private final PasswordEncoder passwordEncoder;
 
     public UserDto getUserInformation() {
@@ -54,11 +52,18 @@ public class UserService {
 
         user.setName(dto.getName());
         user.setPhoneNumber(dto.getPhoneNumber());
-        user.setEmail(dto.getEmail());
+
+        AccessToken accessToken = accessTokenRepository.findByUserId(user.getId());
+
+        if (!user.getEmail().equals(dto.getEmail())){
+            user.setEmail(dto.getEmail());
+            accessToken.setRevoked(true);
+        }
 
         if (dto.getPassword() != null
                 && dto.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")) {
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
+            accessToken.setRevoked(true);
         } else if (dto.getPassword() != null
                 && !dto.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")) {
             throw new IllegalArgumentException("Password should contain at least: 1 lowercase letter, 1 uppercase letter, 1 digit, no spaces and tabs and should be at least 6 characters long!");
@@ -72,6 +77,7 @@ public class UserService {
         }
 
         userRepository.save(user);
+        accessTokenRepository.save(accessToken);
         return mapToUserDto(user);
     }
 
@@ -110,10 +116,12 @@ public class UserService {
                 .orElseThrow(() -> new EntityNotFoundException("Delivery guy role not found???????????????"));
         user.getRoles().add(role);
 
+        AccessToken accessToken = accessTokenRepository.findByUserId(user.getId());
+        accessToken.setRevoked(true);
+
         deliveryGuyRepository.save(deliveryGuy);
         userRepository.save(user);
-
-//        user.setDeliveryGuy(deliveryGuy); MAYBE NOT NEEDED, TESTING REQUIRED
+        accessTokenRepository.save(accessToken);
     }
 
     public List<DeliveryDto> getActiveDeliveries() {
