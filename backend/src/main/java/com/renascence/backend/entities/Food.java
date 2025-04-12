@@ -28,6 +28,9 @@ public class Food {
 
     private String description;
 
+    @Column(nullable = false)
+    private boolean isDeleted;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private FoodCategory foodCategory;

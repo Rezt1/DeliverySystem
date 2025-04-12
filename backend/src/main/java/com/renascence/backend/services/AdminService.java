@@ -196,6 +196,12 @@ public class AdminService {
             throw new EntityNotFoundException("restaurant has already been removed");
         }
 
+        restaurant
+                .getFoods()
+                .stream()
+                .filter(f -> !f.isDeleted())
+                .forEach(f -> f.setDeleted(true));
+
         restaurant.setDeleted(true);
 
         restaurantRepository.save(restaurant);
@@ -211,15 +217,39 @@ public class AdminService {
             throw new EntityNotFoundException("city has already been removed");
         }
 
-        List<Restaurant> restaurantsToRemove = restaurantRepository.findAllByCityIdAndIsDeleted(id, false);
-        restaurantsToRemove.forEach(r -> r.setDeleted(true));
+        city
+            .getRestaurants()
+            .stream()
+            .flatMap(r -> r.getFoods().stream())
+            .filter(f -> !f.isDeleted())
+            .forEach(f -> f.setDeleted(true));
+
+        city
+            .getRestaurants()
+            .stream()
+            .filter(r -> !r.isDeleted())
+            .forEach(r -> r.setDeleted(true));
 
         city.setDeleted(true);
 
-        restaurantRepository.saveAll(restaurantsToRemove);
         cityRepository.save(city);
 
         return String.format("city %s with id %d has been removed successfully", city.getName(), city.getId());
+    }
+
+    public String removeFood(Long id) {
+        Food food = foodRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("food not found"));
+
+        if (food.isDeleted()) {
+            throw new EntityNotFoundException("food has already been removed");
+        }
+
+        food.setDeleted(true);
+
+        foodRepository.save(food);
+
+        return String.format("food %s with id %d has been removed", food.getName(), food.getId());
     }
 
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {

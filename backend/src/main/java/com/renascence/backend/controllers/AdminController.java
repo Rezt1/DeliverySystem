@@ -100,4 +100,9 @@ public class AdminController {
     public ResponseEntity<String> removeCity(@PathVariable Long id) {
         return ResponseEntity.ok(adminService.removeCity(id));
     }
+
+    @DeleteMapping("/remove-food/{id}")
+    public ResponseEntity<String> removeFood(@PathVariable Long id) {
+        return ResponseEntity.ok(adminService.removeFood(id));
+    }
 }

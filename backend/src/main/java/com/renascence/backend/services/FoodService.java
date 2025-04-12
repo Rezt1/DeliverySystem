@@ -35,6 +35,7 @@ public class FoodService {
         }
 
         return foods.stream()
+                .filter(f -> !f.isDeleted())
                 .map(this::convertToDto)
                 .toList();
     }
@@ -49,6 +50,7 @@ public class FoodService {
 
         List<Food> foods = foodRepository.findByRestaurantId(restaurantId);
         return foods.stream()
+                .filter(f -> !f.isDeleted())
                 .map(this::convertToDto)
                 .toList();
     }
@@ -56,6 +58,10 @@ public class FoodService {
     public FoodDto getFoodById(Long id) {
         Food food = foodRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Food not found with ID: " + id));
+
+        if (food.isDeleted()) {
+            throw new EntityNotFoundException("Food no longer exist with id: " + id);
+        }
 
         return convertToDto(food);
     }

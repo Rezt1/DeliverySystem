@@ -57,6 +57,10 @@ public class DeliveryService {
                     Food food = foodRepository.findById(deliveryFoodDto.getFoodId())
                             .orElseThrow(() -> new EntityNotFoundException("Food not found: " + deliveryFoodDto.getFoodId()));
 
+                    if (food.isDeleted()) {
+                        throw new EntityNotFoundException(String.format("Food %s with id %d no longer exists", food.getName(), food.getId()));
+                    }
+
                     DeliveryFood deliveryFood = new DeliveryFood();
                     deliveryFood.setDelivery(delivery);
                     deliveryFood.setFood(food);
