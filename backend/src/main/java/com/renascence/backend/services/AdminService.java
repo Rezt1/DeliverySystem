@@ -9,6 +9,7 @@ import com.renascence.backend.dtos.deliveryGuy.DeliveryGuyDto;
 import com.renascence.backend.dtos.deliveryGuySalary.CreateDeliveryGuySalaryDto;
 import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
 import com.renascence.backend.dtos.food.CreateFoodDto;
+import com.renascence.backend.dtos.food.EditFoodDto;
 import com.renascence.backend.dtos.food.FoodDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeForPeriodOfTimeDto;
@@ -331,6 +332,24 @@ public class AdminService {
         cityDto.setSalary(city.getSalary());
 
         return cityDto;
+    }
+
+    public FoodDto editFood(EditFoodDto dto, Long id) {
+        Food food = foodRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Food not found"));
+
+        if (food.isDeleted()) {
+            throw new EntityNotFoundException("Food no longer exists");
+        }
+
+        food.setName(dto.getName());
+        food.setPrice(dto.getPrice());
+        food.setDescription(dto.getDescription());
+        food.setFoodCategory(dto.getFoodCategory());
+
+        foodRepository.save(food);
+
+        return convertToFoodDto(food);
     }
 
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {

@@ -63,7 +63,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleEnumConversionError(HttpMessageNotReadableException ex) {
         return ResponseEntity
                 .badRequest()
-                .body("Invalid paying method provided, " + ex.getMessage());
+                .body("Invalid value provided, " + ex.getMessage());
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)

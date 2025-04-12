@@ -9,6 +9,7 @@ import com.renascence.backend.dtos.deliveryGuy.DeliveryGuyDto;
 import com.renascence.backend.dtos.deliveryGuySalary.CreateDeliveryGuySalaryDto;
 import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
 import com.renascence.backend.dtos.food.CreateFoodDto;
+import com.renascence.backend.dtos.food.EditFoodDto;
 import com.renascence.backend.dtos.food.FoodDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeForPeriodOfTimeDto;
@@ -100,6 +101,11 @@ public class AdminController {
     @PutMapping("/edit-city/{id}")
     public ResponseEntity<EditCityDto> editCity(@Valid @RequestBody CreateCityDto dto, @PathVariable Long id) {
         return ResponseEntity.ok(adminService.editCity(dto, id));
+    }
+
+    @PutMapping("/edit-food/{id}")
+    public ResponseEntity<FoodDto> editFood(@Valid @RequestBody EditFoodDto dto, @PathVariable Long id) {
+        return ResponseEntity.ok(adminService.editFood(dto, id));
     }
 
     @DeleteMapping("/remove-restaurant/{id}")
