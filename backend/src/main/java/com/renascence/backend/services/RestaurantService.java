@@ -87,6 +87,7 @@ public class RestaurantService {
         dto.setName(restaurant.getName());
         dto.setCityName(restaurant.getCity().getName());
         dto.setRating(restaurant.getRating());
+        dto.setIban(restaurant.getIban());
         return dto;
     }
 }

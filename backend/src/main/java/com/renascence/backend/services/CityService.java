@@ -35,6 +35,6 @@ public class CityService {
     }
 
     private CityDto convertToDto(City city) {
-        return new CityDto(city.getId(), city.getName());
+        return new CityDto(city.getId(), city.getName(), city.getSalary());
     }
 }

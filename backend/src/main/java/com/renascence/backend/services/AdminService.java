@@ -2,7 +2,6 @@ package com.renascence.backend.services;
 
 import com.renascence.backend.dtos.city.CityDto;
 import com.renascence.backend.dtos.city.CreateCityDto;
-import com.renascence.backend.dtos.city.EditCityDto;
 import com.renascence.backend.dtos.cuisine.CreateCuisineDto;
 import com.renascence.backend.dtos.cuisine.CuisineDto;
 import com.renascence.backend.dtos.deliveryGuy.DeliveryGuyDto;
@@ -15,12 +14,12 @@ import com.renascence.backend.dtos.report.DeliveryGuyIncomeDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeForPeriodOfTimeDto;
 import com.renascence.backend.dtos.report.IncomeForPeriodOfTimeDto;
 import com.renascence.backend.dtos.restaurant.CreateRestaurantDto;
+import com.renascence.backend.dtos.restaurant.EditRestaurantDto;
 import com.renascence.backend.dtos.restaurant.RestaurantDto;
 import com.renascence.backend.entities.*;
 import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.repositories.*;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +49,7 @@ public class AdminService {
 
         cityRepository.save(city);
 
-        return new CityDto(city.getId(), city.getName());
+        return new CityDto(city.getId(), city.getName(), city.getSalary());
     }
 
     public CuisineDto createCuisine(CreateCuisineDto createCuisineDto) {
@@ -313,7 +312,7 @@ public class AdminService {
         return cuisineDto;
     }
 
-    public EditCityDto editCity(CreateCityDto dto, Long id) {
+    public CityDto editCity(CreateCityDto dto, Long id) {
         City city = cityRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("City not found"));
 
@@ -326,7 +325,7 @@ public class AdminService {
 
         cityRepository.save(city);
 
-        EditCityDto cityDto = new EditCityDto();
+        CityDto cityDto = new CityDto();
         cityDto.setId(city.getId());
         cityDto.setName(city.getName());
         cityDto.setSalary(city.getSalary());
@@ -352,12 +351,30 @@ public class AdminService {
         return convertToFoodDto(food);
     }
 
+    public RestaurantDto editRestaurant(EditRestaurantDto dto, Long id) {
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Restaurant not found"));
+
+        if (restaurant.isDeleted()) {
+            throw new EntityNotFoundException("Restaurant no longer exists");
+        }
+
+        restaurant.setName(dto.getName());
+        restaurant.setRating(dto.getRating());
+        restaurant.setIban(dto.getIban());
+
+        restaurantRepository.save(restaurant);
+
+        return convertToRestaurantDto(restaurant);
+    }
+
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {
         RestaurantDto dto = new RestaurantDto();
         dto.setId(restaurant.getId());
         dto.setName(restaurant.getName());
         dto.setCityName(restaurant.getCity().getName());
         dto.setRating(restaurant.getRating());
+        dto.setIban(restaurant.getIban());
         return dto;
     }
 
