@@ -83,6 +83,10 @@ public class UserService {
         User user = userRepository.findByEmail(auth.getName())
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
+        if (user.getDeliveryGuy() != null && user.getDeliveryGuy().isFired()) {
+            throw new IllegalStateException("You cannot become a delivery guy again");
+        }
+
         // Check if user is already a delivery guy
         if (user.getDeliveryGuy() != null) {
             throw new IllegalStateException("You are already a delivery guy");

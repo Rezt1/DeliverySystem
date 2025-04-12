@@ -22,6 +22,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -35,6 +36,9 @@ public class AdminService {
     private final FoodRepository foodRepository;
     private final DeliveryGuySalaryRepository deliveryGuySalaryRepository;
     private final DeliveryRepository deliveryRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final AccessTokenRepository accessTokenRepository;
 
     public CityDto createCity(CreateCityDto createCityDto) {
         City city = new City();
@@ -230,8 +234,27 @@ public class AdminService {
             .filter(r -> !r.isDeleted())
             .forEach(r -> r.setDeleted(true));
 
+        Role role = roleRepository.findByName("ROLE_" + com.renascence.backend.enums.Role.DELIVERY_GUY)
+                .orElseThrow(() -> new EntityNotFoundException("delivery guy role not found?????????"));
+
+        List<DeliveryGuy> deliveryGuys = city.getDeliveryGuys();
+        deliveryGuys.forEach(dg -> {
+            dg.setFired(true);
+            dg.setEndWorkDate(LocalDate.now());
+            dg.getUser().getRoles().remove(role);
+        });
+
+        List<AccessToken> accessTokens = deliveryGuys
+                .stream()
+                .map(dg -> accessTokenRepository.findByUserId(dg.getId()))
+                .toList();
+
+        accessTokens.forEach(at -> at.setRevoked(true));
+
         city.setDeleted(true);
 
+        deliveryGuyRepository.saveAll(deliveryGuys);
+        accessTokenRepository.saveAll(accessTokens);
         cityRepository.save(city);
 
         return String.format("city %s with id %d has been removed successfully", city.getName(), city.getId());
@@ -250,6 +273,27 @@ public class AdminService {
         foodRepository.save(food);
 
         return String.format("food %s with id %d has been removed", food.getName(), food.getId());
+    }
+
+    public String fireDeliveryGuy(Long id) {
+        DeliveryGuy deliveryGuy = deliveryGuyRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("delivery guy not found"));
+
+        Role role = roleRepository.findByName("ROLE_" + com.renascence.backend.enums.Role.DELIVERY_GUY)
+                .orElseThrow(() -> new EntityNotFoundException("delivery guy role not found?????????"));
+
+        deliveryGuy.getUser().getRoles().remove(role);
+        deliveryGuy.setFired(true);
+        deliveryGuy.setEndWorkDate(LocalDate.now());
+
+        AccessToken accessToken = accessTokenRepository.findByUserId(deliveryGuy.getId());
+        accessToken.setRevoked(true);
+
+        deliveryGuyRepository.save(deliveryGuy);
+        accessTokenRepository.save(accessToken);
+
+        return String.format("delivery guy %s with id %d has been successfully fired",
+                deliveryGuy.getUser().getName(), deliveryGuy.getUser().getId());
     }
 
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {

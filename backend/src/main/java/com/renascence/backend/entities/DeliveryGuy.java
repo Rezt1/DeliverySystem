@@ -32,6 +32,9 @@ public class DeliveryGuy {
 
     private LocalDate endWorkDate;
 
+    @Column(nullable = false)
+    private boolean isFired;
+
     @ManyToOne
     @JoinColumn(name = "workCityId", nullable = false)
     private City workCity;
