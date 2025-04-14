@@ -238,42 +238,135 @@
         </div>
       </div>
 
-      <div class="flex flex-col gap-4 py-4 w-[80%]">
-        <section id="delivery-info" class="flex flex-col gap-4 w-full">
+      <div class="flex max-md:flex-col max-md:gap-4 gap-16 items-start py-4 w-[80%]">
+        <section id="delivery-info" class="flex flex-col gap-4 w-full max-md:mb-8">
             <h2 class="text-3xl pb-2">Delivery information</h2>
-            <div class="flex gap-4 text-md">
-                <div id="first-name-block" class="flex flex-col gap-2">
-                <label for="">First name</label>
-                <input type="text" name="first-name" id="first-name-input" class="border border-gray-300 rounded px-2 py-1 w-full" />
+            <div class="flex gap-4 text-md w-fill">
+              <div id="first-name-block" class="flex flex-col gap-2 w-full">
+                <label for="first-name-input">First name</label>
+                <input type="text" name="first-name" id="first-name-input" class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]" />
                 </div>
-                <div id="last-name-block" class="flex flex-col gap-2">
-                <label for="">Last name</label>
-                <input type="text" name="last-name" id="last-name-input" class="border border-gray-300 rounded px-2 py-1 w-full" />
-                </div>
+                <div id="last-name-block" class="flex flex-col gap-2 w-full">
+                <label for="last-name-input">Last name</label>
+                <input type="text" name="last-name" id="last-name-input" class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]" />
+              </div>
             </div>
 
             <div class="flex flex-col gap-2">
-              <div class="flex gap-2">
-                <label for="delivery-address">Delivery Address:</label>
-                <input
-                  type="text"
-                  id="delivery-address"
-                  placeholder="Enter delivery address"
-                  class="border border-gray-300 rounded px-2 py-1 w-full"
-                />
-              </div>
-              <div class="flex gap-2">
-                <label for="delivery-time">Delivery Time:</label>
-                <input
-                  type="datetime-local"
-                  id="delivery-time"
-                  class="border border-gray-300 rounded px-2 py-1 w-full"
-                />
-              </div>
+              <label for="delivery-address">Delivery Address</label>
+              <input
+                type="text"
+                id="delivery-address"
+                class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"/>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label for="delivery-address-optional">Apartment, suite, etc. (Optional)</label>
+              <input
+                type="text"
+                id="delivery-address-optional"
+                class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"/>
+            </div>
+
+
+          <div class="flex gap-4 text-md w-fill">
+            <div id="city-block" class="flex flex-col gap-2 w-full">
+              <label for="city-select">City</label>
+              <select 
+                name="city" 
+                id="city-select" 
+                class="border border-gray-300 rounded px-2 py-1 h-9 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]">
+                <option value="" disabled selected>Select a city</option>
+                <option value="burgas">Burgas</option>
+                <option value="plovdiv">Plovdiv</option>
+                <option value="ruse">Ruse</option>
+                <option value="sofia">Sofia</option>
+                <option value="varna">Varna</option>
+              </select>
+            </div>
+            <div id="postal-code-block" class="flex flex-col gap-2 w-full">
+              <label for="postal-code-input">Postal code</label>
+              <input type="number" name="postal-code" id="postal-code-input" class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]" />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="delivery-time">Delivery Time</label>
+            <!-- Sashka !!!!!! fix the time to display only certain hours. 10:00 - 23:30 and when a person makes an order the minimum allowed time for delivery to be after 1 hour??? -->
+            <input
+              type="time"
+              id="delivery-time"
+              class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+              step="300"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="phone-number">Phone</label>
+            <input
+              type="text"
+              id="phone-number"
+              class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+              maxlength="10"
+            />
+          </div>  
         </section>
-        <section id="payment-info"></section>
+        <section id="payment-info" class="flex flex-col gap-4 w-full">
+          <h2 class="text-3xl pb-2">Payment</h2>
+          <div class="flex flex-col gap-2">
+            <label for="card-number">Card number</label>
+            <input
+              type="text"
+              id="card-number"
+              class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+              maxlength="16"
+            />
+          </div>  
+          <div class="flex flex-col gap-2">
+            <label for="card-name">Name on card</label>
+            <input
+            type="text"
+            id="card-name"
+            class="border border-gray-300 rounded px-2 h-9 py-1 w-full uppercase focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+            oninput="this.value = this.value.toUpperCase()" 
+            autocapitalize="characters"
+            />
+          </div>  
+          <div class="flex gap-4 text-md w-fill">
+            <div id="expiration-date-block" class="flex flex-col gap-2 w-full">
+              <label for="expiration-date-input">Expiration date (MM/YY)</label>
+              <!-- Sashka !!! add formatExpiration logic -->
+              <input type="text"
+              name="expiration-date"
+              id="expiration-date-input"
+              placeholder="MM/YY"
+              class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+              maxlength="5"
+              pattern="(0[1-9]|1[0-2])\/\d{2}"
+              oninput="formatExpiration(this)"/>
+              </div>
+              <div id="cvc-block" class="flex flex-col gap-2 w-full">
+              <label for="cvc-input">CVC</label>
+              <input type="password"
+              name="cvc"
+              id="cvc-input"
+              placeholder="•••"
+              class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+              maxlength="4"
+              pattern="\d{3,4}"
+              inputmode="numeric"/>
+            </div>
+          </div>
+        </section>
       </div>
-    </main>
+      <button
+      class="bg-[#006bb8] text-white w-[80%] md:w-[40%] max-md:my-8 mt-6 p-2 rounded-lg text-2xl md:text-4xl hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:border-2 hover:border-[#ff66c4] hover:p-[6px] active:opacity-70"
+    >
+      Confirm Order
+    </button>    
+  </main>
+
+    
 
     <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
       <button class="btn-footer">FAQ</button>

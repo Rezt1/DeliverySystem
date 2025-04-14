@@ -9,7 +9,7 @@
     <script src="./src/loginSrc.js" type="module" defer></script>
     <link href="./custom.css" rel="stylesheet" />
 
-    <title>Hexeats - Login</title>
+    <title>Hexeats - Apply As Courier</title>
   </head>
 
   <body>
@@ -208,73 +208,47 @@
       </div>
     </header>
 
-    <main class="flex justify-around pt-[24px] pb-0 text-[#006bb8]">
-      <div class="w-[60%] md:w-[45%] flex flex-col justify-center items-center">
-        <img
-          class="w-[60%] object-contain"
-          src="./Images/logo.PNG"
-          alt="logo"
-        />
-        <section
-          id="section-input-login-information"
-          class="pb-5 w-[80%] md:w-[70%]"
-        >
-          <input
-            type="email"
-            placeholder="E-mail"
-            id="e-mail-input"
-            class="btn-secondary w-full focus:outline-none focus:ring-[1px] focus:ring-[#006bb8] hover:focus:ring-0"
-          />
+    <main
+      class="flex flex-col items-center py-[24px] text-[#006bb8] overflow-y-auto"
+    >
+      <!-- Dotted Progress Bar -->
+      <div class="relative pb-8 w-[30%]">
+        <!-- Progress Line -->
+        <div
+          class="progress-track w-full"
+          style="background-position: 30% bottom"
+        ></div>
 
-          <!-- Added button to show password -->
-          <div class="relative">
-            <input
-              type="password"
-              placeholder="Password"
-              id="password-input"
-              class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8] pr-16"
-              autocomplete="current-password"
-            />
-            <button
-              id="password-show"
-              type="button"
-              class="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-[#006bb8] hover:cursor-pointer hover:text-[#ff66c4] active:opacity-70 font-bold"
-            >
-              Show
-            </button>
-          </div>
-        </section>
-        <button
-          id="btn-login-main"
-          class="w-[50%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[10px] hover:border-2 active:opacity-70"
-        >
-          Login
-        </button>
-        <p
-          class="text-[8px] md:text-[10px] py-5 px-8 text-gray-500 text-justify"
-        >
-          Please visit
-          <a
-            href="./privacy_statement.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-blue-500 underline"
-            >Hexeats Privacy Statement</a
-          >
-          to learn more about personal data processing at Hexeats. You can
-          access the local Privacy Statement related to your Hexeats account
-          after you have provided the country and language preferences
-          applicable to you during registration.
-        </p>
+        <!-- Dots Container -->
+        <div class="flex justify-between absolute w-full top-0">
+          <!-- Filled Dot -->
+          <div class="w-4 h-4 rounded-full bg-blue-500"></div>
+          
+          <!-- Filled Dot -->
+          <div class="w-4 h-4 rounded-full bg-blue-500"></div>
+          
+          <!-- Empty Dot (current) -->
+          <div
+            class="w-4 h-4 rounded-full border-2 border-blue-500 bg-white"
+          ></div>
+          
+          <!-- Empty Dot -->
+          <!-- <div
+            class="w-4 h-4 rounded-full border-2 border-gray-300 bg-white"
+          ></div> -->
+
+          <!-- Empty Dot -->
+          <!-- <div -->
+            <!-- class="w-4 h-4 rounded-full border-2 border-gray-300 bg-white" -->
+          <!-- ></div> -->
+        </div>
       </div>
-      <div class="hidden w-[45%] justify-center items-end md:flex">
-        <img
-          src="./Images/courier_pizza_box_look.png"
-          alt="courier_pizza_box_look.png"
-          class="max-h-[85%]"
-        />
-      </div>
-    </main>
+
+    
+ 
+  </main>
+
+    
 
     <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
       <button class="btn-footer">FAQ</button>
