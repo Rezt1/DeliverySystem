@@ -31,26 +31,36 @@ public class CityServiceTest {
     private CityService cityService;
 
     @Test
-    void getAllCities_ShouldReturnAllCitiesAsDtos() {
+    void getAllCities_ShouldReturnOnlyNonDeletedCitiesAsDtos() {
         // Arrange
         City plevenEntity = new City();
         plevenEntity.setId(1L);
         plevenEntity.setName("Pleven");
-        CityDto expectedPlevenDto = new CityDto(1L, "Pleven");
+        plevenEntity.setSalary(1400.0);
+        plevenEntity.setDeleted(true);
+        CityDto expectedPlevenDto = new CityDto(1L, "Pleven", 1400.0);
 
         City petrichEntity = new City();
         petrichEntity.setId(2L);
         petrichEntity.setName("Petrich");
-        CityDto expectedPetrichDto = new CityDto(2L, "Petrich");
+        petrichEntity.setSalary(1300.0);
+        CityDto expectedPetrichDto = new CityDto(2L, "Petrich", 1300.0);
 
-        when(cityRepository.findAll()).thenReturn(List.of(plevenEntity, petrichEntity));
+        City blagoevgradEntity = new City();
+        blagoevgradEntity.setId(3L);
+        blagoevgradEntity.setName("Blagoevgrad");
+        blagoevgradEntity.setSalary(1300.0);
+        CityDto expectedBlagoevgradDto = new CityDto(3L, "Blagoevgrad", 1300.0);
+
+        when(cityRepository.findAll()).thenReturn(List.of(plevenEntity, petrichEntity, blagoevgradEntity));
 
         // Act
         List<CityDto> result = cityService.getAllCities();
 
         // Assert
         assertEquals(2, result.size());
-        Assertions.assertTrue(result.containsAll(List.of(expectedPlevenDto, expectedPetrichDto)));
+        Assertions.assertTrue(result.containsAll(List.of(expectedPetrichDto, expectedBlagoevgradDto)));
+        Assertions.assertFalse(result.stream().anyMatch(dto -> dto.getName().equals("Pleven")));
         verify(cityRepository, times(1)).findAll();
     }
 
@@ -73,7 +83,8 @@ public class CityServiceTest {
         City cityEntity = new City();
         cityEntity.setId(1L);
         cityEntity.setName("Pleven");
-        CityDto expectedDto = new CityDto(1L, "Pleven");
+        cityEntity.setSalary(1400.0);
+        CityDto expectedDto = new CityDto(1L, "Pleven", 1400.0);
 
         when(cityRepository.findById(1L)).thenReturn(Optional.of(cityEntity));
 
@@ -99,6 +110,22 @@ public class CityServiceTest {
         );
         assertEquals("City not found", exception.getMessage());
         verify(cityRepository, times(1)).findById(99L);
+    }
+
+    @Test
+    void getCityById_throwsException_whenCityIsDeleted() {
+        City cityEntity = new City();
+        cityEntity.setId(1L);
+        cityEntity.setName("Pleven");
+        cityEntity.setSalary(1400.0);
+        cityEntity.setDeleted(true);
+        CityDto expectedDto = new CityDto(1L, "Pleven", 1400.0);
+        when(cityRepository.findById(2L)).thenReturn(Optional.of(cityEntity));
+
+        EntityNotFoundException ex = assertThrows(EntityNotFoundException.class,
+                () -> cityService.getCityById(2L));
+
+        assertEquals("City no longer exists in our system", ex.getMessage());
     }
 
     @Test
