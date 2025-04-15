@@ -69,3 +69,19 @@ export async function fetchDelivery(id) {
   let data = await resp.json();
   return data;
 }
+
+export async function fetchCuisine() {
+
+  let token = sessionStorage.getItem("accessToken");
+  let resp = await fetch(`${ip()}/api/cuisines`, {
+    method: "Get",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  let data = await resp.json();
+  return data;
+  
+}

@@ -1,4 +1,4 @@
-import { fetchingCities } from "./fetchingData.mjs";
+import { fetchCuisine, fetchingCities } from "./fetchingData.mjs";
 import { ip } from "./ipSearch.mjs";
 import { showOptions } from "./utils.mjs";
 
@@ -11,11 +11,11 @@ try{
   if("location-id" in sessionStorage){  
 
 
-     address = `${ip()}/api/restaurants/by-city/${sessionStorage.getItem("location-id")}`;
+     address = `${ip()}/api/restaurants?cityId=${sessionStorage.getItem("location-id")}`;
   }
   if( cityOptionsContainer.textContent != "All Cities"){
     let id = parseInt(cityOptionsContainer.dataset.cityId);
-    address = `${ip()}/api/restaurants/by-city/${id}`
+    address = `${ip()}/api/restaurants?cityId=${id}&`
   }
     let resp = await fetch(address, {
       method: "Get",
@@ -71,7 +71,6 @@ try{
       }
 
     async function  chefsPick(data) {
-        data.sort((a, b) => b.rating - a.rating);
         
         let loading1 = document.getElementById("loading-1");
         let loading2 = document.getElementById("loading-2");
@@ -115,7 +114,7 @@ try{
     let alphabeticalDec = document.getElementById("Alphabetical(Z-A)");
     alphabeticalDec.addEventListener("click", sorting);
 
-    async function sorting(e){
+   async function sorting(e){
       let target = e.target;
       let restaurantsList = document.getElementById("restaurants-list");
       console.log(restaurantsList);
@@ -126,6 +125,7 @@ try{
         };
       });
       */
+    ////////////////////////////////////////////////////
       console.log(restaurants);
       if(target.textContent == "Alphabetical (Z-A)"){
         data.sort((a, b) => b.name.localeCompare(a.name));
@@ -152,8 +152,6 @@ try{
 let cityDoc = document.getElementById("city-menu");
 cityDoc.addEventListener("click", cityShow);
 cityDoc.addEventListener("change", cityShow);
-
-
 
 async function cityShow(e) {
     let data = await fetchingCities();
@@ -192,3 +190,34 @@ else{
 }
 }
 
+let cousineBtn = document.getElementById("cuisine-menu");
+cousineBtn.addEventListener("click", cusineShow);
+cousineBtn.addEventListener("change", cusineShow);
+
+async function  cusineShow(e) {
+  let data = await fetchCuisine();
+  console.log(data);
+
+  let cusineOptionsContainer = document.getElementById('cuisine-options');
+  cusineOptionsContainer.innerHTML = "";
+
+  data.forEach(city => {
+    let option = document.createElement("div");
+    option.textContent = city.name;
+    option.classList.add('px-4', 'py-2', 'text-sm', 'hover:bg-gray-100', 'hover:text-[#ff66c4]');
+
+    option.addEventListener("click", async () => {
+      document.getElementById('cuisine-selected').textContent = city.name;
+      document.getElementById('cuisine-selected').dataset.cityId = city.id;
+      document.querySelector('.origin-top-right').classList.add('hidden');
+      let data1 = await fetchingRestaurants();
+      console.log(data1)
+      renderRest(data1);
+      chefsPick(data1);
+      showHide(cusineOptionsContainer);
+    });
+
+    cusineOptionsContainer.appendChild(option);
+  });
+ showHide(cusineOptionsContainer);
+}
