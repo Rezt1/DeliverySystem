@@ -249,8 +249,8 @@
             class="grid grid-cols-[45%_30%_25%] md:grid-cols-[55%_25%_20%] py-4 border-gray-300 border-b-2"
           >
             <div id="product-details" class="flex flex-col gap-1">
-              <h3 class="text-lg md:text-3xl">Product Name</h3>
-              <p class="text-sm md:text-lg text-gray-500">500g</p>
+              <h3 id="item-name" class="text-lg md:text-3xl">Product Name</h3>
+              <p id="item-description" class="text-sm md:text-lg text-gray-500 w-[80%]">Delicious burger with cheese and lettuce</p>
             </div>
 
             <div
@@ -259,6 +259,7 @@
             >
               <!-- Quantity Dropdown -->
               <select
+              id="qty-dropdown"
                 class="block w-13 h-10 px-2 py-1 border border-gray-300 rounded-md text-sm md:text-lg hover:cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#006bb8]"
               >
                 <option>1</option>
@@ -271,6 +272,7 @@
 
               <!-- Remove Button -->
               <button
+              id="remove-item-btn"
                 class="text-sm md:text-lg text-[#ff66c4] h-10 hover:underline hover:cursor-pointer active:opacity-70"
               >
                 Remove
@@ -278,7 +280,7 @@
             </div>
 
             <div id="price-details" class="h-10 flex justify-end items-start">
-              <span class="text-lg md:text-2xl">€24.99</span>
+              <span id="price-item" class="text-lg md:text-2xl">€24.99</span>
             </div>
           </div>
         </section>

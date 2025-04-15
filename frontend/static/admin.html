@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="./style.css" rel="stylesheet" />
+    <script src="./src/nav.mjs" type="module" defer></script>
+    <script src="./src/loginSrc.js" type="module" defer></script>
+    <link href="./custom.css" rel="stylesheet" />
+
+    <title>Hexeats - Admin</title>
+  </head>
+
+  <body class="text-[#006bb8] min-h-screen flex flex-col">
+    <header
+      class="bg-[#006bb8] relative flex items-center justify-center py-3 px-2 md:max-h-[110px]"
+    >
+      <!-- Logo Section -->
+      <div class="flex items-center shrink-0">
+        <a href="home.html">
+          <img
+            class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
+            src="./Images/logo.PNG"
+            alt="logo"
+          />
+        </a>
+      </div>
+    </header>
+
+    <div class="flex flex-1">
+      <!-- SIDEBAR -->
+      <div class="md:static flex flex-col top-0 left-0 w-15 md:!w-46 bg-[#006bb8] text-white  text-lg border-t-2 border-white border-l-transparent h-full z-10 font-bold">
+        <!-- Nav-name -->
+        <div class="flex items-center gap-2 justify-center h-14 border-b">
+            <svg
+            class="btn-menu-icon h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+          <h1 class="hidden md:!flex">Navigation</h1>
+        </div>
+
+        <div class="overflow-y-auto overflow-x-hidden flex-grow">
+          <ul class="flex flex-col py-4 space-y-1">
+            <li>
+              <a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] pr-6">
+                <span class="inline-flex justify-center items-center ml-4">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                </span>
+                <span class="hidden md:!flex ml-2 tracking-wide truncate">Dashboard</span>
+              </a>
+            </li>
+            <!-- To add more items -->
+          </ul>
+        </div>
+      </div>
+    
+      <!-- MAIN CONTENT -->
+      <main class="flex flex-col mt-12 md:mt-22 items-center p-6">
+        <h1 class="text-7xl md:text-8xl text-center font-bold">ADMIN</h1>
+
+        <!-- Add statistics here - Quantity of clients, restaurants, delivery guys! -->
+        <section id="statistics" class="flex flex-col md:flex-row justify-between md:gap-4 lg:gap-12 mt-14 text-[#ff66c4]">
+            <div id="clients-block" class="flex flex-col items-center border-2 border-[#006bb8] rounded-lg p-4 w-45 h-45 lg:w-50 lg:h-50 bg-[#006bb8]">
+                <div class="rounded-full h-24 w-24 border-2 border-[#006bb8] flex items-center justify-center bg-white">
+                    <h2 id="client-qty" class="text-4xl lg:text-5xl">30</h2>
+                </div>
+                <h4 class="text-xl lg:text-2xl font-bold m-auto text-white text-shadow">Clients</h4>
+            </div>
+            <div id="restaurants-block" class="flex flex-col items-center border-2 border-[#006bb8] rounded-lg p-4 w-45 h-45 lg:w-50 lg:h-50 bg-[#006bb8]">
+                <div  class="rounded-full h-24 w-24 border-2 border-[#006bb8] flex items-center justify-center bg-white">
+                    <h2 id="restaurants-qty" class="text-4xl lg:text-5xl">15</h2>
+                </div>
+                <h4 class="text-xl lg:text-2xl font-bold m-auto text-white text-shadow">Restaurants</h4>
+            </div>
+            <div id="delivery-guys-block" class="flex flex-col items-center border-2 border-[#006bb8] rounded-lg p-4 w-45 h-45 lg:w-50 lg:h-50 bg-[#006bb8]">
+                <div class="rounded-full h-24 w-24 border-2 border-[#006bb8] flex items-center justify-center bg-white">
+                    <h2 id="delivery-guys-qty" class="text-4xl lg:text-5xl">10</h2>
+                </div>
+                <h4 class="text-xl lg:text-2xl font-bold m-auto text-white text-shadow">Delivery guys</h4>
+            </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

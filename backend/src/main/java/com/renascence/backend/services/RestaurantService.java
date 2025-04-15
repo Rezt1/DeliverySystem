@@ -12,6 +12,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ public class RestaurantService {
     private final CityRepository cityRepository;
     private final CuisineRepository cuisineRepository;
 
-    public List<RestaurantDto> getAllRestaurants(long cityId, long cuisineId, int restaurantCount) {
+    public List<RestaurantDto> getAllRestaurants(long cityId, long cuisineId, int sorting) {
         List<Restaurant> restaurants = restaurantRepository
                 .findAllByOrderByRatingDesc()
                 .stream()
@@ -52,8 +53,26 @@ public class RestaurantService {
             }).toList();
         }
 
-        if (restaurantCount >= 0) {
-            restaurants = restaurants.stream().limit(restaurantCount).toList();
+        if (sorting == 0) {
+            restaurants = restaurants
+                    .stream()
+                    .sorted(Comparator.comparing(Restaurant::getName, String.CASE_INSENSITIVE_ORDER))
+                    .toList();
+        } else if (sorting == 1) {
+            restaurants = restaurants
+                    .stream()
+                    .sorted(Comparator.comparing(Restaurant::getName, String.CASE_INSENSITIVE_ORDER).reversed())
+                    .toList();
+        } else if (sorting == 2) {
+            restaurants = restaurants
+                    .stream()
+                    .sorted(Comparator.comparing(Restaurant::getRating).reversed())
+                    .toList();
+        } else if (sorting == 3) {
+            restaurants = restaurants
+                    .stream()
+                    .sorted(Comparator.comparing(Restaurant::getRating))
+                    .toList();
         }
 
         return restaurants

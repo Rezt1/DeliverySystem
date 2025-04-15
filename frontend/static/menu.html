@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="./style.css" rel="stylesheet" />
+    <script src="./src/nav.mjs" type="module" defer></script>
+    <script src="./src/loginSrc.js" type="module" defer></script>
+    <link href="./custom.css" rel="stylesheet" />
+
+    <title>Hexeats - Menu</title>
+  </head>
+
+  <body>
+    <header
+      class="bg-[#006bb8] relative flex items-center justify-between py-3 px-2 md:max-h-[110px]"
+    >
+      <!-- Logo Section -->
+      <div class="flex items-center shrink-0">
+        <a href="home.html">
+          <img
+            class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
+            src="./Images/logo.PNG"
+            alt="logo"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Navigation (prevents buttons from going out of sight) -->
+      <nav
+        class="max-md:!hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:!justify-between md:pl-[70px]"
+      >
+        <!-- Left Section -->
+        <div class="flex flex-wrap gap-3">
+          <button class="btn-primary">Home</button>
+          <button id="restaurants-button" class="btn-primary">
+            Restaurants
+          </button>
+
+          <!-- Hidden deliveries button -->
+          <!-- To be shown only when delivery guy is logged in -->
+          <button id="deliveries-button" class="btn-primary !hidden">
+            Deliveries
+          </button>
+        </div>
+
+        <!-- Right Section -->
+        <div class="flex flex-wrap gap-3 items-center">
+          <div class="relative w-35">
+            <select
+              id="search-main-dropdown-2"
+              class="btn-drop-down !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+            >
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Options from database  -->
+              <option value="" selected disabled hidden>City</option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+            >
+              <svg
+                class="fill-current h-4 w-4 text-[#006bb8]"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <button
+            class="btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative"
+          >
+            <svg
+              class="btn-cart-icon w-8 h-8 text-[#006bb8]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              viewBox="0 0 24 24"
+            >
+              <path d="M4 10h16l-2 8H6l-2-8z" />
+              <path d="M9 10V6a3 3 0 0 1 6 0v4" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <line x1="9" y1="16" x2="15" y2="16" />
+            </svg>
+          </button>
+
+          <!-- Login/Reg/Account buttons -->
+          <button id="login-button" class="!flex btn-primary">Login</button>
+          <button id="register-button" class="!flex btn-primary">
+            Register
+          </button>
+          <button id="account-button" class="!hidden btn-primary">
+            Account
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden flex items-center">
+        <button
+          type="button"
+          id="main-menu"
+          aria-label="Main menu"
+          aria-expanded="false"
+          class="btn-menu p-2 rounded-md text-white hover:bg-white hover:text-[#006bb8] transition"
+        >
+          <svg
+            class="btn-menu-icon h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Menu (hidden by default) -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden flex flex-col items-center bg-[#006bb8] absolute top-[100px] left-0 w-full p-4 space-y-4 transition-all duration-300 ease-in-out"
+      >
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+        <!-- change to DropDown -->
+        <div class="relative w-full">
+          <select
+            id="search-main-dropdown-1"
+            class="btn-drop-down text-center !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+          >
+            <!-- Options from database  -->
+            <option value="" selected disabled hidden>City</option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+          >
+            <svg
+              class="fill-current h-4 w-4 text-[#006bb8]"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
+        <button
+          id="home-btn"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Home
+        </button>
+        <button
+          id="restaurants-button-mobile"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Restaurants
+        </button>
+
+        <!-- Hidden button for Deliveries -->
+        <!-- To be shown only when delivery guy is logged in -->
+        <button
+          id="mobile-deliveries-button"
+          class="btn-primary w-full text-white text-lg py-2 !hidden text-start"
+        >
+          Deliveries
+        </button>
+        <button
+          id="mobile-cart-button"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Cart
+        </button>
+
+        <!-- Mobile Login/Account/Register Buttons -->
+        <button
+          id="mobile-login-button"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Login
+        </button>
+        <button
+          id="mobile-register-button"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Register
+        </button>
+        <button
+          id="mobile-account-button"
+          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Account
+        </button>
+      </div>
+    </header>
+
+    <main class="pt-[24px] pb-0 text-[#006bb8]">
+      <div id="loading-state" class="mb-5">
+
+        <!-- Restaurant Name Loading State -->
+        <div class="text-center shadow-xl shadow-gray-300 border bg-white rounded-lg p-4 w-[80%] mx-auto">
+          <h1 id="name-of-restaurant" class="text-5xl md:!text-7xl font-bold bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent">
+                &nbsp; <!-- Empty space for shimmer effect -->
+            </h1>
+        </div>
+    
+        <!-- Menu Section Loading State -->
+        <section id="menu" class="shadow-xl shadow-gray-300 rounded-lg mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto">
+          <!-- Category Loading -->
+          <div class="mb-12">
+            <h3 class="text-3xl md:!text-4xl mt-3 font-bold bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent w-1/3 h-8 rounded">
+              &nbsp;
+            </h3>
+                
+            <!-- Menu Items Grid Loading -->
+            <div class="grid md:grid-cols-2 gap-4 mt-6">
+              <!-- Menu Item Skeleton (repeated 4-6 times) -->
+              <div class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse">
+                <div class="flex flex-col items-start gap-2 w-3/4">
+                  <div class="h-6 bg-gray-200 rounded w-2/3"></div>
+                  <div class="h-4 bg-gray-200 rounded w-full"></div>
+                  <div class="h-4 bg-gray-200 rounded w-4/5"></div>
+                </div>
+                <div class="flex flex-col items-end justify-between gap-2">
+                  <div class="h-6 bg-gray-200 rounded w-12"></div>
+                  <div class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"></div>
+                </div>
+              </div>
+              
+              <!-- Repeat similar skeleton items -->
+              <div class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse">
+                <div class="flex flex-col items-start gap-2 w-3/4">
+                  <div class="h-6 bg-gray-200 rounded w-1/2"></div>
+                  <div class="h-4 bg-gray-200 rounded w-full"></div>
+                  <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                </div>
+                <div class="flex flex-col items-end justify-between gap-2">
+                  <div class="h-6 bg-gray-200 rounded w-12"></div>
+                  <div class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"></div>
+                </div>
+              </div>
+              
+              <!-- Third item -->
+              <div class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse">
+                <div class="flex flex-col items-start gap-2 w-3/4">
+                  <div class="h-6 bg-gray-200 rounded w-3/4"></div>
+                  <div class="h-4 bg-gray-200 rounded w-full"></div>
+                  <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                </div>
+                <div class="flex flex-col items-end justify-between gap-2">
+                  <div class="h-6 bg-gray-200 rounded w-12"></div>
+                  <div class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"></div>
+                </div>
+              </div>
+                    
+                    <!-- Fourth item -->
+                    <div class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse">
+                      <div class="flex flex-col items-start gap-2 w-3/4">
+                            <div class="h-6 bg-gray-200 rounded w-1/3"></div>
+                            <div class="h-4 bg-gray-200 rounded w-full"></div>
+                            <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+                          </div>
+                          <div class="flex flex-col items-end justify-between gap-2">
+                            <div class="h-6 bg-gray-200 rounded w-12"></div>
+                            <div class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Second Category Loading -->
+                    <div class="mb-12">
+                      <h3 class="text-3xl md:!text-4xl mt-3 font-bold bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent w-1/4 h-8 rounded">
+                        &nbsp;
+                      </h3>
+                      
+                      <!-- Second Menu Items Grid Loading -->
+                      <div class="grid md:grid-cols-2 gap-4 mt-6">
+                        <!-- Repeat similar skeleton items -->
+                        <div class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse">
+                        <div class="flex flex-col items-start gap-2 w-3/4">
+                            <div class="h-6 bg-gray-200 rounded w-3/5"></div>
+                            <div class="h-4 bg-gray-200 rounded w-full"></div>
+                            <div class="h-4 bg-gray-200 rounded w-4/5"></div>
+                        </div>
+                        <div class="flex flex-col items-end justify-between gap-2">
+                          <div class="h-6 bg-gray-200 rounded w-12"></div>
+                          <div class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"></div>
+                        </div>
+                      </div>
+                      
+                      <!-- Second item -->
+                      <div class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse">
+                        <div class="flex flex-col items-start gap-2 w-3/4">
+                          <div class="h-6 bg-gray-200 rounded w-2/3"></div>
+                          <div class="h-4 bg-gray-200 rounded w-full"></div>
+                          <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                        </div>
+                        <div class="flex flex-col items-end justify-between gap-2">
+                          <div class="h-6 bg-gray-200 rounded w-12"></div>
+                          <div class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+                
+              <!-- Template for the actual info -->
+              <!-- It's hidden. Unhide it and hide the skeleton items when the data is loaded. -->
+              <div id="template-menu" class="hidden mb-5">
+                <!-- Restaurant Name -->
+                <div class="text-center shadow-xl shadow-gray-300 border bg-white rounded-lg p-4 w-[80%] mx-auto">
+                  <h1
+                  id="name-of-restaurant"
+                  class="text-5xl md:!text-7xl font-bold">Restaurant name</h1>
+                </div>
+
+                <!-- Menu content -->
+                <section id="menu"
+                class="shadow-xl shadow-gray-300 rounded-lg flex flex-col items-start justify-center mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto overflow-y-auto">
+                <h3
+                id="category-name"
+                class="text-3xl md:!text-4xl mt-3 font-bold">Category</h3>
+                
+                <!-- Items -->
+                <div id="menu-items"
+                class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6">
+                <div id="item" class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full md:!w-[50%]">
+                <div class="flex flex-col items-start gap-2">
+                    <h4 id="item-name"
+                    class="text-2xl md:text-3xl">Item name</h4>
+                    <p id="item-description"
+                    class="max-md:text-sm md:!text-md lg:!text-lg text-gray-500 w-[90%] md:w-[85%]">Item description</p>
+                  </div>
+                  <div class="flex flex-col items-end justify-between gap-2">
+                    <h4 id="item-price"
+                    class="text-2xl md:text-3xl">€14.50</h4>
+                    <button id="add-to-cart-btn"
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 text-3xl md:!text-4xl bg-blue-50 hover:cursor-pointer hover:text-[#ff66c4] hover:bg-pink-50 active:opacity-70">+</button>
+                  </div>
+                </div>
+                
+              </div>
+            </section>
+          </div>
+        </main>
+          
+          <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
+            <button class="btn-footer">FAQ</button>
+            <button class="btn-footer">About</button>
+            <button class="btn-footer">Contacts</button>
+            <button class="btn-footer">Feedback</button>
+          </footer>
+  </body>
+</html>
