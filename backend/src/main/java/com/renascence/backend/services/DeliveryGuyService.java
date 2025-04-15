@@ -44,11 +44,6 @@ public class DeliveryGuyService {
             throw new IllegalStateException("User is not a delivery guy");
         }
 
-        // I DON'T KNOW WHY THIS IS HERE
-//        if (deliveryGuy.getWorkCity() == null){
-//            throw new IllegalStateException("Cannot take a delivery from another city");
-//        }
-
         List<Delivery> deliveries = deliveryRepository
                 .findByStatusAndRestaurant_City_Id(DeliveryStatus.PENDING, deliveryGuy.getWorkCity().getId());
 
