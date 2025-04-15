@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryGuyServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/CityServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/CityServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryGuyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryGuyService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,39 +55,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.BackendApplication.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CityRepositoryTest.cityRepository_saveCity_ShouldReturnSavedCity.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CityRepositoryTest.saveCity_ShouldPersist.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CityServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CityServiceTest.getAllCities_ShouldReturnAllCitiesAsDtos.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CityServiceTest.getCityById_WithExistingId_ShouldReturnCityDto.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CuisineServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CuisineServiceTest.getAllCuisines_ShouldReturnAllCuisinesAsDtos.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CuisineServiceTest.getAllCuisines_WhenNoCuisinesExist_ShouldReturnEmptyList.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CuisineServiceTest.getCuisineById_WithExistingId_ShouldReturnConvertedDto.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Spring Boot.BackendApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ivo/Desktop/DeliverySystem/backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.BackendApplication.executor": "Run",
+    "JUnit.CityRepositoryTest.cityRepository_saveCity_ShouldReturnSavedCity.executor": "Run",
+    "JUnit.CityRepositoryTest.saveCity_ShouldPersist.executor": "Run",
+    "JUnit.CityServiceTest.executor": "Run",
+    "JUnit.CityServiceTest.getAllCities_ShouldReturnAllCitiesAsDtos.executor": "Run",
+    "JUnit.CityServiceTest.getCityById_WithExistingId_ShouldReturnCityDto.executor": "Run",
+    "JUnit.CuisineServiceTest.executor": "Run",
+    "JUnit.CuisineServiceTest.getAllCuisines_ShouldReturnAllCuisinesAsDtos.executor": "Run",
+    "JUnit.CuisineServiceTest.getAllCuisines_WhenNoCuisinesExist_ShouldReturnEmptyList.executor": "Run",
+    "JUnit.CuisineServiceTest.getCuisineById_WithExistingId_ShouldReturnConvertedDto.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenAlreadyAssigned.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenDeliveryNotInSameCity.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testAssignDelivery_successful.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetPendingDeliveries_shouldReturnDeliveries.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.BackendApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Ivo/Desktop/DeliverySystem/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="JUnit.CityServiceTest">
-    <configuration name="CityServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+}]]></component>
+  <component name="RunManager" selected="JUnit.DeliveryGuyServiceTest">
+    <configuration name="DeliveryGuyServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -95,13 +101,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CityServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CityServiceTest.getAllCities_ShouldReturnAllCitiesAsDtos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenAlreadyAssigned" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -110,14 +116,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CityServiceTest" />
-      <option name="METHOD_NAME" value="getAllCities_ShouldReturnAllCitiesAsDtos" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
+      <option name="METHOD_NAME" value="testAssignDelivery_shouldThrowWhenAlreadyAssigned" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CityServiceTest.getAllCities_ShouldReturnOnlyNonDeletedCitiesAsDtos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenDeliveryNotInSameCity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -126,14 +132,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CityServiceTest" />
-      <option name="METHOD_NAME" value="getAllCities_ShouldReturnOnlyNonDeletedCitiesAsDtos" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
+      <option name="METHOD_NAME" value="testAssignDelivery_shouldThrowWhenDeliveryNotInSameCity" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CityServiceTest.getCityById_throwsException_whenCityIsDeleted" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryGuyServiceTest.testAssignDelivery_successful" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -142,14 +148,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CityServiceTest" />
-      <option name="METHOD_NAME" value="getCityById_throwsException_whenCityIsDeleted" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
+      <option name="METHOD_NAME" value="testAssignDelivery_successful" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CuisineServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryGuyServiceTest.testGetPendingDeliveries_shouldReturnDeliveries" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -158,8 +164,9 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CuisineServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
+      <option name="METHOD_NAME" value="testGetPendingDeliveries_shouldReturnDeliveries" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -173,11 +180,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CityServiceTest" />
-        <item itemvalue="JUnit.CityServiceTest.getAllCities_ShouldReturnOnlyNonDeletedCitiesAsDtos" />
-        <item itemvalue="JUnit.CityServiceTest.getCityById_throwsException_whenCityIsDeleted" />
-        <item itemvalue="JUnit.CityServiceTest.getAllCities_ShouldReturnAllCitiesAsDtos" />
-        <item itemvalue="JUnit.CuisineServiceTest" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTest" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTest.testAssignDelivery_successful" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenAlreadyAssigned" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenDeliveryNotInSameCity" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTest.testGetPendingDeliveries_shouldReturnDeliveries" />
       </list>
     </recent_temporary>
   </component>
