@@ -1,14 +1,33 @@
 import { fetchCuisine, fetchingCities } from "./fetchingData.mjs";
 import { ip } from "./ipSearch.mjs";
-import { showOptions } from "./utils.mjs";
 
+let obj = {
+  "cityId" : undefined,
+  "cuisineId" : undefined,
+  "sorting" : undefined
+}
 
-async function fetchingRestaurants(){
+if("location-id" in sessionStorage){
+  obj.cityId = sessionStorage.getItem("location-id");
+}
+
+async function fetchingRestaurants(obj){
 try{
   let address = `${ip()}/api/restaurants`;
   let token = sessionStorage.getItem("accessToken");
-  let cityOptionsContainer = document.getElementById('city-selected');
-  if("location-id" in sessionStorage){  
+  let stringSort = '';
+ Object.keys(obj).forEach(el => {
+  if(obj[el] != undefined){
+    stringSort = stringSort + `${el}=${obj[el]}&`
+  }
+ });
+ console.log(stringSort);
+ if(stringSort != ''){
+  stringSort = stringSort.slice(0, -1); 
+  address = `${ip()}/api/restaurants?${stringSort}`;
+ }
+
+ /* if("location-id" in sessionStorage){  
 
 
      address = `${ip()}/api/restaurants?cityId=${sessionStorage.getItem("location-id")}`;
@@ -17,6 +36,8 @@ try{
     let id = parseInt(cityOptionsContainer.dataset.cityId);
     address = `${ip()}/api/restaurants?cityId=${id}&`
   }
+  */
+
     let resp = await fetch(address, {
       method: "Get",
       headers: {
@@ -40,13 +61,20 @@ try{
 }
   
         let btnRatingSort = document.getElementById("sort-menu");
-        btnRatingSort.addEventListener("click", showOptions);
+        btnRatingSort.addEventListener("click", () =>{
+          let options = document.getElementById("options");
+          console.log(options);
+          if(options.classList.contains("hidden")){
+         options.classList.toggle("hidden", false);
+          }
+          else{
+        options.classList.toggle("hidden", true);
+          }
+          });
         
 
-        let data = await fetchingRestaurants();
+        let data = await fetchingRestaurants(obj);
         renderRest(data);
-        
-        console.log(data);
 
         async function renderRest(data) {
         let restaurantsList = document.getElementById("restaurants-list");
@@ -71,6 +99,8 @@ try{
       }
 
     async function  chefsPick(data) {
+
+        data.sort((a, b) => b.rating - a.rating);
         
         let loading1 = document.getElementById("loading-1");
         let loading2 = document.getElementById("loading-2");
@@ -106,13 +136,30 @@ try{
     }
 
     let highest = document.getElementById("Highest-Rated");
-    highest.addEventListener("click", sorting);
+    highest.addEventListener("click", async () => {
+      obj.sorting = 2
+      let restSort = await fetchingRestaurants(obj);
+      renderRest(restSort);
+      btnRatingSort.click();
+    });
 
     let alphabeticalAc = document.getElementById("Alphabetical(A-Z)");
-    alphabeticalAc.addEventListener("click", sorting);
+    alphabeticalAc.addEventListener("click", async () => {
+      obj.sorting = 0
+      fetchingRestaurants(obj);
+      let restSort = await fetchingRestaurants(obj);
+      renderRest(restSort);
+      btnRatingSort.click();
+    });
 
     let alphabeticalDec = document.getElementById("Alphabetical(Z-A)");
-    alphabeticalDec.addEventListener("click", sorting);
+    alphabeticalDec.addEventListener("click", async () => {
+      obj.sorting= 1
+      fetchingRestaurants(obj);
+      let restSort = await fetchingRestaurants(obj);
+      renderRest(restSort);
+      btnRatingSort.click();
+    });
 
    async function sorting(e){
       let target = e.target;
@@ -166,10 +213,12 @@ async function cityShow(e) {
       option.classList.add('px-4', 'py-2', 'text-sm', 'hover:bg-gray-100', 'hover:text-[#ff66c4]');
 
       option.addEventListener("click", async () => {
-        document.getElementById('city-selected').textContent = city.name;
+       /*document.getElementById('city-selected').textContent = city.name;
         document.getElementById('city-selected').dataset.cityId = city.id;
         document.querySelector('.origin-top-right').classList.add('hidden');
-        let data1 = await fetchingRestaurants();
+        */
+        obj.cityId = city.id;
+        let data1 = await fetchingRestaurants(obj);
         console.log(data1)
         renderRest(data1);
         chefsPick(data1);
@@ -201,16 +250,18 @@ async function  cusineShow(e) {
   let cusineOptionsContainer = document.getElementById('cuisine-options');
   cusineOptionsContainer.innerHTML = "";
 
-  data.forEach(city => {
+  data.forEach(cuisine => {
     let option = document.createElement("div");
-    option.textContent = city.name;
+    option.textContent = cuisine.name;
     option.classList.add('px-4', 'py-2', 'text-sm', 'hover:bg-gray-100', 'hover:text-[#ff66c4]');
 
     option.addEventListener("click", async () => {
-      document.getElementById('cuisine-selected').textContent = city.name;
+     /* document.getElementById('cuisine-selected').textContent = city.name;
       document.getElementById('cuisine-selected').dataset.cityId = city.id;
       document.querySelector('.origin-top-right').classList.add('hidden');
-      let data1 = await fetchingRestaurants();
+      */
+      obj.cuisineId = cuisine.id;
+      let data1 = await fetchingRestaurants(obj);
       console.log(data1)
       renderRest(data1);
       chefsPick(data1);
