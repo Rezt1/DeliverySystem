@@ -78,10 +78,11 @@ public class DeliveryService {
     }
 
     public DeliveryDto getDeliveryById(Long id) {
-        Delivery delivery = deliveryRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Delivery not found"));
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        Delivery delivery = deliveryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Delivery not found"));
 
         User user = userRepository.findByEmail(auth.getName())
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));

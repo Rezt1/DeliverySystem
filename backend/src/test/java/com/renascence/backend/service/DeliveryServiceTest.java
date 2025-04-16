@@ -32,8 +32,7 @@ import static com.renascence.backend.enums.PaymentMethod.CARD;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class DeliveryServiceTest {
@@ -61,15 +60,14 @@ public class DeliveryServiceTest {
         SecurityContextHolder.setContext(securityContext);
 
         // Returns UnnecessaryStubbingException for getDeliveryById_shouldThrowIfDeliveryNotFound()
-        when(securityContext.getAuthentication()).thenReturn(authentication);
-        when(authentication.getName()).thenReturn("user@example.com");
+        lenient().when(securityContext.getAuthentication()).thenReturn(authentication);
+        lenient().when(authentication.getName()).thenReturn("user@example.com");
     }
 
 
 
     @Test
     void createDelivery_shouldCreateDeliverySuccessfully() {
-
         User user = new User();
         user.setEmail("user@example.com");
 

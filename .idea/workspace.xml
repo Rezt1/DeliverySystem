@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/FoodServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/deliveryFood/DeliveryFoodDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/deliveryFood/DeliveryFoodDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryGuyServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryGuyServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +108,16 @@
     "JUnit.DeliveryServiceTest.executor": "Run",
     "JUnit.DeliveryServiceTest.getDeliveryById_shouldReturnDeliveryDtoIfValid.executor": "Run",
     "JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotOwnedByUser.executor": "Run",
     "JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfUserNotFound.executor": "Run",
+    "JUnit.FoodServiceTest.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodById_FoodIsDeleted.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodById_FoodNotFound.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodById_Success.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodsByRestaurant_ExcludesDeletedFoods.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodsByRestaurant_RestaurantIsDeleted.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodsByRestaurant_RestaurantNotFound.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodsByRestaurant_Success.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -128,7 +137,20 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotOwnedByUser">
+  <component name="RunManager" selected="JUnit.FoodServiceTest">
+    <configuration name="BackendApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.BackendApplication" />
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DeliveryServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
@@ -140,22 +162,6 @@
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
       <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DeliveryServiceTest.createDelivery_shouldCreateDeliverySuccessfully" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
-      <option name="METHOD_NAME" value="createDelivery_shouldCreateDeliverySuccessfully" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -176,7 +182,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotOwnedByUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FoodServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -185,14 +191,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
-      <option name="METHOD_NAME" value="getDeliveryById_shouldThrowIfDeliveryNotOwnedByUser" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.FoodServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryServiceTest.getDeliveryById_shouldThrowIfUserNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FoodServiceTest.testGetFoodById_FoodIsDeleted" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -201,8 +206,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
-      <option name="METHOD_NAME" value="getDeliveryById_shouldThrowIfUserNotFound" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.FoodServiceTest" />
+      <option name="METHOD_NAME" value="testGetFoodById_FoodIsDeleted" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -217,11 +222,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotOwnedByUser" />
+        <item itemvalue="JUnit.FoodServiceTest" />
         <item itemvalue="JUnit.DeliveryServiceTest" />
-        <item itemvalue="JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfUserNotFound" />
-        <item itemvalue="JUnit.DeliveryServiceTest.createDelivery_shouldCreateDeliverySuccessfully" />
+        <item itemvalue="Application.BackendApplication" />
         <item itemvalue="JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotFound" />
+        <item itemvalue="JUnit.FoodServiceTest.testGetFoodById_FoodIsDeleted" />
       </list>
     </recent_temporary>
   </component>
