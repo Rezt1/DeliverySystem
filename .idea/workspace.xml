@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryGuyServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/RestaurantService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryGuyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryGuyService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,11 +66,65 @@
     "JUnit.CuisineServiceTest.getAllCuisines_ShouldReturnAllCuisinesAsDtos.executor": "Run",
     "JUnit.CuisineServiceTest.getAllCuisines_WhenNoCuisinesExist_ShouldReturnEmptyList.executor": "Run",
     "JUnit.CuisineServiceTest.getCuisineById_WithExistingId_ShouldReturnConvertedDto.executor": "Run",
-    "JUnit.DeliveryGuyServiceTest.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.assignDelivery_ThrowsException_WhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.assignDelivery_shouldSuccessfullyAssignDelivery.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.assignDelivery_shouldThrowWhenDeliveryNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.assignDelivery_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.executor": "Debug",
+    "JUnit.DeliveryGuyServiceTest.getCurrentDelivery_shouldOnlyReturnOutForDeliveryStatus.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.getCurrentDelivery_shouldReturnNullWhenNoActiveDeliveries.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenAlreadyAssigned.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenDeliveryNotInSameCity.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenUserNotFound.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testAssignDelivery_successful.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_shouldReturnCurrentDeliveryForDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetFinishedDeliveries_shouldReturnDeliveredDeliveries.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetFinishedDeliveries_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetFinishedDeliveries_shouldThrowWhenUserNotFound.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testGetPendingDeliveries_shouldReturnDeliveries.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetPendingDeliveries_shouldThrowWhenUserIsNotDeliveryGuy_andUserDoesNotExist.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetPendingDeliveries_shouldThrowWhenUserIsNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetSalaries_shouldReturnSalaryDtos.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetSalaries_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetSalaries_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldMarkSuccessfully.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenDeliveryNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenNoActiveDelivery.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testQuit_shouldSucceedAndReturnMessage.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testQuit_shouldThrowWhenNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testQuit_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldCreateDeliverySuccessfully.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFirstFoodNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFoodDeletedInLoop.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFoodNotFoundInLoop.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfRestaurantIsDeleted.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfUserNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.executor": "Run",
+    "JUnit.DeliveryServiceTest.getDeliveryById_shouldReturnDeliveryDtoIfValid.executor": "Run",
+    "JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotOwnedByUser.executor": "Run",
+    "JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfUserNotFound.executor": "Run",
+    "JUnit.FoodServiceTest.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodById_FoodIsDeleted.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodById_FoodNotFound.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodById_Success.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodsByRestaurant_ExcludesDeletedFoods.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodsByRestaurant_RestaurantIsDeleted.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodsByRestaurant_RestaurantNotFound.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodsByRestaurant_Success.executor": "Run",
+    "JUnit.RestaurantServiceTest.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_cityNotFound_throwsException.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_cuisineNotFound_throwsException.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_deletedCity_throwsException.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_filterByCuisine_returnsOnlyMatchingCuisine.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_sortByNameAscending_sortedCorrectly.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_sortByNameDescending_sortedCorrectly.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_sortByRatingAscending_sortedCorrectly.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_sortByRatingDescending_sortedCorrectly.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -91,8 +144,8 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.DeliveryGuyServiceTest">
-    <configuration name="DeliveryGuyServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.RestaurantServiceTest">
+    <configuration name="RestaurantServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -101,13 +154,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.RestaurantServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenAlreadyAssigned" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RestaurantServiceTest.getAllRestaurants_cityNotFound_throwsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -116,14 +169,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="testAssignDelivery_shouldThrowWhenAlreadyAssigned" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.RestaurantServiceTest" />
+      <option name="METHOD_NAME" value="getAllRestaurants_cityNotFound_throwsException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenDeliveryNotInSameCity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RestaurantServiceTest.getAllRestaurants_cuisineNotFound_throwsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -132,14 +185,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="testAssignDelivery_shouldThrowWhenDeliveryNotInSameCity" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.RestaurantServiceTest" />
+      <option name="METHOD_NAME" value="getAllRestaurants_cuisineNotFound_throwsException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryGuyServiceTest.testAssignDelivery_successful" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RestaurantServiceTest.getAllRestaurants_deletedCity_throwsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -148,14 +201,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="testAssignDelivery_successful" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.RestaurantServiceTest" />
+      <option name="METHOD_NAME" value="getAllRestaurants_deletedCity_throwsException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryGuyServiceTest.testGetPendingDeliveries_shouldReturnDeliveries" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RestaurantServiceTest.getAllRestaurants_sortByRatingAscending_sortedCorrectly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -164,8 +217,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="testGetPendingDeliveries_shouldReturnDeliveries" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.RestaurantServiceTest" />
+      <option name="METHOD_NAME" value="getAllRestaurants_sortByRatingAscending_sortedCorrectly" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -180,11 +233,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DeliveryGuyServiceTest" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.testAssignDelivery_successful" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenAlreadyAssigned" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenDeliveryNotInSameCity" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.testGetPendingDeliveries_shouldReturnDeliveries" />
+        <item itemvalue="JUnit.RestaurantServiceTest" />
+        <item itemvalue="JUnit.RestaurantServiceTest.getAllRestaurants_deletedCity_throwsException" />
+        <item itemvalue="JUnit.RestaurantServiceTest.getAllRestaurants_cuisineNotFound_throwsException" />
+        <item itemvalue="JUnit.RestaurantServiceTest.getAllRestaurants_cityNotFound_throwsException" />
+        <item itemvalue="JUnit.RestaurantServiceTest.getAllRestaurants_sortByRatingAscending_sortedCorrectly" />
       </list>
     </recent_temporary>
   </component>

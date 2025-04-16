@@ -81,25 +81,6 @@ public class RestaurantService {
                 .toList();
     }
 
-//    public List<RestaurantDto> getRestaurantsByCityId(Long cityId) {
-//        return restaurantRepository.findByCityId(cityId).stream()
-//                .map(this::convertToDto)
-//                .toList();
-//    }
-//
-//    public List<RestaurantDto> getTopRatedRestaurants(int count) {
-//        return restaurantRepository.findTopRatedRestaurants(count).stream()
-//                .map(this::convertToDto)
-//                .toList();
-//    }
-//
-//    public List<RestaurantDto> searchByCuisineName(String cuisineName) {
-//        return restaurantRepository.findByCuisineNameContainingIgnoreCase(cuisineName)
-//                .stream()
-//                .map(this::convertToDto)
-//                .toList();
-//    }
-
     private RestaurantDto convertToDto(Restaurant restaurant) {
         RestaurantDto dto = new RestaurantDto();
         dto.setId(restaurant.getId());
