@@ -27,10 +27,10 @@ export async function fetchingCities(){
     }
 }
 
-export async function fetchingFood(){
-
+export async function fetchingFood(id){
   let token = sessionStorage.getItem("accessToken");
-  let resp = await fetch(`${ip()}/api/foods/restaurant/1`, {
+  try{
+  let resp = await fetch(`${ip()}/api/foods/restaurant/${id}`, {
     method: "Get",
     headers: {
       'Content-Type': 'application/json',
@@ -40,6 +40,11 @@ export async function fetchingFood(){
 
   let data = await resp.json();
   return data;
+  }
+  catch(e){
+    console.log(e.message);
+  }
+
 }
 
 export async function fettchUser() {
