@@ -22,7 +22,6 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.mockAuthentication;
 
 @ExtendWith(MockitoExtension.class)
 class DeliveryGuyServiceTest {

@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryGuyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryGuyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/deliveryFood/DeliveryFoodDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/deliveryFood/DeliveryFoodDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryGuyServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryGuyServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +72,7 @@
     "JUnit.DeliveryGuyServiceTest.assignDelivery_shouldSuccessfullyAssignDelivery.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.assignDelivery_shouldThrowWhenDeliveryNotFound.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.assignDelivery_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
-    "JUnit.DeliveryGuyServiceTest.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.executor": "Debug",
     "JUnit.DeliveryGuyServiceTest.getCurrentDelivery_shouldOnlyReturnOutForDeliveryStatus.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.getCurrentDelivery_shouldReturnNullWhenNoActiveDeliveries.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenAlreadyAssigned.executor": "Run",
@@ -95,6 +96,19 @@
     "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenNoActiveDelivery.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testQuit_shouldSucceedAndReturnMessage.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testQuit_shouldThrowWhenNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testQuit_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldCreateDeliverySuccessfully.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFirstFoodNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFoodDeletedInLoop.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFoodNotFoundInLoop.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfRestaurantIsDeleted.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfUserNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.executor": "Run",
+    "JUnit.DeliveryServiceTest.getDeliveryById_shouldReturnDeliveryDtoIfValid.executor": "Run",
+    "JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfUserNotFound.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -114,8 +128,8 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.DeliveryGuyServiceTest.testQuit_shouldThrowWhenNotDeliveryGuy">
-    <configuration name="DeliveryGuyServiceTest.testGetSalaries_shouldThrowWhenUserIsNotDeliveryGuy" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotOwnedByUser">
+    <configuration name="DeliveryServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -124,14 +138,29 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="testGetSalaries_shouldThrowWhenUserIsNotDeliveryGuy" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DeliveryServiceTest.createDelivery_shouldCreateDeliverySuccessfully" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
+      <option name="METHOD_NAME" value="createDelivery_shouldCreateDeliverySuccessfully" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryGuyServiceTest.testGetSalaries_shouldThrowWhenUserNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -140,14 +169,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="testGetSalaries_shouldThrowWhenUserNotFound" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
+      <option name="METHOD_NAME" value="getDeliveryById_shouldThrowIfDeliveryNotFound" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryGuyServiceTest.testQuit_shouldSucceedAndReturnMessage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotOwnedByUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -156,14 +185,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="testQuit_shouldSucceedAndReturnMessage" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
+      <option name="METHOD_NAME" value="getDeliveryById_shouldThrowIfDeliveryNotOwnedByUser" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryGuyServiceTest.testQuit_shouldThrowWhenNotDeliveryGuy" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryServiceTest.getDeliveryById_shouldThrowIfUserNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -172,24 +201,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="testQuit_shouldThrowWhenNotDeliveryGuy" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DeliveryGuyServiceTest.testQuit_shouldThrowWhenUserNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="testQuit_shouldThrowWhenUserNotFound" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
+      <option name="METHOD_NAME" value="getDeliveryById_shouldThrowIfUserNotFound" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -204,11 +217,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.testQuit_shouldThrowWhenNotDeliveryGuy" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.testQuit_shouldThrowWhenUserNotFound" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.testQuit_shouldSucceedAndReturnMessage" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.testGetSalaries_shouldThrowWhenUserIsNotDeliveryGuy" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.testGetSalaries_shouldThrowWhenUserNotFound" />
+        <item itemvalue="JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotOwnedByUser" />
+        <item itemvalue="JUnit.DeliveryServiceTest" />
+        <item itemvalue="JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfUserNotFound" />
+        <item itemvalue="JUnit.DeliveryServiceTest.createDelivery_shouldCreateDeliverySuccessfully" />
+        <item itemvalue="JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotFound" />
       </list>
     </recent_temporary>
   </component>
