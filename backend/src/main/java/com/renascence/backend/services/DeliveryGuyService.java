@@ -1,6 +1,5 @@
 package com.renascence.backend.services;
 
-
 import com.renascence.backend.dtos.delivery.DeliveryDto;
 import com.renascence.backend.dtos.deliveryFood.DeliveryFoodDto;
 import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
@@ -36,7 +35,7 @@ public class DeliveryGuyService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         User user = userRepository.findByEmail(auth.getName())
-                .orElseThrow(() -> new EntityNotFoundException("User does not exists"));
+                .orElseThrow(() -> new EntityNotFoundException("User does not exist"));
 
         DeliveryGuy deliveryGuy = user.getDeliveryGuy();
 
@@ -211,7 +210,7 @@ public class DeliveryGuyService {
                 deliveryGuy.getUser().getName(), deliveryGuy.getId());
     }
 
-    private DeliveryDto mapToDeliveryDto(Delivery delivery) {
+    public DeliveryDto mapToDeliveryDto(Delivery delivery) {
         DeliveryDto dto = new DeliveryDto();
         dto.setDeliveryId(delivery.getId());
         dto.setUsername(delivery.getReceiver().getName());
