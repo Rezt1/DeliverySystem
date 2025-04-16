@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/RestaurantService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/UserServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +44,7 @@
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -125,6 +126,11 @@
     "JUnit.RestaurantServiceTest.getAllRestaurants_sortByNameDescending_sortedCorrectly.executor": "Run",
     "JUnit.RestaurantServiceTest.getAllRestaurants_sortByRatingAscending_sortedCorrectly.executor": "Run",
     "JUnit.RestaurantServiceTest.getAllRestaurants_sortByRatingDescending_sortedCorrectly.executor": "Run",
+    "JUnit.UserServiceTest.executor": "Run",
+    "JUnit.UserServiceTest.testGetActiveDeliveries_shouldReturnActiveOnesOnly.executor": "Run",
+    "JUnit.UserServiceTest.testGetActiveDeliveries_userNotFound_shouldThrow.executor": "Run",
+    "JUnit.UserServiceTest.testGetPastDeliveries_shouldReturnDeliveredOnly.executor": "Run",
+    "JUnit.UserServiceTest.testGetPastDeliveries_userNotFound_shouldThrow.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -144,8 +150,8 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.RestaurantServiceTest">
-    <configuration name="RestaurantServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.UserServiceTest.testGetPastDeliveries_shouldReturnDeliveredOnly">
+    <configuration name="UserServiceTest.testGetActiveDeliveries_shouldReturnActiveOnesOnly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -154,29 +160,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.RestaurantServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RestaurantServiceTest.getAllRestaurants_cityNotFound_throwsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.RestaurantServiceTest" />
-      <option name="METHOD_NAME" value="getAllRestaurants_cityNotFound_throwsException" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="testGetActiveDeliveries_shouldReturnActiveOnesOnly" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RestaurantServiceTest.getAllRestaurants_cuisineNotFound_throwsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserServiceTest.testGetActiveDeliveries_shouldReturnPendingAndOutForDelivery" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -185,14 +176,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.RestaurantServiceTest" />
-      <option name="METHOD_NAME" value="getAllRestaurants_cuisineNotFound_throwsException" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="testGetActiveDeliveries_shouldReturnPendingAndOutForDelivery" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RestaurantServiceTest.getAllRestaurants_deletedCity_throwsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserServiceTest.testGetActiveDeliveries_userNotFound_shouldThrow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -201,14 +192,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.RestaurantServiceTest" />
-      <option name="METHOD_NAME" value="getAllRestaurants_deletedCity_throwsException" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="testGetActiveDeliveries_userNotFound_shouldThrow" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RestaurantServiceTest.getAllRestaurants_sortByRatingAscending_sortedCorrectly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserServiceTest.testGetPastDeliveries_shouldReturnDeliveredOnly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -217,8 +208,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.RestaurantServiceTest" />
-      <option name="METHOD_NAME" value="getAllRestaurants_sortByRatingAscending_sortedCorrectly" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="testGetPastDeliveries_shouldReturnDeliveredOnly" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.testGetPastDeliveries_userNotFound_shouldThrow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="testGetPastDeliveries_userNotFound_shouldThrow" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -233,11 +240,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.RestaurantServiceTest" />
-        <item itemvalue="JUnit.RestaurantServiceTest.getAllRestaurants_deletedCity_throwsException" />
-        <item itemvalue="JUnit.RestaurantServiceTest.getAllRestaurants_cuisineNotFound_throwsException" />
-        <item itemvalue="JUnit.RestaurantServiceTest.getAllRestaurants_cityNotFound_throwsException" />
-        <item itemvalue="JUnit.RestaurantServiceTest.getAllRestaurants_sortByRatingAscending_sortedCorrectly" />
+        <item itemvalue="JUnit.UserServiceTest.testGetPastDeliveries_shouldReturnDeliveredOnly" />
+        <item itemvalue="JUnit.UserServiceTest.testGetActiveDeliveries_shouldReturnPendingAndOutForDelivery" />
+        <item itemvalue="JUnit.UserServiceTest.testGetPastDeliveries_userNotFound_shouldThrow" />
+        <item itemvalue="JUnit.UserServiceTest.testGetActiveDeliveries_shouldReturnActiveOnesOnly" />
+        <item itemvalue="JUnit.UserServiceTest.testGetActiveDeliveries_userNotFound_shouldThrow" />
       </list>
     </recent_temporary>
   </component>

@@ -169,7 +169,6 @@ public class UserService {
         dto.setEmail(user.getEmail());
         dto.setPhoneNumber(user.getPhoneNumber());
         dto.setCityName(user.getLocation() != null ? user.getLocation().getName() : "No city chosen");
-        // Add other fields you want to expose
         return dto;
     }
 
