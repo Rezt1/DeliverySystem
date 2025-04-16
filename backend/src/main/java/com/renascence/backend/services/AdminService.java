@@ -49,9 +49,9 @@ public class AdminService {
         city.setName(createCityDto.getName());
         city.setSalary(createCityDto.getSalary());
 
-        cityRepository.save(city);
+        City savedCity = cityRepository.save(city);
 
-        return new CityDto(city.getId(), city.getName(), city.getSalary());
+        return new CityDto(savedCity.getId(), savedCity.getName(), savedCity.getSalary());
     }
 
     public CuisineDto createCuisine(CreateCuisineDto createCuisineDto) {
@@ -59,9 +59,9 @@ public class AdminService {
 
         cuisine.setName(createCuisineDto.getName());
 
-        cuisineRepository.save(cuisine);
+        Cuisine savedCuisine = cuisineRepository.save(cuisine);
 
-        return new CuisineDto(cuisine.getId(), cuisine.getName());
+        return new CuisineDto(savedCuisine.getId(), savedCuisine.getName());
     }
 
     public FoodDto createFood(CreateFoodDto dto) {
@@ -177,30 +177,66 @@ public class AdminService {
     }
 
     public List<DeliveryGuyIncomeDto> getIncomeByDeliveryGuy(DeliveryGuyIncomeForPeriodOfTimeDto dto) {
+//        List<DeliveryGuy> deliveryGuys = deliveryGuyRepository.findAll();
+//
+//        return deliveryGuys
+//                .stream()
+//                .map(dg -> {
+//                   DeliveryGuyIncomeDto incomeDto = new DeliveryGuyIncomeDto();
+//                   incomeDto.setDeliveryGuyId(dg.getId());
+//                   incomeDto.setDeliveryGuyName(dg.getUser().getName());
+//                   incomeDto.setPhoneNumber(dg.getUser().getPhoneNumber());
+//                   incomeDto.setStartDate(dto.getStartDate());
+//                   incomeDto.setEndDate(dto.getEndDate());
+//
+//                   double amount = dg.getDeliveries()
+//                           .stream()
+//                           .filter(d -> d.getStatus() == DeliveryStatus.DELIVERED
+//                                   && !d.getDeliveredDate().toLocalDate().isAfter(dto.getEndDate())
+//                                   && !d.getDeliveredDate().toLocalDate().isBefore(dto.getStartDate()))
+//                           .flatMap(d -> d.getDeliveriesFoods().stream())
+//                           .mapToDouble(df -> df.getFood().getPrice() * df.getFoodCount())
+//                           .sum();
+//
+//                   incomeDto.setAmount(amount);
+//
+//                   return incomeDto;
+//                })
+//                .toList();
+
         List<DeliveryGuy> deliveryGuys = deliveryGuyRepository.findAll();
 
         return deliveryGuys
                 .stream()
                 .map(dg -> {
-                   DeliveryGuyIncomeDto incomeDto = new DeliveryGuyIncomeDto();
-                   incomeDto.setDeliveryGuyId(dg.getId());
-                   incomeDto.setDeliveryGuyName(dg.getUser().getName());
-                   incomeDto.setPhoneNumber(dg.getUser().getPhoneNumber());
-                   incomeDto.setStartDate(dto.getStartDate());
-                   incomeDto.setEndDate(dto.getEndDate());
+                    DeliveryGuyIncomeDto incomeDto = new DeliveryGuyIncomeDto();
+                    incomeDto.setDeliveryGuyId(dg.getId());
 
-                   double amount = dg.getDeliveries()
-                           .stream()
-                           .filter(d -> d.getStatus() == DeliveryStatus.DELIVERED
-                                   && !d.getDeliveredDate().toLocalDate().isAfter(dto.getEndDate())
-                                   && !d.getDeliveredDate().toLocalDate().isBefore(dto.getStartDate()))
-                           .flatMap(d -> d.getDeliveriesFoods().stream())
-                           .mapToDouble(df -> df.getFood().getPrice() * df.getFoodCount())
-                           .sum();
+                    // Check if User is null
+                    if (dg.getUser() != null) {
+                        incomeDto.setDeliveryGuyName(dg.getUser().getName());
+                        incomeDto.setPhoneNumber(dg.getUser().getPhoneNumber());
+                    } else {
+                        // Set default values if User is null
+                        incomeDto.setDeliveryGuyName("Unknown");
+                        incomeDto.setPhoneNumber("Unknown");
+                    }
 
-                   incomeDto.setAmount(amount);
+                    incomeDto.setStartDate(dto.getStartDate());
+                    incomeDto.setEndDate(dto.getEndDate());
 
-                   return incomeDto;
+                    double amount = dg.getDeliveries()
+                            .stream()
+                            .filter(d -> d.getStatus() == DeliveryStatus.DELIVERED
+                                    && !d.getDeliveredDate().toLocalDate().isAfter(dto.getEndDate())
+                                    && !d.getDeliveredDate().toLocalDate().isBefore(dto.getStartDate()))
+                            .flatMap(d -> d.getDeliveriesFoods().stream())
+                            .mapToDouble(df -> df.getFood().getPrice() * df.getFoodCount())
+                            .sum();
+
+                    incomeDto.setAmount(amount);
+
+                    return incomeDto;
                 })
                 .toList();
     }

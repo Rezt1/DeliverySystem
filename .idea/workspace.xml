@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/CustomUserDetailsServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/deliveryGuySalary/CreateDeliveryGuySalaryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/deliveryGuySalary/CreateDeliveryGuySalaryDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/report/DeliveryGuyIncomeForPeriodOfTimeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/report/DeliveryGuyIncomeForPeriodOfTimeDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/AdminService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +60,25 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.BackendApplication.executor": "Run",
+    "JUnit.AdminServiceTest.executor": "Run",
+    "JUnit.AdminServiceTest.testCreateCity.executor": "Run",
+    "JUnit.AdminServiceTest.testCreateCuisine.executor": "Run",
+    "JUnit.AdminServiceTest.testCreateFood.executor": "Run",
+    "JUnit.AdminServiceTest.testCreateRestaurant.executor": "Run",
+    "JUnit.AdminServiceTest.testCreateRestaurant_IbanAlreadyExists.executor": "Run",
+    "JUnit.AdminServiceTest.testGetAllDeliveryGuys.executor": "Run",
+    "JUnit.AdminServiceTest.testGetDeliveryGuyById_NotFound.executor": "Run",
+    "JUnit.AdminServiceTest.testGetDeliveryGuyById_Success.executor": "Run",
+    "JUnit.AdminServiceTest.testGetIncome.executor": "Run",
+    "JUnit.AdminServiceTest.testGetIncomeByDeliveryGuy.executor": "Run",
+    "JUnit.AdminServiceTest.testPayDeliveryGuy_DeliveryGuyNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.testPayDeliveryGuy_InvalidStartDate.executor": "Debug",
+    "JUnit.AdminServiceTest.testPayDeliveryGuy_Success.executor": "Run",
+    "JUnit.AdminServiceTest.testRemoveRestaurant_AlreadyRemoved.executor": "Run",
+    "JUnit.AdminServiceTest.testRemoveRestaurant_RestaurantNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.testRemoveRestaurant_Success.executor": "Run",
+    "JUnit.AdminServiceTest.testRemoveRestaurant_Success_WithFoods.executor": "Run",
+    "JUnit.AdminServiceTest.testRemoveRestaurant_WithDeletedFoods.executor": "Debug",
     "JUnit.CityRepositoryTest.cityRepository_saveCity_ShouldReturnSavedCity.executor": "Run",
     "JUnit.CityRepositoryTest.saveCity_ShouldPersist.executor": "Run",
     "JUnit.CityServiceTest.executor": "Run",
@@ -152,8 +174,8 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.CustomUserDetailsServiceTest.loadUserByUsername_userDoesNotExist_throwsException">
-    <configuration name="CustomUserDetailsServiceTest.loadUserByUsername_userDoesNotExist_throwsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.AdminServiceTest.testRemoveRestaurant_Success_WithFoods">
+    <configuration name="AdminServiceTest.testRemoveRestaurant_AlreadyRemoved" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -162,14 +184,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CustomUserDetailsServiceTest" />
-      <option name="METHOD_NAME" value="loadUserByUsername_userDoesNotExist_throwsException" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="METHOD_NAME" value="testRemoveRestaurant_AlreadyRemoved" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CustomUserDetailsServiceTest.loadUserByUsername_userExists_returnsCustomUserDetails" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AdminServiceTest.testRemoveRestaurant_RestaurantNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -178,14 +200,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.CustomUserDetailsServiceTest" />
-      <option name="METHOD_NAME" value="loadUserByUsername_userExists_returnsCustomUserDetails" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="METHOD_NAME" value="testRemoveRestaurant_RestaurantNotFound" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.testGetActiveDeliveries_shouldReturnPendingAndOutForDelivery" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AdminServiceTest.testRemoveRestaurant_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -194,14 +216,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="testGetActiveDeliveries_shouldReturnPendingAndOutForDelivery" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="METHOD_NAME" value="testRemoveRestaurant_Success" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.testGetPastDeliveries_shouldReturnDeliveredOnly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AdminServiceTest.testRemoveRestaurant_Success_WithFoods" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -210,14 +232,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="testGetPastDeliveries_shouldReturnDeliveredOnly" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="METHOD_NAME" value="testRemoveRestaurant_Success_WithFoods" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.testGetPastDeliveries_userNotFound_shouldThrow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AdminServiceTest.testRemoveRestaurant_WithDeletedFoods" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -226,8 +248,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="testGetPastDeliveries_userNotFound_shouldThrow" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="METHOD_NAME" value="testRemoveRestaurant_WithDeletedFoods" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -242,11 +264,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CustomUserDetailsServiceTest.loadUserByUsername_userDoesNotExist_throwsException" />
-        <item itemvalue="JUnit.CustomUserDetailsServiceTest.loadUserByUsername_userExists_returnsCustomUserDetails" />
-        <item itemvalue="JUnit.UserServiceTest.testGetPastDeliveries_shouldReturnDeliveredOnly" />
-        <item itemvalue="JUnit.UserServiceTest.testGetActiveDeliveries_shouldReturnPendingAndOutForDelivery" />
-        <item itemvalue="JUnit.UserServiceTest.testGetPastDeliveries_userNotFound_shouldThrow" />
+        <item itemvalue="JUnit.AdminServiceTest.testRemoveRestaurant_Success_WithFoods" />
+        <item itemvalue="JUnit.AdminServiceTest.testRemoveRestaurant_WithDeletedFoods" />
+        <item itemvalue="JUnit.AdminServiceTest.testRemoveRestaurant_AlreadyRemoved" />
+        <item itemvalue="JUnit.AdminServiceTest.testRemoveRestaurant_RestaurantNotFound" />
+        <item itemvalue="JUnit.AdminServiceTest.testRemoveRestaurant_Success" />
       </list>
     </recent_temporary>
   </component>
