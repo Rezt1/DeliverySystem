@@ -92,6 +92,7 @@ try{
             let div = document.createElement("div");
             div.classList.add("restaurant-item", "bg-white", "rounded-lg", "shadow-md", "p-4");
             div.innerHTML = `<strong>${data.name}</strong> <br> Rating: ⭐${data.rating}`;
+            div.addEventListener("click", () => goToRestMenu(data.id, data.name))
             restaurantsList.appendChild(div);
         });
       
@@ -120,6 +121,7 @@ try{
         }
         else{
           buttonChef1.textContent =  `${data[0].name} - Rating: ⭐${data[0].rating}`;
+          buttonChef1.addEventListener("click", () => goToRestMenu(data[0].id, data[0].name));
         }
 
         let buttonChef2 = document.getElementById("chef-pick-2");
@@ -132,6 +134,8 @@ try{
         }
         else{
           buttonChef2.textContent =  `${data[1].name} - Rating: ⭐${data[1].rating}`;
+          buttonChef2.addEventListener("click", () => goToRestMenu(data[1].id, data[1].name));
+
         }
     }
 
@@ -271,4 +275,9 @@ async function  cusineShow(e) {
     cusineOptionsContainer.appendChild(option);
   });
  showHide(cusineOptionsContainer);
+}
+
+
+function goToRestMenu(id, name){
+  window.location.href = `menu.html?restaurant=${id}&resturantName=${name}`;
 }

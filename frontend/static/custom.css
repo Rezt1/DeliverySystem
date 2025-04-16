@@ -250,3 +250,18 @@ footer {
 .text-shadow {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
+
+.pink-outline-heading {
+  background-color: #006bb8; /* Blue background */
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: inline-block; /* Keeps the background tight around the text */
+  color: white;
+  text-shadow:
+    -1px -1px 0 #ff66c4,
+     1px -1px 0 #ff66c4,
+    -1px  1px 0 #ff66c4,
+     1px  1px 0 #ff66c4,
+     0 0 10px rgba(255, 102, 196, 0.6); /* Glow for extra pop */
+}

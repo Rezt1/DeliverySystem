@@ -8,13 +8,14 @@ import { ifLoggedIn } from "./userWork.mjs";
     let homeBtn = document.getElementsByClassName("btn-primary w-full text-white text-lg py-2")[0];
     document.getElementsByClassName("flex items-center shrink-0")[0].addEventListener('click', loadHome);
     let restBtn = document.getElementById("restaurants-button");
+    let cartBtn = document.getElementsByClassName("btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative")[0];
     
     loginBtn.addEventListener('click', loadLogin);
     registerBtn.addEventListener("click", loadRegister);
     acctountBtn.addEventListener("click", loadAccount);
     homeBtn.addEventListener("click", loadHome);
     restBtn.addEventListener("click", loadResturants);
-
+    cartBtn.addEventListener("click", loadCart);
 
     let loginBtnDe = document.getElementById("login-button");
     let registerBtnDe = document.getElementById("register-button");
@@ -65,6 +66,10 @@ function loadLogin(){
 
   function loadResturants(){
     window.location.href = "./restaurants.html";
+  }
+
+  function loadCart(){
+    window.location.href = "./cart.html";
   }
 
     }
