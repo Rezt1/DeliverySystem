@@ -320,9 +320,9 @@
                 </section>
               </div>
                 
-              <!-- Template for the actual info -->
+               <!-- Template for the actual info -->
               <!-- It's hidden. Unhide it and hide the skeleton items when the data is loaded. -->
-              <div id="template-menu" class="hidden mb-5">
+              <div id="template-menu" class=" mb-5">
                 <!-- Restaurant Name -->
                 <div class="text-center shadow-xl shadow-gray-300 border bg-white rounded-lg p-4 w-[80%] mx-auto">
                   <h1
@@ -331,27 +331,40 @@
                 </div>
 
                 <!-- Menu content -->
-            <section id="SALAD"
-            class="shadow-xl shadow-gray-300 rounded-lg flex flex-col items-start justify-center mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto overflow-y-auto">
-            <h3
-            id="category-salad"
-            class="text-3xl md:!text-4xl mt-3 font-bold">Salad</h3>
-            
-            <!-- Items -->
-            <div id="menu-items-salad"
-            class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6">
-
-            </div>
-            
+                <section id="menu"
+                class="shadow-xl shadow-gray-300 rounded-lg flex flex-col items-start justify-center mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto overflow-y-auto">
+                <h3
+                id="category-name"
+                class="text-3xl md:!text-4xl mt-3 font-bold">Category</h3>
+                
+                <!-- Items -->
+                <div id="menu-items"
+                class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6">
+                <div id="item" class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full md:!w-[50%]">
+                <div class="flex flex-col items-start gap-2">
+                    <h4 id="item-name"
+                    class="text-2xl md:text-3xl">Item name</h4>
+                    <p id="item-description"
+                    class="max-md:text-sm md:!text-md lg:!text-lg text-gray-500 w-[90%] md:w-[85%]">Item description</p>
+                  </div>
+                  <div class="flex flex-col items-end justify-between gap-2">
+                    <h4 id="item-price"
+                    class="text-2xl md:text-3xl">€14.50</h4>
+                    <button id="add-to-cart-btn"
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 text-3xl md:!text-4xl bg-blue-50 hover:cursor-pointer hover:text-[#ff66c4] hover:bg-pink-50 active:opacity-70">+</button>
+                  </div>
+                </div>
+                
+              </div>
+            </section>
           </div>
-        </section>
-        <section id="APPETIZER"
+        <!-- <section id="APPETIZER"
         class="shadow-xl shadow-gray-300 rounded-lg flex flex-col items-start justify-center mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto overflow-y-auto">
         <h3
         id="category-appetizer"
         class="text-3xl md:!text-4xl mt-3 font-bold">Appetizer</h3>
         
-        <!-- Items -->
+        -- Items --
         <div id="menu-items-appetizer"
         class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6">
         
@@ -365,7 +378,7 @@
     id="category-main_course"
     class="text-3xl md:!text-4xl mt-3 font-bold">Main Course</h3>
     
-    <!-- Items -->
+    <-- Items --
     <div id="menu-items-main_course"
     class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6">
     
@@ -379,12 +392,9 @@
                 id="category-dessert"
                 class="text-3xl md:!text-4xl mt-3 font-bold">Dessert</h3>
                 
-                <!-- Items -->
+                <-- Items --
                 <div id="menu-items-dessert"
                 class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6">
-<<<<<<< Updated upstream
-      
-=======
                 <div id="item" class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full md:!w-[50%]">
                 <div class="flex flex-col items-start gap-2">
                     <h4 id="item-name"
@@ -400,10 +410,9 @@
                   </div>
                 </div>
                 
->>>>>>> Stashed changes
               </div>
             </section>
-          </div>
+          </div> -->
         </main>
           
           <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
