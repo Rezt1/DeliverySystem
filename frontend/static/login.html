@@ -215,15 +215,15 @@
           src="./Images/logo.PNG"
           alt="logo"
         />
-        <section
+        <form
           id="section-input-login-information"
-          class="pb-5 w-[80%] md:w-[70%]"
+          class="pb-5 w-[80%] md:w-[70%] flex flex-col gap-2"
         >
           <input
             type="email"
             placeholder="E-mail"
             id="e-mail-input"
-            class="btn-secondary w-full focus:outline-none focus:ring-[1px] focus:ring-[#006bb8] hover:focus:ring-0"
+            class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]" required
           />
 
           <!-- Added button to show password -->
@@ -232,7 +232,7 @@
               type="password"
               placeholder="Password"
               id="password-input"
-              class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8] pr-16"
+              class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]" required
               autocomplete="current-password"
             />
             <button
@@ -243,7 +243,7 @@
               Show
             </button>
           </div>
-        </section>
+        </form>
         <button
           id="btn-login-main"
           class="w-[50%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[10px] hover:border-2 active:opacity-70"

@@ -215,15 +215,15 @@
           src="./Images/logo.PNG"
           alt="logo"
         />
-        <section
-          id="section-input-login-information"
-          class="pb-5 w-[80%] md:w-[70%]"
+        <form
+          id="section-input-apply-delivery-information"
+          class="pb-5 w-[80%] md:w-[70%] flex flex-col gap-2"
         >
           <input
             type="text"
             placeholder="City"
             id="city-input"
-            class="btn-secondary w-full focus:outline-none focus:ring-[1px] focus:ring-[#006bb8] py-3 px-4 border rounded-lg"
+            class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]" required
           />
 
           <!-- IBAN input without a wrapping div -->
@@ -231,10 +231,10 @@
             type="text"
             placeholder="IBAN"
             id="iban-input"
-            class="btn-secondary w-full focus:outline-none focus:ring-[1px] focus:ring-[#006bb8] py-3 px-4 border rounded-lg pr-16 mt-3"
+            class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]" required
             autocomplete="current-password"
           />
-        </section>
+      </form>
         <button
           id="btn-apply-for-position-main"
           class="w-[50%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[10px] hover:border-2 active:opacity-70"

@@ -30,10 +30,10 @@
 
     <div class="flex flex-1">
       <!-- SIDEBAR -->
-      <div class="md:static flex flex-col top-0 left-0 w-15 md:!w-46 bg-[#006bb8] text-white  text-lg border-t-2 border-white border-l-transparent h-full z-10 font-bold">
+      <div class="md:static flex flex-col top-0 left-0 w-15 md:!w-46 bg-[#006bb8] text-white  text-lg border-t-2 border-white border-l-transparent h-full z-10 font-bold py-[2px]">
         <!-- Menu-admin -->            
-          <button id="btn-navigation-admin" class="relative flex flex-row items-center h-11 border-b focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full">
-            <span class="inline-flex justify-center items-center ml-4">
+          <button id="btn-navigation-admin" class="group relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full hover:cursor-pointer active:border-r[#006bb8]/70">
+            <span class=" group-active:opacity-70 inline-flex justify-center items-center ml-4">
                 <svg
             class="btn-menu-icon h-7 w-7"
             fill="none"
@@ -48,63 +48,63 @@
             ></path>
           </svg>
             </span>
-            <span class="hidden md:!flex ml-2 tracking-wide truncate">Menu</span>
+            <span class="hidden group-active:opacity-70 md:!flex ml-2 tracking-wide truncate">Menu</span>
         </button>
         
 
         <div class="overflow-y-auto overflow-x-hidden flex-grow">
           <ul class="flex flex-col py-4 space-y-1">
             <li>
-                <button id="btn-dashboard" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full">
-                    <span class="inline-flex justify-center items-center ml-4">
+                <button id="btn-dashboard" class="group relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full hover:cursor-pointer">
+                    <span class="group-active:opacity-70 inline-flex justify-center items-center ml-4">
                         <svg viewBox="0 0 24 24" fill="none" class="h-7 w-7 stroke-current fill-current" xmlns="http://www.w3.org/2000/svg" stroke="current" ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M22 22L2 22" stroke="current"  stroke-width="1.5" stroke-linecap="round"></path> <path d="M2 11L6.06296 7.74968M22 11L13.8741 4.49931C12.7784 3.62279 11.2216 3.62279 10.1259 4.49931L9.34398 5.12486" stroke="current"  stroke-width="1.5" stroke-linecap="round"></path> <path d="M15.5 5.5V3.5C15.5 3.22386 15.7239 3 16 3H18.5C18.7761 3 19 3.22386 19 3.5V8.5" stroke="current"  stroke-width="1.5" stroke-linecap="round"></path> <path d="M4 22V9.5" stroke="current"  stroke-width="1.5" stroke-linecap="round"></path> <path d="M20 9.5V13.5M20 22V17.5" stroke="current"  stroke-width="1.5" stroke-linecap="round"></path> <path d="M15 22V17C15 15.5858 15 14.8787 14.5607 14.4393C14.1213 14 13.4142 14 12 14C10.5858 14 9.87868 14 9.43934 14.4393M9 22V17" stroke="current"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14 9.5C14 10.6046 13.1046 11.5 12 11.5C10.8954 11.5 10 10.6046 10 9.5C10 8.39543 10.8954 7.5 12 7.5C13.1046 7.5 14 8.39543 14 9.5Z" stroke="current"  stroke-width="1.5"></path> </g></svg>
                       </span>
-                      <span class="hidden md:!flex ml-2 tracking-wide truncate">Dashboard</span>
+                      <span class="hidden group-active:opacity-70 md:!flex ml-2 tracking-wide truncate">Dashboard</span>
                     </button>
                 </li>
                 <!-- Cities -->
                 <li>
-                    <button id="btn-cities" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full">
-                        <span class="inline-flex justify-center items-center ml-4">
-                            <svg fill="none" class="h-7 w-7 stroke-2 fill-current" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" stroke="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M12 3.6132812L12 28L9 28L9 23L7 23L7 28L4 28L4 46L21 46L35 46L46 46L46 15L35 15L35 11.279297L32 10.279297L32 4L30 4L30 9.6113281L28 8.9453125L28 4L26 4L26 8.2792969L12 3.6132812 z M 14 6.3886719L33 12.720703L33 44L28 44L28 40.855469C29.715786 40.405591 31 38.850301 31 37C31 34.802706 29.197294 33 27 33C24.802706 33 23 34.802706 23 37C23 38.850301 24.284214 40.405591 26 40.855469L26 44L21 44L21 28L14 28L14 6.3886719 z M 16 12L16 14L22 14L22 12L16 12 z M 16 16L16 18L31 18L31 16L16 16 z M 37 19L42 19L42 22L37 22L37 19 z M 16 20L16 22L24 22L24 20L16 20 z M 26 20L26 22L31 22L31 20L26 20 z M 16 24L16 26L31 26L31 24L16 24 z M 37 24L42 24L42 27L37 27L37 24 z M 23 28L23 30L31 30L31 28L23 28 z M 37 29L42 29L42 32L37 32L37 29 z M 8 32L11 32L11 34L8 34L8 32 z M 14 32L17 32L17 34L14 34L14 32 z M 37 34L42 34L42 37L37 37L37 34 z M 8 36L11 36L11 38L8 38L8 36 z M 14 36L17 36L17 38L14 38L14 36 z M 37 39L42 39L42 42L37 42L37 39 z M 8 40L11 40L11 42L8 42L8 40 z M 14 40L17 40L17 42L14 42L14 40 z"></path></g></svg>
+                    <button id="btn-cities" class=" group relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full hover:cursor-pointer">
+                        <span class="group-active:opacity-70 inline-flex justify-center items-center ml-4">
+                            <svg fill="none" class=" h-7 w-7 stroke-2 fill-current" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" stroke="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M12 3.6132812L12 28L9 28L9 23L7 23L7 28L4 28L4 46L21 46L35 46L46 46L46 15L35 15L35 11.279297L32 10.279297L32 4L30 4L30 9.6113281L28 8.9453125L28 4L26 4L26 8.2792969L12 3.6132812 z M 14 6.3886719L33 12.720703L33 44L28 44L28 40.855469C29.715786 40.405591 31 38.850301 31 37C31 34.802706 29.197294 33 27 33C24.802706 33 23 34.802706 23 37C23 38.850301 24.284214 40.405591 26 40.855469L26 44L21 44L21 28L14 28L14 6.3886719 z M 16 12L16 14L22 14L22 12L16 12 z M 16 16L16 18L31 18L31 16L16 16 z M 37 19L42 19L42 22L37 22L37 19 z M 16 20L16 22L24 22L24 20L16 20 z M 26 20L26 22L31 22L31 20L26 20 z M 16 24L16 26L31 26L31 24L16 24 z M 37 24L42 24L42 27L37 27L37 24 z M 23 28L23 30L31 30L31 28L23 28 z M 37 29L42 29L42 32L37 32L37 29 z M 8 32L11 32L11 34L8 34L8 32 z M 14 32L17 32L17 34L14 34L14 32 z M 37 34L42 34L42 37L37 37L37 34 z M 8 36L11 36L11 38L8 38L8 36 z M 14 36L17 36L17 38L14 38L14 36 z M 37 39L42 39L42 42L37 42L37 39 z M 8 40L11 40L11 42L8 42L8 40 z M 14 40L17 40L17 42L14 42L14 40 z"></path></g></svg>
                         </span>
-                        <span class="hidden md:!flex ml-2 tracking-wide truncate">Cities</span>
+                        <span class="hidden group-active:opacity-70 md:!flex ml-2 tracking-wide truncate">Cities</span>
                     </button>
                 </li>
                 <!-- Restaurants -->
                 <li>
-                    <button id="btn-restaurants" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full">
-                        <span class="inline-flex justify-center items-center ml-4">
-                            <svg viewBox="0 0 1024 1024" class="h-7 w-7 stroke-current fill-current" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M682.666667 554.666667a42.666667 42.666667 0 0 0-42.666667-42.666667h-21.333333c-23.552 0-21.333333 19.114667-21.333334 42.666667l-21.333333 362.666666a42.666667 42.666667 0 0 0 42.666667 42.666667h42.666666a42.666667 42.666667 0 0 0 42.666667-42.666667l-21.333333-362.666666zM426.666667 448h-85.333334l-21.333333 469.333333a42.666667 42.666667 0 0 0 42.666667 42.666667h42.666666a42.666667 42.666667 0 0 0 42.666667-42.666667l-21.333333-469.333333z" fill="current"></path><path d="M682.666667 554.666667h-85.333334V64c42.666667 0 192 85.333333 85.333334 490.666667zM448 64v277.333333h-42.666667V64h-42.666666v277.333333h-42.666667V64h-42.666667l-21.333333 298.666667 85.333333 85.333333h85.333334l85.333333-85.333333-21.333333-298.666667z" fill="current"></path></g></svg>
+                    <button id="btn-restaurants" class="group relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full hover:cursor-pointer">
+                        <span class="group-active:opacity-70 inline-flex justify-center items-center ml-4">
+                            <svg viewBox="0 0 1024 1024" class=" h-7 w-7 stroke-current fill-current" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M682.666667 554.666667a42.666667 42.666667 0 0 0-42.666667-42.666667h-21.333333c-23.552 0-21.333333 19.114667-21.333334 42.666667l-21.333333 362.666666a42.666667 42.666667 0 0 0 42.666667 42.666667h42.666666a42.666667 42.666667 0 0 0 42.666667-42.666667l-21.333333-362.666666zM426.666667 448h-85.333334l-21.333333 469.333333a42.666667 42.666667 0 0 0 42.666667 42.666667h42.666666a42.666667 42.666667 0 0 0 42.666667-42.666667l-21.333333-469.333333z" fill="current"></path><path d="M682.666667 554.666667h-85.333334V64c42.666667 0 192 85.333333 85.333334 490.666667zM448 64v277.333333h-42.666667V64h-42.666666v277.333333h-42.666667V64h-42.666667l-21.333333 298.666667 85.333333 85.333333h85.333334l85.333333-85.333333-21.333333-298.666667z" fill="current"></path></g></svg>
                         </span>
-                        <span class="hidden md:!flex ml-2 tracking-wide truncate">Restaurants</span>
+                        <span class="group-active:opacity-70 hidden md:!flex ml-2 tracking-wide truncate">Restaurants</span>
         </button>
     </li>
     <!-- Delivery guys -->
     <li>
-        <button id="btn-delivery-guys" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full">
-                        <span class="inline-flex justify-center items-center ml-4">
+        <button id="btn-delivery-guys" class="group relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full hover:cursor-pointer">
+                        <span class="group-active:opacity-70 inline-flex justify-center items-center ml-4">
                             <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="none" class="h-7 w-7 stroke-current fill-current" stroke="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"></style> <g> <path class="st0" d="M311.069,130.515c-0.963-5.641-5.851-9.768-11.578-9.768H35.43c-7.61,0-13.772,6.169-13.772,13.765 c0,7.61,6.162,13.772,13.772,13.772h64.263c7.61,0,13.772,6.17,13.772,13.773c0,7.603-6.162,13.772-13.772,13.772H13.772 C6.169,175.829,0,181.998,0,189.601c0,7.603,6.169,13.764,13.772,13.764h117.114c6.72,0,12.172,5.46,12.172,12.18 c0,6.72-5.452,12.172-12.172,12.172H68.665c-7.61,0-13.772,6.17-13.772,13.773c0,7.602,6.162,13.772,13.772,13.772h45.857 c6.726,0,12.179,5.452,12.179,12.172c0,6.719-5.453,12.172-12.179,12.172H51.215c-7.61,0-13.772,6.169-13.772,13.772 c0,7.603,6.162,13.772,13.772,13.772h87.014l5.488,31.042h31.52c-1.854,4.504-2.911,9.421-2.911,14.598 c0,21.245,17.218,38.464,38.464,38.464c21.237,0,38.456-17.219,38.456-38.464c0-5.177-1.057-10.094-2.911-14.598h100.04 L311.069,130.515z M227.342,352.789c0,9.146-7.407,16.553-16.553,16.553c-9.152,0-16.56-7.407-16.56-16.553 c0-6.364,3.627-11.824,8.892-14.598h15.329C223.714,340.965,227.342,346.424,227.342,352.789z"></path> <path class="st0" d="M511.598,314.072l-15.799-77.941l-57.689-88.759H333.074l32.534,190.819h38.42 c-1.846,4.504-2.904,9.421-2.904,14.598c0,21.245,17.219,38.464,38.456,38.464c21.246,0,38.464-17.219,38.464-38.464 c0-5.177-1.057-10.094-2.91-14.598h16.741c6.039,0,11.759-2.708,15.582-7.386C511.273,326.136,512.8,319.988,511.598,314.072z M392.529,182.882h26.314l34.162,52.547h-51.512L392.529,182.882z M456.14,352.789c0,9.146-7.407,16.553-16.56,16.553 c-9.138,0-16.552-7.407-16.552-16.553c0-6.364,3.635-11.824,8.892-14.598h15.329C452.513,340.965,456.14,346.424,456.14,352.789z"></path> </g> </g></svg>
                         </span>
-                        <span class="hidden md:!flex ml-2 tracking-wide truncate">Delivery guys</span>
+                        <span class="hidden group-active:opacity-70 md:!flex ml-2 tracking-wide truncate">Delivery guys</span>
                     </button>
                 </li>
                 <!-- Clients -->
                 <li>
-                    <button id="btn-clients" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full">
-                        <span class="inline-flex justify-center items-center ml-4">
-                            <svg fill="none"class="h-7 w-7 stroke-current fill-current" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="924 578 200 200" enable-background="new 924 578 200 200" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M984.585,638.942c0,13.999-9.609,25.348-21.462,25.348c-11.852,0-21.459-11.349-21.459-25.348 c0-13.998,9.607-25.346,21.459-25.346C974.976,613.596,984.585,624.944,984.585,638.942z"></path> <path d="M987.585,683.641c1.55-0.945,3.265-1.561,5.041-1.855c-3.606-5.088-6.161-10.546-7.637-17.078 c-0.404-2.387-3.672-2.667-6.102-0.687c-4.546,3.706-9.849,6.186-15.765,6.186c-6.03,0-11.577-2.399-16.024-6.414 c-1.419-1.282-3.51-1.476-5.143-0.479c-8.443,5.158-14.834,13.344-17.622,23.067c-0.749,2.605-0.223,5.42,1.411,7.588 c1.636,2.166,4.192,3.443,6.906,3.443h38.668C975.947,692.072,981.41,687.41,987.585,683.641z"></path> </g> <g> <path d="M1063.416,638.942c0,13.999,9.608,25.348,21.461,25.348c11.854,0,21.46-11.349,21.46-25.348 c0-13.998-9.606-25.346-21.46-25.346C1073.024,613.596,1063.416,624.944,1063.416,638.942z"></path> <path d="M1060.415,683.641c-1.55-0.945-3.266-1.561-5.041-1.855c3.606-5.088,6.161-10.546,7.637-17.078 c0.405-2.387,3.673-2.667,6.103-0.687c4.546,3.706,9.848,6.186,15.764,6.186c6.029,0,11.577-2.399,16.025-6.414 c1.419-1.282,3.509-1.476,5.142-0.479c8.444,5.158,14.836,13.344,17.622,23.067c0.748,2.605,0.223,5.42-1.41,7.588 c-1.637,2.166-4.192,3.443-6.905,3.443h-38.67C1072.053,692.072,1066.591,687.41,1060.415,683.641z"></path> </g> <g> <path d="M1082.475,725.451c-4.198-14.654-13.72-27.045-26.326-34.992c-2.487-1.566-5.715-1.313-7.921,0.631 c-6.766,5.959-15.138,9.506-24.228,9.506c-9.269,0-17.791-3.686-24.626-9.855c-2.182-1.971-5.393-2.268-7.902-0.734 c-12.977,7.924-22.799,20.504-27.082,35.445c-1.151,4.008-0.344,8.328,2.166,11.662c2.516,3.33,6.443,5.291,10.615,5.291h92.523 c4.173,0,8.103-1.955,10.618-5.291C1082.823,733.779,1083.626,729.463,1082.475,725.451z"></path> <path d="M1056.981,652.547c0,21.513-14.766,38.955-32.981,38.955c-18.214,0-32.979-17.442-32.979-38.955 c0-21.515,14.765-38.951,32.979-38.951C1042.216,613.596,1056.981,631.033,1056.981,652.547z"></path> </g> </g> </g></svg>
+                    <button id="btn-clients" class="group relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full hover:cursor-pointer">
+                        <span class="group-active:opacity-70 inline-flex justify-center items-center ml-4">
+                            <svg fill="none"class=" h-7 w-7 stroke-current fill-current" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="924 578 200 200" enable-background="new 924 578 200 200" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M984.585,638.942c0,13.999-9.609,25.348-21.462,25.348c-11.852,0-21.459-11.349-21.459-25.348 c0-13.998,9.607-25.346,21.459-25.346C974.976,613.596,984.585,624.944,984.585,638.942z"></path> <path d="M987.585,683.641c1.55-0.945,3.265-1.561,5.041-1.855c-3.606-5.088-6.161-10.546-7.637-17.078 c-0.404-2.387-3.672-2.667-6.102-0.687c-4.546,3.706-9.849,6.186-15.765,6.186c-6.03,0-11.577-2.399-16.024-6.414 c-1.419-1.282-3.51-1.476-5.143-0.479c-8.443,5.158-14.834,13.344-17.622,23.067c-0.749,2.605-0.223,5.42,1.411,7.588 c1.636,2.166,4.192,3.443,6.906,3.443h38.668C975.947,692.072,981.41,687.41,987.585,683.641z"></path> </g> <g> <path d="M1063.416,638.942c0,13.999,9.608,25.348,21.461,25.348c11.854,0,21.46-11.349,21.46-25.348 c0-13.998-9.606-25.346-21.46-25.346C1073.024,613.596,1063.416,624.944,1063.416,638.942z"></path> <path d="M1060.415,683.641c-1.55-0.945-3.266-1.561-5.041-1.855c3.606-5.088,6.161-10.546,7.637-17.078 c0.405-2.387,3.673-2.667,6.103-0.687c4.546,3.706,9.848,6.186,15.764,6.186c6.029,0,11.577-2.399,16.025-6.414 c1.419-1.282,3.509-1.476,5.142-0.479c8.444,5.158,14.836,13.344,17.622,23.067c0.748,2.605,0.223,5.42-1.41,7.588 c-1.637,2.166-4.192,3.443-6.905,3.443h-38.67C1072.053,692.072,1066.591,687.41,1060.415,683.641z"></path> </g> <g> <path d="M1082.475,725.451c-4.198-14.654-13.72-27.045-26.326-34.992c-2.487-1.566-5.715-1.313-7.921,0.631 c-6.766,5.959-15.138,9.506-24.228,9.506c-9.269,0-17.791-3.686-24.626-9.855c-2.182-1.971-5.393-2.268-7.902-0.734 c-12.977,7.924-22.799,20.504-27.082,35.445c-1.151,4.008-0.344,8.328,2.166,11.662c2.516,3.33,6.443,5.291,10.615,5.291h92.523 c4.173,0,8.103-1.955,10.618-5.291C1082.823,733.779,1083.626,729.463,1082.475,725.451z"></path> <path d="M1056.981,652.547c0,21.513-14.766,38.955-32.981,38.955c-18.214,0-32.979-17.442-32.979-38.955 c0-21.515,14.765-38.951,32.979-38.951C1042.216,613.596,1056.981,631.033,1056.981,652.547z"></path> </g> </g> </g></svg>
                         </span>
-                        <span class="hidden md:!flex ml-2 tracking-wide truncate">Clients</span>
+                        <span class="hidden group-active:opacity-70 md:!flex ml-2 tracking-wide truncate">Clients</span>
                     </button>
                 </li>
                 <!-- Reports -->
                 <li>
-                    <button id="btn-reports" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full">
-                        <span class="inline-flex justify-center items-center ml-4">
-                            <svg fill="none" class="h-7 w-7 stroke-current fill-current" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 492.308 492.308" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M355.813,0H32.264v492.308h427.779V104.231L355.813,0z M361.582,33.615l64.846,64.846h-64.846V33.615z M440.351,472.615 H51.957V19.692h289.933v98.462h98.462V472.615z"></path> </g> </g> <g> <g> <path d="M315.543,331.885v109.947h92.308V331.885H315.543z M388.159,422.139h-52.923v-70.563h52.923V422.139z"></path> </g> </g> <g> <g> <path d="M199.995,272.808v169.024h92.308V272.808H199.995z M272.611,422.139h-52.923V292.5h52.923V422.139z"></path> </g> </g> <g> <g> <path d="M84.447,213.731v228.101h92.308V213.731H84.447z M157.062,422.139h-52.923V233.423h52.923V422.139z"></path> </g> </g> </g></svg>
+                    <button id="btn-reports" class="group relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full hover:cursor-pointer">
+                        <span class="group-active:opacity-70 inline-flex justify-center items-center ml-4">
+                            <svg fill="none" class=" h-7 w-7 stroke-current fill-current" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 492.308 492.308" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M355.813,0H32.264v492.308h427.779V104.231L355.813,0z M361.582,33.615l64.846,64.846h-64.846V33.615z M440.351,472.615 H51.957V19.692h289.933v98.462h98.462V472.615z"></path> </g> </g> <g> <g> <path d="M315.543,331.885v109.947h92.308V331.885H315.543z M388.159,422.139h-52.923v-70.563h52.923V422.139z"></path> </g> </g> <g> <g> <path d="M199.995,272.808v169.024h92.308V272.808H199.995z M272.611,422.139h-52.923V292.5h52.923V422.139z"></path> </g> </g> <g> <g> <path d="M84.447,213.731v228.101h92.308V213.731H84.447z M157.062,422.139h-52.923V233.423h52.923V422.139z"></path> </g> </g> </g></svg>
                         </span>
-                        <span class="hidden md:!flex ml-2 tracking-wide truncate">Reports</span>
+                        <span class="hidden group-active:opacity-70 md:!flex ml-2 tracking-wide truncate">Reports</span>
                     </button>
                 </li>
             </ul>
@@ -112,17 +112,17 @@
         </div>
         
         <!-- Logout  -->
-        <button id="btn-logout-admin" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full">
-            <span class="inline-flex justify-center items-center ml-4">
+        <button id="btn-logout-admin" class="group relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full hover:cursor-pointer">
+            <span class="group-active:opacity-70 inline-flex justify-center items-center ml-4">
                 <svg viewBox="0 0 24 24" fill="none" class="h-7 w-7 stroke-current fill-current" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H15M8 8L4 12M4 12L8 16M4 12L16 12" stroke="current" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
             </span>
-            <span class="hidden md:!flex ml-2 tracking-wide truncate">Logout</span>
+            <span class="hidden group-active:opacity-70 md:!flex ml-2 tracking-wide truncate">Logout</span>
         </button>
     </div>
     
       <!-- MAIN CONTENT -->
-      <main class="flex flex-col mt-10 md:mt-20 items-center p-6">
-        <h1 class="text-7xl md:text-8xl text-center font-bold text-shadow">ADMIN</h1>
+      <main id="dashboard-main" class=" hidden flex flex-col mt-10 md:mt-14 items-center p-6">
+        <h1 class="text-6xl md:text-8xl text-center font-bold text-shadow">ADMIN</h1>
 
         <!-- Add statistics here - Quantity of clients, restaurants, delivery guys! -->
         <section id="statistics" class="flex flex-col md:flex-row justify-between gap-4 lg:!gap-12 mt-10 text-[#ff66c4]">
@@ -146,6 +146,63 @@
             </div>
         </section>
       </main>
+
+      <main id="cities-main" class="hidden flex flex-col mt-10 md:mt-14 items-center p-6">
+        <h1 class="text-6xl md:text-8xl text-center font-bold text-shadow">CITIES</h1>
+        <div class="flex flex-col md:flex-row gap-10 justify-between gap-4 mt-10 w-[80%]">
+
+            <div id="list-of-cities" class="shadow-md shadow-gray-300 w-full md:w-[45%] flex flex-col h-[500px] overflow-y-auto divide-y divide-gray-300" >
+                <div id="city" class="flex justify-between items-center p-4 w-full ">
+                    <h3 id="city-name" class="text-3xl font-bold">City 1</h3>
+                    <button id="delete-city" id="btn-delete-city" class=" text-[#ff66c4] border border-[#ff66c4] font-bold py-2 px-4 rounded hover:text-white hover:bg-[#ff66c4] hover:cursor-pointer active:opacity-70">Delete</button>
+                </div>   
+                <!-- The rest -> via JS -->
+            </div>
+            <div class="shadow-md shadow-gray-300 w-full md:w-[45%]">
+                <h2 class="text-4xl мд:теьт-5ьл font-bold text-center p-2">Add City</h2>
+                <form id="add-city-form" class="flex flex-col items-center gap-4 p-4">
+                    <input type="text" id="city-name-input" placeholder="City name" class=" w-[80%] border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]" required/>
+                    <input type="text" id="city-salary-input" placeholder="Salary" class="w-[80%] border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]" required/>
+                    <button id="btn-add-city" class="w-[60%] text-white border-2 border-[#ff66c4] bg-[#ff66c4] rounded-full font-bold py-2 px-4 hover:text-[#ff66c4] hover:bg-white hover:cursor-pointer active:opacity-70">Add City</button>
+                </form>
+            </div>
+        </div>
+      </main>
+      
+      <main id="cities-main" class="flex flex-col mt-10 md:mt-14 items-center p-6">
+          <h1 class="text-6xl md:text-8xl text-center font-bold text-shadow">RESTAURANTS</h1>
+          <div class="flex flex-col md:flex-row gap-10 justify-between gap-4 mt-10 w-[80%]">
+						<section
+            id="list-with-restaurants"
+            class="bg-white rounded-3xl shadow-md shadow-gray-700 mb-5 flex-1 "
+          >
+            <!-- Loading state -->
+            <div id="restaurants-loading-admin" class="hidden grid gap-3 p-4 overflow-y-auto ">
+              <!-- Skeleton loader items -->
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+            </div>
+
+            <!-- Actual restaurants will be inserted here -->
+            <div id="restaurants-list-admin" class=" grid gap-3 p-4 overflow-y-auto ">
+							<!-- Restaurant item example -->
+							 <div 
+							 id="restaurant"
+							 class="text-[#006bb8] font-bold h-14 md:h-18 border rounded-lg my-auto text-xl md:text-3xl flex justify-between items-center p-4">
+								<h3 id="restaurant-name">Restaurant name</h3>
+								<button id="remove-restaurant-btn"
+								class="border border-[#ff66c4] p-1 text-[#ff66c4] font-medium rounded-md text-sm hover:bg-[#ff66c4] hover:text-white hover:cursor-pointer active:opacity-70">Remove</button>
+							 </div>
+              
+            </div>
+          </section>
+        	</div>
+          
+      </main>
+
     </div>
   </body>
 </html>
