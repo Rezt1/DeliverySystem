@@ -2,7 +2,7 @@
 let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
 let itemSummery = document.getElementById("order-summary");
-  
+
 if(localStorage.getItem("cart") !=  null){
     let classes = "grid grid-cols-[45%_30%_25%] md:grid-cols-[55%_25%_20%] py-4 border-gray-300 border-b-2"
     cartItems.forEach(item => {
@@ -42,14 +42,34 @@ if(localStorage.getItem("cart") !=  null){
             </div>
 
             <div id="price-details" class="h-10 flex justify-end items-start">
-              <span id="price-item" class="text-lg md:text-2xl">€${item.price}</span>
+              <span id="price-item" class="text-lg md:text-2xl">€${(item.price * item.quantity).toFixed(2)}</span>
             </div>
 `
-        //let dropdown = itemInfo.getElementById("qty-dropdown");
-       // dropdown.value = item.quatity;
         itemSummery.appendChild(itemInfo);
+        let dropdown = itemInfo.querySelector("#qty-dropdown");
+        dropdown.addEventListener("change", () => {
+          let priceItem = itemInfo.querySelector("#price-item");
+          let amount = dropdown.value;
+
+          priceItem.textContent = "€" + (item.price*amount).toFixed(2);
+          addingSubtotal();
+        });
+         dropdown.value = item.quantity;
     });
 }
 else{
     itemSummery.textContent = "No items in cart"
+}
+
+addingSubtotal();
+
+function addingSubtotal(){
+  let prices = document.querySelectorAll(".text-lg.md\\:text-2xl");
+  let placeForSubtotal = document.getElementById("subtotal-price");
+
+  let sum = 0;
+
+  Array.from(prices).forEach(el => sum += parseInt(el.textContent.slice(1)));
+
+  placeForSubtotal.textContent = "€" + sum.toFixed(2);
 }
