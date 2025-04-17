@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AuthServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/deliveryGuySalary/CreateDeliveryGuySalaryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/deliveryGuySalary/CreateDeliveryGuySalaryDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/report/DeliveryGuyIncomeForPeriodOfTimeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/report/DeliveryGuyIncomeForPeriodOfTimeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +77,7 @@
     "JUnit.AdminServiceTest.testRemoveRestaurant_Success.executor": "Run",
     "JUnit.AdminServiceTest.testRemoveRestaurant_Success_WithFoods.executor": "Run",
     "JUnit.AdminServiceTest.testRemoveRestaurant_WithDeletedFoods.executor": "Debug",
+    "JUnit.AuthServiceTest.login_whenAlreadyAuthenticated_shouldReturnForbidden.executor": "Run",
     "JUnit.CityRepositoryTest.cityRepository_saveCity_ShouldReturnSavedCity.executor": "Run",
     "JUnit.CityRepositoryTest.saveCity_ShouldPersist.executor": "Run",
     "JUnit.CityServiceTest.executor": "Run",
@@ -88,13 +87,14 @@
     "JUnit.CuisineServiceTest.getAllCuisines_ShouldReturnAllCuisinesAsDtos.executor": "Run",
     "JUnit.CuisineServiceTest.getAllCuisines_WhenNoCuisinesExist_ShouldReturnEmptyList.executor": "Run",
     "JUnit.CuisineServiceTest.getCuisineById_WithExistingId_ShouldReturnConvertedDto.executor": "Run",
+    "JUnit.CustomUserDetailsServiceTest.executor": "Run",
     "JUnit.CustomUserDetailsServiceTest.loadUserByUsername_userDoesNotExist_throwsException.executor": "Run",
     "JUnit.CustomUserDetailsServiceTest.loadUserByUsername_userExists_returnsCustomUserDetails.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.assignDelivery_ThrowsException_WhenUserNotFound.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.assignDelivery_shouldSuccessfullyAssignDelivery.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.assignDelivery_shouldThrowWhenDeliveryNotFound.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.assignDelivery_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
-    "JUnit.DeliveryGuyServiceTest.executor": "Debug",
+    "JUnit.DeliveryGuyServiceTest.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.getCurrentDelivery_shouldOnlyReturnOutForDeliveryStatus.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.getCurrentDelivery_shouldReturnNullWhenNoActiveDeliveries.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenAlreadyAssigned.executor": "Run",
@@ -174,8 +174,8 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.AdminServiceTest.testRemoveRestaurant_Success_WithFoods">
-    <configuration name="AdminServiceTest.testRemoveRestaurant_AlreadyRemoved" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.AuthServiceTest.logout_whenErrorOccurs_shouldReturnInternalServerError">
+    <configuration name="AuthServiceTest.login_whenAuthenticationFails_shouldReturnBadRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -184,14 +184,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="testRemoveRestaurant_AlreadyRemoved" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AuthServiceTest" />
+      <option name="METHOD_NAME" value="login_whenAuthenticationFails_shouldReturnBadRequest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest.testRemoveRestaurant_RestaurantNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthServiceTest.login_whenValidCredentials_shouldReturnAuthResponse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -200,14 +200,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="testRemoveRestaurant_RestaurantNotFound" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AuthServiceTest" />
+      <option name="METHOD_NAME" value="login_whenValidCredentials_shouldReturnAuthResponse" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest.testRemoveRestaurant_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthServiceTest.logout_whenErrorOccurs_shouldReturnInternalServerError" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -216,14 +216,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="testRemoveRestaurant_Success" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AuthServiceTest" />
+      <option name="METHOD_NAME" value="logout_whenErrorOccurs_shouldReturnInternalServerError" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest.testRemoveRestaurant_Success_WithFoods" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthServiceTest.logout_whenNoAuthHeader_shouldReturnOk" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -232,14 +232,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="testRemoveRestaurant_Success_WithFoods" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AuthServiceTest" />
+      <option name="METHOD_NAME" value="logout_whenNoAuthHeader_shouldReturnOk" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest.testRemoveRestaurant_WithDeletedFoods" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthServiceTest.logout_whenValidToken_shouldRevokeTokens" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -248,8 +248,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="testRemoveRestaurant_WithDeletedFoods" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AuthServiceTest" />
+      <option name="METHOD_NAME" value="logout_whenValidToken_shouldRevokeTokens" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -264,11 +264,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AdminServiceTest.testRemoveRestaurant_Success_WithFoods" />
-        <item itemvalue="JUnit.AdminServiceTest.testRemoveRestaurant_WithDeletedFoods" />
-        <item itemvalue="JUnit.AdminServiceTest.testRemoveRestaurant_AlreadyRemoved" />
-        <item itemvalue="JUnit.AdminServiceTest.testRemoveRestaurant_RestaurantNotFound" />
-        <item itemvalue="JUnit.AdminServiceTest.testRemoveRestaurant_Success" />
+        <item itemvalue="JUnit.AuthServiceTest.logout_whenErrorOccurs_shouldReturnInternalServerError" />
+        <item itemvalue="JUnit.AuthServiceTest.logout_whenNoAuthHeader_shouldReturnOk" />
+        <item itemvalue="JUnit.AuthServiceTest.logout_whenValidToken_shouldRevokeTokens" />
+        <item itemvalue="JUnit.AuthServiceTest.login_whenAuthenticationFails_shouldReturnBadRequest" />
+        <item itemvalue="JUnit.AuthServiceTest.login_whenValidCredentials_shouldReturnAuthResponse" />
       </list>
     </recent_temporary>
   </component>

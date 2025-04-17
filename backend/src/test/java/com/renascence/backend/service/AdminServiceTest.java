@@ -30,7 +30,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -60,13 +59,10 @@ public class AdminServiceTest {
     private DeliveryRepository deliveryRepository;
 
 
-    private Restaurant restaurant;
-
-
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        restaurant = new Restaurant();
+        Restaurant restaurant = new Restaurant();
         restaurant.setId(1L);
         restaurant.setName("Restaurant Name");
         restaurant.setDeleted(false);
