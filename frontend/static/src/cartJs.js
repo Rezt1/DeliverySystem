@@ -1,5 +1,4 @@
-import { fetchDelivery } from "./fetchingData.mjs";
-import { ip } from "./ipSearch.mjs";
+
 
 let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -64,6 +63,8 @@ if(localStorage.getItem("cart") !=  null){
 
           itemSummery.removeChild(itemInfo);
 
+          addingSubtotal()
+
         });
 
         let dropdown = itemInfo.querySelector("#qty-dropdown");
@@ -102,7 +103,7 @@ function addingSubtotal(){
 
 async function checkout(){
 
-  let deliveries = await fetchDelivery();
-  console.log(deliveries);
+  sessionStorage.setItem("subtotal", (document.getElementById("subtotal-price").textContent));
+  window.location.href = "./checkout.html";
 
 }
