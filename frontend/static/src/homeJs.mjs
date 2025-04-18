@@ -1,5 +1,7 @@
 import { fetchingCities } from "./fetchingData.mjs";
 
+console.log(sessionStorage.getItem("accessToken"));
+
 let menuCities = document.getElementById("search-main-dropdown-3");
 menuCities.addEventListener("click", showOptionsCities);
 menuCities.addEventListener("change", picked);
@@ -38,6 +40,7 @@ catch(e){
     target.dataset.customInfo = "nottoggled";
 }
 }
+
 
 async function picked(e) {
     e.preventDefault();

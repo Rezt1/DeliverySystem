@@ -1,3 +1,5 @@
+import { ip } from "./ipSearch.mjs";
+
 let addressBlock = document.getElementById("delivery-address");
 
 let apartmentblock = document.getElementById("delivery-address-optional");
@@ -6,14 +8,40 @@ let confirmOrder = document.getElementById("confirm-order-button");
 
 const deliveryInput = document.getElementById('delivery-time');
 
+let paymentCard = document.getElementById("card-radio");
+
+console.log(sessionStorage.getItem("accessToken"));
+
+
 confirmOrder.addEventListener("click", ()=> {
+    try{
     console.log(isTimeBetween(deliveryInput.value, deliveryInput.min, deliveryInput.max));
     if(isTimeBetween(deliveryInput.value, deliveryInput.min, deliveryInput.max)){
-        console.log("valid");
+        if(!addressBlock.value){
+            throw new Error("Address must be filled!");
+        }
+        
+        let paymentMethod = "";
+
+        if(paymentCard.checked){
+            paymentMethod = "CARD"
+        }
+        else{
+            paymentMethod = "CASH"
+        }
+
+        deliverySend(addressBlock.value, paymentMethod);
+
+
+
     }
     else{
-        alert(`Time must be between ${deliveryInput.min} and ${deliveryInput.max}`);
+        throw new Error(`Time must be between ${deliveryInput.min} and ${deliveryInput.max}`);
     }
+}
+catch(e){
+    alert(e.message);
+}
 })
 
 function setMinDeliveryTime() {
@@ -55,4 +83,40 @@ function isTimeBetween(time, start, end) {
       // Case where time period crosses midnight
       return timeMins >= startMins || timeMins <= endMins;
     }
+  }
+
+  async function deliverySend(address, paymentMethod) {
+    
+
+            let ip = "http://localhost:8080";
+
+            let foods = JSON.parse(localStorage.getItem("cart")) || [];
+            let token = sessionStorage.getItem("accessToken");
+  
+         let delivery = {
+            address,
+            foods,
+            paymentMethod
+          }
+  
+  
+          let settings = {
+              method: "Post",
+              headers: {"Content-Type":"application/json",
+                "Authorization": `Bearer ${token}`
+
+              },
+              
+              body: JSON.stringify(delivery)
+          }
+  
+  
+          try{
+              let resp = await fetch(`${ip}/api/deliveries/create-delivery`, settings);
+              return resp;
+          }
+          catch(e){
+              console.log(e.message);
+          }
+      
   }
