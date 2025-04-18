@@ -57,11 +57,15 @@ public class AdminServiceTest {
     private DeliveryGuySalaryRepository deliveryGuySalaryRepository;
     @Mock
     private DeliveryRepository deliveryRepository;
+    @Mock
+    private RoleRepository roleRepository;
+    @Mock
+    private AccessTokenRepository accessTokenRepository;
 
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        //MockitoAnnotations.openMocks(this);
         Restaurant restaurant = new Restaurant();
         restaurant.setId(1L);
         restaurant.setName("Restaurant Name");
@@ -491,5 +495,91 @@ public class AdminServiceTest {
 
         // Assert
         assertEquals(2, result.size());
+    }
+
+
+
+    @Test
+    void removeRestaurant_shouldMarkRestaurantAndFoodsAsDeleted() {
+        // Arrange
+        Long restaurantId = 1L;
+        Restaurant restaurant = new Restaurant();
+        restaurant.setId(restaurantId);
+        restaurant.setName("Pizza Place");
+        restaurant.setDeleted(false);
+
+        Food food1 = new Food();
+        food1.setName("Pepperoni");
+        food1.setDeleted(false);
+        Food food2 = new Food();
+        food2.setName("Margarita");
+        food2.setDeleted(false);
+        restaurant.setFoods(List.of(food1, food2));
+
+        when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurant));
+
+        // Act
+        String result = adminService.removeRestaurant(restaurantId);
+
+        // Assert
+        assertTrue(restaurant.isDeleted());
+        assertTrue(food1.isDeleted());
+        assertTrue(food2.isDeleted());
+        verify(restaurantRepository).save(restaurant);
+        assertEquals("restaurant Pizza Place with id 1 has been removed successfully", result);
+    }
+
+    @Test
+    void removeRestaurant_shouldThrowException_whenRestaurantNotFound() {
+        // Arrange
+        when(restaurantRepository.findById(99L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
+                () -> adminService.removeRestaurant(99L));
+        assertEquals("restaurant not found", exception.getMessage());
+    }
+
+    @Test
+    void removeRestaurant_shouldThrowException_whenRestaurantAlreadyDeleted() {
+        // Arrange
+        Restaurant deletedRestaurant = new Restaurant();
+        deletedRestaurant.setId(2L);
+        deletedRestaurant.setDeleted(true);
+        when(restaurantRepository.findById(2L)).thenReturn(Optional.of(deletedRestaurant));
+
+        // Act & Assert
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
+                () -> adminService.removeRestaurant(2L));
+        assertEquals("restaurant has already been removed", exception.getMessage());
+    }
+
+    
+
+
+    @Test
+    void removeCity_shouldThrowException_whenCityNotFound() {
+        // Arrange
+        when(cityRepository.findById(10L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
+                () -> adminService.removeCity(10L));
+        assertEquals("city not found", exception.getMessage());
+    }
+
+    @Test
+    void removeCity_shouldThrowException_whenCityAlreadyDeleted() {
+        // Arrange
+        City city = new City();
+        city.setId(2L);
+        city.setName("Plovdiv");
+        city.setDeleted(true);
+        when(cityRepository.findById(2L)).thenReturn(Optional.of(city));
+
+        // Act & Assert
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
+                () -> adminService.removeCity(2L));
+        assertEquals("city has already been removed", exception.getMessage());
     }
 }
