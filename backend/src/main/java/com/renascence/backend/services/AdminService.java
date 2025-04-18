@@ -336,10 +336,15 @@ public class AdminService {
         deliveryGuy.setEndWorkDate(LocalDate.now());
 
         AccessToken accessToken = accessTokenRepository.findByUserId(deliveryGuy.getId());
-        accessToken.setRevoked(true);
+        // Check if accessToken is found
+        if (accessToken != null) {
+            accessToken.setRevoked(true);
+            accessTokenRepository.save(accessToken);
+        }
+        //accessToken.setRevoked(true);
 
         deliveryGuyRepository.save(deliveryGuy);
-        accessTokenRepository.save(accessToken);
+        //accessTokenRepository.save(accessToken);
 
         return String.format("delivery guy %s with id %d has been successfully fired",
                 deliveryGuy.getUser().getName(), deliveryGuy.getUser().getId());
@@ -443,7 +448,8 @@ public class AdminService {
         dto.setPrice(food.getPrice());
         dto.setDescription(food.getDescription());
         dto.setFoodCategory(food.getFoodCategory());
-        dto.setCuisineName(food.getCuisine().getName());
+        //dto.setCuisineName(food.getCuisine().getName());
+        dto.setCuisineName(food.getCuisine() != null ? food.getCuisine().getName() : null);
         dto.setRestaurantName(food.getRestaurant().getName());
         return dto;
     }

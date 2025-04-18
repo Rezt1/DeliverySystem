@@ -6,8 +6,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class EditFoodDto {
     @NotBlank(message = "Food name is required")
     @Size(min = 2, max = 255, message = "Name must be 2-255 characters")

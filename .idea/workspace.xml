@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/DeliveryGuyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/repositories/DeliveryGuyRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/food/EditFoodDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/food/EditFoodDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/restaurant/EditRestaurantDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/restaurant/EditRestaurantDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/AdminService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +60,15 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.BackendApplication.executor": "Run",
+    "JUnit.AdminServiceTest.editCity_shouldThrowExceptionWhenCityIsDeleted.executor": "Run",
+    "JUnit.AdminServiceTest.editCity_shouldThrowExceptionWhenCityNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.editCity_shouldUpdateCitySuccessfully.executor": "Run",
+    "JUnit.AdminServiceTest.editCuisine_shouldThrowExceptionWhenCuisineNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.editCuisine_shouldUpdateCuisineSuccessfully.executor": "Run",
+    "JUnit.AdminServiceTest.editFood_shouldThrowExceptionWhenFoodIsDeleted.executor": "Run",
+    "JUnit.AdminServiceTest.editFood_shouldThrowExceptionWhenFoodNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.editFood_shouldUpdateFoodSuccessfully.executor": "Run",
+    "JUnit.AdminServiceTest.editRestaurant_shouldUpdateRestaurantSuccessfully.executor": "Run",
     "JUnit.AdminServiceTest.executor": "Run",
     "JUnit.AdminServiceTest.removeCity_shouldMarkCityAsDeleted.executor": "Run",
     "JUnit.AdminServiceTest.removeCity_shouldRemoveDeliveryGuysAssociatedWithCity.executor": "Run",
@@ -186,8 +197,21 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.AdminServiceTest.removeCity_shouldRemoveDeliveryGuysAssociatedWithCity">
-    <configuration name="AdminServiceTest.removeCity_shouldMarkCityAsDeleted" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.BackendApplication">
+    <configuration name="BackendApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.BackendApplication" />
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -197,13 +221,28 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
       <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="removeCity_shouldMarkCityAsDeleted" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminServiceTest.editRestaurant_shouldThrowExceptionIfIbanAlreadyExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="METHOD_NAME" value="editRestaurant_shouldThrowExceptionIfIbanAlreadyExists" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest.removeCity_shouldRemoveDeliveryGuysAssociatedWithCity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AdminServiceTest.editRestaurant_shouldThrowExceptionIfRestaurantIsDeleted" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -213,13 +252,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
       <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="removeCity_shouldRemoveDeliveryGuysAssociatedWithCity" />
+      <option name="METHOD_NAME" value="editRestaurant_shouldThrowExceptionIfRestaurantIsDeleted" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest.removeCity_shouldThrowException_whenCityAlreadyDeleted" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AdminServiceTest.editRestaurant_shouldThrowExceptionIfRestaurantNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -229,39 +268,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
       <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="removeCity_shouldThrowException_whenCityAlreadyDeleted" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AdminServiceTest.removeCity_shouldThrowException_whenCityNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="removeCity_shouldThrowException_whenCityNotFound" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AdminServiceTest.removeRestaurant_shouldThrowException_whenRestaurantAlreadyDeleted" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="removeRestaurant_shouldThrowException_whenRestaurantAlreadyDeleted" />
+      <option name="METHOD_NAME" value="editRestaurant_shouldThrowExceptionIfRestaurantNotFound" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -276,11 +283,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AdminServiceTest.removeCity_shouldRemoveDeliveryGuysAssociatedWithCity" />
-        <item itemvalue="JUnit.AdminServiceTest.removeCity_shouldMarkCityAsDeleted" />
-        <item itemvalue="JUnit.AdminServiceTest.removeCity_shouldThrowException_whenCityAlreadyDeleted" />
-        <item itemvalue="JUnit.AdminServiceTest.removeCity_shouldThrowException_whenCityNotFound" />
-        <item itemvalue="JUnit.AdminServiceTest.removeRestaurant_shouldThrowException_whenRestaurantAlreadyDeleted" />
+        <item itemvalue="Application.BackendApplication" />
+        <item itemvalue="JUnit.AdminServiceTest" />
+        <item itemvalue="JUnit.AdminServiceTest.editRestaurant_shouldThrowExceptionIfIbanAlreadyExists" />
+        <item itemvalue="JUnit.AdminServiceTest.editRestaurant_shouldThrowExceptionIfRestaurantIsDeleted" />
+        <item itemvalue="JUnit.AdminServiceTest.editRestaurant_shouldThrowExceptionIfRestaurantNotFound" />
       </list>
     </recent_temporary>
   </component>

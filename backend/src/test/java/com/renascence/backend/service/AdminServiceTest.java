@@ -8,11 +8,13 @@ import com.renascence.backend.dtos.deliveryGuy.DeliveryGuyDto;
 import com.renascence.backend.dtos.deliveryGuySalary.CreateDeliveryGuySalaryDto;
 import com.renascence.backend.dtos.deliveryGuySalary.DeliveryGuySalaryDto;
 import com.renascence.backend.dtos.food.CreateFoodDto;
+import com.renascence.backend.dtos.food.EditFoodDto;
 import com.renascence.backend.dtos.food.FoodDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeForPeriodOfTimeDto;
 import com.renascence.backend.dtos.report.IncomeForPeriodOfTimeDto;
 import com.renascence.backend.dtos.restaurant.CreateRestaurantDto;
+import com.renascence.backend.dtos.restaurant.EditRestaurantDto;
 import com.renascence.backend.dtos.restaurant.RestaurantDto;
 import com.renascence.backend.entities.*;
 import com.renascence.backend.enums.DeliveryStatus;
@@ -26,7 +28,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
@@ -554,8 +555,54 @@ public class AdminServiceTest {
         assertEquals("restaurant has already been removed", exception.getMessage());
     }
 
-    
 
+
+    @Test
+    void removeCity_shouldCascadeDeleteRestaurantsAndFoodsAndFireDeliveryGuys() {
+        // 1. Setup Test Data
+        Long cityId = 1L;
+        City city = new City();
+        city.setId(cityId);
+        city.setName("Test City");
+        city.setDeleted(false);
+
+        Restaurant restaurant = new Restaurant();
+        restaurant.setId(1L);
+        restaurant.setDeleted(false);
+
+        Food food = new Food();
+        food.setId(1L);
+        food.setDeleted(false);
+        restaurant.setFoods(List.of(food));
+
+        city.setRestaurants(List.of(restaurant));
+
+        DeliveryGuy deliveryGuy = new DeliveryGuy();
+        deliveryGuy.setId(1L);
+        deliveryGuy.setFired(false);
+        deliveryGuy.setUser(new User());
+        city.setDeliveryGuys(List.of(deliveryGuy));
+
+        Role role = new Role();
+        role.setName("ROLE_DELIVERY_GUY");
+
+        AccessToken accessToken = new AccessToken();
+        accessToken.setRevoked(false);
+
+        when(cityRepository.findById(cityId)).thenReturn(Optional.of(city));
+        when(roleRepository.findByName("ROLE_DELIVERY_GUY")).thenReturn(Optional.of(role));
+        when(accessTokenRepository.findByUserId(deliveryGuy.getId())).thenReturn(accessToken);
+
+        String result = adminService.removeCity(cityId);
+
+        assertTrue(city.isDeleted());
+        assertTrue(restaurant.isDeleted());
+        assertTrue(food.isDeleted());
+        assertTrue(deliveryGuy.isFired());
+        assertEquals(LocalDate.now(), deliveryGuy.getEndWorkDate());
+        assertTrue(accessToken.isRevoked());
+        assertEquals("city Test City with id 1 has been removed successfully", result);
+    }
 
     @Test
     void removeCity_shouldThrowException_whenCityNotFound() {
@@ -582,4 +629,430 @@ public class AdminServiceTest {
                 () -> adminService.removeCity(2L));
         assertEquals("city has already been removed", exception.getMessage());
     }
+
+    @Test
+    void removeFood_shouldMarkFoodAsDeleted() {
+        Long foodId = 1L;
+        Food food = new Food();
+        food.setId(foodId);
+        food.setName("Test Food");
+        food.setDeleted(false);
+
+        when(foodRepository.findById(foodId)).thenReturn(Optional.of(food));
+
+        String result = adminService.removeFood(foodId);
+
+        assertTrue(food.isDeleted());
+        assertEquals("food Test Food with id 1 has been removed", result);
+        verify(foodRepository).save(food); // Verify that save was called
+    }
+
+    @Test
+    void removeFood_shouldThrowEntityNotFoundException_whenFoodNotFound() {
+        Long foodId = 1L;
+
+        when(foodRepository.findById(foodId)).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> adminService.removeFood(foodId));
+    }
+
+    @Test
+    void removeFood_shouldThrowEntityNotFoundException_whenFoodAlreadyDeleted() {
+        Long foodId = 1L;
+        Food food = new Food();
+        food.setId(foodId);
+        food.setName("Test Food");
+        food.setDeleted(true);
+
+        when(foodRepository.findById(foodId)).thenReturn(Optional.of(food));
+
+        assertThrows(EntityNotFoundException.class, () -> adminService.removeFood(foodId));
+    }
+
+
+
+    @Test
+    void fireDeliveryGuy_shouldFireDeliveryGuyAndRevokeAccessToken() {
+        long userId = 1L; // Adding a user ID to avoid the issue
+        long deliveryGuyId = 1L;
+
+        DeliveryGuy deliveryGuy = new DeliveryGuy();
+        deliveryGuy.setId(deliveryGuyId);
+        deliveryGuy.setFired(false);
+        deliveryGuy.setEndWorkDate(null);
+
+        User user = new User();
+        user.setId(userId); // Make sure the user ID is set
+        user.setName("John Doe");
+
+        deliveryGuy.setUser(user); // Assign the user to the delivery guy
+
+        Role role = new Role();
+        role.setName("ROLE_DELIVERY_GUY");
+
+        AccessToken accessToken = new AccessToken();
+        accessToken.setRevoked(false);
+
+        when(deliveryGuyRepository.findById(deliveryGuyId)).thenReturn(Optional.of(deliveryGuy));
+        when(roleRepository.findByName("ROLE_DELIVERY_GUY")).thenReturn(Optional.of(role));
+        when(accessTokenRepository.findByUserId(deliveryGuyId)).thenReturn(accessToken);
+
+        String result = adminService.fireDeliveryGuy(deliveryGuyId);
+
+        assertTrue(deliveryGuy.isFired());
+        assertNotNull(deliveryGuy.getEndWorkDate());
+        assertTrue(accessToken.isRevoked());
+        assertEquals("delivery guy John Doe with id " + deliveryGuyId + " has been successfully fired", result);
+
+        verify(deliveryGuyRepository).save(deliveryGuy);
+        verify(accessTokenRepository).save(accessToken);
+    }
+
+    @Test
+    void fireDeliveryGuy_shouldThrowEntityNotFoundException_whenDeliveryGuyNotFound() {
+        Long deliveryGuyId = 1L;
+
+        when(deliveryGuyRepository.findById(deliveryGuyId)).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> adminService.fireDeliveryGuy(deliveryGuyId));
+    }
+
+    @Test
+    void fireDeliveryGuy_shouldThrowEntityNotFoundException_whenRoleNotFound() {
+        Long deliveryGuyId = 1L;
+        DeliveryGuy deliveryGuy = new DeliveryGuy();
+        deliveryGuy.setId(deliveryGuyId);
+        deliveryGuy.setFired(false);
+        deliveryGuy.setEndWorkDate(null);
+        deliveryGuy.setUser(new User());
+
+        when(deliveryGuyRepository.findById(deliveryGuyId)).thenReturn(Optional.of(deliveryGuy));
+        when(roleRepository.findByName("ROLE_DELIVERY_GUY")).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> adminService.fireDeliveryGuy(deliveryGuyId));
+    }
+
+    @Test
+    void fireDeliveryGuy_shouldHandleAccessTokenNotFound() {
+        // 1. Setup Test Data
+        Long deliveryGuyId = 1L;
+        DeliveryGuy deliveryGuy = new DeliveryGuy();
+        deliveryGuy.setId(deliveryGuyId);
+        deliveryGuy.setFired(false);
+        deliveryGuy.setEndWorkDate(null);
+
+        // Set up the user for the delivery guy
+        User user = new User();
+        user.setId(1L);
+        user.setName("John Doe");  // Set the name
+        deliveryGuy.setUser(user);  // Associate the user with the delivery guy
+
+        Role role = new Role();
+        role.setName("ROLE_DELIVERY_GUY");
+
+        // 2. Mock Repository Responses
+        when(deliveryGuyRepository.findById(deliveryGuyId)).thenReturn(Optional.of(deliveryGuy));
+        when(roleRepository.findByName("ROLE_DELIVERY_GUY")).thenReturn(Optional.of(role));
+        when(accessTokenRepository.findByUserId(deliveryGuyId)).thenReturn(null); // Mocking AccessToken as not found
+
+        // 3. Call the Method
+        String result = adminService.fireDeliveryGuy(deliveryGuyId);
+
+        // 4. Assertions
+        assertTrue(deliveryGuy.isFired());
+        assertNotNull(deliveryGuy.getEndWorkDate());
+        assertEquals("delivery guy John Doe with id " + deliveryGuyId + " has been successfully fired", result);
+
+        verify(deliveryGuyRepository).save(deliveryGuy);
+        verify(accessTokenRepository, never()).save(any()); // No save called on access token as it's not found
+    }
+
+
+
+    @Test
+    void editCuisine_shouldUpdateCuisineSuccessfully() {
+        Long cuisineId = 1L;
+        CreateCuisineDto createDto = new CreateCuisineDto();
+        createDto.setName("Updated Cuisine");
+
+        Cuisine cuisine = new Cuisine();
+        cuisine.setId(cuisineId);
+        cuisine.setName("Old Cuisine");
+
+        when(cuisineRepository.findById(cuisineId)).thenReturn(Optional.of(cuisine));
+        when(cuisineRepository.save(any(Cuisine.class))).thenReturn(cuisine);
+
+        CuisineDto result = adminService.editCuisine(createDto, cuisineId);
+
+        assertEquals(cuisineId, result.getId());
+        assertEquals("Updated Cuisine", result.getName());
+
+        verify(cuisineRepository).findById(cuisineId);
+        verify(cuisineRepository).save(cuisine);
+    }
+
+    @Test
+    void editCuisine_shouldThrowExceptionWhenCuisineNotFound() {
+        Long cuisineId = 99L;
+        CreateCuisineDto createDto = new CreateCuisineDto();
+        createDto.setName("Whatever");
+
+        when(cuisineRepository.findById(cuisineId)).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            adminService.editCuisine(createDto, cuisineId);
+        });
+
+        verify(cuisineRepository).findById(cuisineId);
+        verify(cuisineRepository, never()).save(any());
+    }
+
+
+
+    @Test
+    void editCity_shouldUpdateCitySuccessfully() {
+        Long cityId = 1L;
+        CreateCityDto dto = new CreateCityDto();
+        dto.setName("New City");
+        dto.setSalary(2500.0);
+
+        City city = new City();
+        city.setId(cityId);
+        city.setName("Old City");
+        city.setSalary(2000.0);
+        city.setDeleted(false);
+
+        when(cityRepository.findById(cityId)).thenReturn(Optional.of(city));
+        when(cityRepository.save(any(City.class))).thenReturn(city);
+
+        CityDto result = adminService.editCity(dto, cityId);
+
+        assertEquals(cityId, result.getId());
+        assertEquals("New City", result.getName());
+        assertEquals(2500.0, result.getSalary());
+
+        verify(cityRepository).findById(cityId);
+        verify(cityRepository).save(city);
+    }
+
+    @Test
+    void editCity_shouldThrowExceptionWhenCityNotFound() {
+        Long cityId = 99L;
+        CreateCityDto dto = new CreateCityDto();
+        dto.setName("Doesn't Matter");
+        dto.setSalary(3000.0);
+
+        when(cityRepository.findById(cityId)).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            adminService.editCity(dto, cityId);
+        });
+
+        verify(cityRepository).findById(cityId);
+        verify(cityRepository, never()).save(any());
+    }
+
+    @Test
+    void editCity_shouldThrowExceptionWhenCityIsDeleted() {
+        Long cityId = 1L;
+        CreateCityDto dto = new CreateCityDto();
+        dto.setName("Another Name");
+        dto.setSalary(3200.0);
+
+        City city = new City();
+        city.setId(cityId);
+        city.setDeleted(true);
+
+        when(cityRepository.findById(cityId)).thenReturn(Optional.of(city));
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            adminService.editCity(dto, cityId);
+        });
+
+        verify(cityRepository).findById(cityId);
+        verify(cityRepository, never()).save(any());
+    }
+
+
+
+    @Test
+    void editFood_shouldUpdateFoodSuccessfully() {
+        Long foodId = 1L;
+
+        EditFoodDto dto = new EditFoodDto();
+        dto.setName("Updated Pizza");
+        dto.setPrice(15.99);
+        dto.setDescription("Spicy and crispy");
+        dto.setFoodCategory(FoodCategory.MAIN_COURSE);
+
+        Cuisine cuisine = new Cuisine();
+        cuisine.setId(1L);
+        cuisine.setName("Italian");
+
+        Restaurant restaurant = new Restaurant();
+        restaurant.setId(1L);
+        restaurant.setName("Pizza Palace");
+
+        Food existingFood = new Food();
+        existingFood.setId(foodId);
+        existingFood.setDeleted(false);
+        existingFood.setCuisine(cuisine);
+        existingFood.setRestaurant(restaurant);
+
+        when(foodRepository.findById(foodId)).thenReturn(Optional.of(existingFood));
+        when(foodRepository.save(any(Food.class))).thenReturn(existingFood);
+
+        // Optional: Mock convertToFoodDto if it's a separate method
+        FoodDto expectedDto = new FoodDto();
+        expectedDto.setId(foodId);
+        expectedDto.setName("Updated Pizza");
+        expectedDto.setPrice(15.99);
+        expectedDto.setDescription("Spicy and crispy");
+        expectedDto.setFoodCategory(FoodCategory.MAIN_COURSE);
+
+        // You can mock convertToFoodDto if needed, or just check values directly.
+        FoodDto result = adminService.editFood(dto, foodId);
+
+        assertEquals("Updated Pizza", result.getName());
+        assertEquals(15.99, result.getPrice());
+        assertEquals("Spicy and crispy", result.getDescription());
+        assertEquals(FoodCategory.MAIN_COURSE, result.getFoodCategory());
+
+        verify(foodRepository).findById(foodId);
+        verify(foodRepository).save(existingFood);
+    }
+
+    @Test
+    void editFood_shouldThrowExceptionWhenFoodNotFound() {
+        Long foodId = 99L;
+        EditFoodDto dto = new EditFoodDto();
+        dto.setName("Whatever");
+
+        when(foodRepository.findById(foodId)).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            adminService.editFood(dto, foodId);
+        });
+
+        verify(foodRepository).findById(foodId);
+        verify(foodRepository, never()).save(any());
+    }
+
+    @Test
+    void editFood_shouldThrowExceptionWhenFoodIsDeleted() {
+        Long foodId = 1L;
+        EditFoodDto dto = new EditFoodDto();
+        dto.setName("Tacos");
+
+        Food deletedFood = new Food();
+        deletedFood.setId(foodId);
+        deletedFood.setDeleted(true);
+
+        when(foodRepository.findById(foodId)).thenReturn(Optional.of(deletedFood));
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            adminService.editFood(dto, foodId);
+        });
+
+        verify(foodRepository).findById(foodId);
+        verify(foodRepository, never()).save(any());
+    }
+
+
+
+    @Test
+    void editRestaurant_shouldUpdateRestaurantSuccessfully() {
+        Long restaurantId = 1L;
+
+        // Setup city
+        City city = new City();
+        city.setId(10L);
+        city.setName("Sofia");
+
+        // Setup restaurant
+        Restaurant restaurant = new Restaurant();
+        restaurant.setId(restaurantId);
+        restaurant.setDeleted(false);
+        restaurant.setIban("OLD_IBAN");
+        restaurant.setCity(city);
+
+        // Setup DTO
+        EditRestaurantDto dto = new EditRestaurantDto();
+        dto.setName("Updated Name");
+        dto.setRating(4.7F);
+        dto.setIban("NEW_IBAN");
+
+        // Mock behavior
+        when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurant));
+        when(restaurantRepository.findAll()).thenReturn(List.of(restaurant));
+
+        // Act
+        RestaurantDto result = adminService.editRestaurant(dto, restaurantId);
+
+        // Assert
+        assertEquals(dto.getName(), result.getName());
+        assertEquals(dto.getIban(), result.getIban());
+        assertEquals(dto.getRating(), result.getRating());
+        assertEquals("Sofia", result.getCityName()); // Optional, if your DTO has this
+
+        verify(restaurantRepository).save(restaurant);
+    }
+
+    @Test
+    void editRestaurant_shouldThrowExceptionIfRestaurantNotFound() {
+        Long id = 1L;
+        when(restaurantRepository.findById(id)).thenReturn(Optional.empty());
+
+        EditRestaurantDto dto = new EditRestaurantDto();
+        dto.setName("New Name");
+        dto.setIban("NEW_IBAN");
+
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
+                () -> adminService.editRestaurant(dto, id));
+
+        assertEquals("Restaurant not found", exception.getMessage());
+    }
+
+    @Test
+    void editRestaurant_shouldThrowExceptionIfRestaurantIsDeleted() {
+        Long id = 1L;
+        Restaurant restaurant = new Restaurant();
+        restaurant.setDeleted(true);
+
+        when(restaurantRepository.findById(id)).thenReturn(Optional.of(restaurant));
+
+        EditRestaurantDto dto = new EditRestaurantDto();
+        dto.setName("Test");
+        dto.setIban("IBAN");
+
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
+                () -> adminService.editRestaurant(dto, id));
+
+        assertEquals("Restaurant no longer exists", exception.getMessage());
+    }
+
+    @Test
+    void editRestaurant_shouldThrowExceptionIfIbanAlreadyExists() {
+        Long id = 1L;
+        Restaurant current = new Restaurant();
+        current.setId(id);
+        current.setDeleted(false);
+
+        Restaurant other = new Restaurant();
+        other.setId(2L);
+        other.setIban("DUPLICATE_IBAN");
+
+        EditRestaurantDto dto = new EditRestaurantDto();
+        dto.setName("Some Name");
+        dto.setIban("DUPLICATE_IBAN");
+
+        when(restaurantRepository.findById(id)).thenReturn(Optional.of(current));
+        when(restaurantRepository.findAll()).thenReturn(List.of(current, other));
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> adminService.editRestaurant(dto, id));
+
+        assertEquals("Such iban already exists in our system", exception.getMessage());
+    }
+
 }
