@@ -210,26 +210,38 @@
 
     <main class="pt-[24px] pb-0 text-[#006bb8]">
       <div id="loading-state" class="mb-5">
-
         <!-- Restaurant Name Loading State -->
-        <div class="text-center shadow-xl shadow-gray-300 border bg-white rounded-lg p-4 w-[80%] mx-auto">
-          <h1 id="name-of-restaurant-loading" class="text-5xl md:!text-7xl font-bold bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent">
-                &nbsp; <!-- Empty space for shimmer effect -->
-            </h1>
+        <div
+          class="text-center shadow-xl shadow-gray-300 border bg-white rounded-lg p-4 w-[80%] mx-auto"
+        >
+          <h1
+            id="name-of-restaurant-loading"
+            class="text-5xl md:!text-7xl font-bold bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent"
+          >
+            &nbsp;
+            <!-- Empty space for shimmer effect -->
+          </h1>
         </div>
-    
-        <!-- Menu Section Loading State -->
-        <section id="menu" class="shadow-xl shadow-gray-300 rounded-lg mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto">
+
+        <!-- Menu Salads Section Loading State -->
+        <section
+          id="menu"
+          class="shadow-xl shadow-gray-300 rounded-lg mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto"
+        >
           <!-- Category Loading -->
           <div class="mb-12">
-            <h3 class="text-3xl md:!text-4xl mt-3 font-bold bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent w-1/3 h-8 rounded">
+            <h3
+              class="text-3xl md:!text-4xl mt-3 font-bold bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent w-1/3 h-8 rounded"
+            >
               &nbsp;
             </h3>
-                
+
             <!-- Menu Items Grid Loading -->
             <div class="grid md:grid-cols-2 gap-4 mt-6">
               <!-- Menu Item Skeleton (repeated 4-6 times) -->
-              <div class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse">
+              <div
+                class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse"
+              >
                 <div class="flex flex-col items-start gap-2 w-3/4">
                   <div class="h-6 bg-gray-200 rounded w-2/3"></div>
                   <div class="h-4 bg-gray-200 rounded w-full"></div>
@@ -237,12 +249,16 @@
                 </div>
                 <div class="flex flex-col items-end justify-between gap-2">
                   <div class="h-6 bg-gray-200 rounded w-12"></div>
-                  <div class="border rounded-full w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"></div>
+                  <div
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"
+                  ></div>
                 </div>
               </div>
-              
+
               <!-- Repeat similar skeleton items -->
-              <div class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse">
+              <div
+                class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse"
+              >
                 <div class="flex flex-col items-start gap-2 w-3/4">
                   <div class="h-6 bg-gray-200 rounded w-1/2"></div>
                   <div class="h-4 bg-gray-200 rounded w-full"></div>
@@ -250,12 +266,16 @@
                 </div>
                 <div class="flex flex-col items-end justify-between gap-2">
                   <div class="h-6 bg-gray-200 rounded w-12"></div>
-                  <div class="border rounded-full w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"></div>
+                  <div
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"
+                  ></div>
                 </div>
               </div>
-              
+
               <!-- Third item -->
-              <div class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse">
+              <div
+                class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse"
+              >
                 <div class="flex flex-col items-start gap-2 w-3/4">
                   <div class="h-6 bg-gray-200 rounded w-3/4"></div>
                   <div class="h-4 bg-gray-200 rounded w-full"></div>
@@ -263,163 +283,310 @@
                 </div>
                 <div class="flex flex-col items-end justify-between gap-2">
                   <div class="h-6 bg-gray-200 rounded w-12"></div>
-                  <div class="border rounded-full w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"></div>
+                  <div
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"
+                  ></div>
                 </div>
               </div>
-                    
-                    <!-- Fourth item -->
-                    <div class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse">
-                      <div class="flex flex-col items-start gap-2 w-3/4">
-                            <div class="h-6 bg-gray-200 rounded w-1/3"></div>
-                            <div class="h-4 bg-gray-200 rounded w-full"></div>
-                            <div class="h-4 bg-gray-200 rounded w-2/3"></div>
-                          </div>
-                          <div class="flex flex-col items-end justify-between gap-2">
-                            <div class="h-6 bg-gray-200 rounded w-12"></div>
-                            <div class="border rounded-full w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <!-- Second Category Loading -->
-                    <div class="mb-12">
-                      <h3 class="text-3xl md:!text-4xl mt-3 font-bold bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent w-1/4 h-8 rounded">
-                        &nbsp;
-                      </h3>
-                      
-                      <!-- Second Menu Items Grid Loading -->
-                      <div class="grid md:grid-cols-2 gap-4 mt-6">
-                        <!-- Repeat similar skeleton items -->
-                        <div class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse">
-                        <div class="flex flex-col items-start gap-2 w-3/4">
-                            <div class="h-6 bg-gray-200 rounded w-3/5"></div>
-                            <div class="h-4 bg-gray-200 rounded w-full"></div>
-                            <div class="h-4 bg-gray-200 rounded w-4/5"></div>
-                        </div>
-                        <div class="flex flex-col items-end justify-between gap-2">
-                          <div class="h-6 bg-gray-200 rounded w-12"></div>
-                          <div class="border rounded-full w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"></div>
-                        </div>
-                      </div>
-                      
-                      <!-- Second item -->
-                      <div class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse">
-                        <div class="flex flex-col items-start gap-2 w-3/4">
-                          <div class="h-6 bg-gray-200 rounded w-2/3"></div>
-                          <div class="h-4 bg-gray-200 rounded w-full"></div>
-                          <div class="h-4 bg-gray-200 rounded w-3/4"></div>
-                        </div>
-                        <div class="flex flex-col items-end justify-between gap-2">
-                          <div class="h-6 bg-gray-200 rounded w-12"></div>
-                          <div class="border rounded-full w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
-                
-               <!-- Template for the actual info -->
-              <!-- It's hidden. Unhide it and hide the skeleton items when the data is loaded. -->
-              <div id="template-menu" class=" mb-5">
-                <!-- Restaurant Name -->
-                <div class="text-center shadow-xl shadow-gray-300 border bg-white rounded-lg p-4 w-[80%] mx-auto">
-                  <h1
-                  id="name-of-restaurant"
-                  class="text-5xl md:!text-7xl text-shadow font-bold">Restaurant name</h1>
-                </div>
-
-                <!-- Menu content -->
-                <section id="menu"
-                class="shadow-xl shadow-gray-300 rounded-lg flex flex-col items-start justify-center mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto overflow-y-auto">
-                <h3
-                id="category-name"
-                class="text-3xl md:!text-4xl mt-3 font-bold">Category</h3>
-                
-                <!-- Items -->
-                <div id="menu-items"
-                class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6">
-                <div id="item" class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full md:!w-[50%]">
-                <div class="flex flex-col items-start gap-2">
-                    <h4 id="item-name"
-                    class="text-2xl md:text-3xl">Item name</h4>
-                    <p id="item-description"
-                    class="max-md:text-sm md:!text-md lg:!text-lg text-gray-500 w-[90%] md:w-[85%]">Item description</p>
-                  </div>
-                  <div class="flex flex-col items-end justify-between gap-2">
-                    <h4 id="item-price"
-                    class="text-2xl md:text-3xl">€14.50</h4>
-                    <button id="add-to-cart-btn"
-                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 text-3xl md:!text-4xl bg-blue-50 hover:cursor-pointer hover:text-[#ff66c4] hover:bg-pink-50 active:opacity-70">+</button>
-                  </div>
-                </div>
-                
-              </div>
-            </section>
+            </div>
           </div>
-        <!-- <section id="APPETIZER"
-        class="shadow-xl shadow-gray-300 rounded-lg flex flex-col items-start justify-center mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto overflow-y-auto">
-        <h3
-        id="category-appetizer"
-        class="text-3xl md:!text-4xl mt-3 font-bold">Appetizer</h3>
-        
-        -- Items --
-        <div id="menu-items-appetizer"
-        class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6">
-        
-        </div>
-        
-      </div>
-    </section>
-    <section id="MAIN_COURSE"
-    class="shadow-xl shadow-gray-300 rounded-lg flex flex-col items-start justify-center mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto overflow-y-auto">
-    <h3
-    id="category-main_course"
-    class="text-3xl md:!text-4xl mt-3 font-bold">Main Course</h3>
-    
-    <-- Items --
-    <div id="menu-items-main_course"
-    class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6">
-    
-    </div>
-    
-  </div>
-</section>
-              <section id="DESSERT"
-                class="shadow-xl shadow-gray-300 rounded-lg flex flex-col items-start justify-center mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto overflow-y-auto">
-                <h3
-                id="category-dessert"
-                class="text-3xl md:!text-4xl mt-3 font-bold">Dessert</h3>
-                
-                <-- Items --
-                <div id="menu-items-dessert"
-                class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6">
-                <div id="item" class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full md:!w-[50%]">
-                <div class="flex flex-col items-start gap-2">
-                    <h4 id="item-name"
-                    class="text-2xl md:text-3xl">Item name</h4>
-                    <p id="item-description"
-                    class="max-md:text-sm md:!text-md lg:!text-lg text-gray-500 w-[90%] md:w-[85%]">Item description</p>
-                  </div>
-                  <div class="flex flex-col items-end justify-between gap-2">
-                    <h4 id="item-price"
-                    class="text-2xl md:text-3xl">€14.50</h4>
-                    <button id="add-to-cart-btn"
-                    class="border rounded-full w-9 md:!w-12 h-9 md:!h-12 text-3xl md:!text-4xl bg-blue-50 hover:cursor-pointer hover:text-[#ff66c4] hover:bg-pink-50 active:opacity-70">+</button>
-                  </div>
+        </section>
+
+        <!-- Menu Appetizers Section Loading State -->
+        <section
+          id="menu"
+          class="shadow-xl shadow-gray-300 rounded-lg mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto"
+        >
+          <!-- Category Loading -->
+          <div class="mb-12">
+            <h3
+              class="text-3xl md:!text-4xl mt-3 font-bold bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent w-1/3 h-8 rounded"
+            >
+              &nbsp;
+            </h3>
+
+            <!-- Menu Items Grid Loading -->
+            <div class="grid md:grid-cols-2 gap-4 mt-6">
+              <!-- Menu Item Skeleton (repeated 4-6 times) -->
+              <div
+                class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse"
+              >
+                <div class="flex flex-col items-start gap-2 w-3/4">
+                  <div class="h-6 bg-gray-200 rounded w-2/3"></div>
+                  <div class="h-4 bg-gray-200 rounded w-full"></div>
+                  <div class="h-4 bg-gray-200 rounded w-4/5"></div>
                 </div>
-                
+                <div class="flex flex-col items-end justify-between gap-2">
+                  <div class="h-6 bg-gray-200 rounded w-12"></div>
+                  <div
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"
+                  ></div>
+                </div>
               </div>
-            </section>
-          </div> -->
-        </main>
-          
-          <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
-            <button class="btn-footer">FAQ</button>
-            <button class="btn-footer">About</button>
-            <button class="btn-footer">Contacts</button>
-            <button class="btn-footer">Feedback</button>
-          </footer>
+
+              <!-- Repeat similar skeleton items -->
+              <div
+                class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse"
+              >
+                <div class="flex flex-col items-start gap-2 w-3/4">
+                  <div class="h-6 bg-gray-200 rounded w-1/2"></div>
+                  <div class="h-4 bg-gray-200 rounded w-full"></div>
+                  <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                </div>
+                <div class="flex flex-col items-end justify-between gap-2">
+                  <div class="h-6 bg-gray-200 rounded w-12"></div>
+                  <div
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Third item -->
+              <div
+                class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse"
+              >
+                <div class="flex flex-col items-start gap-2 w-3/4">
+                  <div class="h-6 bg-gray-200 rounded w-3/4"></div>
+                  <div class="h-4 bg-gray-200 rounded w-full"></div>
+                  <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                </div>
+                <div class="flex flex-col items-end justify-between gap-2">
+                  <div class="h-6 bg-gray-200 rounded w-12"></div>
+                  <div
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Menu Main Courses Section Loading State -->
+        <section
+          id="menu"
+          class="shadow-xl shadow-gray-300 rounded-lg mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto"
+        >
+          <!-- Category Loading -->
+          <div class="mb-12">
+            <h3
+              class="text-3xl md:!text-4xl mt-3 font-bold bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent w-1/3 h-8 rounded"
+            >
+              &nbsp;
+            </h3>
+
+            <!-- Menu Items Grid Loading -->
+            <div class="grid md:grid-cols-2 gap-4 mt-6">
+              <!-- Menu Item Skeleton (repeated 4-6 times) -->
+              <div
+                class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse"
+              >
+                <div class="flex flex-col items-start gap-2 w-3/4">
+                  <div class="h-6 bg-gray-200 rounded w-2/3"></div>
+                  <div class="h-4 bg-gray-200 rounded w-full"></div>
+                  <div class="h-4 bg-gray-200 rounded w-4/5"></div>
+                </div>
+                <div class="flex flex-col items-end justify-between gap-2">
+                  <div class="h-6 bg-gray-200 rounded w-12"></div>
+                  <div
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Repeat similar skeleton items -->
+              <div
+                class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse"
+              >
+                <div class="flex flex-col items-start gap-2 w-3/4">
+                  <div class="h-6 bg-gray-200 rounded w-1/2"></div>
+                  <div class="h-4 bg-gray-200 rounded w-full"></div>
+                  <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                </div>
+                <div class="flex flex-col items-end justify-between gap-2">
+                  <div class="h-6 bg-gray-200 rounded w-12"></div>
+                  <div
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Third item -->
+              <div
+                class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse"
+              >
+                <div class="flex flex-col items-start gap-2 w-3/4">
+                  <div class="h-6 bg-gray-200 rounded w-3/4"></div>
+                  <div class="h-4 bg-gray-200 rounded w-full"></div>
+                  <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                </div>
+                <div class="flex flex-col items-end justify-between gap-2">
+                  <div class="h-6 bg-gray-200 rounded w-12"></div>
+                  <div
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Menu Desserts Section Loading State -->
+        <section
+          id="menu"
+          class="shadow-xl shadow-gray-300 rounded-lg mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto"
+        >
+          <!-- Category Loading -->
+          <div class="mb-12">
+            <h3
+              class="text-3xl md:!text-4xl mt-3 font-bold bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite] text-transparent w-1/3 h-8 rounded"
+            >
+              &nbsp;
+            </h3>
+
+            <!-- Menu Items Grid Loading -->
+            <div class="grid md:grid-cols-2 gap-4 mt-6">
+              <!-- Menu Item Skeleton (repeated 4-6 times) -->
+              <div
+                class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse"
+              >
+                <div class="flex flex-col items-start gap-2 w-3/4">
+                  <div class="h-6 bg-gray-200 rounded w-2/3"></div>
+                  <div class="h-4 bg-gray-200 rounded w-full"></div>
+                  <div class="h-4 bg-gray-200 rounded w-4/5"></div>
+                </div>
+                <div class="flex flex-col items-end justify-between gap-2">
+                  <div class="h-6 bg-gray-200 rounded w-12"></div>
+                  <div
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Repeat similar skeleton items -->
+              <div
+                class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse"
+              >
+                <div class="flex flex-col items-start gap-2 w-3/4">
+                  <div class="h-6 bg-gray-200 rounded w-1/2"></div>
+                  <div class="h-4 bg-gray-200 rounded w-full"></div>
+                  <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                </div>
+                <div class="flex flex-col items-end justify-between gap-2">
+                  <div class="h-6 bg-gray-200 rounded w-12"></div>
+                  <div
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Third item -->
+              <div
+                class="flex justify-between shadow-md shadow-gray-100 p-2 md:!p-4 rounded-md w-full animate-pulse"
+              >
+                <div class="flex flex-col items-start gap-2 w-3/4">
+                  <div class="h-6 bg-gray-200 rounded w-3/4"></div>
+                  <div class="h-4 bg-gray-200 rounded w-full"></div>
+                  <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                </div>
+                <div class="flex flex-col items-end justify-between gap-2">
+                  <div class="h-6 bg-gray-200 rounded w-12"></div>
+                  <div
+                    class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 bg-gray-200"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Template for the actual info -->
+      <!-- It's hidden. Unhide it and hide the skeleton items when the data is loaded. -->
+      <div id="template-menu" class="mb-5">
+        <!-- Restaurant Name -->
+        <div
+          class="text-center shadow-xl shadow-gray-300 border bg-white rounded-lg p-4 w-[80%] mx-auto"
+        >
+          <h1
+            id="name-of-restaurant"
+            class="text-5xl md:!text-7xl text-shadow font-bold"
+          >
+            Restaurant name
+          </h1>
+        </div>
+
+        <section
+          id="SALAD"
+          class="shadow-xl shadow-gray-300 rounded-lg flex flex-col items-start justify-center mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto overflow-y-auto"
+        >
+          <h3 id="category-salad" class="text-3xl md:!text-4xl mt-3 font-bold">
+            Salads
+          </h3>
+
+          <div
+            id="menu-items-salad"
+            class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6"
+          ></div>
+        </section>
+
+        <section
+          id="APPETIZER"
+          class="shadow-xl shadow-gray-300 rounded-lg flex flex-col items-start justify-center mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto overflow-y-auto"
+        >
+          <h3
+            id="category-appetizer"
+            class="text-3xl md:!text-4xl mt-3 font-bold"
+          >
+            Appetizers
+          </h3>
+
+          <div
+            id="menu-items-appetizer"
+            class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6"
+          ></div>
+        </section>
+
+        <section
+          id="MAIN_COURSE"
+          class="shadow-xl shadow-gray-300 rounded-lg flex flex-col items-start justify-center mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto overflow-y-auto"
+        >
+          <h3
+            id="category-main_course"
+            class="text-3xl md:!text-4xl mt-3 font-bold"
+          >
+            Main Courses
+          </h3>
+
+          <div
+            id="menu-items-main_course"
+            class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6"
+          ></div>
+        </section>
+
+        <section
+          id="DESSERT"
+          class="shadow-xl shadow-gray-300 rounded-lg flex flex-col items-start justify-center mt-8 md:mt-12 p-5 md:!p-8 w-[80%] mx-auto overflow-y-auto"
+        >
+          <h3
+            id="category-dessert"
+            class="text-3xl md:!text-4xl mt-3 font-bold"
+          >
+            Desserts
+          </h3>
+
+          <div
+            id="menu-items-dessert"
+            class="flex max-md:flex-col items-start justify-center md:!justify-between w-full mt-1 md:mt-3 gap-2 md:!gap-6"
+          ></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
+      <button class="btn-footer">FAQ</button>
+      <button class="btn-footer">About</button>
+      <button class="btn-footer">Contacts</button>
+      <button class="btn-footer">Feedback</button>
+    </footer>
   </body>
 </html>

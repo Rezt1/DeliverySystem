@@ -1,5 +1,7 @@
 import { fetchingCities } from "./fetchingData.mjs";
 
+console.log(sessionStorage.getItem("accessToken"));
+
 let menuCities = document.getElementById("search-main-dropdown-3");
 menuCities.addEventListener("click", showOptionsCities);
 menuCities.addEventListener("change", picked);
@@ -39,6 +41,7 @@ catch(e){
 }
 }
 
+
 async function picked(e) {
     e.preventDefault();
     let target = e.target;
@@ -46,7 +49,6 @@ async function picked(e) {
     let spaceForCIty = document.getElementById("option-city");
     spaceForCIty.textContent = selectedOption.textContent +  "-" + selectedOption.id;
 }
-
 
 
 async function setCity() {
