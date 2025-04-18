@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface DeliveryGuyRepository extends JpaRepository<DeliveryGuy, Long> {
-    List<DeliveryGuy> findByCityId(Long cityId);
+    //List<DeliveryGuy> findByCityId(Long cityId);
 }
