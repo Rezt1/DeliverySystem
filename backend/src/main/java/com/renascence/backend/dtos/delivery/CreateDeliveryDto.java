@@ -2,6 +2,7 @@ package com.renascence.backend.dtos.delivery;
 
 import com.renascence.backend.dtos.deliveryFood.CreateDeliveryFoodDto;
 import com.renascence.backend.enums.PaymentMethod;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -17,6 +18,7 @@ public class CreateDeliveryDto {
     @NotNull(message = "Payment method is required")
     private PaymentMethod paymentMethod;
 
+    @Valid
     @NotEmpty(message = "At least 1 food is required")
     private List<CreateDeliveryFoodDto> foods;
 }
