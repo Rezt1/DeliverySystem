@@ -63,7 +63,11 @@ export async function fettchUser() {
 
 export async function fetchDelivery(id) {
   let token = sessionStorage.getItem("accessToken");
-  let resp = await fetch(`${ip()}/api/deliveries/${id}`, {
+  let address = `${ip()}/api/deliveries`;
+  if(id){
+    address = `${ip()}/api/deliveries/${id}`;
+  }
+  let resp = await fetch(address, {
     method: "Get",
     headers: {
       'Content-Type': 'application/json',

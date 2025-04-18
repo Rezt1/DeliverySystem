@@ -48,7 +48,6 @@ async function picked(e) {
 }
 
 
-
 async function setCity() {
     try{
     let spaceForCIty = document.getElementById("option-city");
