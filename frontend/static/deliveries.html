@@ -225,9 +225,19 @@
         id="delievery-info"
         class="flex flex-col items-center bg-white rounded-3xl overflow-hidden shadow-md shadow-gray-700 h-[90%] w-[90%] m-auto text-[#006bb8] md:text-2xl"
       >
-        <h1 class="text-4xl md:text-5xl text-center p-5 text-shadow font-bold">
+        <h1
+          class="max-md:text-4xl md:text-5xl lg:text-6xl text-center p-5 text-shadow font-bold"
+        >
           Deliveries
         </h1>
+
+        <!-- Btn My Delivery - to be shown only when delivery guy has accepted an order. Sends to my_delivery -->
+        <button
+          id="my-delivery-button"
+          class="w-[60%] h-[50px] md:h-[60px] bg-[#006bb8] text-2xl md:text-3xl lg:text-4xl text-white rounded-lg font-bold flex justify-center items-center hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:border-2 hover:border-[#ff66c4] active:opacity-70 transition-all"
+        >
+          My Delivery
+        </button>
 
         <section
           id="list-of-orders"
@@ -268,7 +278,7 @@
               <!-- 10 min ago -->
             </div>
 
-            <!-- Accept button -->
+            <!-- Accept button - Sends to my_delivery -->
             <button
               id="accept-order-button"
               class="w-[90px] h-full flex-shrink-0 bg-[#006bb8] text-white rounded-lg font-bold flex justify-center items-center hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:border-2 hover:border-[#ff66c4] active:opacity-70 transition-all"
