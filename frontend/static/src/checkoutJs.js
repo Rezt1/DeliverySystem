@@ -51,6 +51,7 @@ confirmOrder.addEventListener("click", ()=> {
 
         localStorage.clear();
 
+        window.location.href = "./thank_you_for_order.html";
     }
     else{
         throw new Error(`Time must be between ${deliveryInput.min} and ${deliveryInput.max}`);
