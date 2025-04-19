@@ -6,7 +6,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="./style.css" rel="stylesheet" />
     <script src="./src/nav.mjs" type="module" defer></script>
-    <script src="./src/loginSrc.js" type="module" defer></script>
     <link href="./custom.css" rel="stylesheet" />
 
     <title>Hexeats - Apply As Courier</title>
@@ -40,7 +39,7 @@
 
           <!-- Hidden deliveries button -->
           <!-- To be shown only when delivery guy is logged in -->
-          <button id="deliveries-button" class="btn-primary !hidden">
+          <button id="deliveries-button" class="btn-primary hidden">
             Deliveries
           </button>
         </div>
@@ -94,11 +93,11 @@
           </button>
 
           <!-- Login/Reg/Account buttons -->
-          <button id="login-button" class="!flex btn-primary">Login</button>
-          <button id="register-button" class="!flex btn-primary">
+          <button id="login-button" class="flex btn-primary">Login</button>
+          <button id="register-button" class="flex btn-primary">
             Register
           </button>
-          <button id="account-button" class="!hidden btn-primary">
+          <button id="account-button" class="hidden btn-primary">
             Account
           </button>
         </div>
@@ -175,7 +174,7 @@
         <!-- To be shown only when delivery guy is logged in -->
         <button
           id="mobile-deliveries-button"
-          class="btn-primary w-full text-white text-lg py-2 !hidden text-start"
+          class="btn-primary w-full text-white text-lg py-2 hidden text-start"
         >
           Deliveries
         </button>

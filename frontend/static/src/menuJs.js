@@ -44,7 +44,7 @@ async function laodingItems(data) {
           </div>
       `;
         div.getElementsByTagName("button")[0].addEventListener("click", () => {
-            addToCart(item.name, item.price, item.description);
+            addToCart(item.name, item.price, item.description, item.id);
 
         });
       if(item.foodCategory == "SALAD"){
@@ -81,7 +81,7 @@ async function laodingItems(data) {
 
 }
 
-function addToCart(name, price, description){
+function addToCart(name, price, description, id){
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -90,7 +90,7 @@ function addToCart(name, price, description){
   if (existingItem) {
     existingItem.quantity += 1;
   } else {
-    cart.push({ name, price, description, quantity: 1 });
+    cart.push({ name, price, description, id, quantity: 1 });
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));

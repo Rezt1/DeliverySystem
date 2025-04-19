@@ -1,4 +1,4 @@
-import { ifLoggedIn } from "./userWork.mjs";
+import { ifDeliveryGuy, ifLoggedIn } from "./userWork.mjs";
 
    
   export function navigationStuff(){
@@ -42,6 +42,17 @@ import { ifLoggedIn } from "./userWork.mjs";
       registerBtnDe.classList.remove("hidden");
     }
 
+    if(ifDeliveryGuy()){
+      let btndelivery = document.getElementById("deliveries-button");
+      btndelivery.classList.remove("hidden");
+    btndelivery.addEventListener("click", () => {
+    window.location.href = "./deliveries.html";
+    });
+    }
+    else{
+      btndelivery.classList.add("hidden");
+    }
+    
 
     loginBtnDe.addEventListener('click', loadLogin);
     registerBtnDe.addEventListener("click", loadRegister);
@@ -72,5 +83,5 @@ function loadLogin(){
     window.location.href = "./cart.html";
   }
 
-    }
 
+  }

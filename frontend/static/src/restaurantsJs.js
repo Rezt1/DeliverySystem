@@ -103,18 +103,24 @@ try{
 
         data.sort((a, b) => b.rating - a.rating);
         
-        let loading1 = document.getElementById("loading-1");
-        let loading2 = document.getElementById("loading-2");
+       
+          let loading1 = document.getElementById("chefs-picks-loading");
+          //let loading2 = document.getElementById("loading-2");
+  
+          if(loading1 != null){
+            loading1.classList.add("hidden");
+          //loading2.classList.add("hidden");
+          }
+      
+          let chefList = document.getElementById("chefs-picks-list");
 
-        if(loading1 != null && loading2 != null){
-          loading1.classList.add("hidden");
-        loading2.classList.add("hidden");
-        }
-    
-        let buttonChef1 = document.getElementById("chef-pick-1");
-        buttonChef1.classList.remove('text-transparent'); 
-        buttonChef1.classList.add('text-black');  
-        buttonChef1.disabled = false;
+          chefList.classList.remove("hidden");
+  
+          let buttonChef1 = document.getElementById("chef-pick-1");
+          //buttonChef1.classList.remove('text-transparent'); 
+          //buttonChef1.classList.add('text-black');  
+          buttonChef1.disabled = false;
+        
 
         if(data[0] === undefined){
           buttonChef1.textContent = "No available"
@@ -125,8 +131,8 @@ try{
         }
 
         let buttonChef2 = document.getElementById("chef-pick-2");
-        buttonChef2.classList.remove('text-transparent'); 
-        buttonChef2.classList.add('text-black');  
+        //buttonChef2.classList.remove('text-transparent'); 
+        //buttonChef2.classList.add('text-black');  
         buttonChef2.disabled = false;
 
         if(data[1] === undefined){
@@ -137,7 +143,8 @@ try{
           buttonChef2.addEventListener("click", () => goToRestMenu(data[1].id, data[1].name));
 
         }
-    }
+      }
+    
 
     let highest = document.getElementById("Highest-Rated");
     highest.addEventListener("click", async () => {
