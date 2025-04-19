@@ -3,13 +3,11 @@ package com.renascence.backend.service;
 import com.renascence.backend.dtos.delivery.CreateDeliveryDto;
 import com.renascence.backend.dtos.delivery.DeliveryDto;
 import com.renascence.backend.dtos.deliveryFood.CreateDeliveryFoodDto;
-import com.renascence.backend.dtos.deliveryFood.DeliveryFoodDto;
 import com.renascence.backend.entities.Delivery;
 import com.renascence.backend.entities.Food;
 import com.renascence.backend.entities.Restaurant;
 import com.renascence.backend.entities.User;
 import com.renascence.backend.enums.DeliveryStatus;
-import com.renascence.backend.enums.PaymentMethod;
 import com.renascence.backend.repositories.*;
 import com.renascence.backend.services.DeliveryService;
 import jakarta.persistence.EntityNotFoundException;
@@ -59,7 +57,6 @@ public class DeliveryServiceTest {
         SecurityContext securityContext = mock(SecurityContext.class);
         SecurityContextHolder.setContext(securityContext);
 
-        // Returns UnnecessaryStubbingException for getDeliveryById_shouldThrowIfDeliveryNotFound()
         lenient().when(securityContext.getAuthentication()).thenReturn(authentication);
         lenient().when(authentication.getName()).thenReturn("user@example.com");
     }
@@ -304,5 +301,4 @@ public class DeliveryServiceTest {
 
         assertEquals("Delivery is not yours", exception.getMessage());
     }
-
 }

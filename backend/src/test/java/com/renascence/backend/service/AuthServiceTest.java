@@ -19,7 +19,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import com.renascence.backend.repositories.UserRepository;
@@ -80,7 +79,6 @@ public class AuthServiceTest {
 
     @Test
     void login_whenValidCredentials_shouldReturnAuthResponse() {
-        // Given
         String email = "test@example.com";
         String password = "password";
         String token = "mocked-jwt-token";
@@ -107,10 +105,8 @@ public class AuthServiceTest {
 
         when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
 
-        // When
         ResponseEntity<?> response = authService.login(loginDto);
 
-        // Then
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
         AuthResponseDto responseDto = (AuthResponseDto) response.getBody();
@@ -131,7 +127,7 @@ public class AuthServiceTest {
         ResponseEntity<?> response = authService.login(loginDto);
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertTrue(response.getBody() instanceof ErrorResponse);
+        assertInstanceOf(ErrorResponse.class, response.getBody());
         ErrorResponse error = (ErrorResponse) response.getBody();
         assertEquals("Invalid credentials or login error", error.getMessage());
     }
@@ -140,7 +136,6 @@ public class AuthServiceTest {
 
     @Test
     void logout_whenValidToken_shouldRevokeTokens() {
-        // Given
         String token = "Bearer mocked-jwt";
         String jwt = "mocked-jwt";
         String email = "user@example.com";
@@ -161,14 +156,11 @@ public class AuthServiceTest {
         List<AccessToken> tokens = List.of(accessToken1, accessToken2);
         when(accessTokenRepository.findByUser_Email(email)).thenReturn(tokens);
 
-        // When
         ResponseEntity<?> response = authService.logout(request);
 
-        // Then
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Logged out successfully !!", response.getBody());
 
-        // All tokens should be revoked
         assertTrue(tokens.stream().allMatch(AccessToken::isRevoked));
         verify(accessTokenRepository).saveAll(tokens);
     }
@@ -188,7 +180,6 @@ public class AuthServiceTest {
 
     @Test
     void logout_whenErrorOccurs_shouldReturnInternalServerError() {
-        // Given
         String token = "Bearer mocked-jwt";
         String jwt = "mocked-jwt";
         String email = "user@example.com";
@@ -198,19 +189,15 @@ public class AuthServiceTest {
 
         when(jwtService.getEmailFromToken(jwt)).thenReturn(email);
 
-        // Simulate an exception thrown by the accessTokenRepository.findByUser_Email() method
         when(accessTokenRepository.findByUser_Email(email)).thenThrow(new RuntimeException("Database error"));
 
-        // When
         ResponseEntity<?> response = authService.logout(request);
 
-        // Then
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-        assertTrue(response.getBody() instanceof ErrorResponse);
+        assertInstanceOf(ErrorResponse.class, response.getBody());
         ErrorResponse errorResponse = (ErrorResponse) response.getBody();
         assertEquals("Logout failed !!", errorResponse.getMessage());
     }
-
 }
 
 

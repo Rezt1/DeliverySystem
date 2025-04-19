@@ -225,7 +225,7 @@ class DeliveryGuyServiceTest {
     void testAssignDelivery_shouldThrowWhenUserIsNotDeliveryGuy() {
         User user = new User();
         user.setEmail("noguy@example.com");
-        user.setDeliveryGuy(null); // no delivery guy
+        user.setDeliveryGuy(null);
 
         when(authentication.getName()).thenReturn("noguy@example.com");
         when(userRepository.findByEmail("noguy@example.com")).thenReturn(Optional.of(user));
@@ -296,10 +296,8 @@ class DeliveryGuyServiceTest {
         when(deliveryRepository.findFirstByDeliveryGuyIdAndStatusOrderByTakenByDeliveryGuyDateAsc(
                 testDeliveryGuy.getId(), DeliveryStatus.OUT_FOR_DELIVERY)).thenReturn(Optional.of(testDelivery));
 
-        // Act
         DeliveryDto result = deliveryGuyService.getCurrentDeliveryForDeliveryGuy();
 
-        // Assert
         assertNotNull(result);
         assertEquals(testDelivery.getId(), result.getDeliveryId());
     }
@@ -372,7 +370,7 @@ class DeliveryGuyServiceTest {
         testDelivery.setRestaurant(testRestaurant);
         testDelivery.setStatus(DeliveryStatus.PENDING);
         testDelivery.setReceiver(testUser);
-        // Arrange
+
         testDelivery.setStatus(DeliveryStatus.OUT_FOR_DELIVERY);
         testDelivery.setDeliveryGuy(testDeliveryGuy);
 
@@ -381,10 +379,10 @@ class DeliveryGuyServiceTest {
         when(deliveryRepository.findFirstByDeliveryGuyIdAndStatusOrderByTakenByDeliveryGuyDateAsc(
                 testDeliveryGuy.getId(), DeliveryStatus.OUT_FOR_DELIVERY)).thenReturn(Optional.of(testDelivery));
 
-        // Act
+
         DeliveryDto result = deliveryGuyService.markAsDelivered(1L);
 
-        // Assert
+
         assertEquals(DeliveryStatus.DELIVERED, testDelivery.getStatus());
         assertNotNull(testDelivery.getDeliveredDate());
         verify(deliveryRepository).save(testDelivery);
@@ -410,7 +408,7 @@ class DeliveryGuyServiceTest {
     void testMarkAsDelivered_shouldThrowWhenUserNotFound() {
         User user = new User();
         user.setEmail("unknown@user.com");
-        user.setDeliveryGuy(null); // no delivery guy
+        user.setDeliveryGuy(null);
 
         when(authentication.getName()).thenReturn("unknown@user.com");
         when(userRepository.findByEmail("unknown@user.com")).thenReturn(Optional.empty());
@@ -560,7 +558,7 @@ class DeliveryGuyServiceTest {
         testDelivery.setStatus(DeliveryStatus.PENDING);
         testDelivery.setReceiver(testUser);
 
-        // Arrange
+
         DeliveryGuySalary salary1 = new DeliveryGuySalary();
         salary1.setAmount(100.0);
         salary1.setStartDate(LocalDate.now().minusDays(7));
@@ -577,10 +575,10 @@ class DeliveryGuyServiceTest {
 
         when(userRepository.findByEmail("delivery@example.com")).thenReturn(Optional.of(testUser));
 
-        // Act
+
         List<DeliveryGuySalaryDto> result = deliveryGuyService.getSalaries();
 
-        // Assert
+
         assertEquals(2, result.size());
         assertEquals("Test Delivery Guy", result.get(0).getDeliveryGuyName());
         assertEquals("Test Delivery Guy", result.get(1).getDeliveryGuyName());

@@ -6,7 +6,6 @@ import com.renascence.backend.dtos.user.UpdateUserDto;
 import com.renascence.backend.dtos.user.UserDto;
 import com.renascence.backend.entities.*;
 import com.renascence.backend.enums.DeliveryStatus;
-import com.renascence.backend.enums.PaymentMethod;
 import com.renascence.backend.repositories.*;
 import com.renascence.backend.services.UserService;
 import jakarta.persistence.EntityNotFoundException;
@@ -21,7 +20,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +29,6 @@ import static com.renascence.backend.enums.PaymentMethod.CARD;
 import static com.renascence.backend.enums.PaymentMethod.CASH;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.mockAuthentication;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -65,7 +62,6 @@ class UserServiceTest {
 
     @Test
     void testGetUserInformation_successful() {
-        // Given
         User user = new User();
         user.setName("John Doe");
         user.setEmail("john@example.com");
@@ -77,10 +73,8 @@ class UserServiceTest {
 
         when(userRepository.findByEmail("john@example.com")).thenReturn(Optional.of(user));
 
-        // When
         UserDto userDto = userService.getUserInformation();
 
-        // Then
         assertNotNull(userDto);
         assertEquals("John Doe", userDto.getName());
         assertEquals("john@example.com", userDto.getEmail());
@@ -90,10 +84,8 @@ class UserServiceTest {
 
     @Test
     void testGetUserInformation_userNotFound() {
-        // Given
         when(userRepository.findByEmail("john@example.com")).thenReturn(Optional.empty());
 
-        // When & Then
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
                 () -> userService.getUserInformation());
 
@@ -403,10 +395,9 @@ class UserServiceTest {
         when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
 
 
-        // Act
         List<DeliveryDto> result = userService.getActiveDeliveries();
 
-        // Assert
+
         assertEquals(2, result.size());
         assertTrue(result.stream().allMatch(dto ->
                 dto.getStatus() == DeliveryStatus.PENDING || dto.getStatus() == DeliveryStatus.OUT_FOR_DELIVERY));
@@ -428,7 +419,6 @@ class UserServiceTest {
 
     @Test
     void testGetPastDeliveries_shouldReturnDeliveredOnly() {
-        // Arrange
         String email = "john@example.com";
         User user = new User();
         user.setEmail(email);

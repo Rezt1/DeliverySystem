@@ -6,8 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryGuyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryGuyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AuthServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AuthServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/CityServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/CityServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/CuisineServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/CuisineServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/CustomUserDetailsServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/CustomUserDetailsServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryGuyServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryGuyServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/FoodServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/FoodServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/JwtServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/JwtServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +216,23 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.DeliveryGuyServiceTest">
+  <component name="RunManager" selected="JUnit.RestaurantServiceTest">
+    <configuration name="AuthServiceTest.login_whenAuthenticationFails_shouldReturnBadRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AuthServiceTest" />
+      <option name="METHOD_NAME" value="login_whenAuthenticationFails_shouldReturnBadRequest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DeliveryGuyServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
@@ -257,7 +280,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RestaurantServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -266,23 +289,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="testGetCurrentDeliveryForDeliveryGuy_Success" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DeliveryGuyServiceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTests" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.RestaurantServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -297,11 +304,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RestaurantServiceTest" />
+        <item itemvalue="JUnit.AuthServiceTest.login_whenAuthenticationFails_shouldReturnBadRequest" />
         <item itemvalue="JUnit.DeliveryGuyServiceTest" />
         <item itemvalue="JUnit.DeliveryGuyServiceTest.getSalaries_ShouldReturnDeliveryGuysSalaries" />
         <item itemvalue="JUnit.DeliveryGuyServiceTest.markAsDelivered_ShouldMarkDeliveryAsDelivered" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTests" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_Success" />
       </list>
     </recent_temporary>
   </component>

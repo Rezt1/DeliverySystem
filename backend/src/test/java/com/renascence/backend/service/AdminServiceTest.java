@@ -66,7 +66,6 @@ public class AdminServiceTest {
 
     @BeforeEach
     void setUp() {
-        //MockitoAnnotations.openMocks(this);
         Restaurant restaurant = new Restaurant();
         restaurant.setId(1L);
         restaurant.setName("Restaurant Name");
@@ -75,7 +74,6 @@ public class AdminServiceTest {
 
     @Test
     void testCreateCity() {
-        // Arrange
         CreateCityDto createDto = new CreateCityDto();
         createDto.setName("Sofia");
         createDto.setSalary(1200.00);
@@ -87,10 +85,8 @@ public class AdminServiceTest {
 
         when(cityRepository.save(any(City.class))).thenReturn(savedCity);
 
-        // Act
         CityDto result = adminService.createCity(createDto);
 
-        // Assert
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("Sofia", result.getName());
@@ -108,7 +104,6 @@ public class AdminServiceTest {
 
     @Test
     void testCreateCuisine() {
-        // Arrange
         CreateCuisineDto createDto = new CreateCuisineDto();
         createDto.setName("Italian");
 
@@ -118,10 +113,8 @@ public class AdminServiceTest {
 
         when(cuisineRepository.save(any(Cuisine.class))).thenReturn(savedCuisine);
 
-        // Act
         CuisineDto result = adminService.createCuisine(createDto);
 
-        // Assert
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("Italian", result.getName());
@@ -137,7 +130,6 @@ public class AdminServiceTest {
 
     @Test
     void testCreateFood() {
-        // Arrange
         CreateFoodDto createDto = new CreateFoodDto();
         createDto.setName("Pizza Margherita");
         createDto.setPrice(15.99);
@@ -167,9 +159,7 @@ public class AdminServiceTest {
         when(restaurantRepository.findById(anyLong())).thenReturn(Optional.of(mockRestaurant));
         when(foodRepository.save(any(Food.class))).thenReturn(savedFood);
 
-        // Act
         FoodDto result = adminService.createFood(createDto);
-
         // Assert
         assertNotNull(result);
         assertEquals(1L, result.getId());
@@ -178,11 +168,9 @@ public class AdminServiceTest {
         assertEquals("Classic Italian pizza", result.getDescription());
         assertEquals(FoodCategory.MAIN_COURSE, result.getFoodCategory());
 
-        // Verify that findById was called for both Cuisine and Restaurant
         verify(cuisineRepository).findById(1L);
         verify(restaurantRepository).findById(1L);
 
-        // Verify that the save method was called for Food
         verify(foodRepository).save(any(Food.class));
     }
 
@@ -190,7 +178,6 @@ public class AdminServiceTest {
 
     @Test
     void testCreateRestaurant() {
-        // Arrange
         CreateRestaurantDto createDto = new CreateRestaurantDto();
         createDto.setName("Pasta Paradise");
         createDto.setCityId(1L);
@@ -213,18 +200,16 @@ public class AdminServiceTest {
         savedRestaurant.setRating(4.5F);
 
         when(cityRepository.findById(1L)).thenReturn(Optional.of(mockCity));
-        when(restaurantRepository.findAll()).thenReturn(Collections.singletonList(new Restaurant()));  // Simulate no conflict with IBAN
+        when(restaurantRepository.findAll()).thenReturn(Collections.singletonList(new Restaurant()));
         when(restaurantRepository.save(any(Restaurant.class))).thenReturn(savedRestaurant);
 
-        // Act
         RestaurantDto result = adminService.createRestaurant(createDto);
 
-        // Assert
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("Pasta Paradise", result.getName());
         assertEquals(4.5F, result.getRating());
-        assertEquals("Sofia", result.getCityName()); // Assuming RestaurantDto has city name.
+        assertEquals("Sofia", result.getCityName());
 
         // Verify interactions
         verify(cityRepository).findById(1L);
@@ -251,7 +236,6 @@ public class AdminServiceTest {
         when(cityRepository.findById(1L)).thenReturn(Optional.of(mockCity));
         when(restaurantRepository.findAll()).thenReturn(Collections.singletonList(existing));
 
-        // Act & Assert
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
             adminService.createRestaurant(createDto);
         });
@@ -292,10 +276,8 @@ public class AdminServiceTest {
 
         when(deliveryGuyRepository.findAll()).thenReturn(List.of(deliveryGuy1, deliveryGuy2));
 
-        // Act
         List<DeliveryGuyDto> result = adminService.getAllDeliveryGuys();
 
-        // Assert
         assertEquals(2, result.size());
 
         assertEquals("Ivan Todorov", result.get(0).getDeliveryGuyName());
@@ -311,7 +293,6 @@ public class AdminServiceTest {
 
     @Test
     void testGetDeliveryGuyById_Success() {
-        // Arrange
         User user = new User();
         user.setName("Ivan Petrov");
         user.setPhoneNumber("+359 888123456");
@@ -328,10 +309,8 @@ public class AdminServiceTest {
 
         when(deliveryGuyRepository.findById(1L)).thenReturn(Optional.of(deliveryGuy));
 
-        // Act
         DeliveryGuyDto result = adminService.getDeliveryGuyById(1L);
 
-        // Assert
         assertNotNull(result);
         assertEquals("Ivan Petrov", result.getDeliveryGuyName());
         assertEquals("Sofia", result.getWorkCity());
@@ -342,10 +321,8 @@ public class AdminServiceTest {
 
     @Test
     void testGetDeliveryGuyById_NotFound() {
-        // Arrange
         when(deliveryGuyRepository.findById(2L)).thenReturn(Optional.empty());
 
-        // Act & Assert
         assertThrows(EntityNotFoundException.class, () -> adminService.getDeliveryGuyById(2L));
 
         verify(deliveryGuyRepository).findById(2L);
@@ -355,7 +332,6 @@ public class AdminServiceTest {
 
     @Test
     void testPayDeliveryGuy_Success() {
-        // Arrange
         City city = new City();
         city.setSalary(1200.00);
 
@@ -381,10 +357,8 @@ public class AdminServiceTest {
         when(deliveryGuySalaryRepository.save(any(DeliveryGuySalary.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
-        // Act
         DeliveryGuySalaryDto result = adminService.payDeliveryGuy(dto, 1L);
 
-        // Assert
         assertNotNull(result);
         assertEquals(1200.00 + 2 * 1.5, result.getAmount());
         assertEquals(dto.getSalaryStartDate(), result.getStartDate());
@@ -403,7 +377,6 @@ public class AdminServiceTest {
 
     @Test
     void testPayDeliveryGuy_InvalidStartDate() {
-        // Arrange
         DeliveryGuy deliveryGuy = new DeliveryGuy();
         deliveryGuy.setStartWorkDate(LocalDate.of(2024, 2, 1));
         deliveryGuy.setDeliveries(List.of());
@@ -415,20 +388,17 @@ public class AdminServiceTest {
 
         when(deliveryGuyRepository.findById(1L)).thenReturn(Optional.of(deliveryGuy));
 
-        // Act & Assert
         assertThrows(IllegalArgumentException.class, () -> adminService.payDeliveryGuy(dto, 1L));
     }
 
     @Test
     void testPayDeliveryGuy_DeliveryGuyNotFound() {
-        // Arrange
         when(deliveryGuyRepository.findById(1L)).thenReturn(Optional.empty());
 
         CreateDeliveryGuySalaryDto dto = new CreateDeliveryGuySalaryDto();
         dto.setSalaryStartDate(LocalDate.now());
         dto.setSalaryEndDate(LocalDate.now());
 
-        // Act & Assert
         assertThrows(EntityNotFoundException.class, () -> adminService.payDeliveryGuy(dto, 1L));
     }
 
@@ -436,7 +406,6 @@ public class AdminServiceTest {
 
     @Test
     void testGetIncome() {
-        // Arrange
         IncomeForPeriodOfTimeDto inputDto = new IncomeForPeriodOfTimeDto();
         inputDto.setStartDate(LocalDate.of(2024, 1, 1));
         inputDto.setEndDate(LocalDate.of(2024, 12, 31));
@@ -469,10 +438,8 @@ public class AdminServiceTest {
 
         when(deliveryRepository.findAll()).thenReturn(List.of(delivery1, delivery2));
 
-        // Act
         IncomeForPeriodOfTimeDto result = adminService.getIncome(inputDto);
 
-        // Assert
         assertNotNull(result);
         assertEquals(65.00, result.getAmount(), 0.01); // (2 * 10) + (3 * 15)
     }
@@ -481,7 +448,6 @@ public class AdminServiceTest {
 
     @Test
     void testGetIncomeByDeliveryGuy() {
-        // Arrange
         DeliveryGuy deliveryGuy1 = new DeliveryGuy();
         DeliveryGuy deliveryGuy2 = new DeliveryGuy();
 
@@ -491,10 +457,8 @@ public class AdminServiceTest {
         dto.setStartDate(LocalDate.now().minusDays(7));
         dto.setEndDate(LocalDate.now());
 
-        // Act
         List<DeliveryGuyIncomeDto> result = adminService.getIncomeByDeliveryGuy(dto);
 
-        // Assert
         assertEquals(2, result.size());
     }
 
@@ -502,7 +466,6 @@ public class AdminServiceTest {
 
     @Test
     void removeRestaurant_shouldMarkRestaurantAndFoodsAsDeleted() {
-        // Arrange
         Long restaurantId = 1L;
         Restaurant restaurant = new Restaurant();
         restaurant.setId(restaurantId);
@@ -519,10 +482,8 @@ public class AdminServiceTest {
 
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurant));
 
-        // Act
         String result = adminService.removeRestaurant(restaurantId);
 
-        // Assert
         assertTrue(restaurant.isDeleted());
         assertTrue(food1.isDeleted());
         assertTrue(food2.isDeleted());
@@ -532,10 +493,8 @@ public class AdminServiceTest {
 
     @Test
     void removeRestaurant_shouldThrowException_whenRestaurantNotFound() {
-        // Arrange
         when(restaurantRepository.findById(99L)).thenReturn(Optional.empty());
 
-        // Act & Assert
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
                 () -> adminService.removeRestaurant(99L));
         assertEquals("restaurant not found", exception.getMessage());
@@ -543,13 +502,11 @@ public class AdminServiceTest {
 
     @Test
     void removeRestaurant_shouldThrowException_whenRestaurantAlreadyDeleted() {
-        // Arrange
         Restaurant deletedRestaurant = new Restaurant();
         deletedRestaurant.setId(2L);
         deletedRestaurant.setDeleted(true);
         when(restaurantRepository.findById(2L)).thenReturn(Optional.of(deletedRestaurant));
 
-        // Act & Assert
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
                 () -> adminService.removeRestaurant(2L));
         assertEquals("restaurant has already been removed", exception.getMessage());
@@ -559,7 +516,6 @@ public class AdminServiceTest {
 
     @Test
     void removeCity_shouldCascadeDeleteRestaurantsAndFoodsAndFireDeliveryGuys() {
-        // 1. Setup Test Data
         Long cityId = 1L;
         City city = new City();
         city.setId(cityId);
@@ -606,10 +562,8 @@ public class AdminServiceTest {
 
     @Test
     void removeCity_shouldThrowException_whenCityNotFound() {
-        // Arrange
         when(cityRepository.findById(10L)).thenReturn(Optional.empty());
 
-        // Act & Assert
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
                 () -> adminService.removeCity(10L));
         assertEquals("city not found", exception.getMessage());
@@ -617,14 +571,13 @@ public class AdminServiceTest {
 
     @Test
     void removeCity_shouldThrowException_whenCityAlreadyDeleted() {
-        // Arrange
         City city = new City();
         city.setId(2L);
         city.setName("Plovdiv");
         city.setDeleted(true);
+
         when(cityRepository.findById(2L)).thenReturn(Optional.of(city));
 
-        // Act & Assert
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
                 () -> adminService.removeCity(2L));
         assertEquals("city has already been removed", exception.getMessage());
@@ -673,7 +626,7 @@ public class AdminServiceTest {
 
     @Test
     void fireDeliveryGuy_shouldFireDeliveryGuyAndRevokeAccessToken() {
-        long userId = 1L; // Adding a user ID to avoid the issue
+        long userId = 1L;
         long deliveryGuyId = 1L;
 
         DeliveryGuy deliveryGuy = new DeliveryGuy();
@@ -682,10 +635,10 @@ public class AdminServiceTest {
         deliveryGuy.setEndWorkDate(null);
 
         User user = new User();
-        user.setId(userId); // Make sure the user ID is set
+        user.setId(userId);
         user.setName("John Doe");
 
-        deliveryGuy.setUser(user); // Assign the user to the delivery guy
+        deliveryGuy.setUser(user);
 
         Role role = new Role();
         role.setName("ROLE_DELIVERY_GUY");
@@ -734,37 +687,32 @@ public class AdminServiceTest {
 
     @Test
     void fireDeliveryGuy_shouldHandleAccessTokenNotFound() {
-        // 1. Setup Test Data
         Long deliveryGuyId = 1L;
         DeliveryGuy deliveryGuy = new DeliveryGuy();
         deliveryGuy.setId(deliveryGuyId);
         deliveryGuy.setFired(false);
         deliveryGuy.setEndWorkDate(null);
 
-        // Set up the user for the delivery guy
         User user = new User();
         user.setId(1L);
-        user.setName("John Doe");  // Set the name
-        deliveryGuy.setUser(user);  // Associate the user with the delivery guy
+        user.setName("John Doe");
+        deliveryGuy.setUser(user);
 
         Role role = new Role();
         role.setName("ROLE_DELIVERY_GUY");
 
-        // 2. Mock Repository Responses
         when(deliveryGuyRepository.findById(deliveryGuyId)).thenReturn(Optional.of(deliveryGuy));
         when(roleRepository.findByName("ROLE_DELIVERY_GUY")).thenReturn(Optional.of(role));
-        when(accessTokenRepository.findByUserId(deliveryGuyId)).thenReturn(null); // Mocking AccessToken as not found
+        when(accessTokenRepository.findByUserId(deliveryGuyId)).thenReturn(null);
 
-        // 3. Call the Method
         String result = adminService.fireDeliveryGuy(deliveryGuyId);
 
-        // 4. Assertions
         assertTrue(deliveryGuy.isFired());
         assertNotNull(deliveryGuy.getEndWorkDate());
         assertEquals("delivery guy John Doe with id " + deliveryGuyId + " has been successfully fired", result);
 
         verify(deliveryGuyRepository).save(deliveryGuy);
-        verify(accessTokenRepository, never()).save(any()); // No save called on access token as it's not found
+        verify(accessTokenRepository, never()).save(any());
     }
 
 
@@ -902,7 +850,6 @@ public class AdminServiceTest {
         when(foodRepository.findById(foodId)).thenReturn(Optional.of(existingFood));
         when(foodRepository.save(any(Food.class))).thenReturn(existingFood);
 
-        // Optional: Mock convertToFoodDto if it's a separate method
         FoodDto expectedDto = new FoodDto();
         expectedDto.setId(foodId);
         expectedDto.setName("Updated Pizza");
@@ -910,7 +857,6 @@ public class AdminServiceTest {
         expectedDto.setDescription("Spicy and crispy");
         expectedDto.setFoodCategory(FoodCategory.MAIN_COURSE);
 
-        // You can mock convertToFoodDto if needed, or just check values directly.
         FoodDto result = adminService.editFood(dto, foodId);
 
         assertEquals("Updated Pizza", result.getName());
@@ -964,36 +910,30 @@ public class AdminServiceTest {
     void editRestaurant_shouldUpdateRestaurantSuccessfully() {
         Long restaurantId = 1L;
 
-        // Setup city
         City city = new City();
         city.setId(10L);
         city.setName("Sofia");
 
-        // Setup restaurant
         Restaurant restaurant = new Restaurant();
         restaurant.setId(restaurantId);
         restaurant.setDeleted(false);
         restaurant.setIban("OLD_IBAN");
         restaurant.setCity(city);
 
-        // Setup DTO
         EditRestaurantDto dto = new EditRestaurantDto();
         dto.setName("Updated Name");
         dto.setRating(4.7F);
         dto.setIban("NEW_IBAN");
 
-        // Mock behavior
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurant));
         when(restaurantRepository.findAll()).thenReturn(List.of(restaurant));
 
-        // Act
         RestaurantDto result = adminService.editRestaurant(dto, restaurantId);
 
-        // Assert
         assertEquals(dto.getName(), result.getName());
         assertEquals(dto.getIban(), result.getIban());
         assertEquals(dto.getRating(), result.getRating());
-        assertEquals("Sofia", result.getCityName()); // Optional, if your DTO has this
+        assertEquals("Sofia", result.getCityName());
 
         verify(restaurantRepository).save(restaurant);
     }
@@ -1054,5 +994,4 @@ public class AdminServiceTest {
 
         assertEquals("Such iban already exists in our system", exception.getMessage());
     }
-
 }

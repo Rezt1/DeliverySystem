@@ -56,7 +56,6 @@ class JwtServiceTest {
     void generateToken_ShouldCreateValidToken() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn(testEmail);
-        //when(auth.getAuthorities()).thenReturn(testAuthorities);
 
         // This is the key change - explicit casting
         when(auth.getAuthorities()).thenAnswer(invocation -> testAuthorities);
@@ -102,7 +101,7 @@ class JwtServiceTest {
                 .subject(testEmail)
                 .issuedAt(new Date(System.currentTimeMillis() - testExpiration - 1000))
                 .expiration(new Date(System.currentTimeMillis() - 1000))
-                .signWith(testKey)  // Use the testKey directly
+                .signWith(testKey)
                 .compact();
 
         assertFalse(jwtService.validateToken(expiredToken));
@@ -129,7 +128,7 @@ class JwtServiceTest {
                 .subject(testEmail)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + testExpiration))
-                .signWith(testKey)  // Use the testKey we created in setUp
+                .signWith(testKey)
                 .compact();
     }
 }
