@@ -24,25 +24,4 @@ public class RestaurantController {
         List<RestaurantDto> restaurants = restaurantService.getAllRestaurants(cityId, cuisineId, sorting);
         return ResponseEntity.ok(restaurants);
     }
-
-//    @GetMapping("/by-city/{cityId}")
-//    public ResponseEntity<List<RestaurantDto>> getRestaurantsByCity(
-//            @PathVariable Long cityId) {
-//        List<RestaurantDto> restaurants = restaurantService.getRestaurantsByCityId(cityId);
-//        return ResponseEntity.ok(restaurants);
-//    }
-//
-//    @GetMapping("/top-rated")
-//    public ResponseEntity<List<RestaurantDto>> getTopRatedRestaurants(
-//            @RequestParam(defaultValue = "5") int count) {
-//        List<RestaurantDto> restaurants = restaurantService.getTopRatedRestaurants(count);
-//        return ResponseEntity.ok(restaurants);
-//    }
-//
-//    @GetMapping("/search/cuisine")
-//    public ResponseEntity<List<RestaurantDto>> searchByCuisine(
-//            @RequestParam String name) {
-//        List<RestaurantDto> results = restaurantService.searchByCuisineName(name);
-//        return ResponseEntity.ok(results);
-//    }
 }

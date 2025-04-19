@@ -24,9 +24,6 @@ public class DeliveryGuySalary {
     @Column(nullable = false)
     private LocalDate endDate;
 
-//    @Column
-//    private boolean isBonus;                // ADDITIONAL FIELD -> IF WE DON'T NEED IT IN BONUS IMPL DELETE IT!!!
-
     @ManyToOne
     @JoinColumn(name = "deliveryGuyId", nullable = false)
     private DeliveryGuy deliveryGuy;
