@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/JwtServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/AccessToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/AccessToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryGuyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/DeliveryGuyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryGuyServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryGuyServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,10 +121,13 @@
     "JUnit.DeliveryGuyServiceTest.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.getCurrentDelivery_shouldOnlyReturnOutForDeliveryStatus.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.getCurrentDelivery_shouldReturnNullWhenNoActiveDeliveries.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.getSalaries_ShouldReturnDeliveryGuysSalaries.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.markAsDelivered_ShouldMarkDeliveryAsDelivered.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenAlreadyAssigned.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenDeliveryNotInSameCity.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenUserNotFound.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testAssignDelivery_successful.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_Success.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_shouldReturnCurrentDeliveryForDeliveryGuy.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_shouldThrowWhenUserNotFound.executor": "Run",
@@ -139,6 +140,7 @@
     "JUnit.DeliveryGuyServiceTest.testGetSalaries_shouldReturnSalaryDtos.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testGetSalaries_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testGetSalaries_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_Success.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldMarkSuccessfully.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenDeliveryNotFound.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenNoActiveDelivery.executor": "Run",
@@ -147,6 +149,7 @@
     "JUnit.DeliveryGuyServiceTest.testQuit_shouldSucceedAndReturnMessage.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testQuit_shouldThrowWhenNotDeliveryGuy.executor": "Run",
     "JUnit.DeliveryGuyServiceTest.testQuit_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTests.executor": "Run",
     "JUnit.DeliveryServiceTest.createDelivery_shouldCreateDeliverySuccessfully.executor": "Run",
     "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFirstFoodNotFound.executor": "Run",
     "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFoodDeletedInLoop.executor": "Run",
@@ -167,6 +170,10 @@
     "JUnit.FoodServiceTest.testGetFoodsByRestaurant_RestaurantNotFound.executor": "Run",
     "JUnit.FoodServiceTest.testGetFoodsByRestaurant_Success.executor": "Run",
     "JUnit.JwtServiceTest.executor": "Run",
+    "JUnit.JwtServiceTest.getEmailFromToken_ShouldReturnCorrectEmail.executor": "Run",
+    "JUnit.JwtServiceTest.validateToken_ShouldHandleExpiredToken.executor": "Run",
+    "JUnit.JwtServiceTest.validateToken_ShouldReturnFalseForMissingToken.executor": "Run",
+    "JUnit.JwtServiceTest.validateToken_ShouldReturnFalseForRevokedToken.executor": "Run",
     "JUnit.JwtServiceTest.validateToken_ShouldReturnTrueForValidToken.executor": "Run",
     "JUnit.RestaurantServiceTest.executor": "Run",
     "JUnit.RestaurantServiceTest.getAllRestaurants_cityNotFound_throwsException.executor": "Run",
@@ -202,21 +209,8 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.BackendApplication">
-    <configuration name="BackendApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.BackendApplication" />
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JwtServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.DeliveryGuyServiceTest">
+    <configuration name="DeliveryGuyServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -225,13 +219,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.JwtServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JwtServiceTest.getEmailFromToken_ShouldReturnCorrectEmail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryGuyServiceTest.getSalaries_ShouldReturnDeliveryGuysSalaries" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -240,14 +234,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.JwtServiceTest" />
-      <option name="METHOD_NAME" value="getEmailFromToken_ShouldReturnCorrectEmail" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
+      <option name="METHOD_NAME" value="getSalaries_ShouldReturnDeliveryGuysSalaries" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JwtServiceTest.validateToken_ShouldHandleExpiredToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryGuyServiceTest.markAsDelivered_ShouldMarkDeliveryAsDelivered" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -256,14 +250,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.JwtServiceTest" />
-      <option name="METHOD_NAME" value="validateToken_ShouldHandleExpiredToken" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
+      <option name="METHOD_NAME" value="markAsDelivered_ShouldMarkDeliveryAsDelivered" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JwtServiceTest.validateToken_ShouldReturnFalseForMissingToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -272,9 +266,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.JwtServiceTest" />
-      <option name="METHOD_NAME" value="validateToken_ShouldReturnFalseForMissingToken" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
+      <option name="METHOD_NAME" value="testGetCurrentDeliveryForDeliveryGuy_Success" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DeliveryGuyServiceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -288,11 +297,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.BackendApplication" />
-        <item itemvalue="JUnit.JwtServiceTest" />
-        <item itemvalue="JUnit.JwtServiceTest.validateToken_ShouldHandleExpiredToken" />
-        <item itemvalue="JUnit.JwtServiceTest.getEmailFromToken_ShouldReturnCorrectEmail" />
-        <item itemvalue="JUnit.JwtServiceTest.validateToken_ShouldReturnFalseForMissingToken" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTest" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTest.getSalaries_ShouldReturnDeliveryGuysSalaries" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTest.markAsDelivered_ShouldMarkDeliveryAsDelivered" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTests" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_Success" />
       </list>
     </recent_temporary>
   </component>

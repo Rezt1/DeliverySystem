@@ -7,6 +7,7 @@ import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.repositories.*;
 import com.renascence.backend.services.DeliveryGuyService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,8 +49,11 @@ class DeliveryGuyServiceTest {
 
     @BeforeEach
     void setup() {
+
         SecurityContext securityContext = mock(SecurityContext.class);
         when(securityContext.getAuthentication()).thenReturn(authentication);
+        Mockito.when(authentication.getName()).thenReturn("delivery@example.com");
+
         SecurityContextHolder.setContext(securityContext);
 
         deliveryGuyService = Mockito.spy(new DeliveryGuyService(
@@ -66,6 +71,7 @@ class DeliveryGuyServiceTest {
         Delivery delivery = new Delivery();
         delivery.setReceiver(receiver);
     }
+
 
     private User setupUserWithDeliveryGuy(Long cityId) {
         City city = new City();
@@ -255,81 +261,48 @@ class DeliveryGuyServiceTest {
     }
 
 
-//    @Test
-//    void getCurrentDelivery_shouldReturnOldestActiveDelivery() {
-//        Delivery activeDelivery;
-//        Delivery secondActiveDelivery;
-//
-//        User user = new User();
-//        user.setEmail("guy@example.com");
-//        DeliveryGuy deliveryGuy = new DeliveryGuy();
-//        user.setDeliveryGuy(deliveryGuy);
-//
-//        // Setup an active delivery
-//        activeDelivery = new Delivery();
-//        activeDelivery.setId(1L);
-//        activeDelivery.setStatus(DeliveryStatus.OUT_FOR_DELIVERY);
-//        activeDelivery.setTakenByDeliveryGuyDate(LocalDateTime.now().minusHours(1));
-//        activeDelivery.setDeliveryGuy(deliveryGuy);
-//
-//        // Setup a second active delivery (should be returned second)
-//        secondActiveDelivery = new Delivery();
-//        secondActiveDelivery.setId(2L);
-//        secondActiveDelivery.setStatus(DeliveryStatus.OUT_FOR_DELIVERY);
-//        secondActiveDelivery.setTakenByDeliveryGuyDate(LocalDateTime.now());
-//        secondActiveDelivery.setDeliveryGuy(deliveryGuy);
-//
-//        // Given - two active deliveries, expect the older one first
-//        when(deliveryRepository.findFirstByDeliveryGuyIdAndStatusOrderByTakenByDeliveryGuyDateAsc(
-//                eq(deliveryGuy.getId()),
-//                eq(DeliveryStatus.OUT_FOR_DELIVERY)
-//        )).thenReturn(Optional.of(activeDelivery));
-//
-//        // When
-//        DeliveryDto result = deliveryGuyService.getCurrentDeliveryForDeliveryGuy();
-//
-//        // Then
-//        assertNotNull(result);
-//        assertEquals(1L, result.getDeliveryId());
-//    }
+    @Test
+    void getCurrentDeliveryForDeliveryGuy_ShouldReturnActiveDelivery() {
+        City testCity = new City();
+        testCity.setId(1L);
+        testCity.setName("Test City");
 
-//    @Test
-//    void getCurrentDelivery_shouldReturnNullWhenNoActiveDeliveries() {
-//        // Given - no active deliveries
-//        when(deliveryRepository.findFirstByDeliveryGuyIdAndStatusOrderByTakenByDeliveryGuyDateAsc(
-//                anyLong(),
-//                any()
-//        )).thenReturn(Optional.empty());
-//
-//        // When
-//        DeliveryDto result = deliveryGuyService.getCurrentDeliveryForDeliveryGuy();
-//
-//        // Then
-//        assertNull(result);
-//    }
+        User testUser = new User();
+        testUser.setId(1L);
+        testUser.setEmail("delivery@example.com");
+        testUser.setName("Test Delivery Guy");
 
-//    @Test
-//    void getCurrentDelivery_shouldOnlyReturnOutForDeliveryStatus() {
-//        // Given - delivery in wrong status
-//        Delivery wrongStatusDelivery = new Delivery();
-//        wrongStatusDelivery.setStatus(DeliveryStatus.PENDING);
-//
-//        User user = new User();
-//        user.setEmail("guy@example.com");
-//        DeliveryGuy deliveryGuy = new DeliveryGuy();
-//        user.setDeliveryGuy(deliveryGuy);
-//
-//        when(deliveryRepository.findFirstByDeliveryGuyIdAndStatusOrderByTakenByDeliveryGuyDateAsc(
-//                eq(deliveryGuy.getId()),
-//                eq(DeliveryStatus.OUT_FOR_DELIVERY)
-//        )).thenReturn(Optional.empty());
-//
-//        // When
-//        DeliveryDto result = deliveryGuyService.getCurrentDeliveryForDeliveryGuy();
-//
-//        // Then
-//        assertNull(result);
-//    }
+        DeliveryGuy testDeliveryGuy = new DeliveryGuy();
+        testDeliveryGuy.setId(1L);
+        testDeliveryGuy.setUser(testUser);
+        testDeliveryGuy.setWorkCity(testCity);
+        testUser.setDeliveryGuy(testDeliveryGuy);
+
+        Restaurant testRestaurant = new Restaurant();
+        testRestaurant.setId(1L);
+        testRestaurant.setCity(testCity);
+        testRestaurant.setName("Test Restaurant");
+
+        Delivery testDelivery = new Delivery();
+        testDelivery.setId(1L);
+        testDelivery.setRestaurant(testRestaurant);
+        testDelivery.setStatus(DeliveryStatus.PENDING);
+        testDelivery.setReceiver(testUser);
+
+        testDelivery.setStatus(DeliveryStatus.OUT_FOR_DELIVERY);
+        testDelivery.setDeliveryGuy(testDeliveryGuy);
+
+        when(userRepository.findByEmail("delivery@example.com")).thenReturn(Optional.of(testUser));
+        when(deliveryRepository.findFirstByDeliveryGuyIdAndStatusOrderByTakenByDeliveryGuyDateAsc(
+                testDeliveryGuy.getId(), DeliveryStatus.OUT_FOR_DELIVERY)).thenReturn(Optional.of(testDelivery));
+
+        // Act
+        DeliveryDto result = deliveryGuyService.getCurrentDeliveryForDeliveryGuy();
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(testDelivery.getId(), result.getDeliveryId());
+    }
 
     @Test
     void testGetCurrentDeliveryForDeliveryGuy_shouldThrowWhenUserNotFound() {
@@ -370,6 +343,52 @@ class DeliveryGuyServiceTest {
     }
 
 
+
+    @Test
+    @Transactional
+    void markAsDelivered_ShouldMarkDeliveryAsDelivered() {
+        City testCity = new City();
+        testCity.setId(1L);
+        testCity.setName("Test City");
+
+        User testUser = new User();
+        testUser.setId(1L);
+        testUser.setEmail("delivery@example.com");
+        testUser.setName("Test Delivery Guy");
+
+        DeliveryGuy testDeliveryGuy = new DeliveryGuy();
+        testDeliveryGuy.setId(1L);
+        testDeliveryGuy.setUser(testUser);
+        testDeliveryGuy.setWorkCity(testCity);
+        testUser.setDeliveryGuy(testDeliveryGuy);
+
+        Restaurant testRestaurant = new Restaurant();
+        testRestaurant.setId(1L);
+        testRestaurant.setCity(testCity);
+        testRestaurant.setName("Test Restaurant");
+
+        Delivery testDelivery = new Delivery();
+        testDelivery.setId(1L);
+        testDelivery.setRestaurant(testRestaurant);
+        testDelivery.setStatus(DeliveryStatus.PENDING);
+        testDelivery.setReceiver(testUser);
+        // Arrange
+        testDelivery.setStatus(DeliveryStatus.OUT_FOR_DELIVERY);
+        testDelivery.setDeliveryGuy(testDeliveryGuy);
+
+        when(userRepository.findByEmail("delivery@example.com")).thenReturn(Optional.of(testUser));
+        when(deliveryRepository.findById(1L)).thenReturn(Optional.of(testDelivery));
+        when(deliveryRepository.findFirstByDeliveryGuyIdAndStatusOrderByTakenByDeliveryGuyDateAsc(
+                testDeliveryGuy.getId(), DeliveryStatus.OUT_FOR_DELIVERY)).thenReturn(Optional.of(testDelivery));
+
+        // Act
+        DeliveryDto result = deliveryGuyService.markAsDelivered(1L);
+
+        // Assert
+        assertEquals(DeliveryStatus.DELIVERED, testDelivery.getStatus());
+        assertNotNull(testDelivery.getDeliveredDate());
+        verify(deliveryRepository).save(testDelivery);
+    }
 
     @Test
     void testMarkAsDelivered_shouldThrowWhenDeliveryIdMismatch() {
@@ -449,6 +468,8 @@ class DeliveryGuyServiceTest {
         assertThrows(EntityNotFoundException.class, () -> deliveryGuyService.markAsDelivered(1L));
     }
 
+
+
     @Test
     void testGetFinishedDeliveries_shouldReturnDeliveredDeliveries() {
         String email = "delivery@user.com";
@@ -510,6 +531,60 @@ class DeliveryGuyServiceTest {
     }
 
 
+
+    @Test
+    void getSalaries_ShouldReturnDeliveryGuysSalaries() {
+        City testCity = new City();
+        testCity.setId(1L);
+        testCity.setName("Test City");
+
+        User testUser = new User();
+        testUser.setId(1L);
+        testUser.setEmail("delivery@example.com");
+        testUser.setName("Test Delivery Guy");
+
+        DeliveryGuy testDeliveryGuy = new DeliveryGuy();
+        testDeliveryGuy.setId(1L);
+        testDeliveryGuy.setUser(testUser);
+        testDeliveryGuy.setWorkCity(testCity);
+        testUser.setDeliveryGuy(testDeliveryGuy);
+
+        Restaurant testRestaurant = new Restaurant();
+        testRestaurant.setId(1L);
+        testRestaurant.setCity(testCity);
+        testRestaurant.setName("Test Restaurant");
+
+        Delivery testDelivery = new Delivery();
+        testDelivery.setId(1L);
+        testDelivery.setRestaurant(testRestaurant);
+        testDelivery.setStatus(DeliveryStatus.PENDING);
+        testDelivery.setReceiver(testUser);
+
+        // Arrange
+        DeliveryGuySalary salary1 = new DeliveryGuySalary();
+        salary1.setAmount(100.0);
+        salary1.setStartDate(LocalDate.now().minusDays(7));
+        salary1.setEndDate(LocalDate.now());
+        salary1.setDeliveryGuy(testDeliveryGuy);  // This was missing
+
+        DeliveryGuySalary salary2 = new DeliveryGuySalary();
+        salary2.setAmount(200.0);
+        salary2.setStartDate(LocalDate.now().minusDays(14));
+        salary2.setEndDate(LocalDate.now().minusDays(7));
+        salary2.setDeliveryGuy(testDeliveryGuy);  // This was missing
+
+        testDeliveryGuy.setSalaries(List.of(salary1, salary2));
+
+        when(userRepository.findByEmail("delivery@example.com")).thenReturn(Optional.of(testUser));
+
+        // Act
+        List<DeliveryGuySalaryDto> result = deliveryGuyService.getSalaries();
+
+        // Assert
+        assertEquals(2, result.size());
+        assertEquals("Test Delivery Guy", result.get(0).getDeliveryGuyName());
+        assertEquals("Test Delivery Guy", result.get(1).getDeliveryGuyName());
+    }
 
     @Test
     void testGetSalaries_shouldThrowWhenUserNotFound() {
@@ -600,6 +675,4 @@ class DeliveryGuyServiceTest {
 
         assertThrows(EntityNotFoundException.class, () -> deliveryGuyService.quit());
     }
-
-
 }

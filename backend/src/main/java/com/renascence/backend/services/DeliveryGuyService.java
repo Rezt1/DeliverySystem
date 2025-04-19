@@ -241,7 +241,6 @@ public class DeliveryGuyService {
 
     private DeliveryGuySalaryDto convertToDeliveryGuySalaryDto(DeliveryGuySalary deliveryGuySalary){
         DeliveryGuySalaryDto dto = new DeliveryGuySalaryDto();
-
         dto.setDeliveryGuyName(deliveryGuySalary.getDeliveryGuy().getUser().getName());
         dto.setAmount(deliveryGuySalary.getAmount());
         dto.setStartDate(deliveryGuySalary.getStartDate());
