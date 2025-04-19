@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/JwtServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/food/EditFoodDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/food/EditFoodDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/restaurant/EditRestaurantDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/dtos/restaurant/EditRestaurantDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/AccessToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/entities/AccessToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/services/JwtService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +68,9 @@
     "JUnit.AdminServiceTest.editFood_shouldThrowExceptionWhenFoodIsDeleted.executor": "Run",
     "JUnit.AdminServiceTest.editFood_shouldThrowExceptionWhenFoodNotFound.executor": "Run",
     "JUnit.AdminServiceTest.editFood_shouldUpdateFoodSuccessfully.executor": "Run",
+    "JUnit.AdminServiceTest.editRestaurant_shouldThrowExceptionIfIbanAlreadyExists.executor": "Run",
+    "JUnit.AdminServiceTest.editRestaurant_shouldThrowExceptionIfRestaurantIsDeleted.executor": "Run",
+    "JUnit.AdminServiceTest.editRestaurant_shouldThrowExceptionIfRestaurantNotFound.executor": "Run",
     "JUnit.AdminServiceTest.editRestaurant_shouldUpdateRestaurantSuccessfully.executor": "Run",
     "JUnit.AdminServiceTest.executor": "Run",
     "JUnit.AdminServiceTest.removeCity_shouldMarkCityAsDeleted.executor": "Run",
@@ -163,6 +166,8 @@
     "JUnit.FoodServiceTest.testGetFoodsByRestaurant_RestaurantIsDeleted.executor": "Run",
     "JUnit.FoodServiceTest.testGetFoodsByRestaurant_RestaurantNotFound.executor": "Run",
     "JUnit.FoodServiceTest.testGetFoodsByRestaurant_Success.executor": "Run",
+    "JUnit.JwtServiceTest.executor": "Run",
+    "JUnit.JwtServiceTest.validateToken_ShouldReturnTrueForValidToken.executor": "Run",
     "JUnit.RestaurantServiceTest.executor": "Run",
     "JUnit.RestaurantServiceTest.getAllRestaurants_cityNotFound_throwsException.executor": "Run",
     "JUnit.RestaurantServiceTest.getAllRestaurants_cuisineNotFound_throwsException.executor": "Run",
@@ -211,7 +216,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JwtServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -220,13 +225,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.JwtServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest.editRestaurant_shouldThrowExceptionIfIbanAlreadyExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JwtServiceTest.getEmailFromToken_ShouldReturnCorrectEmail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -235,14 +240,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="editRestaurant_shouldThrowExceptionIfIbanAlreadyExists" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.JwtServiceTest" />
+      <option name="METHOD_NAME" value="getEmailFromToken_ShouldReturnCorrectEmail" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest.editRestaurant_shouldThrowExceptionIfRestaurantIsDeleted" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JwtServiceTest.validateToken_ShouldHandleExpiredToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -251,14 +256,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="editRestaurant_shouldThrowExceptionIfRestaurantIsDeleted" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.JwtServiceTest" />
+      <option name="METHOD_NAME" value="validateToken_ShouldHandleExpiredToken" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest.editRestaurant_shouldThrowExceptionIfRestaurantNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JwtServiceTest.validateToken_ShouldReturnFalseForMissingToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -267,8 +272,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="editRestaurant_shouldThrowExceptionIfRestaurantNotFound" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.JwtServiceTest" />
+      <option name="METHOD_NAME" value="validateToken_ShouldReturnFalseForMissingToken" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -284,10 +289,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.BackendApplication" />
-        <item itemvalue="JUnit.AdminServiceTest" />
-        <item itemvalue="JUnit.AdminServiceTest.editRestaurant_shouldThrowExceptionIfIbanAlreadyExists" />
-        <item itemvalue="JUnit.AdminServiceTest.editRestaurant_shouldThrowExceptionIfRestaurantIsDeleted" />
-        <item itemvalue="JUnit.AdminServiceTest.editRestaurant_shouldThrowExceptionIfRestaurantNotFound" />
+        <item itemvalue="JUnit.JwtServiceTest" />
+        <item itemvalue="JUnit.JwtServiceTest.validateToken_ShouldHandleExpiredToken" />
+        <item itemvalue="JUnit.JwtServiceTest.getEmailFromToken_ShouldReturnCorrectEmail" />
+        <item itemvalue="JUnit.JwtServiceTest.validateToken_ShouldReturnFalseForMissingToken" />
       </list>
     </recent_temporary>
   </component>

@@ -30,10 +30,10 @@ public class JwtService {
     private final AccessTokenRepository accessTokenRepository;
 
     @Value("${security.jwt.secret}")
-    private String jwtSecret;
+    public String jwtSecret;
 
     @Value("${security.jwt.expiration-ms}")
-    private long jwtExpirationInMs;
+    public long jwtExpirationInMs;
 
     private Key key;
 
