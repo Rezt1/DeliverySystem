@@ -8,19 +8,31 @@ btnLogout.addEventListener("click", logout);
 let nameField = document.getElementById("name-field");
 nameField.textContent = sessionStorage.getItem("username");
 
+let userName = document.getElementById("user-name");
+userName.textContent = sessionStorage.getItem("username");
+
 let emailField = document.getElementById("email-field");
 emailField.textContent = sessionStorage.getItem("email");
 
 let phoneField = document.getElementById("phone-field");
 phoneField.textContent = sessionStorage.getItem("phoneNumber");
 
-let btndelivery = document.getElementById("deliveries-button");
-btndelivery.addEventListener("click", () => {
-    window.location.href = "./my_delivery.html";
-} )
+let becomeDel = document.getElementById("become-delivery-guy-btn");
 
-if(ifDeliveryGuy){
+becomeDel.addEventListener("click", () => {
+    window.location.href = "./apply_as_courier.html";
+})
+
+let quitDel = document.getElementById("quit-delivery-guy-btn");
+
+
+
+if(ifDeliveryGuy()){
     console.log("delivery");
-    btndelivery.classList.remove("hidden");
-    sessionStorage.setItem("delivery-id", 1);
+    becomeDel.classList.add("hidden");
+    quitDel.classList.remove("hidden");
+}
+else{
+    becomeDel.classList.remove("hidden");
+    quitDel.classList.add("hidden");
 }

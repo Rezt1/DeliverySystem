@@ -40,7 +40,7 @@
 
           <!-- Hidden deliveries button -->
           <!-- To be shown only when delivery guy is logged in -->
-          <button id="deliveries-button" class="btn-primary !hidden">
+          <button id="deliveries-button" class="btn-primary hidden">
             Deliveries
           </button>
         </div>
@@ -341,7 +341,7 @@
                 <label for="expiration-date-input">Expiration date (MM/YY)</label>
                 <input type="text" name="expiration-date" id="expiration-date-input" placeholder="MM/YY"
                   class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
-                  maxlength="5" pattern="(0[1-9]|1[0-2])\/\d{2}" oninput="formatExpiration(this)" />
+                  maxlength="5" pattern="(0[1-9]|1[0-2])\/\d{2}" />
               </div>
               <div id="cvc-block" class="flex flex-col gap-2 w-full">
                 <label for="cvc-input">CVC</label>

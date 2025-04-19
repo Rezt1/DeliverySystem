@@ -10,8 +10,15 @@ const deliveryInput = document.getElementById('delivery-time');
 
 let paymentCard = document.getElementById("card-radio");
 
-console.log(sessionStorage.getItem("accessToken"));
+let paymentCash = document.getElementById("cash-radio");
 
+paymentCard.addEventListener("click", () => {
+    document.getElementById("card-info").classList.remove("hidden");
+})
+
+paymentCash.addEventListener("click", () => {
+    document.getElementById("card-info").classList.add("hidden");
+})
 
 confirmOrder.addEventListener("click", ()=> {
     try{
@@ -30,9 +37,19 @@ confirmOrder.addEventListener("click", ()=> {
             paymentMethod = "CASH"
         }
 
-        deliverySend(addressBlock.value, paymentMethod);
+        let foods = JSON.parse(localStorage.getItem("cart")) || [];
 
 
+        let foodsInfo = [];
+
+        Array.from(foods).forEach(el => {
+            foodsInfo.push({"foodId": el.id, "quantity": el.quantity})
+        });
+
+
+       deliverySend(addressBlock.value, paymentMethod, foodsInfo);
+
+        localStorage.clear();
 
     }
     else{
@@ -85,12 +102,11 @@ function isTimeBetween(time, start, end) {
     }
   }
 
-  async function deliverySend(address, paymentMethod) {
+  async function deliverySend(address, paymentMethod, foods) {
     
 
             let ip = "http://localhost:8080";
 
-            let foods = JSON.parse(localStorage.getItem("cart")) || [];
             let token = sessionStorage.getItem("accessToken");
   
          let delivery = {

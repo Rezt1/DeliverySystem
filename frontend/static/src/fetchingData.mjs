@@ -94,3 +94,21 @@ export async function fetchCuisine() {
   return data;
   
 }
+
+export async function fetchPendingDel(id) {
+  let token = sessionStorage.getItem("accessToken");
+  let address = `${ip()}/api/deliveries`;
+  if(id){
+    address = `${ip()}/api/deliveries/${id}`;
+  }
+  let resp = await fetch(address, {
+    method: "Get",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  let data = await resp.json();
+  return data;
+}
