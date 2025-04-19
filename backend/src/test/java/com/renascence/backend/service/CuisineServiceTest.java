@@ -10,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +28,6 @@ public class CuisineServiceTest {
 
     @Test
     public void getAllCuisines_ShouldReturnAllCuisinesAsDtos() {
-        //Arrange
         Cuisine italian = new Cuisine();
         italian.setId(1L);
         italian.setName("italian");
@@ -42,10 +40,8 @@ public class CuisineServiceTest {
 
         when(cuisineRepository.findAll()).thenReturn(List.of(italian, bulgarian));
 
-        //Act
         List<CuisineDto> result = cuisineService.getAllCuisines();
 
-        //Assert
         assertEquals(2, result.size());
         assertTrue(result.containsAll(List.of(expectedItalian, expectedBulgarian)));
         verify(cuisineRepository, times(1)).findAll();
@@ -53,20 +49,16 @@ public class CuisineServiceTest {
 
     @Test
     void getAllCuisines_WhenNoCuisinesExist_ShouldReturnEmptyList() {
-        // Arrange
         when(cuisineRepository.findAll()).thenReturn(List.of());
 
-        // Act
         List<CuisineDto> result = cuisineService.getAllCuisines();
 
-        // Assert
         assertTrue(result.isEmpty());
         verify(cuisineRepository, times(1)).findAll();
     }
 
     @Test
     void getCuisineById_WithExistingId_ShouldReturnConvertedDto() {
-        //Arrange
         Cuisine italian = new Cuisine();
         italian.setId(1L);
         italian.setName("italian");
@@ -74,10 +66,8 @@ public class CuisineServiceTest {
 
         when(cuisineRepository.findById(1L)).thenReturn(Optional.of(italian));
 
-        // Act
         CuisineDto result = cuisineService.getCuisineById(1L);
 
-        // Assert
         assertNotNull(result);
         assertEquals(expectedItalian.getId(), result.getId());
         assertEquals(expectedItalian.getName(), result.getName());
@@ -86,10 +76,8 @@ public class CuisineServiceTest {
 
     @Test
     void getCuisineById_WithNonExistentId_ShouldThrowException() {
-        // Arrange
         when(cuisineRepository.findById(99L)).thenReturn(Optional.empty());
 
-        // Act & Assert
         EntityNotFoundException exception = assertThrows(
                 EntityNotFoundException.class,
                 () -> cuisineService.getCuisineById(99L)
@@ -100,7 +88,6 @@ public class CuisineServiceTest {
 
     @Test
     void getCuisineByName_WithExistingName_ShouldReturnOptionalDto() {
-        // Arrange
         Cuisine italian = new Cuisine();
         italian.setId(1L);
         italian.setName("italian");
@@ -108,10 +95,8 @@ public class CuisineServiceTest {
 
         when(cuisineRepository.findByName("italian")).thenReturn(Optional.of(italian));
 
-        // Act
         Optional<CuisineDto> result = cuisineService.getCuisineByName("italian");
 
-        // Assert
         assertTrue(result.isPresent());
         assertEquals(expectedItalian, result.get());
         verify(cuisineRepository, times(1)).findByName("italian");
@@ -119,13 +104,10 @@ public class CuisineServiceTest {
 
     @Test
     void getCuisineByName_WithNonExistentName_ShouldReturnEmptyOptional() {
-        // Arrange
         when(cuisineRepository.findByName("Unknown")).thenReturn(Optional.empty());
 
-        // Act
         Optional<CuisineDto> result = cuisineService.getCuisineByName("Unknown");
 
-        // Assert
         assertFalse(result.isPresent());
         verify(cuisineRepository, times(1)).findByName("Unknown");
     }

@@ -225,5 +225,4 @@ class FoodServiceTest {
         assertEquals("Food no longer exist with id: 1", exception.getMessage());
         verify(foodRepository).findById(1L);
     }
-
 }

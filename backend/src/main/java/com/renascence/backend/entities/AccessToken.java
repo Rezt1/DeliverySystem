@@ -1,8 +1,7 @@
 package com.renascence.backend.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -34,5 +33,10 @@ public class AccessToken {
         this.expiryDate = expiryDate;
         this.token = token;
         this.user = user;
+    }
+
+    public AccessToken(String validToken, boolean b) {
+        this.token = validToken;
+        this.isRevoked = b;
     }
 }

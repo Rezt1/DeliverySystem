@@ -2,8 +2,10 @@ package com.renascence.backend.dtos.restaurant;
 
 import jakarta.validation.constraints.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class EditRestaurantDto {
     @NotBlank(message = "Restaurant name is required")
     @Size(max = 100, message = "Name must be less than 100 characters")

@@ -32,7 +32,6 @@ public class CityServiceTest {
 
     @Test
     void getAllCities_ShouldReturnOnlyNonDeletedCitiesAsDtos() {
-        // Arrange
         City plevenEntity = new City();
         plevenEntity.setId(1L);
         plevenEntity.setName("Pleven");
@@ -54,10 +53,8 @@ public class CityServiceTest {
 
         when(cityRepository.findAll()).thenReturn(List.of(plevenEntity, petrichEntity, blagoevgradEntity));
 
-        // Act
         List<CityDto> result = cityService.getAllCities();
 
-        // Assert
         assertEquals(2, result.size());
         Assertions.assertTrue(result.containsAll(List.of(expectedPetrichDto, expectedBlagoevgradDto)));
         Assertions.assertFalse(result.stream().anyMatch(dto -> dto.getName().equals("Pleven")));
@@ -66,20 +63,16 @@ public class CityServiceTest {
 
     @Test
     void getAllCities_WhenNoCitiesExist_ShouldReturnEmptyList() {
-        // Arrange
         when(cityRepository.findAll()).thenReturn(List.of());
 
-        // Act
         List<CityDto> result = cityService.getAllCities();
 
-        // Assert
         assertTrue(result.isEmpty());
         verify(cityRepository, times(1)).findAll();
     }
 
     @Test
     void getCityById_WithExistingId_ShouldReturnCityDto() {
-        // Arrange
         City cityEntity = new City();
         cityEntity.setId(1L);
         cityEntity.setName("Pleven");
@@ -88,10 +81,8 @@ public class CityServiceTest {
 
         when(cityRepository.findById(1L)).thenReturn(Optional.of(cityEntity));
 
-        // Act
         CityDto result = cityService.getCityById(1L);
 
-        // Assert
         assertNotNull(result);
         assertEquals(expectedDto.getId(), result.getId());
         assertEquals(expectedDto.getName(), result.getName());
@@ -100,10 +91,8 @@ public class CityServiceTest {
 
     @Test
     void getCityById_WithNonExistentId_ShouldThrowException() {
-        // Arrange
         when(cityRepository.findById(99L)).thenReturn(Optional.empty());
 
-        // Act & Assert
         EntityNotFoundException exception = assertThrows(
                 EntityNotFoundException.class,
                 () -> cityService.getCityById(99L)
@@ -134,14 +123,11 @@ public class CityServiceTest {
         plevenEntity.setId(1L);
         plevenEntity.setName("Pleven");
 
-        // Get the private method
         Method method = CityService.class.getDeclaredMethod("convertToDto", City.class);
-        method.setAccessible(true); // Override access restriction
+        method.setAccessible(true);
 
-        // Invoke the method
         CityDto result = (CityDto) method.invoke(cityService, plevenEntity);
 
-        // Assert
         assertEquals(plevenEntity.getId(), result.getId());
         assertEquals(plevenEntity.getName(), result.getName());
     }
