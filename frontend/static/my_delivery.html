@@ -219,7 +219,7 @@
     <main class="flex justify-around">
       <div
         id="delievery-info"
-        class="bg-white rounded-3xl overflow-hidden shadow-md shadow-gray-700 h-[90%] w-[90%] m-auto text-[#006bb8] md:text-2xl"
+        class="bg-white rounded-3xl shadow-md shadow-gray-700 h-[90%] w-[90%] m-auto text-[#006bb8] md:text-2xl"
       >
         <div
           class="h-full w-full overflow-y-auto grid grid-cols-1 md:grid-cols-2 justify-around items-center"
@@ -283,20 +283,18 @@
             </button>
           </div>
 
+          <!-- Order summary -->
           <section
-            id="order-summery"
+            id="order-summary"
             class="flex flex-col mt-15 md:mt-8 mb-auto"
           >
-            <h1 class="text-3xl md:text-5xl text-center text-shadow">
+            <h1 class="text-3xl md:text-5xl my-4 text-center text-shadow">
               Order Summary
             </h1>
 
-            <div
-              id="order-summary-info"
-              class="rounded-3xl h-[70%] flex-1 overflow-y-auto"
-            >
+            <div id="order-summary-info" class="rounded-3xl h-[70%] flex-1">
               <!-- Loading state - make hidden if data is loaded -->
-              <div id="order-summary-loading" class="grid gap-3 p-4">
+              <div id="order-summary-loading" class="hidden grid gap-3 p-4">
                 <!-- Skeleton loader items -->
                 <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
                 <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
@@ -304,7 +302,10 @@
               </div>
 
               <!-- Actual order summary will be inserted here -->
-              <div id="order-summary-list" class="grid gap-3 p-4">
+              <div
+                id="order-summary-list"
+                class="grid gap-3 p-4 flex overflow-y-auto max-h-[450px]"
+              >
                 <!-- Order info box -->
                 <div
                   id="orders-item-summary"
@@ -335,6 +336,16 @@
                   <!-- $24.50 -->
                 </div>
               </div>
+            </div>
+            <div
+              class="flex justify-end items-center gap-2 p-6 text-xl md:text-2xl"
+            >
+              <label for="total-price" class="text-[#006bb8] font-bold"
+                >Total:
+              </label>
+              <span id="total-price" class="text-[#006bb8] font-bold"
+                >24.99</span
+              >
             </div>
           </section>
         </div>
