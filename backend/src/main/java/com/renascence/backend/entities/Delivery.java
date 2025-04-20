@@ -46,6 +46,8 @@ public class Delivery {
     @Column(nullable = false)
     private LocalDateTime creationDate;
 
+
+
     private LocalDateTime takenByDeliveryGuyDate;
 
     private LocalDateTime deliveredDate;
