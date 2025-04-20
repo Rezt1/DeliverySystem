@@ -239,67 +239,84 @@
           My Delivery
         </button>
 
-        <section
-          id="list-of-orders"
-          class="flex flex-col justify-between w-[80%] p-5 overflow-y-auto"
+        <div
+          class="flex justify-between w-[90%] md:w-[90%] h-full p-5 max-md:px-2 gap-4 overflow-y-auto"
         >
-          <!-- Loading state - make hidden if data is loaded -->
-          <div id="orders-loading" class="!hidden grid gap-3 p-4">
-            <!-- Skeleton loader items -->
-            <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
-            <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
-            <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
-            <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
-            <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
-          </div>
-
-          <!-- Actual order summary will be inserted here -->
-          <div
-            class="flex items-center justify-between gap-4 p-2 text-2xl md:text-3xl"
+          <section
+            id="list-of-orders"
+            class="flex flex-col max-md:w-[60%] w-full overflow-y-auto"
           >
-            <!-- Order info box -->
-            <div
-              id="orders-list"
-              class="flex-1 flex items-center justify-between p-4 bg-gray-200 rounded-lg"
-            >
-              <div>
-                <h3 id="order-number" class="font-bold">Order #1234</h3>
-                <!-- Order #1234 -->
-                <span
-                  id="qty-and-price"
-                  class="text-xs md:text-sm text-gray-600"
-                  >2 items • $24.50</span
-                >
-                <!-- 2 items • $24.50 -->
-              </div>
-              <span id="time-ago" class="text-xs md:text-sm text-gray-500"
-                >10 min ago</span
-              >
-              <!-- 10 min ago -->
+            <!-- Loading state - make hidden if data is loaded -->
+            <div id="orders-loading" class="hidden grid gap-3 p-4">
+              <!-- Skeleton loader items -->
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
             </div>
 
-            <!-- Accept button - Sends to my_delivery -->
-            <button
-              id="accept-order-button"
-              class="w-[90px] h-full flex-shrink-0 bg-[#006bb8] text-white rounded-lg font-bold flex justify-center items-center hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:border-2 hover:border-[#ff66c4] active:opacity-70 transition-all"
+            <!-- Actual order summary will be inserted here -->
+            <div
+              class="flex items-center justify-between gap-4 p-2 text-2xl md:text-3xl"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-12 w-12"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+              <!-- Order info box -->
+              <div
+                id="orders-list"
+                class="flex-1 flex max-md:flex-col gap-1 max-md:items-start items-center justify-between p-2 md:p-4 bg-gray-200 rounded-lg"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </button>
-          </div>
-        </section>
+                <div class="flex flex-col gap-1">
+                  <h3 id="order-number" class="font-bold max-md:text-xl">
+                    Order #1234
+                  </h3>
+                  <p
+                    id="order-address"
+                    class="text-xs md:text-sm text-gray-600"
+                  >
+                    123 Main St, City, State
+                  </p>
+                  <span
+                    id="qty-and-price"
+                    class="text-xs md:text-sm text-gray-600"
+                  >
+                    2 items • $24.50
+                  </span>
+                  <span
+                    id="delivery-time"
+                    class="text-xs md:text-sm text-[#ff66c4] font-semibold"
+                  >
+                    Delivery Time: 12:45 PM
+                  </span>
+                </div>
+                <span id="time-ago" class="text-xs md:text-sm text-gray-500"
+                  >10 min ago</span
+                >
+                <!-- 10 min ago -->
+              </div>
+
+              <!-- Accept button - Sends to my_delivery -->
+              <button
+                id="accept-order-button"
+                class="max-w-[60px] max-h-[60px] flex-shrink-0 bg-[#006bb8] text-white rounded-lg font-bold flex justify-center items-center hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:border-2 hover:border-[#ff66c4] active:opacity-70 transition-all"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </button>
+            </div>
+          </section>
+        </div>
       </div>
     </main>
 

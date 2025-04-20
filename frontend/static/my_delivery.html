@@ -227,7 +227,9 @@
           <div class="flex flex-col justify-center items-center gap-2 p-4">
             <div id="info" class="flex justify-around md:flex-col mb-auto mt-2">
               <section id="delievery-info" class="flex flex-col gap-2 m-4 p-2">
-                <h1 class="text-2xl md:text-5xl text-shadow ">Delivery Information</h1>
+                <h1 class="text-2xl md:text-5xl text-shadow">
+                  Delivery Information
+                </h1>
                 <div
                   class="flex flex-col justify-center items-start gap-1 p-2 text-1xl md:text-3xl"
                 >
@@ -252,7 +254,9 @@
                 </div>
               </section>
               <section id="order-info" class="flex flex-col gap-2 m-4 p-2">
-                <h1 class="text-2xl md:text-5xl text-shadow">Order Information</h1>
+                <h1 class="text-2xl md:text-5xl text-shadow">
+                  Order Information
+                </h1>
                 <div
                   class="flex flex-col justify-center items-start gap-1 p-2 text-1xl md:text-3xl"
                 >
@@ -283,7 +287,9 @@
             id="order-summery"
             class="flex flex-col mt-15 md:mt-8 mb-auto"
           >
-            <h1 class="text-3xl md:text-5xl text-center text-shadow ">Order Summary</h1>
+            <h1 class="text-3xl md:text-5xl text-center text-shadow">
+              Order Summary
+            </h1>
 
             <div
               id="order-summary-info"
@@ -298,7 +304,37 @@
               </div>
 
               <!-- Actual order summary will be inserted here -->
-              <div id="order-summary-list" class="grid gap-3 p-4 hidden"></div>
+              <div id="order-summary-list" class="grid gap-3 p-4">
+                <!-- Order info box -->
+                <div
+                  id="orders-item-summary"
+                  class="flex-1 flex gap-1 max-md:items-start items-center justify-between p-2 md:p-4 bg-gray-200 rounded-lg"
+                >
+                  <h3 id="order-item" class="font-bold max-md:text-xl text-2xl">
+                    Item
+                  </h3>
+                  <!-- Salad -->
+                  <div class="flex items-center justify-center gap-2">
+                    <label
+                      for="qty-items"
+                      class="text-md md:text-lg md:text-base text-[#ff66c4]"
+                      >Quantity:
+                    </label>
+                    <span
+                      id="qty-items"
+                      class="text-md md:text-lg md:text-base text-[#ff66c4] mr-auto"
+                      >2</span
+                    >
+                  </div>
+                  <!-- Quantity: 2 -->
+                  <span
+                    id="qty-and-price"
+                    class="text-xl md:text-2xl md:text-base text-[#006bb8] font-bold"
+                    >$24.50</span
+                  >
+                  <!-- $24.50 -->
+                </div>
+              </div>
             </div>
           </section>
         </div>
