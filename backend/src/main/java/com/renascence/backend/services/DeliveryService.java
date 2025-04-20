@@ -51,6 +51,20 @@ public class DeliveryService {
         delivery.setReceiver(user);
         delivery.setRestaurant(restaurant);
         delivery.setStatus(DeliveryStatus.PENDING);
+        delivery.setTotalPrice(createDeliveryDto.getTotalPrice());
+
+        int hour = Integer.parseInt(createDeliveryDto.getHourToBeDelivered().substring(0, 2));
+        int minutes = Integer.parseInt(createDeliveryDto.getHourToBeDelivered().substring(3, 5));
+
+        delivery.setToBeDeliveredHour(LocalDateTime.of(LocalDateTime.now().getYear(),
+                LocalDateTime.now().getMonth(),
+                LocalDateTime.now().getDayOfMonth(),
+                hour,
+                minutes));
+
+        if (delivery.getToBeDeliveredHour().isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Cannot make an order for the past");
+        }
 
         List<DeliveryFood> deliveryFoods = createDeliveryDto.getFoods().stream()
                 .map(deliveryFoodDto -> {
@@ -105,6 +119,9 @@ public class DeliveryService {
         dto.setCreationDate(delivery.getCreationDate());
         dto.setStatus(delivery.getStatus());
         dto.setPaymentMethod(delivery.getPaymentMethod());
+        dto.setTotalPrice(delivery.getTotalPrice());
+        dto.setToBeDeliveredTime(String
+                .format("%d:%d", delivery.getToBeDeliveredHour().getHour(), delivery.getToBeDeliveredHour().getMinute()));
 
         // Map the related DeliveryFood entities to DeliveryFoodDto
         List<DeliveryFoodDto> foodDtos = new ArrayList<>();

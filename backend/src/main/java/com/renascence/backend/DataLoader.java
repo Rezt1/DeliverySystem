@@ -725,10 +725,12 @@ public class DataLoader implements CommandLineRunner {
         Delivery delivery = new Delivery();
         delivery.setAddress("100 Vitosha Blvd");
         delivery.setCreationDate(LocalDateTime.now());
+        delivery.setToBeDeliveredHour(LocalDateTime.now().plusHours(1));
         delivery.setPaymentMethod(PaymentMethod.CARD);
         delivery.setReceiver(customer1);
         delivery.setRestaurant(vega);
         delivery.setStatus(DeliveryStatus.PENDING);
+        delivery.setTotalPrice(100);
 
         DeliveryFood deliveryFood = new DeliveryFood();
         deliveryFood.setFood(pizza);
@@ -746,10 +748,12 @@ public class DataLoader implements CommandLineRunner {
         Delivery delivery2 = new Delivery();
         delivery2.setAddress("12 Bulgaria Blvd");
         delivery2.setCreationDate(LocalDateTime.now());
+        delivery2.setToBeDeliveredHour(LocalDateTime.now().plusHours(1));
         delivery2.setPaymentMethod(PaymentMethod.CASH);
         delivery2.setReceiver(customer2);
         delivery2.setRestaurant(italianFantasy);
         delivery2.setStatus(DeliveryStatus.PENDING);
+        delivery2.setTotalPrice(100);
 
         DeliveryFood deliveryFood2 = new DeliveryFood();
         deliveryFood2.setFood(pizza);
@@ -766,10 +770,12 @@ public class DataLoader implements CommandLineRunner {
         Delivery delivery3 = new Delivery();
         delivery3.setAddress("12 Bulgaria hehe");
         delivery3.setCreationDate(LocalDateTime.now());
+        delivery3.setToBeDeliveredHour(LocalDateTime.now().plusHours(1));
         delivery3.setPaymentMethod(PaymentMethod.CASH);
         delivery3.setReceiver(customer2);
         delivery3.setRestaurant(kebabHouse);
         delivery3.setStatus(DeliveryStatus.PENDING);
+        delivery3.setTotalPrice(100);
 
         DeliveryFood deliveryFood3 = new DeliveryFood();
         deliveryFood3.setFood(shishKebab);

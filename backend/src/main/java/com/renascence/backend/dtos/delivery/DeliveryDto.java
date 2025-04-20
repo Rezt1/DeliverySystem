@@ -20,6 +20,8 @@ public class DeliveryDto {
     private String address;
     private String userPhoneNumber;
     private LocalDateTime creationDate;
+    private String toBeDeliveredTime;
+    private Double totalPrice;
     private DeliveryStatus status;
     private PaymentMethod paymentMethod;
     private String deliveryGuyName;

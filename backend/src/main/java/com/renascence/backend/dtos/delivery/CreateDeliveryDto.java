@@ -21,4 +21,12 @@ public class CreateDeliveryDto {
     @Valid
     @NotEmpty(message = "At least 1 food is required")
     private List<CreateDeliveryFoodDto> foods;
+
+    @NotNull(message = "Total price is required")
+    @Positive(message = "Total price cannot be non positive")
+    private Double totalPrice;
+
+    @NotBlank(message = "Hour is required")
+    @Pattern(regexp = "^\\d{2}:\\d{2}$", message = "Hour should follow the pattern: hh:mm")
+    private String hourToBeDelivered;
 }

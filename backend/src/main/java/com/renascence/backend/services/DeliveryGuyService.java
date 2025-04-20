@@ -221,6 +221,9 @@ public class DeliveryGuyService {
         dto.setCreationDate(delivery.getCreationDate());
         dto.setStatus(delivery.getStatus());
         dto.setPaymentMethod(delivery.getPaymentMethod());
+        dto.setTotalPrice(delivery.getTotalPrice());
+        dto.setToBeDeliveredTime(String
+                .format("%d:%d", delivery.getToBeDeliveredHour().getHour(), delivery.getToBeDeliveredHour().getMinute()));
 
         // Map the related DeliveryFood entities to DeliveryFoodDto
         List<DeliveryFoodDto> foodDtos = new ArrayList<>();

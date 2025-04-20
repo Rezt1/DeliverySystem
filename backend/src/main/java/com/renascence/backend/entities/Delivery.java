@@ -44,9 +44,13 @@ public class Delivery {
     private String address;
 
     @Column(nullable = false)
+    private double totalPrice;
+
+    @Column(nullable = false)
     private LocalDateTime creationDate;
 
-
+    @Column(nullable = false)
+    private LocalDateTime toBeDeliveredHour;
 
     private LocalDateTime takenByDeliveryGuyDate;
 
