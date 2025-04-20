@@ -15,6 +15,7 @@ async function onDashboardClick(e) {
     let clientsCountEl = document.getElementById("client-qty");
     let restaurantsCountEl = document.getElementById("restaurants-qty");
     let deliveryGuysCountEl = document.getElementById("delivery-guys-qty");
+    let citiesCountEl = document.getElementById("cities-qty");
 
     let address = ip() + "/api/admin/get-statistics";
     let token = sessionStorage.getItem("accessToken");
@@ -32,6 +33,7 @@ async function onDashboardClick(e) {
     clientsCountEl.textContent = respData.userCount;
     restaurantsCountEl.textContent = respData.restaurantsCount;
     deliveryGuysCountEl.textContent = respData.deliveryGuysCount;
+    citiesCountEl.textContent = respData.citiesCount;
 
     dashboardMain.classList.remove("hidden");
 }
