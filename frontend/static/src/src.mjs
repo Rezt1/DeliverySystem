@@ -49,9 +49,7 @@ import { ifDeliveryGuy, ifLoggedIn } from "./userWork.mjs";
     window.location.href = "./deliveries.html";
     });
     }
-    else{
-      btndelivery.classList.add("hidden");
-    }
+  
     
 
     loginBtnDe.addEventListener('click', loadLogin);

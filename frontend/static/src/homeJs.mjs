@@ -1,4 +1,5 @@
 import { fetchingCities } from "./fetchingData.mjs";
+import { ifDeliveryGuy } from "./userWork.mjs";
 
 console.log(sessionStorage.getItem("accessToken"));
 
@@ -9,6 +10,18 @@ menuCities.addEventListener("change", picked);
 let btnSearch = document.getElementById("btn-search-main");
 console.log(btnSearch);
 btnSearch.addEventListener("click", setCity)
+
+let btnMyDelivery = document.getElementById("my-delivery-button");
+btnMyDelivery.addEventListener("click", () => {
+    window.location.href = "./my_delivery.html";
+})
+
+if(ifDeliveryGuy()){
+    btnMyDelivery.classList.remove("hidden");
+}
+else{
+    btnMyDelivery.classList.add("hidden");
+}
 
 export async function showOptionsCities(e){
     try{

@@ -95,13 +95,24 @@ export async function fetchCuisine() {
   
 }
 
-export async function fetchPendingDel(id) {
+export async function fetchPendingDel() {
   let token = sessionStorage.getItem("accessToken");
-  let address = `${ip()}/api/deliveries`;
-  if(id){
-    address = `${ip()}/api/deliveries/${id}`;
-  }
+  let address = `${ip()}/api/delivery-guys/pending-deliveries`;
   let resp = await fetch(address, {
+    method: "Get",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  let data = await resp.json();
+  return data;
+}
+
+export async function fetchActiveDel() {
+  let token = sessionStorage.getItem("accessToken");
+  let resp = await fetch(`${ip()}/api/delivery-guys/my-active-delivery`, {
     method: "Get",
     headers: {
       'Content-Type': 'application/json',

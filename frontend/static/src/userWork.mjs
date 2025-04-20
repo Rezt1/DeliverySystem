@@ -51,7 +51,7 @@ export async function logout(e){
 
 }
 
-export function ifDeliveryGuy(){
+/* export function ifDeliveryGuy(){
     let email = sessionStorage.getItem("email");
     if(/deliveryGuy[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
         return true;
@@ -59,4 +59,36 @@ export function ifDeliveryGuy(){
     else{
         return false;
     }
+} */
+
+export function ifDeliveryGuy(){
+
+        let token = sessionStorage.getItem("accessToken");
+        if (!token) {
+            console.log("No token found");
+            return;
+        }
+    
+        let decodedToken = parseJwt(token);
+    
+        // Example: Check if user has "ROLE_DELIVERY_GUY"
+        let roles = decodedToken.roles;  // This is an array in most cases
+        if (roles && roles.includes("ROLE_DELIVERY_GUY")) {
+            return true;
+        } else {
+            return false;
+        }
+
+        function parseJwt(token) {
+            let base64Url = token.split('.')[1];
+            let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        
+            return JSON.parse(jsonPayload);
+        }
+    
+    
+    
 }

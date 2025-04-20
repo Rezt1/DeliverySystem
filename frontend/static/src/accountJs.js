@@ -36,3 +36,4 @@ else{
     becomeDel.classList.remove("hidden");
     quitDel.classList.add("hidden");
 }
+
