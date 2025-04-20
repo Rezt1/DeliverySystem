@@ -12,6 +12,7 @@ import com.renascence.backend.dtos.food.EditFoodDto;
 import com.renascence.backend.dtos.food.FoodDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeForPeriodOfTimeDto;
+import com.renascence.backend.dtos.report.DeliverySystemStatistics;
 import com.renascence.backend.dtos.report.IncomeForPeriodOfTimeDto;
 import com.renascence.backend.dtos.restaurant.CreateRestaurantDto;
 import com.renascence.backend.dtos.restaurant.EditRestaurantDto;
@@ -431,6 +432,15 @@ public class AdminService {
         restaurantRepository.save(restaurant);
 
         return convertToRestaurantDto(restaurant);
+    }
+
+    public DeliverySystemStatistics getStatistics() {
+        long usersCount = userRepository.findAll().size();
+        long citiesCount = cityRepository.findAll().stream().filter(c -> !c.isDeleted()).count();
+        long restaurantsCount = restaurantRepository.findAll().stream().filter(r -> !r.isDeleted()).count();
+        long deliveryGuysCount = deliveryGuyRepository.findAll().stream().filter(dg -> !dg.isFired()).count();
+
+        return new DeliverySystemStatistics(usersCount, citiesCount, restaurantsCount, deliveryGuysCount);
     }
 
     private RestaurantDto convertToRestaurantDto(Restaurant restaurant) {

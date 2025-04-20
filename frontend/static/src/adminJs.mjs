@@ -6,8 +6,6 @@ let deliveryGuysMain = document.getElementById("delivery-guys-main");
 let paymentsMain = document.getElementById("payments-main");
 let reportsMain = document.getElementById("reports-main");
 
-
-
 export function hideEverything() {
     dashboardMain.classList.add("hidden");
     citiesMain.classList.add("hidden");

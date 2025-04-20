@@ -12,6 +12,7 @@ import com.renascence.backend.dtos.food.EditFoodDto;
 import com.renascence.backend.dtos.food.FoodDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeForPeriodOfTimeDto;
+import com.renascence.backend.dtos.report.DeliverySystemStatistics;
 import com.renascence.backend.dtos.report.IncomeForPeriodOfTimeDto;
 import com.renascence.backend.dtos.restaurant.CreateRestaurantDto;
 import com.renascence.backend.dtos.restaurant.EditRestaurantDto;
@@ -31,6 +32,11 @@ import java.util.List;
 public class AdminController {
 
     private final AdminService adminService;
+
+    @GetMapping("/get-statistics")
+    public ResponseEntity<DeliverySystemStatistics> getStatistics() {
+        return ResponseEntity.ok(adminService.getStatistics());
+    }
 
     @GetMapping("/get-income")
     public ResponseEntity<IncomeForPeriodOfTimeDto> getReportForIncome(@Valid @RequestBody IncomeForPeriodOfTimeDto dto){
