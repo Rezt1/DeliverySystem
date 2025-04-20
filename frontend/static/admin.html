@@ -438,52 +438,71 @@
         <!-- Add statistics here - Quantity of clients, restaurants, delivery guys! -->
         <section
           id="statistics"
-          class="flex flex-col md:flex-row justify-between gap-4 lg:!gap-12 mt-10 lg:mt-30 text-[#ff66c4]"
+          class="flex flex-col md:flex-row md:flex-wrap justify-center gap-6 mt-8 lg:mt-16 p-12 text-[#ff66c4]"
         >
-          <div
-            id="clients-block"
-            class="flex flex-col items-center border-2 border-[#006bb8] rounded-lg p-4 w-45 h-45 lg:w-50 lg:h-50 bg-[#006bb8]"
-          >
+          <div class="flex flex-col md:flex-row gap-6 items-center">
             <div
-              class="rounded-full h-24 w-24 border-2 border-[#006bb8] flex items-center justify-center bg-white"
+              id="clients-block"
+              class="flex flex-col items-center border-2 border-[#006bb8] rounded-lg p-4 w-45 h-45 lg:w-50 lg:h-50 bg-[#006bb8]"
             >
-              <h2 id="client-qty" class="text-4xl lg:text-5xl">30</h2>
+              <div
+                class="rounded-full h-24 w-24 border-2 border-[#006bb8] flex items-center justify-center bg-white"
+              >
+                <h2 id="client-qty" class="text-4xl lg:text-5xl">30</h2>
+              </div>
+              <h4
+                class="text-xl lg:text-2xl font-bold m-auto text-white text-shadow"
+              >
+                Clients
+              </h4>
             </div>
-            <h4
-              class="text-xl lg:text-2xl font-bold m-auto text-white text-shadow"
+            <div
+              id="restaurants-block"
+              class="flex flex-col items-center border-2 border-[#006bb8] rounded-lg p-4 w-45 h-45 lg:w-50 lg:h-50 bg-[#006bb8]"
             >
-              Clients
-            </h4>
+              <div
+                class="rounded-full h-24 w-24 border-2 border-[#006bb8] flex items-center justify-center bg-white"
+              >
+                <h2 id="restaurants-qty" class="text-4xl lg:text-5xl">15</h2>
+              </div>
+              <h4
+                class="text-xl lg:text-2xl font-bold m-auto text-white text-shadow"
+              >
+                Restaurants
+              </h4>
+            </div>
           </div>
-          <div
-            id="restaurants-block"
-            class="flex flex-col items-center border-2 border-[#006bb8] rounded-lg p-4 w-45 h-45 lg:w-50 lg:h-50 bg-[#006bb8]"
-          >
+          <div class="flex flex-col md:flex-row gap-6 items-center">
             <div
-              class="rounded-full h-24 w-24 border-2 border-[#006bb8] flex items-center justify-center bg-white"
+              id="delivery-guys-block"
+              class="flex flex-col items-center border-2 border-[#006bb8] rounded-lg p-4 w-45 h-45 lg:w-50 lg:h-50 bg-[#006bb8]"
             >
-              <h2 id="restaurants-qty" class="text-4xl lg:text-5xl">15</h2>
+              <div
+                class="rounded-full h-24 w-24 border-2 border-[#006bb8] flex items-center justify-center bg-white"
+              >
+                <h2 id="delivery-guys-qty" class="text-4xl lg:text-5xl">10</h2>
+              </div>
+              <h4
+                class="text-xl lg:text-2xl font-bold m-auto text-white text-shadow"
+              >
+                Delivery guys
+              </h4>
             </div>
-            <h4
-              class="text-xl lg:text-2xl font-bold m-auto text-white text-shadow"
-            >
-              Restaurants
-            </h4>
-          </div>
-          <div
-            id="delivery-guys-block"
-            class="flex flex-col items-center border-2 border-[#006bb8] rounded-lg p-4 w-45 h-45 lg:w-50 lg:h-50 bg-[#006bb8]"
-          >
             <div
-              class="rounded-full h-24 w-24 border-2 border-[#006bb8] flex items-center justify-center bg-white"
+              id="cities-block"
+              class="flex flex-col items-center border-2 border-[#006bb8] rounded-lg p-4 w-45 h-45 lg:w-50 lg:h-50 bg-[#006bb8]"
             >
-              <h2 id="delivery-guys-qty" class="text-4xl lg:text-5xl">10</h2>
+              <div
+                class="rounded-full h-24 w-24 border-2 border-[#006bb8] flex items-center justify-center bg-white"
+              >
+                <h2 id="cities-qty" class="text-4xl lg:text-5xl">5</h2>
+              </div>
+              <h4
+                class="text-xl lg:text-2xl font-bold m-auto text-white text-shadow"
+              >
+                Cities
+              </h4>
             </div>
-            <h4
-              class="text-xl lg:text-2xl font-bold m-auto text-white text-shadow"
-            >
-              Delivery guys
-            </h4>
           </div>
         </section>
       </main>
@@ -636,18 +655,23 @@
             >
               <input
                 type="text"
-                id="city-name-input"
+                id="restaurant-name-input"
                 placeholder="Restaurant name"
                 class="w-[80%] border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
                 required
               />
-              <input
-                type="number"
-                id="city-id-input"
-                placeholder="City ID"
-                class="w-[80%] border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+              <select
+                name="cities"
+                id="city-input"
+                class="w-[80%] border border-[#006bb8] h-11 rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
                 required
-              />
+              >
+                <option value selected disabled class="text-blue-400">
+                  City
+                </option>
+                <!-- Options from database  -->
+                <option value></option>
+              </select>
               <input
                 type="text"
                 id="restaurant-iban-input"

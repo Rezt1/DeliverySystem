@@ -275,3 +275,8 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+
+select:invalid {
+  color: #7fb4db;
+}

@@ -219,22 +219,27 @@
           id="section-input-apply-delivery-information"
           class="pb-5 w-[80%] md:w-[70%] flex flex-col gap-2"
         >
-          <input
-            type="text"
-            placeholder="City"
+          <select
+            name="cities"
             id="city-input"
-            class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]" required
-          />
+            class="border-2 border-[#006bb8] h-11 rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+            required
+          >
+            <option value="" selected disabled>City</option>
+            <!-- Options from database  -->
+            <option value></option>
+          </select>
 
           <!-- IBAN input without a wrapping div -->
           <input
             type="text"
             placeholder="IBAN"
             id="iban-input"
-            class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]" required
+            class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+            required
             autocomplete="current-password"
           />
-      </form>
+        </form>
         <button
           id="btn-apply-for-position-main"
           class="w-[50%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[10px] hover:border-2 active:opacity-70"
