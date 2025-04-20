@@ -268,10 +268,11 @@ public class DataLoader implements CommandLineRunner {
         deliveryUser2.setPassword(encoder.encode("deliveryGuy2"));
         deliveryUser2.setName("Kristiyan Nedelkov");
         deliveryUser2.setPhoneNumber("+359 882356700");
+        deliveryUser2.getRoles().add(deliveryGuyRole);
 
         DeliveryGuy deliveryGuy2 = new DeliveryGuy();
         deliveryGuy2.setUser(deliveryUser2);
-        deliveryGuy2.setWorkCity(varna);
+        deliveryGuy2.setWorkCity(sofia);
         deliveryGuy2.setIban("BG0008T883");
         deliveryGuy2.setStartWorkDate(LocalDate.now());
         deliveryGuyRepository.save(deliveryGuy2);
@@ -282,10 +283,11 @@ public class DataLoader implements CommandLineRunner {
         deliveryUser3.setPassword(encoder.encode("deliveryGuy3"));
         deliveryUser3.setName("Petko Petkov");
         deliveryUser3.setPhoneNumber("+359 879056412");
+        deliveryUser3.getRoles().add(deliveryGuyRole);
 
         DeliveryGuy deliveryGuy3 = new DeliveryGuy();
         deliveryGuy3.setUser(deliveryUser3);
-        deliveryGuy3.setWorkCity(varna);
+        deliveryGuy3.setWorkCity(burgas);
         deliveryGuy3.setIban("BG015439UB");
         deliveryGuy3.setStartWorkDate(LocalDate.now());
         deliveryGuyRepository.save(deliveryGuy3);
@@ -296,10 +298,11 @@ public class DataLoader implements CommandLineRunner {
         deliveryUser4.setPassword(encoder.encode("deliveryGuy4"));
         deliveryUser4.setName("Plamen Nikolov");
         deliveryUser4.setPhoneNumber("+359 88779060");
+        deliveryUser4.getRoles().add(deliveryGuyRole);
 
         DeliveryGuy deliveryGuy4 = new DeliveryGuy();
         deliveryGuy4.setUser(deliveryUser4);
-        deliveryGuy4.setWorkCity(varna);
+        deliveryGuy4.setWorkCity(vratsa);
         deliveryGuy4.setIban("BG00876100");
         deliveryGuy4.setStartWorkDate(LocalDate.now());
         deliveryGuyRepository.save(deliveryGuy4);
@@ -310,15 +313,15 @@ public class DataLoader implements CommandLineRunner {
         deliveryUser5.setPassword(encoder.encode("deliveryGuy5"));
         deliveryUser5.setName("Viktor Boyadzhiev");
         deliveryUser5.setPhoneNumber("+359 882356700");
+        deliveryUser5.getRoles().add(deliveryGuyRole);
 
         DeliveryGuy deliveryGuy5 = new DeliveryGuy();
         deliveryGuy5.setUser(deliveryUser5);
-        deliveryGuy5.setWorkCity(varna);
+        deliveryGuy5.setWorkCity(plovdiv);
         deliveryGuy5.setIban("BG10234803");
         deliveryGuy5.setStartWorkDate(LocalDate.now());
         deliveryGuyRepository.save(deliveryGuy5);
         userRepository.save(deliveryUser5);
-
 
         // Foods
         Food pizza = new Food();
