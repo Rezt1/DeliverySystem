@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +87,7 @@
     "JUnit.AdminServiceTest.testGetDeliveryGuyById_Success.executor": "Run",
     "JUnit.AdminServiceTest.testGetIncome.executor": "Run",
     "JUnit.AdminServiceTest.testGetIncomeByDeliveryGuy.executor": "Run",
+    "JUnit.AdminServiceTest.testGetStatistics.executor": "Run",
     "JUnit.AdminServiceTest.testPayDeliveryGuy_DeliveryGuyNotFound.executor": "Run",
     "JUnit.AdminServiceTest.testPayDeliveryGuy_InvalidStartDate.executor": "Debug",
     "JUnit.AdminServiceTest.testPayDeliveryGuy_Success.executor": "Run",
@@ -213,17 +214,48 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.BackendApplicationTests">
-    <configuration name="BackendApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.AdminServiceTest">
+    <configuration name="AdminServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.renascence.backend.*" />
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.BackendApplicationTests" />
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminServiceTest.testGetStatistics" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="METHOD_NAME" value="testGetStatistics" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DeliveryGuyServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -240,38 +272,6 @@
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
       <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DeliveryServiceTest.createDelivery_shouldThrowIfFoodDeletedInLoop" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
-      <option name="METHOD_NAME" value="createDelivery_shouldThrowIfFoodDeletedInLoop" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DeliveryServiceTest.createDelivery_shouldThrowIfFoodNotFoundInLoop" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
-      <option name="METHOD_NAME" value="createDelivery_shouldThrowIfFoodNotFoundInLoop" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -300,11 +300,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BackendApplicationTests" />
+        <item itemvalue="JUnit.AdminServiceTest" />
+        <item itemvalue="JUnit.AdminServiceTest.testGetStatistics" />
         <item itemvalue="JUnit.UserServiceTest" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTest" />
         <item itemvalue="JUnit.DeliveryServiceTest" />
-        <item itemvalue="JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFoodDeletedInLoop" />
-        <item itemvalue="JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFoodNotFoundInLoop" />
       </list>
     </recent_temporary>
   </component>

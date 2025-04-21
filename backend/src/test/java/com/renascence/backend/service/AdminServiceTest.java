@@ -12,6 +12,7 @@ import com.renascence.backend.dtos.food.EditFoodDto;
 import com.renascence.backend.dtos.food.FoodDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeDto;
 import com.renascence.backend.dtos.report.DeliveryGuyIncomeForPeriodOfTimeDto;
+import com.renascence.backend.dtos.report.DeliverySystemStatistics;
 import com.renascence.backend.dtos.report.IncomeForPeriodOfTimeDto;
 import com.renascence.backend.dtos.restaurant.CreateRestaurantDto;
 import com.renascence.backend.dtos.restaurant.EditRestaurantDto;
@@ -62,6 +63,8 @@ public class AdminServiceTest {
     private RoleRepository roleRepository;
     @Mock
     private AccessTokenRepository accessTokenRepository;
+    @Mock
+    private UserRepository userRepository;
 
 
     @BeforeEach
@@ -993,5 +996,32 @@ public class AdminServiceTest {
                 () -> adminService.editRestaurant(dto, id));
 
         assertEquals("Such iban already exists in our system", exception.getMessage());
+    }
+
+
+
+    @Test
+    public void testGetStatistics() {
+        // Mock the data for repositories
+        when(userRepository.findAll()).thenReturn(Arrays.asList(new User(), new User(), new User())); // 3 users
+        when(cityRepository.findAll()).thenReturn(Arrays.asList(new City(), new City())); // 2 cities
+        when(cityRepository.findAll()).thenReturn(Arrays.asList(new City(), new City())); // 2 cities
+        when(restaurantRepository.findAll()).thenReturn(Arrays.asList(new Restaurant(), new Restaurant())); // 2 restaurants
+        when(deliveryGuyRepository.findAll()).thenReturn(Arrays.asList(new DeliveryGuy(), new DeliveryGuy(), new DeliveryGuy())); // 3 delivery guys
+
+        // Assume that some of the entities are deleted or fired
+        // For example, setting one city as deleted:
+        List<City> cities = Arrays.asList(new City(), new City());
+        cities.getFirst().setDeleted(true); // Mark the first city as deleted
+        when(cityRepository.findAll()).thenReturn(cities); // This should count as only 1 city
+
+        // Execute the method
+        DeliverySystemStatistics stats = adminService.getStatistics();
+
+        // Validate the result
+        assertEquals(3, stats.getUserCount()); // 3 users
+        assertEquals(1, stats.getCitiesCount()); // Only 1 city is not deleted
+        assertEquals(2, stats.getRestaurantsCount()); // 2 restaurants
+        assertEquals(3, stats.getDeliveryGuysCount()); // 3 delivery guys
     }
 }
