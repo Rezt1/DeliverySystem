@@ -1,6 +1,9 @@
 import { fetchActiveDel } from "./fetchingData.mjs";
 import { ip } from "./ipSearch.mjs";
 
+let orderSum = document.getElementById("order-summary-list");
+let loading = document.getElementById("order-summary-loading");
+let subtotal = document.getElementById("total-price");
 
 async function renderMyDel() {
     try{
@@ -9,11 +12,11 @@ async function renderMyDel() {
 
         console.log(data);
 
-        let orderSum = document.getElementById("order-summary-list");
         orderSum.classList.remove("hidden");
 
-        let loading = document.getElementById("order-summary-loading");
         loading.classList.add("hidden");
+
+        subtotal.textContent = "€" + data.totalPrice;
 
         if(!data || Object.keys(data).length === 0){
             console.log("empy")
@@ -30,10 +33,21 @@ async function renderMyDel() {
         let status = document.getElementById("status");
 
         data.foods.forEach(food => {
-            console.log(food);
-            let div = document.createElement("div");
-            div.textContent = food.foodName + " x " + food.quantity;
-            orderSum.appendChild(div);
+
+            let foodItem = document.createElement("div");
+            let classes = "flex-1 flex gap-1 max-md:items-start items-center justify-between p-2 md:p-4 bg-gray-200 rounded-lg";
+            foodItem.classList.add(...classes.split(" "));
+            foodItem.innerHTML = ` <h3 id="order-item" class="font-bold max-md:text-xl text-2xl">
+              ${food.foodName}
+            </h3>
+            <div class="flex items-center justify-center gap-2">
+              <label
+                for="qty-items"
+                class="text-md md:text-lg md:text-base text-[#ff66c4]"
+                >Quantity: ${food.quantity}
+              </label>`
+
+              orderSum.appendChild(foodItem);
         });
 
         nameBlock.textContent = data.username;
@@ -45,14 +59,18 @@ async function renderMyDel() {
         let btndelivered = document.getElementById("btn-delivered-main");
 
         btndelivered.addEventListener("click", async () => {
-            let response = await delivered(data);
+            await delivered(data);
             window.location.href = "./my_delivery.html";
-            //console.log(response);
         });
    
         } 
 
     catch(e){
+        orderSum.classList.add("hidden");
+        loading.classList.remove("hidden");
+        let totalDiv = document.getElementById("total-div");
+        totalDiv.classList.add("hidden");
+        
         console.log(e.message);
     }
 }

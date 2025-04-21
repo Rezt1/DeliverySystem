@@ -55,11 +55,9 @@ if(localStorage.getItem("cart") !=  null){
         itemSummery.appendChild(itemInfo);
 
         itemInfo.querySelector("#remove-item-btn").addEventListener("click", () => {
-          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+          cartItems = cartItems.filter(food => food.id !== item.id);
 
-          cart = cart.filter(food => food.name !== item.name);
-
-          localStorage.setItem("cart", JSON.stringify(cart));
+          localStorage.setItem("cart", JSON.stringify(cartItems));
 
           itemSummery.removeChild(itemInfo);
 
@@ -68,14 +66,24 @@ if(localStorage.getItem("cart") !=  null){
         });
 
         let dropdown = itemInfo.querySelector("#qty-dropdown");
+        dropdown.value = item.quantity;
         dropdown.addEventListener("change", () => {
           let priceItem = itemInfo.querySelector("#price-item");
-          let amount = dropdown.value;
+          let amount = parseInt(dropdown.value);
 
           priceItem.textContent = "€" + (item.price*amount).toFixed(2);
+
+         cartItems = cartItems.map(food => {
+            if (food.id === item.id) {
+              return { ...food, quantity: amount};
+            }
+            return food;
+          });
+
+          localStorage.setItem("cart", JSON.stringify(cartItems));
+
           addingSubtotal();
         });
-         dropdown.value = item.quantity;
     });
 }
 else{

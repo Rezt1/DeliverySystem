@@ -1,6 +1,8 @@
 import { logout } from "./userWork.mjs";
 import { ifDeliveryGuy } from "./userWork.mjs";
+import { ip } from "./ipSearch.mjs";
 
+let ipAddress = ip();
 let btnLogout = document.getElementById("logout-btn");
 
 btnLogout.addEventListener("click", logout);
@@ -24,6 +26,34 @@ becomeDel.addEventListener("click", () => {
 })
 
 let quitDel = document.getElementById("quit-delivery-guy-btn");
+quitDel.addEventListener("click", async () => {
+    let token = sessionStorage.getItem("accessToken");
+    try{
+    let address = `${ipAddress}/api/delivery-guys/quit`;
+   
+    let resp = fetch(address, {
+
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+    });
+
+    
+    if (!resp.ok) {
+        let errorData = await resp.json();
+        throw new Error(errorData.message);
+      }
+  
+}
+catch(e){
+    console.error(e.message);
+}
+
+window.location.href = "/account.html";
+    
+});
 
 
 

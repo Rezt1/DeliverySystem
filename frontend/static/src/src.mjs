@@ -21,7 +21,7 @@ import { ifDeliveryGuy, ifLoggedIn } from "./userWork.mjs";
     let registerBtnDe = document.getElementById("register-button");
     let acctountBtnDe = document.getElementById("account-button");
     let homeBtnDe = document.getElementsByClassName("btn-primary")[0];
-    
+
 
     if(ifLoggedIn()){
       console.log("logged");

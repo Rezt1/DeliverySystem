@@ -17,6 +17,8 @@ try{
     
 let pendingDeliveries = await fetchPendingDel();
 
+console.log(pendingDeliveries);
+
 //let pendingDeliveries = [];
 if(pendingDeliveries.length == 0) {
     console.log("hidden");
@@ -34,18 +36,33 @@ pendingDeliveries.forEach(element => {
     let classes = "flex items-center justify-between gap-4 p-2 text-2xl md:text-3xl";
     div.classList.add(...classes.split(" "));
     div.id = `order-${element.id}`
-    div.innerHTML = `<div
+    div.innerHTML =  `
+    <div
       id="orders-list"
-      class="flex-1 flex items-center justify-between p-4 bg-gray-200 rounded-lg"
+      class="flex-1 flex max-md:flex-col gap-1 max-md:items-start items-center justify-between p-2 md:p-4 bg-gray-200 rounded-lg"
     >
-      <div>
-        <h3 id="order-number" class="font-bold">Order #${element.deliveryId}</h3>
+      <div class="flex flex-col gap-1">
+        <h3 id="order-number" class="font-bold max-md:text-xl">
+          Order #${element.deliveryId}
+        </h3>
+        <p
+          id="order-address"
+          class="text-xs md:text-sm text-gray-600"
+        >
+        ${element.address}
+        </p>
         <span
           id="qty-and-price"
           class="text-xs md:text-sm text-gray-600"
-          >${items} items • $24.50</span
         >
-        <!-- 2 items • $24.50 -->
+          ${items} items • €${element.totalPrice}
+        </span>
+        <span
+          id="delivery-time"
+          class="text-xs md:text-sm text-[#ff66c4] font-semibold"
+        >
+          Delivery Time: ${ifPmOrAM(element.toBeDeliveredTime)}
+        </span>
       </div>
       <span id="time-ago" class="text-xs md:text-sm text-gray-500"
         >${timeAgo(element.creationDate)}</span
@@ -53,13 +70,14 @@ pendingDeliveries.forEach(element => {
       <!-- 10 min ago -->
     </div>
 
+    <!-- Accept button - Sends to my_delivery -->
     <button
       id="accept-order-button"
-      class="w-[90px] h-full flex-shrink-0 bg-[#006bb8] text-white rounded-lg font-bold flex justify-center items-center hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:border-2 hover:border-[#ff66c4] active:opacity-70 transition-all"
+      class="max-w-[60px] max-h-[60px] flex-shrink-0 bg-[#006bb8] text-white rounded-lg font-bold flex justify-center items-center hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:border-2 hover:border-[#ff66c4] active:opacity-70 transition-all"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-12 w-12"
+        class="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -72,7 +90,6 @@ pendingDeliveries.forEach(element => {
         />
       </svg>
     </button>`
-
     ordersList.appendChild(div);
     div.querySelector("#accept-order-button").addEventListener("click", async () => {
         let address = `${ip()}/api/delivery-guys/deliveries/${element.deliveryId}/assign`
@@ -86,8 +103,14 @@ pendingDeliveries.forEach(element => {
             }
         })
 
+        if (!resp.ok) {
+          let errorData = await resp.json();
+          throw new Error(errorData.message);
+        }
+    
         let data = await resp.json();
         console.log(data);
+        ordersList.removeChild(div);
     })
 });
 
@@ -114,4 +137,13 @@ function timeAgo(timestamp) {
     if (hours > 0) return `${hours} hour(s) ago`;
     if (minutes > 0) return `${minutes} minute(s) ago`;
     return `${seconds} second(s) ago`;
+  }
+
+  function ifPmOrAM(time){
+    if(parseInt(time.slice(0,2)) >= 13){
+      return `${time} PM`;
+    }
+    else{
+      return `${time} AM`;
+    }
   }

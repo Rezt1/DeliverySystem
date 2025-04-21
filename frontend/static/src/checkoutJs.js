@@ -1,8 +1,10 @@
 import { ip } from "./ipSearch.mjs";
 
+let ipAddress = ip();
+
 let addressBlock = document.getElementById("delivery-address");
 
-let apartmentblock = document.getElementById("delivery-address-optional");
+//let apartmentblock = document.getElementById("delivery-address-optional");
 
 let confirmOrder = document.getElementById("confirm-order-button");
 
@@ -46,8 +48,10 @@ confirmOrder.addEventListener("click", ()=> {
             foodsInfo.push({"foodId": el.id, "quantity": el.quantity})
         });
 
+        let totalPrice = sessionStorage.getItem("subtotal").slice(1);
 
-       deliverySend(addressBlock.value, paymentMethod, foodsInfo);
+
+       deliverySend(addressBlock.value, paymentMethod, foodsInfo, deliveryInput.value, totalPrice);
 
         localStorage.clear();
 
@@ -103,21 +107,20 @@ function isTimeBetween(time, start, end) {
     }
   }
 
-  async function deliverySend(address, paymentMethod, foods) {
+  async function deliverySend(address, paymentMethod, foods, hourToBeDelivered, totalPrice) {
     
-
-            let ip = "http://localhost:8080";
-
-            let token = sessionStorage.getItem("accessToken");
+        let token = sessionStorage.getItem("accessToken");
   
-         let delivery = {
+        let delivery = {
             address,
             foods,
-            paymentMethod
-          }
+            paymentMethod,
+            hourToBeDelivered,
+            totalPrice
+        }
   
   
-          let settings = {
+        let settings = {
               method: "Post",
               headers: {"Content-Type":"application/json",
                 "Authorization": `Bearer ${token}`
@@ -129,11 +132,16 @@ function isTimeBetween(time, start, end) {
   
   
           try{
-              let resp = await fetch(`${ip}/api/deliveries/create-delivery`, settings);
+              let resp = await fetch(`${ipAddress}/api/deliveries/create-delivery`, settings);
+              if (!resp.ok) {
+                let errorData = await resp.json();
+                throw new Error(errorData.message || 'Failed to fetch restaurants');
+              }
               return resp;
+              
           }
           catch(e){
-              console.log(e.message);
+              console.error(e.message);
           }
       
   }

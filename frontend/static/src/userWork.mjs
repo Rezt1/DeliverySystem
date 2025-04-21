@@ -71,8 +71,7 @@ export function ifDeliveryGuy(){
     
         let decodedToken = parseJwt(token);
     
-        // Example: Check if user has "ROLE_DELIVERY_GUY"
-        let roles = decodedToken.roles;  // This is an array in most cases
+        let roles = decodedToken.roles;  
         if (roles && roles.includes("ROLE_DELIVERY_GUY")) {
             return true;
         } else {

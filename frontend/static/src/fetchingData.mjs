@@ -38,16 +38,22 @@ export async function fetchingFood(id){
     }
   });
 
+  if (!resp.ok) {
+    const errorData = await resp.json();
+    throw new Error(errorData.message || 'Request failed');
+  }
+
   let data = await resp.json();
   return data;
   }
   catch(e){
-    console.log(e.message);
+    console.error(e.message);
   }
 
 }
 
 export async function fettchUser() {
+  try{
   let token = sessionStorage.getItem("accessToken");
   let resp = await fetch(`${ip()}/api/users/me`, {
     method: "Get",
@@ -57,11 +63,20 @@ export async function fettchUser() {
     }
   });
 
+  if (!resp.ok) {
+    const errorData = await resp.json();
+    throw new Error(errorData.message || 'Request failed');
+  }
+
   let data = await resp.json();
   return data;
+}catch(e){
+  console.error(e.message);
+}
 }
 
 export async function fetchDelivery(id) {
+  try{
   let token = sessionStorage.getItem("accessToken");
   let address = `${ip()}/api/deliveries`;
   if(id){
@@ -75,12 +90,21 @@ export async function fetchDelivery(id) {
     }
   });
 
+  if (!resp.ok) {
+    const errorData = await resp.json();
+    throw new Error(errorData.message || 'Request failed');
+  }
+
   let data = await resp.json();
   return data;
 }
+  catch(e){
+    console.error(e.message);
+  }
+}
 
 export async function fetchCuisine() {
-
+  try{
   let token = sessionStorage.getItem("accessToken");
   let resp = await fetch(`${ip()}/api/cuisines`, {
     method: "Get",
@@ -90,12 +114,20 @@ export async function fetchCuisine() {
     }
   });
 
+  if (!resp.ok) {
+    const errorData = await resp.json();
+    throw new Error(errorData.message || 'Request failed');
+  }
+
   let data = await resp.json();
   return data;
-  
+}catch(e){
+  console.error(e.message);
+}
 }
 
 export async function fetchPendingDel() {
+  try{
   let token = sessionStorage.getItem("accessToken");
   let address = `${ip()}/api/delivery-guys/pending-deliveries`;
   let resp = await fetch(address, {
@@ -106,11 +138,21 @@ export async function fetchPendingDel() {
     }
   });
 
+  if (!resp.ok) {
+    const errorData = await resp.json();
+    throw new Error(errorData.message || 'Request failed');
+  }
+
   let data = await resp.json();
   return data;
 }
+  catch(e){
+    console.error(e.message);
+  }
+}
 
 export async function fetchActiveDel() {
+  try{
   let token = sessionStorage.getItem("accessToken");
   let resp = await fetch(`${ip()}/api/delivery-guys/my-active-delivery`, {
     method: "Get",
@@ -120,6 +162,14 @@ export async function fetchActiveDel() {
     }
   });
 
+  if (!resp.ok) {
+    const errorData = await resp.json();
+    throw new Error(errorData.message || 'Request failed');
+  }
+  
   let data = await resp.json();
   return data;
+}catch(e){
+  console.error(e.message);
+}
 }

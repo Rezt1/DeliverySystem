@@ -138,13 +138,12 @@
         <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
         <!-- change to DropDown -->
         <div class="relative w-full">
-          <select
+          <!--<select
             id="search-main-dropdown-2"
             class="btn-drop-down text-center !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
           >
-            <!-- Options from database  -->
             <option value="" selected disabled hidden>City</option>
-          </select>
+          </select>-->
           <div
             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
           >
@@ -301,42 +300,13 @@
               </div>
 
               <!-- Actual order summary will be inserted here -->
-              <div
+             <div
                 id="order-summary-list"
                 class="grid gap-3 p-4 flex overflow-y-auto max-h-[450px]"
               >
                 <!-- Order info box -->
-                <div
-                  id="orders-item-summary"
-                  class="flex-1 flex gap-1 max-md:items-start items-center justify-between p-2 md:p-4 bg-gray-200 rounded-lg"
-                >
-                  <h3 id="order-item" class="font-bold max-md:text-xl text-2xl">
-                    Item
-                  </h3>
-                  <!-- Salad -->
-                  <div class="flex items-center justify-center gap-2">
-                    <label
-                      for="qty-items"
-                      class="text-md md:text-lg md:text-base text-[#ff66c4]"
-                      >Quantity:
-                    </label>
-                    <span
-                      id="qty-items"
-                      class="text-md md:text-lg md:text-base text-[#ff66c4] mr-auto"
-                      >2</span
-                    >
-                  </div>
-                  <!-- Quantity: 2 -->
-                  <span
-                    id="qty-and-price"
-                    class="text-xl md:text-2xl md:text-base text-[#006bb8] font-bold"
-                    >$24.50</span
-                  >
-                  <!-- $24.50 -->
-                </div>
-              </div>
             </div>
-            <div
+            <div id = "total-div"
               class="flex justify-end items-center gap-2 p-6 text-xl md:text-2xl"
             >
               <label for="total-price" class="text-[#006bb8] font-bold"

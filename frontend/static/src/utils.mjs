@@ -17,17 +17,16 @@ export function togglePassword(e){
     }
 
 
-export function toggleDropdown(e){
+    export function toggleDropdown() {
+        let dropdown = document.getElementById("sort-dropdown");
+        let button = document.getElementById("sort-menu");
     
-    let dropdown = document.getElementById("sort-dropdown");
-    let button = document.getElementById("sort-menu");
-
-    dropdown.classList.toggle('hidden');
-
-    let isExpanded = button.getAttribute("aria-expanded") === true;
-    button.setAttribute("aria-expanded", !isExpanded);
-
-}
+        dropdown.classList.toggle("hidden");
+    
+        let isExpanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", (!isExpanded).toString());
+    }
+    
 
 export function showOptions(e){
     e.preventDefault();
