@@ -367,7 +367,6 @@ class UserServiceTest {
 
     @Test
     void testGetActiveDeliveries_shouldReturnPendingAndOutForDelivery() {
-        // Arrange
         String email = "john@example.com";
         User user = new User();
         user.setEmail(email);
@@ -380,6 +379,8 @@ class UserServiceTest {
         delivery1.setCreationDate(LocalDateTime.now());
         delivery1.setPaymentMethod(CARD);
         delivery1.setDeliveriesFoods(new ArrayList<>());
+        delivery1.setCreationDate(LocalDateTime.now());
+        delivery1.setToBeDeliveredHour(LocalDateTime.now().plusHours(1));
 
         Delivery delivery2 = new Delivery();
         delivery2.setStatus(DeliveryStatus.OUT_FOR_DELIVERY);
@@ -389,6 +390,8 @@ class UserServiceTest {
         delivery2.setCreationDate(LocalDateTime.now());
         delivery2.setPaymentMethod(CASH);
         delivery2.setDeliveriesFoods(new ArrayList<>());
+        delivery2.setCreationDate(LocalDateTime.now());
+        delivery2.setToBeDeliveredHour(LocalDateTime.now().plusHours(1));
 
         user.setDeliveries(List.of(delivery1, delivery2));
 
@@ -402,7 +405,6 @@ class UserServiceTest {
         assertTrue(result.stream().allMatch(dto ->
                 dto.getStatus() == DeliveryStatus.PENDING || dto.getStatus() == DeliveryStatus.OUT_FOR_DELIVERY));
     }
-
 
     @Test
     void testGetActiveDeliveries_userNotFound_shouldThrow() {
@@ -431,21 +433,22 @@ class UserServiceTest {
         delivered.setCreationDate(LocalDateTime.now().minusDays(2));
         delivered.setPaymentMethod(CARD);
         delivered.setDeliveriesFoods(new ArrayList<>());
+        delivered.setCreationDate(LocalDateTime.now().minusDays(2));
+        delivered.setToBeDeliveredHour(LocalDateTime.now().minusDays(2).plusHours(1));
 
         Delivery pending = new Delivery();
         pending.setStatus(DeliveryStatus.PENDING);  // Should be excluded
         pending.setReceiver(user);
         pending.setRestaurant(new Restaurant());
         pending.setDeliveriesFoods(new ArrayList<>());
+        pending.setToBeDeliveredHour(LocalDateTime.now().plusHours(1)); // Prevent NPE
 
         user.setDeliveries(List.of(delivered, pending));
 
         when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
 
-        // Act
         List<DeliveryDto> result = userService.getPastDeliveries();
 
-        // Assert
         assertEquals(1, result.size());
         assertEquals(DeliveryStatus.DELIVERED, result.getFirst().getStatus());
     }

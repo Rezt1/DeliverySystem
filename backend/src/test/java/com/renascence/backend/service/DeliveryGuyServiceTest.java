@@ -20,6 +20,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -107,6 +108,7 @@ class DeliveryGuyServiceTest {
         delivery.setRestaurant(restaurant);
         delivery.setStatus(DeliveryStatus.PENDING);
         delivery.setAddress("Test Address");
+        delivery.setToBeDeliveredHour(LocalDateTime.now().plusHours(1));
 
         when(deliveryRepository.findByStatusAndRestaurant_City_Id(DeliveryStatus.PENDING, 100L))
                 .thenReturn(List.of(delivery));
@@ -114,6 +116,8 @@ class DeliveryGuyServiceTest {
         List<DeliveryDto> result = deliveryGuyService.getPendingDeliveries();
         assertEquals(1, result.size());
         assertEquals("Test Address", result.getFirst().getAddress());
+        assertNotNull(result.getFirst().getToBeDeliveredTime());
+        assertTrue(result.getFirst().getToBeDeliveredTime().contains(":"));
     }
 
     @Test
@@ -261,6 +265,7 @@ class DeliveryGuyServiceTest {
     }
 
 
+
     @Test
     void getCurrentDeliveryForDeliveryGuy_ShouldReturnActiveDelivery() {
         City testCity = new City();
@@ -292,6 +297,8 @@ class DeliveryGuyServiceTest {
         testDelivery.setStatus(DeliveryStatus.OUT_FOR_DELIVERY);
         testDelivery.setDeliveryGuy(testDeliveryGuy);
 
+        testDelivery.setToBeDeliveredHour(LocalDateTime.now().plusMinutes(30));
+
         when(userRepository.findByEmail("delivery@example.com")).thenReturn(Optional.of(testUser));
         when(deliveryRepository.findFirstByDeliveryGuyIdAndStatusOrderByTakenByDeliveryGuyDateAsc(
                 testDeliveryGuy.getId(), DeliveryStatus.OUT_FOR_DELIVERY)).thenReturn(Optional.of(testDelivery));
@@ -300,6 +307,7 @@ class DeliveryGuyServiceTest {
 
         assertNotNull(result);
         assertEquals(testDelivery.getId(), result.getDeliveryId());
+        assertEquals(testRestaurant.getName(), result.getRestaurantName());
     }
 
     @Test
@@ -373,6 +381,8 @@ class DeliveryGuyServiceTest {
 
         testDelivery.setStatus(DeliveryStatus.OUT_FOR_DELIVERY);
         testDelivery.setDeliveryGuy(testDeliveryGuy);
+
+        testDelivery.setToBeDeliveredHour(LocalDateTime.now().plusHours(1));
 
         when(userRepository.findByEmail("delivery@example.com")).thenReturn(Optional.of(testUser));
         when(deliveryRepository.findById(1L)).thenReturn(Optional.of(testDelivery));
@@ -483,12 +493,14 @@ class DeliveryGuyServiceTest {
         delivered1.setStatus(DeliveryStatus.DELIVERED);
         delivered1.setRestaurant(new Restaurant());
         delivered1.setReceiver(new User());
+        delivered1.setToBeDeliveredHour(LocalDateTime.now().plusHours(1));
 
         Delivery delivered2 = new Delivery();
         delivered2.setId(2L);
         delivered2.setStatus(DeliveryStatus.DELIVERED);
         delivered2.setRestaurant(new Restaurant());
         delivered2.setReceiver(new User());
+        delivered2.setToBeDeliveredHour(LocalDateTime.now().plusMinutes(40));
 
         Delivery notDelivered = new Delivery();
         notDelivered.setId(3L);
