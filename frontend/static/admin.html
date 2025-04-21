@@ -216,6 +216,46 @@
                 >
               </button>
             </li>
+            <!-- Menus -->
+            <li>
+              <button
+                id="btn-menus"
+                class="group relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full hover:cursor-pointer"
+              >
+                <span
+                  class="group-active:opacity-70 inline-flex justify-center items-center ml-4"
+                >
+                  <svg
+                    class="h-7 w-7 stroke-2 fill-current"
+                    fill="none"
+                    version="1.1"
+                    id="Capa_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 45.005 45.005"
+                    xml:space="preserve"
+                  >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <g>
+                        <path
+                          d="M30.249,38.414l-7.399,2.664c-0.113,0.041-0.232,0.062-0.35,0.062s-0.237-0.021-0.35-0.062l-7.697-2.771 c2.616-2.811,5.431-5.64,8.047-8.45C25.148,32.702,27.6,35.565,30.249,38.414z M44.562,4.052c-0.275-0.192-0.627-0.241-0.941-0.126 L22.5,11.53L1.378,3.926C1.063,3.812,0.711,3.86,0.437,4.052C0.163,4.248,0,4.562,0,4.897v27.481c0,0.435,0.272,0.822,0.681,0.969 l11.283,4.063c3.099-2.886,6.198-5.771,9.297-8.654c-0.977-1.049-1.953-2.101-2.93-3.148c-2.063,1.479-5.119,0.917-6.957-1.352 c-1.976-2.395-3.682-6.674-2.031-8.427c1.753-1.652,6.034,0.056,8.427,2.031c2.269,1.839,2.832,4.893,1.352,6.956 c1.062,0.989,2.315,1.944,3.378,2.935c0.996-0.928,1.796-1.818,2.791-2.743c-0.84-1.435-0.283-3.444,1.084-4.591 c1.562-1.312,7.357-6.287,7.516-6.129c0.154,0.155-3.91,3.995-6.625,6.718l0.453,0.452c2.898-2.54,6.992-6.35,7.148-6.195 c0.154,0.156-3.783,4.122-6.408,6.936l0.449,0.45c2.811-2.629,6.775-6.567,6.932-6.413c0.154,0.157-3.654,4.249-6.195,7.148 l0.449,0.449c2.725-2.715,6.562-6.783,6.717-6.626c0.156,0.157-6.117,7.509-6.125,7.52c0-0.001,1.332-1.563-0.004-0.004 c-1.275,1.493-3.182,1.945-4.59,1.084c-0.914,0.982-1.826,1.963-2.741,2.944c3.137,2.921,6.274,5.84,9.413,8.761l11.559-4.162 c0.41-0.146,0.683-0.534,0.683-0.969V4.897C44.999,4.562,44.837,4.248,44.562,4.052z"
+                        ></path>
+                      </g>
+                    </g>
+                  </svg>
+                </span>
+                <span
+                  class="group-active:opacity-70 hidden md:!flex ml-2 tracking-wide truncate"
+                  >Menus</span
+                >
+              </button>
+            </li>
             <!-- Delivery guys -->
             <li>
               <button
@@ -278,10 +318,10 @@
                 >
               </button>
             </li>
-            <!-- Clients -->
+            <!-- Payments -->
             <li>
               <button
-                id="btn-clients"
+                id="btn-payments"
                 class="group relative flex flex-row items-center h-11 focus:outline-none hover:bg-white text-white hover:text-[#ff66c4] border-l-4 border-transparent hover:border-[#ff66c4] border-r-2 hover:border-r-[#006bb8] w-full hover:cursor-pointer"
               >
                 <span
@@ -428,7 +468,7 @@
       <!-- DASHBOARD -->
       <main
         id="dashboard-main"
-        class="flex flex-col mt-10 md:mt-14 items-center p-6"
+        class="hidden flex flex-col mt-10 md:mt-14 items-center p-6"
       >
         <h1
           class="text-6xl md:text-7xl lg:text-8xl text-center font-bold text-shadow"
@@ -582,13 +622,14 @@
                 class="w-[80%] border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
                 required
               />
+              <button
+                id="btn-add-city"
+                type="submit"
+                class="w-[60%] text-white border-2 border-[#ff66c4] bg-[#ff66c4] rounded-full font-bold py-2 px-4 hover:text-[#ff66c4] hover:bg-white hover:cursor-pointer active:opacity-70"
+              >
+                Add
+              </button>
             </form>
-            <button
-              id="btn-add-city"
-              class="w-[60%] text-white border-2 border-[#ff66c4] bg-[#ff66c4] rounded-full font-bold py-2 px-4 hover:text-[#ff66c4] hover:bg-white hover:cursor-pointer active:opacity-70"
-            >
-              Add
-            </button>
           </div>
         </div>
       </main>
@@ -664,12 +705,10 @@
               <select
                 name="cities"
                 id="city-input"
-                class="w-[80%] border border-[#006bb8] h-11 rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+                class="cursor-pointer w-[80%] border border-[#006bb8] h-11 rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
                 required
               >
-                <option value selected disabled class="text-blue-400">
-                  City
-                </option>
+                <option value selected disabled>City</option>
                 <!-- Options from database  -->
                 <option value></option>
               </select>
@@ -688,14 +727,196 @@
                 class="w-[80%] border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
                 required
               />
+              <button
+                id="btn-add-city"
+                type="submit"
+                class="w-[60%] text-white border-2 border-[#ff66c4] bg-[#ff66c4] rounded-full font-bold py-2 px-4 hover:text-[#ff66c4] hover:bg-white hover:cursor-pointer active:opacity-70"
+              >
+                Add
+              </button>
             </form>
             <button
-              id="btn-add-city"
-              class="w-[60%] text-white border-2 border-[#ff66c4] bg-[#ff66c4] rounded-full font-bold py-2 px-4 hover:text-[#ff66c4] hover:bg-white hover:cursor-pointer active:opacity-70"
+              id="btn-add-menu"
+              class="w-[60%] text-white border-2 border-[#ff66c4] bg-[#ff66c4] mt-10 rounded-full font-bold py-2 px-4 hover:text-[#ff66c4] hover:bg-white hover:cursor-pointer active:opacity-70"
             >
-              Add
+              Add Menu
             </button>
           </div>
+        </div>
+      </main>
+
+      <!-- MENUS -->
+      <main
+        id="menus-main"
+        class="hidden flex flex-col mt-10 md:mt-14 items-center p-6"
+      >
+        <h1
+          class="text-6xl md:text-7xl lg:text-8xl text-center font-bold text-shadow"
+        >
+          MENUS
+        </h1>
+        <div
+          class="flex flex-col md:flex-row gap-10 justify-between gap-4 mt-10 w-[80%]"
+        >
+          <section
+            id="list-with-menus"
+            class="flex flex-col gap-4 items-center p-4 shadow-md shadow-gray-300 rounded-lg md:w-[45%] h-full overflow-y-auto"
+          >
+            <div class="flex flex-col items-center gap-2 w-full">
+              <select
+                name="restaurants"
+                id="restaurants-name-search"
+                class="cursor-pointer font-bold w-[80%] border border-[#006bb8] h-11 rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+                required
+              >
+                <option value selected disabled>Select a restaurant</option>
+                <!-- Options from database via JS -->
+                <option value></option>
+              </select>
+              <select
+                name="categories"
+                id="categories-name-search"
+                class="cursor-pointer w-[80%] border border-[#006bb8] h-11 rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+                required
+              >
+                <option value selected disabled>Select a category</option>
+                <!-- Options from database via JS -->
+                <option value></option>
+              </select>
+            </div>
+
+            <div
+              id="restaurant-menus-list-admin"
+              class="grid gap-3 p-4 h-[400px] overflow-y-auto w-full"
+            >
+              <!-- Loading state -->
+              <div id="cities-loading-admin" class="grid gap-3 w-full">
+                <!-- Skeleton loader items -->
+                <div class="h-24 bg-gray-200 rounded-lg animate-pulse"></div>
+                <div class="h-24 bg-gray-200 rounded-lg animate-pulse"></div>
+                <div class="h-24 bg-gray-200 rounded-lg animate-pulse"></div>
+                <div class="h-24 bg-gray-200 rounded-lg animate-pulse"></div>
+                <div class="h-24 bg-gray-200 rounded-lg animate-pulse"></div>
+              </div>
+              <!-- Actual menus will be inserted here -->
+              <!-- Items -->
+              <div
+                id="menu-items-admin"
+                class="flex flex-col w-full mt-1 md:mt-3 gap-2 md:!gap-6"
+              >
+                <div
+                  id="item-admin"
+                  class="flex flex-col gap-2 justify-between shadow-md bg-gray-100 p-2 md:!p-4 rounded-md w-full lg:w-[50%]"
+                >
+                  <div
+                    class="flex flex-wrap items-start justify-between w-full gap-2"
+                  >
+                    <h4 id="item-name-admin" class="text-2xl lg:text-3xl">
+                      Item name
+                    </h4>
+                    <h4 id="item-price-admin" class="text-2xl lg:text-3xl">
+                      €14.50
+                    </h4>
+                  </div>
+                  <div
+                    class="flex flex-wrap items-start justify-between w-full gap-2"
+                  >
+                    <p
+                      id="item-description-admin"
+                      class="text-sm lg:text-lg text-gray-500 w-[70%] md:w-[60%]"
+                    >
+                      Item description
+                    </p>
+                    <button
+                      id="remove-btn-admin"
+                      class="border text-gray-100 flex items-center justify-center rounded-lg w-9 md:!w-10 lg:!w-12 h-9 md:!h-10 lg:!h-12 bg-[#ff66c4] hover:cursor-pointer hover:text-[#ff66c4] hover:bg-gray-100 active:opacity-70"
+                    >
+                      <svg
+                        class="h-7 w-7 md:!h-8 md:!w-8 lg:!w-9 lg:!h-9 stroke-2 fill-current"
+                        fill="none"
+                        viewBox="-3.5 0 19 19"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="cf-icon-svg"
+                      >
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g
+                          id="SVGRepo_tracerCarrier"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path
+                            d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"
+                          ></path>
+                        </g>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- ^ Items will be inserted here -->
+            </div>
+          </section>
+          <section
+            id="list-with-menus"
+            class="flex flex-col gap-4 items-center p-4 shadow-md shadow-gray-300 rounded-lg md:w-[45%] h-full overflow-y-auto"
+          >
+            <h2 class="text-4xl font-bold text-shadow">Add Item</h2>
+
+            <form
+              action="add-item"
+              class="flex flex-col items-center gap-6 bg-white mt-4 max-md:w-full md:w-[80%]"
+            >
+              <select
+                name="categories-input"
+                id="categories-name-input"
+                class="cursor-pointer w-full border border-[#006bb8] h-10 rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+                required
+              >
+                <option value selected disabled>Select a category</option>
+                <!-- Options from database via JS -->
+                <option value></option>
+              </select>
+              <input
+                type="text"
+                id="item-name"
+                class="w-full border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+                placeholder="Name"
+                required
+              />
+              <select
+                name="cuisine-input"
+                id="cuisine-name-input"
+                class="cursor-pointer w-full border border-[#006bb8] h-10 rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+                required
+              >
+                <option value selected disabled>Select a cuisine</option>
+                <!-- Options from database via JS -->
+                <option value></option>
+              </select>
+
+              <input
+                type="price"
+                id="item-price"
+                class="w-full border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+                placeholder="Price"
+                required
+              />
+              <textarea
+                id="item-description"
+                class="w-full h-[100px] border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+                placeholder="Description"
+                required
+              ></textarea>
+              <button
+                id="btn-add-item"
+                type="submit"
+                class="w-[60%] text-white border-2 border-[#ff66c4] bg-[#ff66c4] rounded-full font-bold py-2 px-4 hover:text-[#ff66c4] hover:bg-white hover:cursor-pointer active:opacity-70"
+              >
+                Add
+              </button>
+            </form>
+          </section>
         </div>
       </main>
 
@@ -848,7 +1069,7 @@
           <!-- Dropdown for choosing delivery guys -->
           <select
             id="payment-recipient"
-            class="w-[80%] border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+            class="cursor-pointer w-[80%] border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
             required
           >
             <option value="all" selected>All</option>
@@ -1010,7 +1231,7 @@
               <select
                 name="deliveryGuy"
                 id="menu-delivery-guys"
-                class="w-full h-[40px] border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+                class="cursor-pointer w-full h-[40px] border border-[#006bb8] rounded-lg p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
               >
                 <option value="all" selected disabled>
                   Select delivery guy

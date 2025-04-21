@@ -217,22 +217,24 @@
         />
         <form
           id="section-input-login-information"
-          class="pb-5 w-[80%] md:w-[70%] flex flex-col gap-2"
+          class="pb-5 w-[80%] md:w-[70%] flex flex-col items-center gap-2"
         >
           <input
             type="email"
             placeholder="E-mail"
             id="e-mail-input"
-            class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]" required
+            class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+            required
           />
 
           <!-- Added button to show password -->
-          <div class="relative">
+          <div class="relative w-full">
             <input
               type="password"
               placeholder="Password"
               id="password-input"
-              class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]" required
+              class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+              required
               autocomplete="current-password"
             />
             <button
@@ -243,13 +245,14 @@
               Show
             </button>
           </div>
+          <button
+            id="btn-login-main"
+            type="submit"
+            class="w-[50%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[10px] hover:border-2 active:opacity-70"
+          >
+            Login
+          </button>
         </form>
-        <button
-          id="btn-login-main"
-          class="w-[50%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[10px] hover:border-2 active:opacity-70"
-        >
-          Login
-        </button>
         <p
           class="text-[8px] md:text-[10px] py-5 px-8 text-gray-500 text-justify"
         >
