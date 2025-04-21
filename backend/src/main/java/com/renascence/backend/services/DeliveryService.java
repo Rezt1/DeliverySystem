@@ -63,7 +63,7 @@ public class DeliveryService {
                 minutes));
 
         if (delivery.getToBeDeliveredHour().isBefore(LocalDateTime.now())) {
-            throw new IllegalArgumentException("Cannot make an order for the past");
+            delivery.setToBeDeliveredHour(delivery.getToBeDeliveredHour().plusDays(1));
         }
 
         List<DeliveryFood> deliveryFoods = createDeliveryDto.getFoods().stream()
@@ -121,7 +121,7 @@ public class DeliveryService {
         dto.setPaymentMethod(delivery.getPaymentMethod());
         dto.setTotalPrice(delivery.getTotalPrice());
         dto.setToBeDeliveredTime(String
-                .format("%d:%d", delivery.getToBeDeliveredHour().getHour(), delivery.getToBeDeliveredHour().getMinute()));
+                .format("%02d:%02d", delivery.getToBeDeliveredHour().getHour(), delivery.getToBeDeliveredHour().getMinute()));
 
         // Map the related DeliveryFood entities to DeliveryFoodDto
         List<DeliveryFoodDto> foodDtos = new ArrayList<>();
