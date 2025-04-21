@@ -3,7 +3,6 @@ package com.renascence.backend.service;
 import com.renascence.backend.dtos.delivery.CreateDeliveryDto;
 import com.renascence.backend.dtos.delivery.DeliveryDto;
 import com.renascence.backend.dtos.deliveryFood.CreateDeliveryFoodDto;
-import com.renascence.backend.dtos.deliveryFood.DeliveryFoodDto;
 import com.renascence.backend.entities.Delivery;
 import com.renascence.backend.entities.Food;
 import com.renascence.backend.entities.Restaurant;
@@ -18,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -26,7 +24,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -276,9 +273,15 @@ public class DeliveryServiceTest {
         CreateDeliveryDto dto = new CreateDeliveryDto();
         dto.setFoods(List.of(deliveryFoodDto, deliveryFoodDto2));
         dto.setTotalPrice(30.0); // Set the total price to avoid NullPointerException
-        dto.setHourToBeDelivered("15:30"); // Set the hourToBeDelivered to a valid value
+
+        // Set the hourToBeDelivered to a valid future value (like 15:30 if it's currently before this time)
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime deliveryTime = currentTime.plusMinutes(10);  // Set a time 10 minutes in the future
+        dto.setHourToBeDelivered(String.format("%02d:%02d", deliveryTime.getHour(), deliveryTime.getMinute()));
+
         return dto;
     }
+
 
 
 

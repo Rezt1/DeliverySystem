@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryGuyServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryGuyServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/DeliveryServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/UserServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +87,7 @@
     "JUnit.AdminServiceTest.testGetDeliveryGuyById_Success.executor": "Run",
     "JUnit.AdminServiceTest.testGetIncome.executor": "Run",
     "JUnit.AdminServiceTest.testGetIncomeByDeliveryGuy.executor": "Run",
+    "JUnit.AdminServiceTest.testGetStatistics.executor": "Run",
     "JUnit.AdminServiceTest.testPayDeliveryGuy_DeliveryGuyNotFound.executor": "Run",
     "JUnit.AdminServiceTest.testPayDeliveryGuy_InvalidStartDate.executor": "Debug",
     "JUnit.AdminServiceTest.testPayDeliveryGuy_Success.executor": "Run",
@@ -105,6 +103,7 @@
     "JUnit.AuthServiceTest.logout_whenErrorOccurs_shouldReturnInternalServerError.executor": "Run",
     "JUnit.AuthServiceTest.logout_whenNoAuthHeader_shouldReturnOk.executor": "Run",
     "JUnit.AuthServiceTest.logout_whenValidToken_shouldRevokeTokens.executor": "Run",
+    "JUnit.BackendApplicationTests.executor": "Run",
     "JUnit.CityRepositoryTest.cityRepository_saveCity_ShouldReturnSavedCity.executor": "Run",
     "JUnit.CityRepositoryTest.saveCity_ShouldPersist.executor": "Run",
     "JUnit.CityServiceTest.executor": "Run",
@@ -215,8 +214,39 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.DeliveryGuyServiceTest.testGetFinishedDeliveries_shouldReturnDeliveredDeliveries">
-    <configuration name="DeliveryGuyServiceTest.getCurrentDeliveryForDeliveryGuy_ShouldReturnActiveDelivery" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.AdminServiceTest">
+    <configuration name="AdminServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminServiceTest.testGetStatistics" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="METHOD_NAME" value="testGetStatistics" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DeliveryGuyServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -226,61 +256,12 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
       <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="getCurrentDeliveryForDeliveryGuy_ShouldReturnActiveDelivery" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryGuyServiceTest.markAsDelivered_ShouldMarkDeliveryAsDelivered" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="markAsDelivered_ShouldMarkDeliveryAsDelivered" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DeliveryGuyServiceTest.testGetFinishedDeliveries_shouldReturnDeliveredDeliveries" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="testGetFinishedDeliveries_shouldReturnDeliveredDeliveries" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DeliveryGuyServiceTest.testGetPendingDeliveries_shouldReturnDeliveries" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.renascence.backend.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
-      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
-      <option name="METHOD_NAME" value="testGetPendingDeliveries_shouldReturnDeliveries" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DeliveryServiceTest.testCreateDelivery_withPastTime_throwsIllegalArgumentException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -290,8 +271,22 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
       <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
-      <option name="METHOD_NAME" value="testCreateDelivery_withPastTime_throwsIllegalArgumentException" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.UserServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -305,11 +300,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.testGetFinishedDeliveries_shouldReturnDeliveredDeliveries" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.markAsDelivered_ShouldMarkDeliveryAsDelivered" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.getCurrentDeliveryForDeliveryGuy_ShouldReturnActiveDelivery" />
-        <item itemvalue="JUnit.DeliveryGuyServiceTest.testGetPendingDeliveries_shouldReturnDeliveries" />
-        <item itemvalue="JUnit.DeliveryServiceTest.testCreateDelivery_withPastTime_throwsIllegalArgumentException" />
+        <item itemvalue="JUnit.AdminServiceTest" />
+        <item itemvalue="JUnit.AdminServiceTest.testGetStatistics" />
+        <item itemvalue="JUnit.UserServiceTest" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTest" />
+        <item itemvalue="JUnit.DeliveryServiceTest" />
       </list>
     </recent_temporary>
   </component>
