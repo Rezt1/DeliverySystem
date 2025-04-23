@@ -18,7 +18,7 @@ export function sessionStorageRemove(response){
 }
 
 export function ifLoggedIn(){
-    if(sessionStorage.length != 0){
+    if(sessionStorage.getItem("username")){
         return true;
     }
     return false;

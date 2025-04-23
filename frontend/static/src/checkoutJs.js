@@ -55,6 +55,8 @@ confirmOrder.addEventListener("click", ()=> {
 
         localStorage.clear();
 
+        sessionStorage.removeItem("subtotal");
+
         window.location.href = "./thank_you_for_order.html";
     }
     else{

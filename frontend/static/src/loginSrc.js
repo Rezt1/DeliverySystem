@@ -13,6 +13,7 @@ loginBtnMob.addEventListener("click", onLogin);
 
 async function onLogin(e){
     e.preventDefault();
+    sessionStorage.clear();
     try{
         let email = document.getElementById("e-mail-input").value;
        let password = document.getElementById("password-input").value;

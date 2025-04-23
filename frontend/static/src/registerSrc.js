@@ -11,6 +11,7 @@ btnToShow2.addEventListener("click", togglePassword);
 
 async function onRegister(e){
     e.preventDefault();
+    sessionStorage.clear();
     try{
         let username = document.getElementById("name-input").value;
        let phone = document.getElementById("phone-input").value;
