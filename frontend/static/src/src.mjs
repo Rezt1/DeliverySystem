@@ -22,6 +22,13 @@ import { ifDeliveryGuy, ifLoggedIn } from "./userWork.mjs";
     let acctountBtnDe = document.getElementById("account-button");
     let homeBtnDe = document.getElementsByClassName("btn-primary")[0];
 
+    document.getElementById("aboutBtn").addEventListener("click", () => {
+      window.location.href ="./about_us.html";
+    })
+
+    document.getElementById("feedbackBtn").addEventListener("click", () => {
+      window.location.href ="./feedback.html";
+    })
 
     if(ifLoggedIn()){
       console.log("logged");
@@ -44,13 +51,16 @@ import { ifDeliveryGuy, ifLoggedIn } from "./userWork.mjs";
 
     if(ifDeliveryGuy()){
       let btndelivery = document.getElementById("deliveries-button");
+      console.log("deliveryGuy")
       btndelivery.classList.remove("hidden");
     btndelivery.addEventListener("click", () => {
     window.location.href = "./deliveries.html";
     });
     }
   
-    
+    else{
+      console.log('not delivery guy')
+    }
 
     loginBtnDe.addEventListener('click', loadLogin);
     registerBtnDe.addEventListener("click", loadRegister);

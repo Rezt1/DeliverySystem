@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="./src/nav.mjs" type="module" defer></script>
-    <script src="./src/accountJs.js" type="module" defer></script>
     <link href="./style.css" rel="stylesheet" />
     <link href="./custom.css" rel="stylesheet" />
 
@@ -215,7 +214,7 @@
         <div
         class="w-[50%] h-full flex flex-col justify-center items-center gap-4">   
         <h2 class="w-[80%] text-2xl md:text-3xl lg:text-4xl font-bold">Give us your feedback!</h2>
-            <form action="feedback-submit"
+            <form id = "submitForm"
             class="w-[80%] flex flex-col gap-4 items-center ">
                 <input
                 type="email" 
@@ -244,11 +243,18 @@
     </main>
 
     <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
-      <button class="btn-footer">FAQ</button>
-      <button class="btn-footer">About</button>
-      <button class="btn-footer">Contacts</button>
-      <button class="btn-footer">Feedback</button>
+      <button id = "faqBtn" class="btn-footer">FAQ</button>
+      <button id = "aboutBtn" class="btn-footer">About</button>
+      <button id = "feedbackBtn"class="btn-footer">Feedback</button>
     </footer>
+
+    <script>
+      document.getElementById("submitForm").addEventListener("submit", sendHome);
+      function sendHome(e){
+        e.preventDefault();
+        window.location.href = "/home.html"
+      }
+    </script>
 
   </body>
 </html>

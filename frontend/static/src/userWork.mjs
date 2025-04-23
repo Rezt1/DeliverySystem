@@ -25,8 +25,8 @@ export function ifLoggedIn(){
 }
 
 
-export async function logout(e){
-    e.preventDefault();
+export async function logout(){
+    
     let settings = {
         method: "Post",
         headers: {

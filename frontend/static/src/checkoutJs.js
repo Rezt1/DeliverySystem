@@ -50,14 +50,20 @@ confirmOrder.addEventListener("click", ()=> {
 
         let totalPrice = sessionStorage.getItem("subtotal").slice(1);
 
-
+        try{
        deliverySend(addressBlock.value, paymentMethod, foodsInfo, deliveryInput.value, totalPrice);
+       
+       localStorage.clear();
 
-        localStorage.clear();
+       sessionStorage.removeItem("subtotal");
 
-        sessionStorage.removeItem("subtotal");
+       window.location.href = "./thank_you_for_order.html";
 
-        window.location.href = "./thank_you_for_order.html";
+
+    }catch(e){
+        console.error(e.message);
+    }
+
     }
     else{
         throw new Error(`Time must be between ${deliveryInput.min} and ${deliveryInput.max}`);
@@ -133,17 +139,15 @@ function isTimeBetween(time, start, end) {
           }
   
   
-          try{
+          
               let resp = await fetch(`${ipAddress}/api/deliveries/create-delivery`, settings);
               if (!resp.ok) {
                 let errorData = await resp.json();
-                throw new Error(errorData.message || 'Failed to fetch restaurants');
+                throw new Error(errorData.message);
               }
               return resp;
               
           }
-          catch(e){
-              console.error(e.message);
-          }
+          
       
-  }
+  

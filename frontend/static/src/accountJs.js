@@ -50,8 +50,11 @@ quitDel.addEventListener("click", async () => {
 catch(e){
     console.error(e.message);
 }
+    
 
-window.location.href = "/account.html";
+logout();
+
+//window.location.href = "/home.html";
     
 });
 
