@@ -7,6 +7,8 @@ let btnLogout = document.getElementById("logout-btn");
 
 btnLogout.addEventListener("click", logout);
 
+let token = sessionStorage.getItem("accessToken");
+
 let nameField = document.getElementById("name-field");
 nameField.textContent = sessionStorage.getItem("username");
 
@@ -21,13 +23,13 @@ phoneField.textContent = sessionStorage.getItem("phoneNumber");
 
 let becomeDel = document.getElementById("become-delivery-guy-btn");
 
+
 becomeDel.addEventListener("click", () => {
     window.location.href = "./apply_as_courier.html";
 })
 
 let quitDel = document.getElementById("quit-delivery-guy-btn");
 quitDel.addEventListener("click", async () => {
-    let token = sessionStorage.getItem("accessToken");
     try{
     let address = `${ipAddress}/api/delivery-guys/quit`;
    
@@ -70,3 +72,100 @@ else{
     quitDel.classList.add("hidden");
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const editBtn = document.getElementById("edit-btn");
+    const saveBtn = document.getElementById("save-btn");
+    const cancelBtn = document.getElementById("cancel-btn");
+    const userNameElement = document.getElementById("user-name");
+
+
+    editBtn.addEventListener("click", () => {
+      nameField.setAttribute("contenteditable", "true");
+      nameField.classList.add("ring-2", "ring-[#006bb8]");
+      nameField.focus(); 
+
+      emailField.setAttribute("contenteditable", "true");
+      emailField.classList.add("ring-2", "ring-[#006bb8]");
+      emailField.focus(); 
+
+      phoneField.setAttribute("contenteditable", "true");
+      phoneField.classList.add("ring-2", "ring-[#006bb8]");
+      phoneField.focus(); 
+
+      editBtn.classList.add("hidden");
+      saveBtn.classList.remove("hidden");
+      cancelBtn.classList.remove("hidden");
+    });
+
+    saveBtn.addEventListener("click", async () => {
+      let newName = nameField.textContent.trim();
+      let newPhone = phoneField.textContent.trim();
+      let newEmail = emailField.textContent.trim();
+
+      if (!newName || !newPhone || !newEmail) {
+        alert("Name cannot be empty!");
+        return;
+      }
+
+      let newUser = {
+        name: newName,
+        phoneNumber: newPhone,
+        email: newEmail
+      }
+
+      try {
+        const response = await fetch(`${ip()}/api/users/update-account`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(newUser),
+        });
+    
+        if (!response.ok) throw new Error('Failed to update developer info.');
+    
+        const data = await response.json();
+        console.log(data);
+        alert("User updated successfully!");
+        userNameElement.textContent = newName;
+        nameField.setAttribute("contenteditable", "false");
+        nameField.classList.remove("ring-2", "ring-[#006bb8]");
+
+        sessionStorage.setItem("username", newName);
+        sessionStorage.setItem("email", newEmail);
+        sessionStorage.setItem("phoneNumber", newPhone);
+  
+        editBtn.classList.remove("hidden");
+        saveBtn.classList.add("hidden");
+        cancelBtn.classList.add("hidden");
+      } catch (error) {
+        console.error('Error updating user:', error);
+      }
+    
+
+    });
+
+    cancelBtn.addEventListener("click", () => {
+      nameField.setAttribute("contenteditable", "false");
+      nameField.classList.remove("ring-2", "ring-[#006bb8]");
+
+      emailField.setAttribute("contenteditable", "false");
+      emailField.classList.remove("ring-2", "ring-[#006bb8]");
+
+      phoneField.setAttribute("contenteditable", "false");
+      phoneField.classList.remove("ring-2", "ring-[#006bb8]");
+
+      editBtn.classList.remove("hidden");
+      saveBtn.classList.add("hidden");
+      cancelBtn.classList.add("hidden");
+    });
+
+    nameField.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+      }
+    });
+
+  });
