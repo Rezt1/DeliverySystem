@@ -45,9 +45,6 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "owner")
-    private List<Restaurant> restaurants = new ArrayList<>();
-
     @OneToMany(mappedBy = "receiver")
     private List<Delivery> deliveries = new ArrayList<>();
 }

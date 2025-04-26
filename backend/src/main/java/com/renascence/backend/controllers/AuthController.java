@@ -1,10 +1,10 @@
 package com.renascence.backend.controllers;
 
-import com.renascence.backend.dtos.Authorization.LoginRequestDto;
-import com.renascence.backend.dtos.Authorization.RefreshTokenRequestDto;
+import com.renascence.backend.dtos.authorization.LoginRequestDto;
+import com.renascence.backend.dtos.authorization.RegisterDto;
 import com.renascence.backend.services.AuthService;
-import jakarta.annotation.security.PermitAll;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,13 +25,15 @@ public class AuthController {
         return authService.login(loginRequestDto);
     }
 
-    @PostMapping("/refresh")
-    public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequestDto refreshTokenRequestDto) {
-        return authService.refreshToken(refreshTokenRequestDto);
-    }
-
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest httpServletRequest) {
         return authService.logout(httpServletRequest);
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterDto registerDto) {
+
+        return authService.register(registerDto);
+    }
+
 }

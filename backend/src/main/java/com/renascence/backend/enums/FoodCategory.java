@@ -5,5 +5,6 @@ public enum FoodCategory {
     MAIN_COURSE,
     DESSERT,
     SALAD,
-    BREAD
+    BREAD,
+    STARTER
 }

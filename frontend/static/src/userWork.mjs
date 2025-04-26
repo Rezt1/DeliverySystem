@@ -1,3 +1,6 @@
+import { ip } from "./ipSearch.mjs";
+
+
 export function sessionStorageSet(response) {
     Object.keys(response).forEach(key => {
         if (key !== "password") { 
@@ -15,25 +18,76 @@ export function sessionStorageRemove(response){
 }
 
 export function ifLoggedIn(){
-    if(sessionStorage.length > 1){
+    if(sessionStorage.getItem("username")){
         return true;
     }
     return false;
 }
 
 
-export async function logout(e){
-    e.preventDefault();
-    /*let settings = {
-        method: "Get",
-        headers: {"X-Authorization": sessionStorage.accessToken}
+export async function logout(){
+    
+    let settings = {
+        method: "Post",
+        headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem("accessToken")}`
+          },
+    }
+    let address = ip();
+    let response = await fetch(`${address}/api/auth/logout`, settings);
+
+
+    if (response.status === 401) {
+        sessionStorage.clear();
+        window.location.reload();
+        return;
+    
     }
 
-    let response = await fetch("http", settings);
-    sessionStorageRemove(response.json());*/
-    
-    console.log('logout');
-    sessionStorage.removeItem(1, "logged");
+    if (!response.ok) throw new Error('Logout failed');
+
+    sessionStorage.clear();
     window.location.href = "./home.html";
 
+}
+
+/* export function ifDeliveryGuy(){
+    let email = sessionStorage.getItem("email");
+    if(/deliveryGuy[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
+        return true;
+    }
+    else{
+        return false;
+    }
+} */
+
+export function ifDeliveryGuy(){
+
+        let token = sessionStorage.getItem("accessToken");
+        if (!token) {
+            console.log("No token found");
+            return;
+        }
+    
+        let decodedToken = parseJwt(token);
+    
+        let roles = decodedToken.roles;  
+        if (roles && roles.includes("ROLE_DELIVERY_GUY")) {
+            return true;
+        } else {
+            return false;
+        }
+
+        function parseJwt(token) {
+            let base64Url = token.split('.')[1];
+            let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        
+            return JSON.parse(jsonPayload);
+        }
+    
+    
+    
 }

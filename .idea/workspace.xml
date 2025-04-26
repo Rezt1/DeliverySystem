@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2ea482dd-698b-490a-b425-f3e9f82561af" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/DataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/renascence/backend/DataLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/renascence/backend/service/AdminServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +16,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -41,6 +42,9 @@
     &quot;accountId&quot;: &quot;0fba0679-cf8a-4b61-9ee3-6e42bd564511&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 7
@@ -50,47 +54,259 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.BackendApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;database__devolopment&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ivo/Desktop/DeliverySystem/backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
-    ]
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.BackendApplication.executor": "Run",
+    "JUnit.AdminServiceTest.editCity_shouldThrowExceptionWhenCityIsDeleted.executor": "Run",
+    "JUnit.AdminServiceTest.editCity_shouldThrowExceptionWhenCityNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.editCity_shouldUpdateCitySuccessfully.executor": "Run",
+    "JUnit.AdminServiceTest.editCuisine_shouldThrowExceptionWhenCuisineNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.editCuisine_shouldUpdateCuisineSuccessfully.executor": "Run",
+    "JUnit.AdminServiceTest.editFood_shouldThrowExceptionWhenFoodIsDeleted.executor": "Run",
+    "JUnit.AdminServiceTest.editFood_shouldThrowExceptionWhenFoodNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.editFood_shouldUpdateFoodSuccessfully.executor": "Run",
+    "JUnit.AdminServiceTest.editRestaurant_shouldThrowExceptionIfIbanAlreadyExists.executor": "Run",
+    "JUnit.AdminServiceTest.editRestaurant_shouldThrowExceptionIfRestaurantIsDeleted.executor": "Run",
+    "JUnit.AdminServiceTest.editRestaurant_shouldThrowExceptionIfRestaurantNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.editRestaurant_shouldUpdateRestaurantSuccessfully.executor": "Run",
+    "JUnit.AdminServiceTest.executor": "Run",
+    "JUnit.AdminServiceTest.removeCity_shouldMarkCityAsDeleted.executor": "Run",
+    "JUnit.AdminServiceTest.removeCity_shouldRemoveDeliveryGuysAssociatedWithCity.executor": "Run",
+    "JUnit.AdminServiceTest.removeCity_shouldThrowException_whenCityAlreadyDeleted.executor": "Run",
+    "JUnit.AdminServiceTest.removeCity_shouldThrowException_whenCityNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.removeRestaurant_shouldMarkRestaurantAndFoodsAsDeleted.executor": "Run",
+    "JUnit.AdminServiceTest.removeRestaurant_shouldThrowException_whenRestaurantAlreadyDeleted.executor": "Run",
+    "JUnit.AdminServiceTest.removeRestaurant_shouldThrowException_whenRestaurantNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.testCreateCity.executor": "Run",
+    "JUnit.AdminServiceTest.testCreateCuisine.executor": "Run",
+    "JUnit.AdminServiceTest.testCreateFood.executor": "Run",
+    "JUnit.AdminServiceTest.testCreateRestaurant.executor": "Run",
+    "JUnit.AdminServiceTest.testCreateRestaurant_IbanAlreadyExists.executor": "Run",
+    "JUnit.AdminServiceTest.testGetAllDeliveryGuys.executor": "Run",
+    "JUnit.AdminServiceTest.testGetDeliveryGuyById_NotFound.executor": "Run",
+    "JUnit.AdminServiceTest.testGetDeliveryGuyById_Success.executor": "Run",
+    "JUnit.AdminServiceTest.testGetIncome.executor": "Run",
+    "JUnit.AdminServiceTest.testGetIncomeByDeliveryGuy.executor": "Run",
+    "JUnit.AdminServiceTest.testGetStatistics.executor": "Run",
+    "JUnit.AdminServiceTest.testPayDeliveryGuy_DeliveryGuyNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.testPayDeliveryGuy_InvalidStartDate.executor": "Debug",
+    "JUnit.AdminServiceTest.testPayDeliveryGuy_Success.executor": "Run",
+    "JUnit.AdminServiceTest.testRemoveRestaurant_AlreadyRemoved.executor": "Run",
+    "JUnit.AdminServiceTest.testRemoveRestaurant_RestaurantNotFound.executor": "Run",
+    "JUnit.AdminServiceTest.testRemoveRestaurant_Success.executor": "Run",
+    "JUnit.AdminServiceTest.testRemoveRestaurant_Success_WithFoods.executor": "Run",
+    "JUnit.AdminServiceTest.testRemoveRestaurant_WithDeletedFoods.executor": "Debug",
+    "JUnit.AuthServiceTest.executor": "Run",
+    "JUnit.AuthServiceTest.login_whenAlreadyAuthenticated_shouldReturnForbidden.executor": "Run",
+    "JUnit.AuthServiceTest.login_whenAuthenticationFails_shouldReturnBadRequest.executor": "Run",
+    "JUnit.AuthServiceTest.login_whenValidCredentials_shouldReturnAuthResponse.executor": "Run",
+    "JUnit.AuthServiceTest.logout_whenErrorOccurs_shouldReturnInternalServerError.executor": "Run",
+    "JUnit.AuthServiceTest.logout_whenNoAuthHeader_shouldReturnOk.executor": "Run",
+    "JUnit.AuthServiceTest.logout_whenValidToken_shouldRevokeTokens.executor": "Run",
+    "JUnit.BackendApplicationTests.executor": "Run",
+    "JUnit.CityRepositoryTest.cityRepository_saveCity_ShouldReturnSavedCity.executor": "Run",
+    "JUnit.CityRepositoryTest.saveCity_ShouldPersist.executor": "Run",
+    "JUnit.CityServiceTest.executor": "Run",
+    "JUnit.CityServiceTest.getAllCities_ShouldReturnAllCitiesAsDtos.executor": "Run",
+    "JUnit.CityServiceTest.getCityById_WithExistingId_ShouldReturnCityDto.executor": "Run",
+    "JUnit.CuisineServiceTest.executor": "Run",
+    "JUnit.CuisineServiceTest.getAllCuisines_ShouldReturnAllCuisinesAsDtos.executor": "Run",
+    "JUnit.CuisineServiceTest.getAllCuisines_WhenNoCuisinesExist_ShouldReturnEmptyList.executor": "Run",
+    "JUnit.CuisineServiceTest.getCuisineById_WithExistingId_ShouldReturnConvertedDto.executor": "Run",
+    "JUnit.CustomUserDetailsServiceTest.executor": "Run",
+    "JUnit.CustomUserDetailsServiceTest.loadUserByUsername_userDoesNotExist_throwsException.executor": "Run",
+    "JUnit.CustomUserDetailsServiceTest.loadUserByUsername_userExists_returnsCustomUserDetails.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.assignDelivery_ThrowsException_WhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.assignDelivery_shouldSuccessfullyAssignDelivery.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.assignDelivery_shouldThrowWhenDeliveryNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.assignDelivery_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.getCurrentDeliveryForDeliveryGuy_ShouldReturnActiveDelivery.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.getCurrentDelivery_shouldOnlyReturnOutForDeliveryStatus.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.getCurrentDelivery_shouldReturnNullWhenNoActiveDeliveries.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.getSalaries_ShouldReturnDeliveryGuysSalaries.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.markAsDelivered_ShouldMarkDeliveryAsDelivered.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenAlreadyAssigned.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenDeliveryNotInSameCity.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testAssignDelivery_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testAssignDelivery_successful.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_Success.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_shouldReturnCurrentDeliveryForDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetCurrentDeliveryForDeliveryGuy_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetFinishedDeliveries_shouldReturnDeliveredDeliveries.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetFinishedDeliveries_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetFinishedDeliveries_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetPendingDeliveries_shouldReturnDeliveries.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetPendingDeliveries_shouldThrowWhenUserIsNotDeliveryGuy_andUserDoesNotExist.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetPendingDeliveries_shouldThrowWhenUserIsNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetSalaries_shouldReturnSalaryDtos.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetSalaries_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testGetSalaries_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_Success.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldMarkSuccessfully.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenDeliveryNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenNoActiveDelivery.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenUserIsNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testMarkAsDelivered_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testQuit_shouldSucceedAndReturnMessage.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testQuit_shouldThrowWhenNotDeliveryGuy.executor": "Run",
+    "JUnit.DeliveryGuyServiceTest.testQuit_shouldThrowWhenUserNotFound.executor": "Run",
+    "JUnit.DeliveryGuyServiceTests.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldCreateDeliverySuccessfully.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFirstFoodNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFoodDeletedInLoop.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfFoodNotFoundInLoop.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfOrderIsForThePast.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfRestaurantIsDeleted.executor": "Run",
+    "JUnit.DeliveryServiceTest.createDelivery_shouldThrowIfUserNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.executor": "Run",
+    "JUnit.DeliveryServiceTest.getDeliveryById_shouldReturnDeliveryDtoIfValid.executor": "Run",
+    "JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfDeliveryNotOwnedByUser.executor": "Run",
+    "JUnit.DeliveryServiceTest.getDeliveryById_shouldThrowIfUserNotFound.executor": "Run",
+    "JUnit.DeliveryServiceTest.testCreateDelivery_withPastTime_throwsIllegalArgumentException.executor": "Run",
+    "JUnit.FoodServiceTest.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodById_FoodIsDeleted.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodById_FoodNotFound.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodById_Success.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodsByRestaurant_ExcludesDeletedFoods.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodsByRestaurant_RestaurantIsDeleted.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodsByRestaurant_RestaurantNotFound.executor": "Run",
+    "JUnit.FoodServiceTest.testGetFoodsByRestaurant_Success.executor": "Run",
+    "JUnit.JwtServiceTest.executor": "Run",
+    "JUnit.JwtServiceTest.getEmailFromToken_ShouldReturnCorrectEmail.executor": "Run",
+    "JUnit.JwtServiceTest.validateToken_ShouldHandleExpiredToken.executor": "Run",
+    "JUnit.JwtServiceTest.validateToken_ShouldReturnFalseForMissingToken.executor": "Run",
+    "JUnit.JwtServiceTest.validateToken_ShouldReturnFalseForRevokedToken.executor": "Run",
+    "JUnit.JwtServiceTest.validateToken_ShouldReturnTrueForValidToken.executor": "Run",
+    "JUnit.RestaurantServiceTest.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_cityNotFound_throwsException.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_cuisineNotFound_throwsException.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_deletedCity_throwsException.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_filterByCuisine_returnsOnlyMatchingCuisine.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_sortByNameAscending_sortedCorrectly.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_sortByNameDescending_sortedCorrectly.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_sortByRatingAscending_sortedCorrectly.executor": "Run",
+    "JUnit.RestaurantServiceTest.getAllRestaurants_sortByRatingDescending_sortedCorrectly.executor": "Run",
+    "JUnit.UserServiceTest.executor": "Run",
+    "JUnit.UserServiceTest.testGetActiveDeliveries_shouldReturnActiveOnesOnly.executor": "Run",
+    "JUnit.UserServiceTest.testGetActiveDeliveries_shouldReturnPendingAndOutForDelivery.executor": "Run",
+    "JUnit.UserServiceTest.testGetActiveDeliveries_userNotFound_shouldThrow.executor": "Run",
+    "JUnit.UserServiceTest.testGetPastDeliveries_shouldReturnDeliveredOnly.executor": "Run",
+    "JUnit.UserServiceTest.testGetPastDeliveries_userNotFound_shouldThrow.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.BackendApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Ivo/Desktop/DeliverySystem/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager">
+}]]></component>
+  <component name="RunManager" selected="JUnit.AdminServiceTest">
+    <configuration name="AdminServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminServiceTest.testGetStatistics" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.AdminServiceTest" />
+      <option name="METHOD_NAME" value="testGetStatistics" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DeliveryGuyServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryGuyServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DeliveryServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.DeliveryServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.renascence.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.renascence.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="com.renascence.backend.service.UserServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="DeliverySystem" />
+      <module name="backend" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.renascence.backend.BackendApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
-      </set>
-    </attachedChunks>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.AdminServiceTest" />
+        <item itemvalue="JUnit.AdminServiceTest.testGetStatistics" />
+        <item itemvalue="JUnit.UserServiceTest" />
+        <item itemvalue="JUnit.DeliveryGuyServiceTest" />
+        <item itemvalue="JUnit.DeliveryServiceTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -105,13 +321,21 @@
       <workItem from="1742406316110" duration="774000" />
       <workItem from="1742407127194" duration="78000" />
       <workItem from="1742407250476" duration="138000" />
-      <workItem from="1743422468560" duration="530000" />
-      <workItem from="1743423013411" duration="4631000" />
-      <workItem from="1743427766087" duration="3341000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

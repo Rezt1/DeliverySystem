@@ -49,12 +49,12 @@
   margin-left: 0
 }
 
-.btn-secondary:hover {
+/* .btn-secondary:hover {
   background-color: white;
   border: 2px solid #ff66c4;
   color: #ff66c4;
   cursor: text;
-}
+} */
 
 .btn-secondary:active {
   opacity: 0.85;
@@ -75,6 +75,12 @@
 
 .btn-drop-down:active {
   opacity: 0.85;
+}
+
+.btn-drop-down-nav:hover {
+  box-shadow: #ff66c4 4px 4px 10px 1px;
+  transition: all 0.25s ease-in-out;
+
 }
 
 .btn-cart:hover {
@@ -174,43 +180,60 @@ footer {
 }
 
 .chef-pick-btn {
-  background: linear-gradient(45deg, #FF69B4, #FF1493); 
+  background: linear-gradient(45deg, #FF69B4, #FF1493);
   color: white;
   border-radius: 12px;
-  font-size: 18px; /* Larger font size */
-  font-weight: bold; /* Bold font for emphasis */
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  font-size: 18px;
+  /* Larger font size */
+  font-weight: bold;
+  /* Bold font for emphasis */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  /* Soft shadow for depth */
   text-align: center;
-  text-transform: uppercase; /* Uppercase text */
-  transition: all 0.3s ease-in-out; /* Smooth transition effect */
-  cursor: pointer; /* Pointer cursor to indicate interactivity */
+  text-transform: uppercase;
+  /* Uppercase text */
+  transition: all 0.3s ease-in-out;
+  /* Smooth transition effect */
+  cursor: pointer;
+  /* Pointer cursor to indicate interactivity */
 }
 
 /* Hover effect */
 .chef-pick-btn:hover {
-  background: linear-gradient(45deg, #FF1493, #FF69B4); /* Reverse the gradient on hover */
-  transform: scale(1.05); /* Slightly enlarge the button on hover */
-  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3); /* Bigger shadow for hover */
+  background: linear-gradient(45deg, #FF1493, #FF69B4);
+  /* Reverse the gradient on hover */
+  transform: scale(1.05);
+  /* Slightly enlarge the button on hover */
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3);
+  /* Bigger shadow for hover */
 }
 
 /* Focus effect (when the button is clicked) */
 .chef-pick-btn:focus {
-  outline: none; /* Remove the outline */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Focus shadow effect */
+  outline: none;
+  /* Remove the outline */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  /* Focus shadow effect */
 }
 
 /* Disabled state */
 .chef-pick-btn:disabled {
-  background: #f0c4d3; /* Light pink background when disabled */
-  color: #aaa; /* Lighter text color */
-  cursor: not-allowed; /* Indicate that the button is not clickable */
-  box-shadow: none; /* Remove shadow */
+  background: #f0c4d3;
+  /* Light pink background when disabled */
+  color: #aaa;
+  /* Lighter text color */
+  cursor: not-allowed;
+  /* Indicate that the button is not clickable */
+  box-shadow: none;
+  /* Remove shadow */
 }
 
 /* Add a shimmer effect for the button */
 .chef-pick-btn:active {
-  background: linear-gradient(45deg, #FF69B4, #FF1493); /* Add shimmer effect */
-  animation: shimmer 1.5s infinite; /* Continuous shimmer animation */
+  background: linear-gradient(45deg, #FF69B4, #FF1493);
+  /* Add shimmer effect */
+  animation: shimmer 1.5s infinite;
+  /* Continuous shimmer animation */
 }
 
 /* Shimmer animation */
@@ -218,10 +241,42 @@ footer {
   0% {
     background-position: -100% 0;
   }
+
   100% {
     background-position: 100% 0;
   }
 }
 
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 
 
+.pink-outline-heading {
+  background-color: #006bb8; /* Blue background */
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: inline-block; /* Keeps the background tight around the text */
+  color: white;
+  text-shadow:
+    -1px -1px 0 #ff66c4,
+     1px -1px 0 #ff66c4,
+    -1px  1px 0 #ff66c4,
+     1px  1px 0 #ff66c4,
+     0 0 10px rgba(255, 102, 196, 0.6); /* Glow for extra pop */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+
+select:invalid {
+  color: #7fb4db;
+}

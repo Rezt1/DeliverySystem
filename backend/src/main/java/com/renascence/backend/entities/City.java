@@ -19,9 +19,18 @@ public class City {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private double salary;
+
+    @Column(nullable = false)
+    private boolean isDeleted;
+
     @OneToMany(mappedBy = "location")
     List<User> users = new ArrayList<>();
 
     @OneToMany(mappedBy = "city")
     List<Restaurant> restaurants = new ArrayList<>();
+
+    @OneToMany(mappedBy = "workCity")
+    List<DeliveryGuy> deliveryGuys = new ArrayList<>();
 }

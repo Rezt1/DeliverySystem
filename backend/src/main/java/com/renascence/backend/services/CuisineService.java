@@ -1,29 +1,21 @@
 package com.renascence.backend.services;
 
-import com.renascence.backend.dtos.Cuisine.CreateCuisineDto;
-import com.renascence.backend.dtos.Cuisine.CuisineDto;
+import com.renascence.backend.dtos.cuisine.CuisineDto;
 import com.renascence.backend.entities.Cuisine;
 import com.renascence.backend.repositories.CuisineRepository;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CuisineService {
 
     private final CuisineRepository cuisineRepository;
 
-    public CuisineService(CuisineRepository cuisineRepository) {
-        this.cuisineRepository = cuisineRepository;
-    }
-
-    public CuisineDto createCuisine(CreateCuisineDto createCuisineDto) {
-        Cuisine cuisine =new Cuisine();
-        cuisine.setName(createCuisineDto.getName());
-        Cuisine savedCuisine = cuisineRepository.save(cuisine);
-        return convertToDto(savedCuisine);
-    }
 
     public List<CuisineDto> getAllCuisines() {
         return cuisineRepository.findAll().stream()
@@ -31,9 +23,11 @@ public class CuisineService {
                 .toList();
     }
 
-    public Optional<CuisineDto> getCuisineById(Long id) {
-        return cuisineRepository.findById(id)
-                .map(this::convertToDto);
+    public CuisineDto getCuisineById(Long id) {
+        Cuisine cuisine = cuisineRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cuisine not found"));
+
+        return convertToDto(cuisine);
     }
 
     public Optional<CuisineDto> getCuisineByName(String name) {

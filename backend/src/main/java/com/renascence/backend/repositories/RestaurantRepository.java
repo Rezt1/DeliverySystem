@@ -11,12 +11,15 @@ import java.util.List;
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
-    List<Restaurant> findByCityId(Long cityId);
+    List<Restaurant> findAllByOrderByRatingDesc();
 
-    @Query("SELECT r FROM Restaurant r ORDER BY r.rating DESC LIMIT :count")
-    List<Restaurant> findTopRatedRestaurants(@Param("count") int count);
-
-    @Query("SELECT DISTINCT r FROM Restaurant r JOIN r.foods f JOIN f.cuisine c " +
-            "WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :cuisineName, '%'))")
-    List<Restaurant> findByCuisineNameContainingIgnoreCase(@Param("cuisineName") String cuisineName);
+    List<Restaurant> findAllByCityIdAndIsDeleted(Long cityId, boolean isDeleted);
+//    List<Restaurant> findByCityId(Long cityId);
+//
+//    @Query("SELECT r FROM Restaurant r ORDER BY r.rating DESC LIMIT :count")
+//    List<Restaurant> findTopRatedRestaurants(@Param("count") int count);
+//
+//    @Query("SELECT DISTINCT r FROM Restaurant r JOIN r.foods f JOIN f.cuisine c " +
+//            "WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :cuisineName, '%'))")
+//    List<Restaurant> findByCuisineNameContainingIgnoreCase(@Param("cuisineName") String cuisineName);
 }

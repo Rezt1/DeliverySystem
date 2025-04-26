@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="./style.css" rel="stylesheet" />
+    <script src="./src/nav.mjs" type="module" defer></script>
+    <script src="./src/checkoutJs.js" type="module" defer></script>
+    <link href="./custom.css" rel="stylesheet" />
+
+    <title>Hexeats - Apply As Courier</title>
+  </head>
+
+  <body>
+    <header
+      class="bg-[#006bb8] relative flex items-center justify-between py-3 px-2 md:max-h-[110px]"
+    >
+      <!-- Logo Section -->
+      <div class="flex items-center shrink-0">
+        <a href="home.html">
+          <img
+            class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
+            src="./Images/logo.PNG"
+            alt="logo"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Navigation (prevents buttons from going out of sight) -->
+      <nav
+        class="max-md:!hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:!justify-between md:pl-[70px]"
+      >
+        <!-- Left Section -->
+        <div class="flex flex-wrap gap-3">
+          <button class="btn-primary">Home</button>
+          <button id="restaurants-button" class="btn-primary">
+            Restaurants
+          </button>
+
+          <!-- Hidden deliveries button -->
+          <!-- To be shown only when delivery guy is logged in -->
+          <button id="deliveries-button" class="btn-primary hidden">
+            Deliveries
+          </button>
+        </div>
+
+        <!-- Right Section -->
+        <div class="flex flex-wrap gap-3 items-center">
+          <div class="relative w-35">
+           <!-- <select
+              id="search-main-dropdown-2"
+              class="btn-drop-down !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+            >
+              <option value="" selected disabled hidden>City</option>
+            </select> -->
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+            >
+              <svg
+                class="fill-current h-4 w-4 text-[#006bb8]"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <button
+            class="btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative"
+          >
+            <svg
+              class="btn-cart-icon w-8 h-8 text-[#006bb8]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              viewBox="0 0 24 24"
+            >
+              <path d="M4 10h16l-2 8H6l-2-8z" />
+              <path d="M9 10V6a3 3 0 0 1 6 0v4" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <line x1="9" y1="16" x2="15" y2="16" />
+            </svg>
+          </button>
+
+          <!-- Login/Reg/Account buttons -->
+          <button id="login-button" class="flex btn-primary">Login</button>
+          <button id="register-button" class="flex btn-primary">
+            Register
+          </button>
+          <button id="account-button" class="hidden btn-primary">
+            Account
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden flex items-center">
+        <button
+          type="button"
+          id="main-menu"
+          aria-label="Main menu"
+          aria-expanded="false"
+          class="btn-menu p-2 rounded-md text-white hover:bg-white hover:text-[#006bb8] transition"
+        >
+          <svg
+            class="btn-menu-icon h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Menu (hidden by default) -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden flex flex-col items-center bg-[#006bb8] absolute top-[100px] left-0 w-full p-4 space-y-4 transition-all duration-300 ease-in-out"
+      >
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+        <!-- change to DropDown -->
+        <div class="relative w-full">
+          <select
+            id="search-main-dropdown-1"
+            class="btn-drop-down text-center !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+          >
+            <!-- Options from database  -->
+            <option value="" selected disabled hidden>City</option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+          >
+            <svg
+              class="fill-current h-4 w-4 text-[#006bb8]"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
+        <button
+          id="home-btn"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Home
+        </button>
+        <button
+          id="restaurants-button-mobile"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Restaurants
+        </button>
+
+        <!-- Hidden button for Deliveries -->
+        <!-- To be shown only when delivery guy is logged in -->
+        <button
+          id="mobile-deliveries-button"
+          class="btn-primary w-full text-white text-lg py-2 !hidden text-start"
+        >
+          Deliveries
+        </button>
+        <button
+          id="mobile-cart-button"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Cart
+        </button>
+
+        <!-- Mobile Login/Account/Register Buttons -->
+        <button
+          id="mobile-login-button"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Login
+        </button>
+        <button
+          id="mobile-register-button"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Register
+        </button>
+        <button
+          id="mobile-account-button"
+          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Account
+        </button>
+      </div>
+    </header>
+
+    <main
+      class="flex flex-col items-center py-[24px] text-[#006bb8] overflow-y-auto"
+    >
+      <!-- Dotted Progress Bar -->
+      <div class="relative pb-8 w-[30%]">
+        <!-- Progress Line -->
+        <div
+          class="progress-track w-full"
+          style="background-position: 30% bottom"
+        ></div>
+
+        <!-- Dots Container -->
+        <div class="flex justify-between absolute w-full top-0">
+          <!-- Filled Dot -->
+          <div class="w-4 h-4 rounded-full bg-blue-500"></div>
+          <!-- Empty Dot (current) -->
+          <div
+            class="w-4 h-4 rounded-full border-2 border-blue-500 bg-white"
+          ></div>
+          <!-- Empty Dot -->
+          <!-- <div
+            class="w-4 h-4 rounded-full border-2 border-gray-300 bg-white"
+          ></div> -->
+          <!-- Empty Dot -->
+          <div
+            class="w-4 h-4 rounded-full border-2 border-gray-300 bg-white"
+          ></div>
+        </div>
+      </div>
+
+      <div
+        class="flex max-md:flex-col max-md:gap-4 gap-16 items-start py-4 w-[80%]"
+      >
+        <section
+          id="delivery-info"
+          class="flex flex-col gap-4 w-full max-md:mb-8"
+        >
+          <h2 class="text-3xl pb-2">Delivery information</h2>
+
+          <div class="flex flex-col gap-2">
+            <label for="delivery-address">Delivery Address</label>
+            <input
+              type="text"
+              id="delivery-address"
+              class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="delivery-address-optional"
+              >Apartment, suite, etc. (Optional)</label
+            >
+            <input
+              type="text"
+              id="delivery-address-optional"
+              class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="delivery-time">Delivery Time</label>
+            <!-- Sashka !!!!!! fix the time to display only certain hours. 10:00 - 23:30 and when a person makes an order the minimum allowed time for delivery to be after 1 hour??? -->
+            <input
+              type="time"
+              id="delivery-time"
+              class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+              step="300"
+            />
+          </div>
+        </section>
+        <section id="payment-info" class="flex flex-col gap-4 w-full">
+          <h2 class="text-3xl pb-2">Payment</h2>
+
+          <div id="payment-options" class="space-y-4">
+            <div
+              id="option-cash"
+              class="payment-option flex items-center space-x-2 border rounded-lg p-3 cursor-pointer transition duration-200"
+            >
+              <input
+                type="radio"
+                name="payment"
+                id="cash-radio"
+                checked
+                class="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+              />
+              <label for="cash-radio" class="text-lg cursor-pointer"
+                >💵 Cash</label
+              >
+            </div>
+
+            <div
+              id="option-card"
+              class="payment-option flex items-center space-x-2 border rounded-lg p-3 cursor-pointer transition duration-200"
+            >
+              <input
+                type="radio"
+                name="payment"
+                id="card-radio"
+                class="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+              />
+              <label for="card-radio" class="text-lg cursor-pointer"
+                >💳 Card</label
+              >
+            </div>
+          </div>
+
+          <!-- Card Info (hidden by default) -->
+          <div id="card-info" class="hidden mt-4">
+            <div class="flex flex-col gap-2">
+              <label for="card-number">Card number</label>
+              <input
+                type="text"
+                id="card-number"
+                class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+                maxlength="16"
+              />
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="card-name">Name on card</label>
+              <input
+                type="text"
+                id="card-name"
+                class="border border-gray-300 rounded px-2 h-9 py-1 w-full uppercase focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+                oninput="this.value = this.value.toUpperCase()"
+                autocapitalize="characters"
+              />
+            </div>
+            <div class="flex gap-4 text-md w-fill">
+              <div
+                id="expiration-date-block"
+                class="flex flex-col gap-2 w-full"
+              >
+                <label for="expiration-date-input"
+                  >Expiration date (MM/YY)</label
+                >
+                <input
+                  type="text"
+                  name="expiration-date"
+                  id="expiration-date-input"
+                  placeholder="MM/YY"
+                  class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+                  maxlength="5"
+                  pattern="(0[1-9]|1[0-2])\/\d{2}"
+                />
+              </div>
+              <div id="cvc-block" class="flex flex-col gap-2 w-full">
+                <label for="cvc-input">CVC</label>
+                <input
+                  type="password"
+                  name="cvc"
+                  id="cvc-input"
+                  placeholder="•••"
+                  class="border border-gray-300 rounded px-2 h-9 py-1 w-full focus:outline-none focus:ring-2 focus:ring-[#006bb8]"
+                  maxlength="4"
+                  pattern="\d{3,4}"
+                  inputmode="numeric"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <button
+        id="confirm-order-button"
+        class="mt-auto bottom-[15%] bg-[#006bb8] text-white w-[80%] md:w-[40%] max-md:my-8 p-2 rounded-full text-2xl md:text-4xl hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:border-2 hover:border-[#ff66c4] hover:p-[6px] active:opacity-70"
+      >
+        Confirm Order
+      </button>
+    </main>
+
+    <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
+      <button id = "faqBtn" class="btn-footer">FAQ</button>
+      <button id = "aboutBtn" class="btn-footer">About</button>
+      <button id = "feedbackBtn"class="btn-footer">Feedback</button>
+    </footer>
+  </body>
+</html>

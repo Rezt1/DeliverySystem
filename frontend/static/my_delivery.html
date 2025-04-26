@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+      defer
+    ></script>
+    <script src="./src/nav.mjs" type="module" defer></script>
+    <script src="./src/myDeliveryJs.js" type="module" defer></script>
+    <link href="./style.css" rel="stylesheet" />
+    <link href="./custom.css" rel="stylesheet" />
+
+    <title>Hexeats - My Delivery</title>
+  </head>
+
+  <body>
+    <header
+      class="bg-[#006bb8] relative flex items-center justify-between py-3 px-2 md:max-h-[110px]"
+    >
+      <!-- Logo Section -->
+      <div class="flex items-center shrink-0">
+        <a href="home.html">
+          <img
+            class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
+            src="./Images/logo.PNG"
+            alt="logo"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Navigation (prevents buttons from going out of sight) -->
+      <nav
+        class="max-md:!hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:!justify-between md:pl-[70px]"
+      >
+        <!-- Left Section -->
+        <div class="flex flex-wrap gap-3">
+          <button class="btn-primary">Home</button>
+          <button id="restaurants-button" class="btn-primary">
+            Restaurants
+          </button>
+
+          <!-- Hidden deliveries button -->
+          <!-- To be shown only when delivery guy is logged in -->
+          <button id="deliveries-button" class="btn-primary hidden">
+            Deliveries
+          </button>
+        </div>
+
+        <!-- Right Section -->
+        <div class="flex flex-wrap gap-3 items-center">
+          <div class="relative w-35">
+            <select
+              id="search-main-dropdown-1"
+              class="btn-drop-down !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+            >
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Options from database  -->
+              <option value="" selected disabled hidden>City</option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+            >
+              <svg
+                class="fill-current h-4 w-4 text-[#006bb8]"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <button
+            class="btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative"
+          >
+            <svg
+              class="btn-cart-icon w-8 h-8 text-[#006bb8]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              viewBox="0 0 24 24"
+            >
+              <path d="M4 10h16l-2 8H6l-2-8z" />
+              <path d="M9 10V6a3 3 0 0 1 6 0v4" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <line x1="9" y1="16" x2="15" y2="16" />
+            </svg>
+          </button>
+
+          <!-- Login/Reg/Account buttons -->
+          <button id="login-button" class="hidden btn-primary">Login</button>
+          <button id="register-button" class="hidden btn-primary">
+            Register
+          </button>
+          <button id="account-button" class="flex btn-primary">Account</button>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden flex items-center">
+        <button
+          type="button"
+          id="main-menu"
+          aria-label="Main menu"
+          aria-expanded="false"
+          class="btn-menu p-2 rounded-md text-white hover:bg-white hover:text-[#006bb8] transition"
+        >
+          <svg
+            class="btn-menu-icon h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Menu (hidden by default) -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden flex flex-col items-center bg-[#006bb8] absolute top-[100px] left-0 w-full p-4 space-y-4 transition-all duration-300 ease-in-out"
+      >
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+        <!-- change to DropDown -->
+        <div class="relative w-full">
+          <!--<select
+            id="search-main-dropdown-2"
+            class="btn-drop-down text-center !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+          >
+            <option value="" selected disabled hidden>City</option>
+          </select>-->
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+          >
+            <svg
+              class="fill-current h-4 w-4 text-[#006bb8]"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
+        <button
+          id="home-btn"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Home
+        </button>
+        <button
+          id="restaurants-button-mobile"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Restaurants
+        </button>
+
+        <!-- Hidden button for Deliveries -->
+        <!-- To be shown only when delivery guy is logged in -->
+        <button
+          id="mobile-deliveries-button"
+          class="btn-primary w-full text-white text-lg py-2 !hidden text-start"
+        >
+          Deliveries
+        </button>
+        <button
+          id="mobile-cart-button"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Cart
+        </button>
+
+        <!-- Mobile Login/Account/Register Buttons -->
+        <button
+          id="mobile-login-button"
+          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Login
+        </button>
+        <button
+          id="mobile-register-button"
+          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Register
+        </button>
+        <button
+          id="mobile-account-button"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Account
+        </button>
+        <button
+          id="mobile-account-button"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <main class="flex justify-around">
+      <div
+        id="delievery-info"
+        class="bg-white rounded-3xl shadow-md shadow-gray-700 h-[90%] w-[90%] m-auto text-[#006bb8] md:text-2xl"
+      >
+        <div
+          class="h-full w-full overflow-y-auto grid grid-cols-1 md:grid-cols-2 justify-around items-center"
+        >
+          <div class="flex flex-col justify-center items-center gap-2 p-4">
+            <div id="info" class="flex justify-around md:flex-col mb-auto mt-2">
+              <section id="delievery-info" class="flex flex-col gap-2 m-4 p-2">
+                <h1 class="text-2xl md:text-5xl text-shadow">
+                  Delivery Information
+                </h1>
+                <div
+                  class="flex flex-col justify-center items-start gap-1 p-2 text-1xl md:text-3xl"
+                >
+                  <div id="name-block" class="mb-2">
+                    <span>Name: </span>
+                    <span id="name" class="animate-pulse block md:inline"
+                      >Loading...</span
+                    >
+                  </div>
+                  <div id="address-block" class="mb-2">
+                    <span>Address: </span>
+                    <span id="address" class="animate-pulse block md:inline"
+                      >Loading...</span
+                    >
+                  </div>
+                  <div id="phone-block" class="mb-2">
+                    <span>Phone: </span>
+                    <span id="phone" class="animate-pulse block md:inline"
+                      >Loading...</span
+                    >
+                  </div>
+                </div>
+              </section>
+              <section id="order-info" class="flex flex-col gap-2 m-4 p-2">
+                <h1 class="text-2xl md:text-5xl text-shadow">
+                  Order Information
+                </h1>
+                <div
+                  class="flex flex-col justify-center items-start gap-1 p-2 text-1xl md:text-3xl"
+                >
+                  <div id="orer-id-block" class="mb-2">
+                    <span>Order-id: </span>
+                    <span id="order-id" class="animate-pulse block md:inline"
+                      >Loading...</span
+                    >
+                  </div>
+                  <div id="status-block" class="mb-2">
+                    <span>Status: </span>
+                    <span id="status" class="animate-pulse block md:inline"
+                      >Loading...</span
+                    >
+                  </div>
+                </div>
+              </section>
+            </div>
+            <button
+              id="btn-delivered-main"
+              class="w-[50%] py-3 bg-[#006bb8] text-white rounded-full font-bold hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[10px] hover:border-2 active:opacity-70"
+            >
+              Delivered
+            </button>
+          </div>
+
+          <!-- Order summary -->
+          <section
+            id="order-summary"
+            class="flex flex-col mt-15 md:mt-8 mb-auto"
+          >
+            <h1 class="text-3xl md:text-5xl my-4 text-center text-shadow">
+              Order Summary
+            </h1>
+
+            <div id="order-summary-info" class="rounded-3xl h-[70%] flex-1">
+              <!-- Loading state - make hidden if data is loaded -->
+              <div id="order-summary-loading" class="hidden grid gap-3 p-4">
+                <!-- Skeleton loader items -->
+                <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+                <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+                <div class="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+              </div>
+
+              <!-- Actual order summary will be inserted here -->
+             <div
+                id="order-summary-list"
+                class="grid gap-3 p-4 flex overflow-y-auto max-h-[450px]"
+              >
+                <!-- Order info box -->
+            </div>
+            <div id = "total-div"
+              class="flex justify-end items-center gap-2 p-6 text-xl md:text-2xl"
+            >
+              <label for="total-price" class="text-[#006bb8] font-bold"
+                >Total:
+              </label>
+              <span id="total-price" class="text-[#006bb8] font-bold"
+                >24.99</span
+              >
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    
+    <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
+      <button id = "faqBtn" class="btn-footer">FAQ</button>
+      <button id = "aboutBtn" class="btn-footer">About</button>
+      <button id = "feedbackBtn"class="btn-footer">Feedback</button>
+    </footer>
+  </body>
+</html>

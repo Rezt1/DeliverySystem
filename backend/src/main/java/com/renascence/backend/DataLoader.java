@@ -1,30 +1,36 @@
 package com.renascence.backend;
 
 import com.renascence.backend.entities.*;
+import com.renascence.backend.enums.DeliveryStatus;
 import com.renascence.backend.enums.FoodCategory;
+import com.renascence.backend.enums.PaymentMethod;
 import com.renascence.backend.repositories.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
+@RequiredArgsConstructor
 public class DataLoader implements CommandLineRunner {
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    @Autowired
-    private CityRepository cityRepository;
-    @Autowired
-    private RestaurantRepository restaurantRepository;
-    @Autowired
-    private CuisineRepository cuisineRepository;
-    @Autowired
-    private FoodRepository foodRepository;
-    @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private UserRepository userRepository;
+    private final CityRepository cityRepository;
+    private final RestaurantRepository restaurantRepository;
+    private final CuisineRepository cuisineRepository;
+    private final FoodRepository foodRepository;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final DeliveryGuyRepository deliveryGuyRepository;
+    private final DeliveryRepository deliveryRepository;
+    private final DeliveryFoodRepository deliveryFoodRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -32,26 +38,71 @@ public class DataLoader implements CommandLineRunner {
             return;
         }
 
-        // 1. Cities
+        // Cities
         City sofia = new City();
         sofia.setName("Sofia");
+        sofia.setSalary(1600);
         cityRepository.save(sofia);
 
         City varna = new City();
         varna.setName("Varna");
+        varna.setSalary(1300);
         cityRepository.save(varna);
 
         City plovdiv = new City();
         plovdiv.setName("Plovdiv");
+        plovdiv.setSalary(1300);
         cityRepository.save(plovdiv);
 
         City burgas = new City();
         burgas.setName("Burgas");
+        burgas.setSalary(1300);
         cityRepository.save(burgas);
 
         City vratsa = new City();
         vratsa.setName("Vratsa");
+        vratsa.setSalary(1150);
         cityRepository.save(vratsa);
+
+
+        // Roles
+        Role deliveryGuyRole = new Role();
+        deliveryGuyRole.setName("ROLE_" + com.renascence.backend.enums.Role.DELIVERY_GUY.toString());
+        roleRepository.save(deliveryGuyRole);
+
+        Role adminRole = new Role();
+        adminRole.setName("ROLE_" + com.renascence.backend.enums.Role.ADMIN.toString());
+        roleRepository.save(adminRole);
+
+
+        // Users
+        //Customers
+        User customer1 = new User();
+        customer1.setEmail("customer1@gmail.com");
+        customer1.setPassword(encoder.encode("customer1"));
+        customer1.setName("Martin");
+        customer1.setPhoneNumber("+359 594231552");
+        customer1.setLocation(sofia);
+        userRepository.save(customer1);
+
+        User customer2 = new User();
+        customer2.setEmail("customer2@gmail.com");
+        customer2.setPassword(encoder.encode("customer2"));
+        customer2.setName("Ivan");
+        customer2.setPhoneNumber("+359 594231552");
+        customer2.setLocation(sofia);
+        userRepository.save(customer2);
+
+        //Admins
+        User admin1 = new User();
+        admin1.setEmail("admin1@gmail.com");
+        admin1.setPassword(encoder.encode("admin1"));
+        admin1.setName("Tosho");
+        admin1.setPhoneNumber("+359 596131442");
+        admin1.setLocation(sofia);
+        admin1.getRoles().add(adminRole);
+        userRepository.save(admin1);
+
 
         // 2. Cuisines
         Cuisine italian = new Cuisine();
@@ -79,25 +130,25 @@ public class DataLoader implements CommandLineRunner {
         cuisineRepository.save(turkish);
 
         Cuisine greek = new Cuisine();
-        turkish.setName("Greek");
+        greek.setName("Greek");
         cuisineRepository.save(greek);
 
         Cuisine bulgarian = new Cuisine();
-        turkish.setName("Bulgarian");
+        bulgarian.setName("Bulgarian");
         cuisineRepository.save(bulgarian);
 
         Cuisine korean = new Cuisine();
-        turkish.setName("Korean");
+        korean.setName("Korean");
         cuisineRepository.save(korean);
 
         Cuisine indian = new Cuisine();
-        turkish.setName("Indian");
+        indian.setName("Indian");
         cuisineRepository.save(indian);
+
 
         // 3. Restaurants
         Restaurant italianFantasy = new Restaurant();
         italianFantasy.setName("Italian Fantasy");
-        italianFantasy.setDeliveryGuySalary(915.50);
         italianFantasy.setIban("GB123456789");
         italianFantasy.setRating(4.5f);
         italianFantasy.setCity(sofia);
@@ -105,7 +156,6 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant sushiWorld = new Restaurant();
         sushiWorld.setName("Sushi World");
-        sushiWorld.setDeliveryGuySalary(1018.75);
         sushiWorld.setIban("JP987654321");
         sushiWorld.setRating(4.8f);
         sushiWorld.setCity(plovdiv);
@@ -113,15 +163,13 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant kebabHouse = new Restaurant();
         kebabHouse.setName("Kebab House");
-        kebabHouse.setDeliveryGuySalary(1000.00);
         kebabHouse.setIban("TR11985643");
-        kebabHouse.setRating(5.0f);
+        kebabHouse.setRating(4.0f);
         kebabHouse.setCity(burgas);
         restaurantRepository.save(kebabHouse);
 
         Restaurant vega = new Restaurant();
         vega.setName("Vega");
-        vega.setDeliveryGuySalary(1200.78);
         vega.setIban("BG10988143");
         vega.setRating(5.0f);
         vega.setCity(varna);
@@ -129,7 +177,6 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant bulgari = new Restaurant();
         bulgari.setName("Bulgari");
-        bulgari.setDeliveryGuySalary(979.00);
         bulgari.setIban("BG14574829");
         bulgari.setRating(4.0f);
         bulgari.setCity(sofia);
@@ -137,7 +184,6 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant kalos = new Restaurant();
         kalos.setName("Kalos");
-        kalos.setDeliveryGuySalary(1050.00);
         kalos.setIban("GR54424567");
         kalos.setRating(4.2f);
         kalos.setCity(plovdiv);
@@ -145,7 +191,6 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant balkan = new Restaurant();
         balkan.setName("Balkan");
-        balkan.setDeliveryGuySalary(1030.50);
         balkan.setIban("GR55321237");
         balkan.setRating(3.7f);
         balkan.setCity(burgas);
@@ -153,7 +198,6 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant royalDragon = new Restaurant();
         royalDragon.setName("Royal Dragon");
-        royalDragon.setDeliveryGuySalary(1200.50);
         royalDragon.setIban("JP56323674");
         royalDragon.setRating(4.5f);
         royalDragon.setCity(sofia);
@@ -161,7 +205,6 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant indianTaste = new Restaurant();
         indianTaste.setName("Indian Taste");
-        indianTaste.setDeliveryGuySalary(1200.75);
         indianTaste.setIban("IN15835374");
         indianTaste.setRating(3.1f);
         indianTaste.setCity(sofia);
@@ -169,7 +212,6 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant bellaItalia = new Restaurant();
         bellaItalia.setName("Bella Italia");
-        bellaItalia.setDeliveryGuySalary(1300.00);
         bellaItalia.setIban("IT56382910");
         bellaItalia.setRating(4.7f);
         bellaItalia.setCity(vratsa);
@@ -177,7 +219,6 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant yemek = new Restaurant();
         yemek.setName("Yemek");
-        yemek.setDeliveryGuySalary(1100.50);
         yemek.setIban("TR41565423");
         yemek.setRating(4.1f);
         yemek.setCity(plovdiv);
@@ -185,7 +226,6 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant frenchBaguette = new Restaurant();
         frenchBaguette.setName("French Baguette");
-        frenchBaguette.setDeliveryGuySalary(1150.20);
         frenchBaguette.setIban("FR16432897");
         frenchBaguette.setRating(4.3f);
         frenchBaguette.setCity(burgas);
@@ -193,7 +233,6 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant kkot = new Restaurant();
         kkot.setName("Kkot");
-        kkot.setDeliveryGuySalary(1250.30);
         kkot.setIban("KR96321457");
         kkot.setRating(3.6f);
         kkot.setCity(varna);
@@ -201,13 +240,90 @@ public class DataLoader implements CommandLineRunner {
 
         Restaurant amigo = new Restaurant();
         amigo.setName("Amigo");
-        amigo.setDeliveryGuySalary(1180.45);
         amigo.setIban("MX71394268");
         amigo.setRating(3.3f);
         amigo.setCity(sofia);
         restaurantRepository.save(amigo);
 
-        // 4. Foods
+
+        // Delivery users -> delivery guys
+        User deliveryUser1 = new User();
+        deliveryUser1.setEmail("deliveryGuy1@gmail.com");
+        deliveryUser1.setPassword(encoder.encode("deliveryGuy1"));
+        deliveryUser1.setName("Ivan Todorov");
+        deliveryUser1.setLocation(sofia);
+        deliveryUser1.getRoles().add(deliveryGuyRole);
+        deliveryUser1.setPhoneNumber("+359 877908142");
+
+        DeliveryGuy deliveryGuy1 = new DeliveryGuy();
+        deliveryGuy1.setUser(deliveryUser1);
+        deliveryGuy1.setWorkCity(varna);
+        deliveryGuy1.setIban("BG00094883");
+        deliveryGuy1.setStartWorkDate(LocalDate.now());
+        deliveryGuyRepository.save(deliveryGuy1);
+        userRepository.save(deliveryUser1);
+
+        User deliveryUser2 = new User();
+        deliveryUser2.setEmail("deliveryGuy2@gmail.com");
+        deliveryUser2.setPassword(encoder.encode("deliveryGuy2"));
+        deliveryUser2.setName("Kristiyan Nedelkov");
+        deliveryUser2.setPhoneNumber("+359 882356700");
+        deliveryUser2.getRoles().add(deliveryGuyRole);
+
+        DeliveryGuy deliveryGuy2 = new DeliveryGuy();
+        deliveryGuy2.setUser(deliveryUser2);
+        deliveryGuy2.setWorkCity(sofia);
+        deliveryGuy2.setIban("BG0008T883");
+        deliveryGuy2.setStartWorkDate(LocalDate.now());
+        deliveryGuyRepository.save(deliveryGuy2);
+        userRepository.save(deliveryUser2);
+
+        User deliveryUser3 = new User();
+        deliveryUser3.setEmail("deliveryGuy3@gmail.com");
+        deliveryUser3.setPassword(encoder.encode("deliveryGuy3"));
+        deliveryUser3.setName("Petko Petkov");
+        deliveryUser3.setPhoneNumber("+359 879056412");
+        deliveryUser3.getRoles().add(deliveryGuyRole);
+
+        DeliveryGuy deliveryGuy3 = new DeliveryGuy();
+        deliveryGuy3.setUser(deliveryUser3);
+        deliveryGuy3.setWorkCity(burgas);
+        deliveryGuy3.setIban("BG015439UB");
+        deliveryGuy3.setStartWorkDate(LocalDate.now());
+        deliveryGuyRepository.save(deliveryGuy3);
+        userRepository.save(deliveryUser3);
+
+        User deliveryUser4 = new User();
+        deliveryUser4.setEmail("deliveryGuy4@gmail.com");
+        deliveryUser4.setPassword(encoder.encode("deliveryGuy4"));
+        deliveryUser4.setName("Plamen Nikolov");
+        deliveryUser4.setPhoneNumber("+359 88779060");
+        deliveryUser4.getRoles().add(deliveryGuyRole);
+
+        DeliveryGuy deliveryGuy4 = new DeliveryGuy();
+        deliveryGuy4.setUser(deliveryUser4);
+        deliveryGuy4.setWorkCity(vratsa);
+        deliveryGuy4.setIban("BG00876100");
+        deliveryGuy4.setStartWorkDate(LocalDate.now());
+        deliveryGuyRepository.save(deliveryGuy4);
+        userRepository.save(deliveryUser4);
+
+        User deliveryUser5 = new User();
+        deliveryUser5.setEmail("deliveryGuy5@gmail.com");
+        deliveryUser5.setPassword(encoder.encode("deliveryGuy5"));
+        deliveryUser5.setName("Viktor Boyadzhiev");
+        deliveryUser5.setPhoneNumber("+359 882356700");
+        deliveryUser5.getRoles().add(deliveryGuyRole);
+
+        DeliveryGuy deliveryGuy5 = new DeliveryGuy();
+        deliveryGuy5.setUser(deliveryUser5);
+        deliveryGuy5.setWorkCity(plovdiv);
+        deliveryGuy5.setIban("BG10234803");
+        deliveryGuy5.setStartWorkDate(LocalDate.now());
+        deliveryGuyRepository.save(deliveryGuy5);
+        userRepository.save(deliveryUser5);
+
+        // Foods
         Food pizza = new Food();
         pizza.setName("Margherita Pizza");
         pizza.setPrice(12.99);
@@ -289,14 +405,14 @@ public class DataLoader implements CommandLineRunner {
         coqAuVin.setRestaurant(vega);
         foodRepository.save(coqAuVin);
 
-        Food saladeNiçoise = new Food();
-        saladeNiçoise.setName("Salade niçoise");
-        saladeNiçoise.setPrice(9.29);
-        saladeNiçoise.setFoodCategory(FoodCategory.SALAD);
-        saladeNiçoise.setDescription("Traditionally made of tomatoes, hard-boiled eggs, Niçoise olives and anchovies or tuna, dressed with olive oil, or in some historical versions, a vinaigrette");
-        saladeNiçoise.setCuisine(french);
-        saladeNiçoise.setRestaurant(vega);
-        foodRepository.save(saladeNiçoise);
+        Food saladeNicoise = new Food();
+        saladeNicoise.setName("Salade niçoise");
+        saladeNicoise.setPrice(9.29);
+        saladeNicoise.setFoodCategory(FoodCategory.SALAD);
+        saladeNicoise.setDescription("Traditionally made of tomatoes, hard-boiled eggs, Niçoise olives and anchovies or tuna, dressed with olive oil, or in some historical versions, a vinaigrette");
+        saladeNicoise.setCuisine(french);
+        saladeNicoise.setRestaurant(vega);
+        foodRepository.save(saladeNicoise);
 
         Food quicheLorraine = new Food();
         quicheLorraine.setName("Quiche Lorraine");
@@ -436,7 +552,7 @@ public class DataLoader implements CommandLineRunner {
         Food shopskaSalad = new Food();
         shopskaSalad.setName("Shopska Salad");
         shopskaSalad.setPrice(6.50);
-        shopskaSalad.setFoodCategory(FoodCategory.SALAD);
+        shopskaSalad.setFoodCategory(FoodCategory.STARTER);
         shopskaSalad.setDescription("Traditional Bulgarian salad with tomatoes, cucumbers, onion, peppers, and white cheese.");
         shopskaSalad.setCuisine(bulgarian);
         shopskaSalad.setRestaurant(bulgari);
@@ -445,7 +561,7 @@ public class DataLoader implements CommandLineRunner {
         Food tarator = new Food();
         tarator.setName("Tarator");
         tarator.setPrice(5.00);
-        tarator.setFoodCategory(FoodCategory.APPETIZER);
+        tarator.setFoodCategory(FoodCategory.STARTER);
         tarator.setDescription("Cold yogurt soup with cucumber, garlic, walnuts, and dill.");
         tarator.setCuisine(bulgarian);
         tarator.setRestaurant(bulgari);
@@ -481,7 +597,7 @@ public class DataLoader implements CommandLineRunner {
         Food tzatziki = new Food();
         tzatziki.setName("Tzatziki");
         tzatziki.setPrice(5.50);
-        tzatziki.setFoodCategory(FoodCategory.APPETIZER);
+        tzatziki.setFoodCategory(FoodCategory.STARTER);
         tzatziki.setDescription("Greek yogurt dip with cucumber, garlic, and dill.");
         tzatziki.setCuisine(greek);
         tzatziki.setRestaurant(kalos);
@@ -490,7 +606,7 @@ public class DataLoader implements CommandLineRunner {
         Food greekSalad = new Food();
         greekSalad.setName("Greek Salad");
         greekSalad.setPrice(7.00);
-        greekSalad.setFoodCategory(FoodCategory.SALAD);
+        greekSalad.setFoodCategory(FoodCategory.STARTER);
         greekSalad.setDescription("Fresh salad with tomatoes, cucumbers, olives, feta cheese, and olive oil.");
         greekSalad.setCuisine(greek);
         greekSalad.setRestaurant(kalos);
@@ -499,7 +615,7 @@ public class DataLoader implements CommandLineRunner {
         Food dolmadakia = new Food();
         dolmadakia.setName("Dolmadakia");
         dolmadakia.setPrice(8.00);
-        dolmadakia.setFoodCategory(FoodCategory.APPETIZER);
+        dolmadakia.setFoodCategory(FoodCategory.STARTER);
         dolmadakia.setDescription("Stuffed grape leaves with rice, herbs, and lemon.");
         dolmadakia.setCuisine(greek);
         dolmadakia.setRestaurant(kalos);
@@ -537,16 +653,16 @@ public class DataLoader implements CommandLineRunner {
         ramen.setPrice(12.00);
         ramen.setFoodCategory(FoodCategory.MAIN_COURSE);
         ramen.setDescription("Traditional Japanese noodle soup with broth, meat, and vegetables.");
-        ramen.setCuisine(asian);
+        ramen.setCuisine(japanese);
         ramen.setRestaurant(royalDragon);
         foodRepository.save(ramen);
 
         Food dimSum = new Food();
         dimSum.setName("Dim Sum");
         dimSum.setPrice(9.00);
-        dimSum.setFoodCategory(FoodCategory.APPETIZER);
+        dimSum.setFoodCategory(FoodCategory.STARTER);
         dimSum.setDescription("Steamed dumplings filled with meat, seafood, or vegetables.");
-        dimSum.setCuisine(asian);
+        dimSum.setCuisine(chinese);
         dimSum.setRestaurant(royalDragon);
         foodRepository.save(dimSum);
 
@@ -555,54 +671,9 @@ public class DataLoader implements CommandLineRunner {
         mochi.setPrice(6.50);
         mochi.setFoodCategory(FoodCategory.DESSERT);
         mochi.setDescription("Sweet rice cake filled with ice cream in various flavors.");
-        mochi.setCuisine(asian);
+        mochi.setCuisine(japanese);
         mochi.setRestaurant(royalDragon);
         foodRepository.save(mochi);
-
-        Food naan = new Food();
-        naan.setName("Naan");
-        naan.setPrice(3.50);
-        naan.setFoodCategory(FoodCategory.BREAD);
-        naan.setDescription("Traditional Indian flatbread baked in a tandoor oven.");
-        naan.setCuisine(indian);
-        naan.setRestaurant(indianTaste);
-        foodRepository.save(naan);
-
-        Food samosa = new Food();
-        samosa.setName("Samosa");
-        samosa.setPrice(5.00);
-        samosa.setFoodCategory(FoodCategory.APPETIZER);
-        samosa.setDescription("Crispy pastry filled with spiced potatoes, peas, and herbs.");
-        samosa.setCuisine(indian);
-        samosa.setRestaurant(indianTaste);
-        foodRepository.save(samosa);
-
-        Food sambarTandoori = new Food();
-        sambarTandoori.setName("Sambar Tandoori");
-        sambarTandoori.setPrice(8.50);
-        sambarTandoori.setFoodCategory(FoodCategory.MAIN_COURSE);
-        sambarTandoori.setDescription("Spicy lentil-based vegetable stew, cooked with tamarind and aromatic spices.");
-        sambarTandoori.setCuisine(indian);
-        sambarTandoori.setRestaurant(indianTaste);
-        foodRepository.save(sambarTandoori);
-
-        Food butterChicken = new Food();
-        butterChicken.setName("Butter Chicken");
-        butterChicken.setPrice(12.00);
-        butterChicken.setFoodCategory(FoodCategory.MAIN_COURSE);
-        butterChicken.setDescription("Creamy tomato-based curry with tender pieces of tandoori chicken.");
-        butterChicken.setCuisine(indian);
-        butterChicken.setRestaurant(indianTaste);
-        foodRepository.save(butterChicken);
-
-        Food malaiKofta = new Food();
-        malaiKofta.setName("Malai Kofta");
-        malaiKofta.setPrice(11.50);
-        malaiKofta.setFoodCategory(FoodCategory.MAIN_COURSE);
-        malaiKofta.setDescription("Soft paneer and potato dumplings served in a rich, creamy tomato sauce.");
-        malaiKofta.setCuisine(indian);
-        malaiKofta.setRestaurant(indianTaste);
-        foodRepository.save(malaiKofta);
 
         Food risotto = new Food();
         risotto.setName("Risotto");
@@ -613,14 +684,14 @@ public class DataLoader implements CommandLineRunner {
         risotto.setRestaurant(bellaItalia);
         foodRepository.save(risotto);
 
-        Food chickenParmesanWithPepperoni = new Food();
-        chickenParmesanWithPepperoni.setName("Chicken Parmesan with Pepperoni");
-        chickenParmesanWithPepperoni.setPrice(14.50);
-        chickenParmesanWithPepperoni.setFoodCategory(FoodCategory.MAIN_COURSE);
-        chickenParmesanWithPepperoni.setDescription("Breaded and fried chicken cutlet topped with marinara sauce, melted cheese, and pepperoni.");
-        chickenParmesanWithPepperoni.setCuisine(italian);
-        chickenParmesanWithPepperoni.setRestaurant(bellaItalia);
-        foodRepository.save(chickenParmesanWithPepperoni);
+        Food chickenParmesan = new Food();
+        chickenParmesan.setName("Chicken Parmesan with Pepperoni");
+        chickenParmesan.setPrice(14.50);
+        chickenParmesan.setFoodCategory(FoodCategory.MAIN_COURSE);
+        chickenParmesan.setDescription("Breaded and fried chicken cutlet topped with marinara sauce, melted cheese, and pepperoni.");
+        chickenParmesan.setCuisine(italian);
+        chickenParmesan.setRestaurant(bellaItalia);
+        foodRepository.save(chickenParmesan);
 
         Food fettuccineAlfredo = new Food();
         fettuccineAlfredo.setName("Fettuccine Alfredo");
@@ -634,7 +705,7 @@ public class DataLoader implements CommandLineRunner {
         Food bruschetta = new Food();
         bruschetta.setName("Bruschetta");
         bruschetta.setPrice(7.00);
-        bruschetta.setFoodCategory(FoodCategory.BREAD);
+        bruschetta.setFoodCategory(FoodCategory.STARTER);
         bruschetta.setDescription("Toasted bread topped with diced tomatoes, garlic, basil, and olive oil.");
         bruschetta.setCuisine(italian);
         bruschetta.setRestaurant(bellaItalia);
@@ -649,180 +720,74 @@ public class DataLoader implements CommandLineRunner {
         gnocchi.setRestaurant(bellaItalia);
         foodRepository.save(gnocchi);
 
-        Food pide = new Food();
-        pide.setName("Pide");
-        pide.setPrice(9.50);
-        pide.setFoodCategory(FoodCategory.MAIN_COURSE);
-        pide.setDescription("Turkish-style flatbread with various toppings like minced meat, cheese, and vegetables.");
-        pide.setCuisine(turkish);
-        pide.setRestaurant(yemek);
-        foodRepository.save(pide);
 
-        Food gozleme = new Food();
-        gozleme.setName("Gözleme");
-        gozleme.setPrice(7.50);
-        gozleme.setFoodCategory(FoodCategory.MAIN_COURSE);
-        gozleme.setDescription("Traditional Turkish stuffed flatbread, filled with cheese, spinach, or minced meat.");
-        gozleme.setCuisine(turkish);
-        gozleme.setRestaurant(yemek);
-        foodRepository.save(gozleme);
+        // Delivery
+        Delivery delivery = new Delivery();
+        delivery.setAddress("100 Vitosha Blvd");
+        delivery.setCreationDate(LocalDateTime.now());
+        delivery.setToBeDeliveredHour(LocalDateTime.now().plusHours(1));
+        delivery.setPaymentMethod(PaymentMethod.CARD);
+        delivery.setReceiver(customer1);
+        delivery.setRestaurant(vega);
+        delivery.setStatus(DeliveryStatus.PENDING);
+        delivery.setTotalPrice(100);
 
-        Food mercimekCorbasi = new Food();
-        mercimekCorbasi.setName("Mercimek Çorbası");
-        mercimekCorbasi.setPrice(5.50);
-        mercimekCorbasi.setFoodCategory(FoodCategory.APPETIZER);
-        mercimekCorbasi.setDescription("Rich and creamy Turkish lentil soup, seasoned with spices.");
-        mercimekCorbasi.setCuisine(turkish);
-        mercimekCorbasi.setRestaurant(yemek);
-        foodRepository.save(mercimekCorbasi);
+        DeliveryFood deliveryFood = new DeliveryFood();
+        deliveryFood.setFood(pizza);
+        deliveryFood.setFoodCount(2);
+        deliveryFood.setDelivery(delivery);
 
-        Food sultanKebab = new Food();
-        sultanKebab.setName("Sultan Kebab");
-        sultanKebab.setPrice(13.50);
-        sultanKebab.setFoodCategory(FoodCategory.MAIN_COURSE);
-        sultanKebab.setDescription("Slow-cooked lamb or beef kebab with vegetables, served with a creamy sauce.");
-        sultanKebab.setCuisine(turkish);
-        sultanKebab.setRestaurant(yemek);
-        foodRepository.save(sultanKebab);
+        List<DeliveryFood> deliveryFoods = new ArrayList<>();
+        deliveryFoods.add(deliveryFood);
+        delivery.setDeliveriesFoods(deliveryFoods);
 
-        Food croissant = new Food();
-        croissant.setName("Croissant");
-        croissant.setPrice(4.00);
-        croissant.setFoodCategory(FoodCategory.APPETIZER);
-        croissant.setDescription("Flaky, buttery pastry, perfect for breakfast or a light snack.");
-        croissant.setCuisine(french);
-        croissant.setRestaurant(frenchBaguette);
-        foodRepository.save(croissant);
+        deliveryRepository.save(delivery);
+        deliveryFoodRepository.saveAll(deliveryFoods);
 
-        Food ratatouille = new Food();
-        ratatouille.setName("Ratatouille");
-        ratatouille.setPrice(10.00);
-        ratatouille.setFoodCategory(FoodCategory.MAIN_COURSE);
-        ratatouille.setDescription("Traditional French vegetable stew made with eggplant, zucchini, and bell peppers.");
-        ratatouille.setCuisine(french);
-        ratatouille.setRestaurant(frenchBaguette);
-        foodRepository.save(ratatouille);
 
-        Food onionSoup = new Food();
-        onionSoup.setName("French Onion Soup");
-        onionSoup.setPrice(8.50);
-        onionSoup.setFoodCategory(FoodCategory.APPETIZER);
-        onionSoup.setDescription("Rich and savory soup made with caramelized onions, beef broth, and topped with melted cheese.");
-        onionSoup.setCuisine(french);
-        onionSoup.setRestaurant(frenchBaguette);
-        foodRepository.save(onionSoup);
+        Delivery delivery2 = new Delivery();
+        delivery2.setAddress("12 Bulgaria Blvd");
+        delivery2.setCreationDate(LocalDateTime.now());
+        delivery2.setToBeDeliveredHour(LocalDateTime.now().plusHours(1));
+        delivery2.setPaymentMethod(PaymentMethod.CASH);
+        delivery2.setReceiver(customer2);
+        delivery2.setRestaurant(italianFantasy);
+        delivery2.setStatus(DeliveryStatus.PENDING);
+        delivery2.setTotalPrice(100);
 
-        Food cremeBrulee = new Food();
-        cremeBrulee.setName("Crème Brûlée");
-        cremeBrulee.setPrice(6.50);
-        cremeBrulee.setFoodCategory(FoodCategory.DESSERT);
-        cremeBrulee.setDescription("Classic French dessert with a creamy vanilla custard base and a caramelized sugar crust.");
-        cremeBrulee.setCuisine(french);
-        cremeBrulee.setRestaurant(frenchBaguette);
-        foodRepository.save(cremeBrulee);
+        DeliveryFood deliveryFood2 = new DeliveryFood();
+        deliveryFood2.setFood(pizza);
+        deliveryFood2.setFoodCount(3);
+        deliveryFood2.setDelivery(delivery2);
 
-        Food kimchi = new Food();
-        kimchi.setName("Kimchi");
-        kimchi.setPrice(6.00);
-        kimchi.setFoodCategory(FoodCategory.SIDE);
-        kimchi.setDescription("Spicy fermented cabbage with chili peppers and garlic.");
-        kimchi.setCuisine(korean);
-        kimchi.setRestaurant(kkot);
-        foodRepository.save(kimchi);
+        List<DeliveryFood> deliveryFoods2 = new ArrayList<>();
+        deliveryFoods2.add(deliveryFood2);
+        delivery2.setDeliveriesFoods(deliveryFoods2);
 
-        Food bibimbap = new Food();
-        bibimbap.setName("Bibimbap");
-        bibimbap.setPrice(12.00);
-        bibimbap.setFoodCategory(FoodCategory.MAIN_COURSE);
-        bibimbap.setDescription("Rice bowl topped with sautéed vegetables, sliced meat, egg, and spicy gochujang sauce.");
-        bibimbap.setCuisine(korean);
-        bibimbap.setRestaurant(kkot);
-        foodRepository.save(bibimbap);
+        deliveryRepository.save(delivery2);
+        deliveryFoodRepository.saveAll(deliveryFoods2);
 
-        Food tteokbokki = new Food();
-        tteokbokki.setName("Tteokbokki");
-        tteokbokki.setPrice(9.50);
-        tteokbokki.setFoodCategory(FoodCategory.MAIN_COURSE);
-        tteokbokki.setDescription("Chewy rice cakes in a spicy and slightly sweet gochujang sauce.");
-        tteokbokki.setCuisine(korean);
-        tteokbokki.setRestaurant(kkot);
-        foodRepository.save(tteokbokki);
+        Delivery delivery3 = new Delivery();
+        delivery3.setAddress("12 Bulgaria hehe");
+        delivery3.setCreationDate(LocalDateTime.now());
+        delivery3.setToBeDeliveredHour(LocalDateTime.now().plusHours(1));
+        delivery3.setPaymentMethod(PaymentMethod.CASH);
+        delivery3.setReceiver(customer2);
+        delivery3.setRestaurant(kebabHouse);
+        delivery3.setStatus(DeliveryStatus.PENDING);
+        delivery3.setTotalPrice(100);
 
-        Food hotteok = new Food();
-        hotteok.setName("Hotteok");
-        hotteok.setPrice(5.50);
-        hotteok.setFoodCategory(FoodCategory.DESSERT);
-        hotteok.setDescription("Sweet Korean pancakes filled with brown sugar, cinnamon, and nuts.");
-        hotteok.setCuisine(korean);
-        hotteok.setRestaurant(kkot);
-        foodRepository.save(hotteok);
+        DeliveryFood deliveryFood3 = new DeliveryFood();
+        deliveryFood3.setFood(shishKebab);
+        deliveryFood3.setFoodCount(4);
+        deliveryFood3.setDelivery(delivery3);
 
-        Food tacos = new Food();
-        tacos.setName("Tacos");
-        tacos.setPrice(10.00);
-        tacos.setFoodCategory(FoodCategory.MAIN_COURSE);
-        tacos.setDescription("Traditional Mexican dish made with corn tortillas filled with meat, vegetables, and salsa.");
-        tacos.setCuisine(mexican);
-        tacos.setRestaurant(amigo);
-        foodRepository.save(tacos);
+        List<DeliveryFood> deliveryFoods3 = new ArrayList<>();
+        deliveryFoods3.add(deliveryFood3);
+        delivery2.setDeliveriesFoods(deliveryFoods3);
 
-        Food burrito = new Food();
-        burrito.setName("Burrito");
-        burrito.setPrice(11.50);
-        burrito.setFoodCategory(FoodCategory.MAIN_COURSE);
-        burrito.setDescription("Large flour tortilla filled with rice, beans, meat, and cheese.");
-        burrito.setCuisine(mexican);
-        burrito.setRestaurant(amigo);
-        foodRepository.save(burrito);
-
-        Food quesadilla = new Food();
-        quesadilla.setName("Quesadilla");
-        quesadilla.setPrice(9.00);
-        quesadilla.setFoodCategory(FoodCategory.MAIN_COURSE);
-        quesadilla.setDescription("Grilled tortilla filled with melted cheese and other ingredients like chicken or vegetables.");
-        quesadilla.setCuisine(mexican);
-        quesadilla.setRestaurant(amigo);
-        foodRepository.save(quesadilla);
-
-        Food churros = new Food();
-        churros.setName("Churros");
-        churros.setPrice(6.50);
-        churros.setFoodCategory(FoodCategory.DESSERT);
-        churros.setDescription("Crispy fried dough pastries sprinkled with cinnamon sugar and served with chocolate sauce.");
-        churros.setCuisine(mexican);
-        churros.setRestaurant(amigo);
-        foodRepository.save(churros);
-
-        //Roles
-        Role deliveryGuyRole = new Role();
-        deliveryGuyRole.setName(com.renascence.backend.enums.Role.DELIVERY_GUY.toString());
-        roleRepository.save(deliveryGuyRole);
-
-        Role ownerRole = new Role();
-        ownerRole.setName(com.renascence.backend.enums.Role.OWNER.toString());
-        roleRepository.save(ownerRole);
-
-        Role adminRole = new Role();
-        adminRole.setName(com.renascence.backend.enums.Role.ADMIN.toString());
-        roleRepository.save(adminRole);
-
-        //Users
-        User customer1 = new User();
-        customer1.setEmail("customer1@gmail.com");
-        customer1.setPassword(encoder.encode("customer1"));
-        customer1.setName("Gosho");
-        customer1.setPhoneNumber("+359 0594231552");
-        customer1.setLocation(sofia);
-        userRepository.save(customer1);
-
-        User admin1 = new User();
-        admin1.setEmail("admin1@gmail.com");
-        admin1.setPassword(encoder.encode("admin1"));
-        admin1.setName("Tosho");
-        admin1.setPhoneNumber("+359 0596131442");
-        admin1.setLocation(sofia);
-        admin1.getRoles().add(adminRole);
-        userRepository.save(admin1);
+        deliveryRepository.save(delivery3);
+        deliveryFoodRepository.saveAll(deliveryFoods3);
 
         System.out.println("Sample data loaded successfully!");
     }

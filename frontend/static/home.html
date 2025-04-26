@@ -8,6 +8,7 @@
       defer
     ></script>
     <script src="./src/nav.mjs" type="module" defer></script>
+    <script src="./src/homeJs.mjs" type="module" defer></script>
     <link href="./style.css" rel="stylesheet" />
     <link href="./custom.css" rel="stylesheet" />
 
@@ -31,7 +32,7 @@
 
       <!-- Desktop Navigation (prevents buttons from going out of sight) -->
       <nav
-        class="hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:justify-between md:pl-[100px]"
+        class="max-md:!hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:!justify-between md:pl-[70px]"
       >
         <!-- Left Section -->
         <div class="flex flex-wrap gap-3">
@@ -42,20 +43,42 @@
 
           <!-- Hidden deliveries button -->
           <!-- To be shown only when delivery guy is logged in -->
-          <button id="deliveries-button" class="btn-primary !hidden">
+          <button id="deliveries-button" class="btn-primary hidden">
             Deliveries
           </button>
         </div>
 
         <!-- Right Section -->
         <div class="flex flex-wrap gap-3 items-center">
-          <input
-            type="text"
-            placeholder="Search..."
-            id="search-navbar-input"
-            class="btn-primary btn-search w-31 focus:outline-none"
-          />
+          <div class="!hidden relative w-35">
+            <select
+              id="search-main-dropdown-1"
+              class="btn-drop-down !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+            >
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Options from database  -->
+              <option value="" selected disabled hidden>City</option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+            >
+              <svg
+                class="fill-current h-4 w-4 text-[#006bb8]"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
+            </div>
+          </div>
+
           <button
+            id="cart-btn"
             class="btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative"
           >
             <svg
@@ -75,12 +98,13 @@
           </button>
 
           <!-- Login/Reg/Account buttons -->
-          <button id="login-button" class="btn-primary">Login</button>
-          <button id="register-button" class="btn-primary">Register</button>
+          <button id="login-button" class="flex btn-primary">Login</button>
+          <button id="register-button" class="flex btn-primary">
+            Register
+          </button>
           <button id="account-button" class="hidden btn-primary">
             Account
           </button>
-          <button id="logout-button" class="hidden btn-primary">Logout</button>
         </div>
       </nav>
 
@@ -114,21 +138,37 @@
         id="mobile-menu"
         class="hidden md:hidden flex flex-col items-center bg-[#006bb8] absolute top-[100px] left-0 w-full p-4 space-y-4 transition-all duration-300 ease-in-out"
       >
-        <input
-          type="text"
-          placeholder="Search..."
-          id="search-navbar-menu-input"
-          class="btn-search bg-white text-[#006bb8] px-[18px] py-[10px] rounded-3xl w-full font-extrabold hover:text-[#ff66c4] focus:outline-none focus:ring-1 focus:ring-[#006bb8]"
-        />
+        <div class="!hidden relative w-full">
+          <select
+            id="search-main-dropdown-2"
+            class="btn-drop-down text-center !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+          >
+            <!-- Options from database  -->
+            <option value="" selected disabled hidden>City</option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+          >
+            <svg
+              class="fill-current h-4 w-4 text-[#006bb8]"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
         <button
           id="home-btn"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
         >
           Home
         </button>
         <button
           id="restaurants-button-mobile"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
         >
           Restaurants
         </button>
@@ -137,13 +177,13 @@
         <!-- To be shown only when delivery guy is logged in -->
         <button
           id="mobile-deliveries-button"
-          class="btn-primary w-full text-white text-lg py-2 !hidden"
+          class="btn-primary w-full text-white text-lg py-2 !hidden text-start"
         >
           Deliveries
         </button>
         <button
           id="mobile-cart-button"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
         >
           Cart
         </button>
@@ -151,49 +191,50 @@
         <!-- Mobile Login/Account/Register Buttons -->
         <button
           id="mobile-login-button"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
         >
           Login
         </button>
         <button
           id="mobile-register-button"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
         >
           Register
         </button>
         <button
           id="mobile-account-button"
-          class="btn-primary w-full text-white text-lg py-2 hidden"
+          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
         >
           Account
         </button>
       </div>
     </header>
 
-    <main class="grid grid-cols-3 gap-4 py-[24px] pb-0 text-[#006bb8]">
+    <main class="grid grid-cols-3 gap-4 pt-[24px] pb-0 text-[#006bb8]">
       <div
         id="row_1_col_1_&_2"
         class="p-4 md:p-10 flex flex-col justify-center items-end col-span-2 row-span-1 ml-10 h-80"
       >
         <div class="relative w-full">
           <select
-            id="search-main-dropdown"
-            class="btn-drop-down w-full hover:!border-2 hover:!border-[#ff66c4] hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+            data-custom-info="nottoggled"
+            id="search-main-dropdown-3"
+            class="border-2 m-2 px-2 py-4 font-bold font-serif rounded-lg w-full hover:!border-2 hover:!border-[#ff66c4] hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] text-md md:text-lg lg:text-xl appearance-none pl-4 pr-8 py-3"
           >
             <!-- Sashka -->
             <!-- Sashka -->
             <!-- Sashka -->
             <!-- Sashka -->
             <!-- Options from database  -->
-            <option value="" selected disabled hidden>
-              Select an option...
+            <option id="option-city" value="city" selected disabled hidden>
+              City
             </option>
           </select>
           <div
-            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
           >
             <svg
-              class="fill-current h-4 w-4"
+              class="fill-current h-4 w-4 text-[#006bb8]"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
             >
@@ -206,7 +247,7 @@
 
         <button
           id="btn-search-main"
-          class="w-[35%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:border-2 hover:py-[10px] hover:bg-white hover:text-[#ff66c4] hover:cursor-pointer active:opacity-70"
+          class="w-[45%] md:w-[35%] py-3 bg-[#006bb8] text-white text-md md:text-lg lg:text-xl rounded-3xl font-bold hover:border-2 hover:py-[10px] hover:bg-white hover:text-[#ff66c4] hover:cursor-pointer active:opacity-70"
         >
           Search
         </button>
@@ -216,7 +257,7 @@
         id="row_1_col_3"
         class="p-4 pr-10 md:p-7 text-center flex items-center md:items-end h-80 overflow-hidden"
       >
-        <div class="relative w-full h-full">
+        <div class="relative w-full h-full text-shadow">
           <h2
             class="text-2xl md:text-4xl font-serif text-center font-bold absolute inset-0 opacity-0 transition-opacity"
           >
@@ -248,10 +289,40 @@
         />
       </div>
 
-      <div
-        id="row_2_col_2"
-        class="flex justify-center items-start h-95 pt-16"
-      ></div>
+      <div id="row_2_col_2" class="flex justify-center items-start h-95">
+        <!-- Btn My Delivery - to be shown only when delivery guy is loged in and has accepted an order. Sends to my_delivery -->
+        <button
+          id="my-delivery-button"
+          class="w-[150px] h-[150px] md:w-[175px] md:h-[175px] lg:w-[200px] lg:h-[200px] rounded-full bg-[#006bb8] text-2xl md:text-3xl lg:text-4xl text-white text-center font-bold flex justify-center items-center hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:border-2 hover:border-[#ff66c4] active:opacity-70 transition-all"
+        >
+          <svg
+            class="w-2/3 h-2/3 fill-current"
+            version="1.1"
+            id="_x32_"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 512 512"
+            xml:space="preserve"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <g>
+                <path
+                  d="M311.069,130.515c-0.963-5.641-5.851-9.768-11.578-9.768H35.43c-7.61,0-13.772,6.169-13.772,13.765 c0,7.61,6.162,13.772,13.772,13.772h64.263c7.61,0,13.772,6.17,13.772,13.773c0,7.603-6.162,13.772-13.772,13.772H13.772 C6.169,175.829,0,181.998,0,189.601c0,7.603,6.169,13.764,13.772,13.764h117.114c6.72,0,12.172,5.46,12.172,12.18 c0,6.72-5.452,12.172-12.172,12.172H68.665c-7.61,0-13.772,6.17-13.772,13.773c0,7.602,6.162,13.772,13.772,13.772h45.857 c6.726,0,12.179,5.452,12.179,12.172c0,6.719-5.453,12.172-12.179,12.172H51.215c-7.61,0-13.772,6.169-13.772,13.772 c0,7.603,6.162,13.772,13.772,13.772h87.014l5.488,31.042h31.52c-1.854,4.504-2.911,9.421-2.911,14.598 c0,21.245,17.218,38.464,38.464,38.464c21.237,0,38.456-17.219,38.456-38.464c0-5.177-1.057-10.094-2.911-14.598h100.04 L311.069,130.515z M227.342,352.789c0,9.146-7.407,16.553-16.553,16.553c-9.152,0-16.56-7.407-16.56-16.553 c0-6.364,3.627-11.824,8.892-14.598h15.329C223.714,340.965,227.342,346.424,227.342,352.789z"
+                ></path>
+                <path
+                  d="M511.598,314.072l-15.799-77.941l-57.689-88.759H333.074l32.534,190.819h38.42 c-1.846,4.504-2.904,9.421-2.904,14.598c0,21.245,17.219,38.464,38.456,38.464c21.246,0,38.464-17.219,38.464-38.464 c0-5.177-1.057-10.094-2.91-14.598h16.741c6.039,0,11.759-2.708,15.582-7.386C511.273,326.136,512.8,319.988,511.598,314.072z M392.529,182.882h26.314l34.162,52.547h-51.512L392.529,182.882z M456.14,352.789c0,9.146-7.407,16.553-16.56,16.553 c-9.138,0-16.552-7.407-16.552-16.553c0-6.364,3.635-11.824,8.892-14.598h15.329C452.513,340.965,456.14,346.424,456.14,352.789z"
+                ></path>
+              </g>
+            </g>
+          </svg>
+        </button>
+      </div>
 
       <div id="row_2_col_3" class="flex justify-start items-end h-95">
         <img
@@ -263,10 +334,9 @@
     </main>
 
     <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
-      <button class="btn-footer">FAQ</button>
-      <button class="btn-footer">About</button>
-      <button class="btn-footer">Contacts</button>
-      <button class="btn-footer">Feedback</button>
+      <button id = "faqBtn" class="btn-footer">FAQ</button>
+      <button id = "aboutBtn" class="btn-footer">About</button>
+      <button id = "feedbackBtn"class="btn-footer">Feedback</button>
     </footer>
 
     <script>

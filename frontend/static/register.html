@@ -18,7 +18,7 @@
     >
       <!-- Logo Section -->
       <div class="flex items-center shrink-0">
-        <a href="#">
+        <a href="home.html">
           <img
             class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
             src="./Images/logo.PNG"
@@ -29,7 +29,7 @@
 
       <!-- Desktop Navigation (prevents buttons from going out of sight) -->
       <nav
-        class="hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:justify-between md:pl-[100px]"
+        class="max-md:!hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:!justify-between md:pl-[70px]"
       >
         <!-- Left Section -->
         <div class="flex flex-wrap gap-3">
@@ -47,12 +47,33 @@
 
         <!-- Right Section -->
         <div class="flex flex-wrap gap-3 items-center">
-          <input
-            type="text"
-            placeholder="Search..."
-            id="search-navbar-input"
-            class="btn-primary btn-search w-31 focus:outline-none"
-          />
+          <div class="relative w-35">
+            <select
+              id="search-main-dropdown-1"
+              class="btn-drop-down !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+            >
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Sashka -->
+              <!-- Options from database  -->
+              <option value="" selected disabled hidden>City</option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+            >
+              <svg
+                class="fill-current h-4 w-4 text-[#006bb8]"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
+            </div>
+          </div>
+
           <button
             class="btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative"
           >
@@ -73,12 +94,13 @@
           </button>
 
           <!-- Login/Reg/Account buttons -->
-          <button id="login-button" class="btn-primary">Login</button>
-          <button id="register-button" class="btn-primary">Register</button>
-          <button id="account-button" class="btn-primary !hidden">
+          <button id="login-button" class="!flex btn-primary">Login</button>
+          <button id="register-button" class="!flex btn-primary">
+            Register
+          </button>
+          <button id="account-button" class="!hidden btn-primary">
             Account
           </button>
-          <button id="logout-button" class="hidden btn-primary">Logout</button>
         </div>
       </nav>
 
@@ -112,14 +134,39 @@
         id="mobile-menu"
         class="hidden md:hidden flex flex-col items-center bg-[#006bb8] absolute top-[100px] left-0 w-full p-4 space-y-4 transition-all duration-300 ease-in-out"
       >
-        <input
-          type="text"
-          placeholder="Search..."
-          id="search-navbar-menu-input"
-          class="btn-primary w-full focus:outline-none focus:ring-1 focus:ring-[#006bb8]"
-        />
-        <button class="btn-primary w-full text-white text-lg py-2">Home</button>
-        <button class="btn-primary w-full text-white text-lg py-2">
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+        <!-- change to DropDown -->
+        <div class="relative w-full">
+         <!-- <select
+            id="search-main-dropdown-2"
+            class="btn-drop-down text-center !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+          >
+            <option value="" selected disabled hidden>City</option>
+          </select>-->
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+          >
+            <svg
+              class="fill-current h-4 w-4 text-[#006bb8]"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
+        <button
+          id="home-btn"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Home
+        </button>
+        <button
+          id="restaurants-button-mobile"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
           Restaurants
         </button>
 
@@ -127,13 +174,13 @@
         <!-- To be shown only when delivery guy is logged in -->
         <button
           id="mobile-deliveries-button"
-          class="btn-primary w-full text-white text-lg py-2 !hidden"
+          class="btn-primary w-full text-white text-lg py-2 !hidden text-start"
         >
           Deliveries
         </button>
         <button
           id="mobile-cart-button"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
         >
           Cart
         </button>
@@ -141,76 +188,101 @@
         <!-- Mobile Login/Account/Register Buttons -->
         <button
           id="mobile-login-button"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
         >
           Login
         </button>
         <button
           id="mobile-register-button"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
         >
           Register
         </button>
         <button
           id="mobile-account-button"
-          class="btn-primary w-full text-white text-lg py-2 !hidden"
+          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
         >
           Account
         </button>
       </div>
     </header>
 
-    <main class="flex justify-around py-[24px] pb-0 text-[#006bb8]">
+    <main class="flex justify-around pt-[24px] pb-0 text-[#006bb8]">
       <div class="w-[60%] md:w-[45%] flex flex-col justify-center items-center">
         <img
           class="w-[60%] object-contain"
           src="./Images/logo.PNG"
           alt="logo"
         />
-        <section id="section-input-login-information" class="pb-5">
+        <form
+          id="section-input-login-information"
+          class="pb-5 w-[80%] md:w-[70%] flex flex-col items-center gap-2"
+        >
           <input
             type="text"
-            placeholder="name"
+            placeholder="Name"
             id="name-input"
-            class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8]"
+            class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+            required
           />
           <input
             type="text"
-            placeholder="phone"
+            placeholder="Phone"
             id="phone-input"
-            class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8]"
+            class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+            required
+            maxlength="10"
           />
           <input
-            type="text"
-            placeholder="e-mail"
+            type="email"
+            placeholder="E-mail"
             id="e-mail-input"
-            class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8]"
+            class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+            required
           />
 
           <!-- Added button to show password -->
-          <div class="relative">
+          <div class="relative w-full">
             <input
               type="password"
-              placeholder="password"
+              placeholder="Password"
               id="password-input"
-              class="btn-secondary w-full focus:outline-none focus:ring-[1px] hover:focus:ring-0 focus:ring-[#006bb8] pr-16"
+              class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+              required
               autocomplete="current-password"
             />
             <button
+              id="password-show"
               type="button"
-              onclick="togglePassword()"
-              class="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-[#006bb8] hover:cursor-pointer hover:text-[#ff66c4] active:opacity-70"
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-[#006bb8] hover:cursor-pointer hover:text-[#ff66c4] active:opacity-70 font-bold"
             >
               Show
             </button>
           </div>
-        </section>
-        <button
-          id="btn-login-main"
-          class="w-[50%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[10px] hover:border-2 active:opacity-70"
-        >
-          Register
-        </button>
+          <div class="relative w-full">
+            <input
+              type="password"
+              id="repeat-password-input"
+              placeholder="Repeat Password"
+              class="border-2 border-[#006bb8] rounded-lg w-full p-2 focus:outline-none focus:ring focus:ring-[#006bb8]"
+              required
+            />
+            <button
+              id="password-show-2"
+              type="button"
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-[#006bb8] hover:cursor-pointer hover:text-[#ff66c4] active:opacity-70 font-bold"
+            >
+              Show
+            </button>
+          </div>
+          <button
+            id="btn-login-main"
+            type="submit"
+            class="w-[50%] py-3 bg-[#006bb8] text-white rounded-3xl font-bold hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[10px] hover:border-2 active:opacity-70"
+          >
+            Register
+          </button>
+        </form>
         <p
           class="text-[8px] md:text-[10px] py-5 px-8 text-gray-500 text-justify"
         >
@@ -238,10 +310,9 @@
     </main>
 
     <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
-      <button class="btn-footer">FAQ</button>
-      <button class="btn-footer">About</button>
-      <button class="btn-footer">Contacts</button>
-      <button class="btn-footer">Feedback</button>
+      <button id = "faqBtn" class="btn-footer">FAQ</button>
+      <button id = "aboutBtn" class="btn-footer">About</button>
+      <button id = "feedbackBtn"class="btn-footer">Feedback</button>
     </footer>
 
     <script></script>

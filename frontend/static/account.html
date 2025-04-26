@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="./src/nav.mjs" type="module" defer></script>
+    <script src="./src/accountJs.js" type="module" defer></script>
     <link href="./style.css" rel="stylesheet" />
     <link href="./custom.css" rel="stylesheet" />
 
@@ -17,7 +18,7 @@
     >
       <!-- Logo Section -->
       <div class="flex items-center shrink-0">
-        <a href="#">
+        <a href="home.html">
           <img
             class="max-h-[100px] md:max-h-[120px] w-auto object-contain"
             src="./Images/logo.PNG"
@@ -28,28 +29,46 @@
 
       <!-- Desktop Navigation (prevents buttons from going out of sight) -->
       <nav
-      class="hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:justify-between md:pl-[100px]"
+        class="max-md:!hidden md:flex md:flex-col lg:flex-row justify-center items-center flex-grow lg:!justify-between md:pl-[70px]"
       >
         <!-- Left Section -->
         <div class="flex flex-wrap gap-3">
           <button class="btn-primary">Home</button>
-          <button class="btn-primary">Restaurants</button>
+          <button id="restaurants-button" class="btn-primary">
+            Restaurants
+          </button>
 
           <!-- Hidden deliveries button -->
           <!-- To be shown only when delivery guy is logged in -->
-          <button id="deliveries-button" class="btn-primary !hidden">
+          <button id="deliveries-button" class="btn-primary hidden">
             Deliveries
           </button>
         </div>
 
         <!-- Right Section -->
         <div class="flex flex-wrap gap-3 items-center">
-          <input
-            type="text"
-            placeholder="Search..."
-            id="search-navbar-input"
-            class="btn-primary btn-search w-31 focus:outline-none"
-          />
+          <div class="relative w-35">
+          <!--  <select
+              id="search-main-dropdown-2"
+              class="btn-drop-down !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+            >
+              <option value="" selected disabled hidden>City</option>
+            </select> -->
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+            >
+              <svg
+                class="fill-current h-4 w-4 text-[#006bb8]"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
+            </div>
+          </div>
+
           <button
             class="btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative"
           >
@@ -70,14 +89,13 @@
           </button>
 
           <!-- Login/Reg/Account buttons -->
-          <button id="login-button" class="btn-primary !hidden">Login</button>
-          <button id="register-button" class="btn-primary !hidden">
+          <button id="login-button" class="!hidden btn-primary">Login</button>
+          <button id="register-button" class="!hidden btn-primary">
             Register
-            <button id="account-button" class="btn-primary hidden">
-              Account
-            </button><button id="logout-button" class="hidden btn-primary">
-              Logout
-            </button>
+          </button>
+          <button id="account-button" class="!flex btn-primary">
+            Account
+          </button>
         </div>
       </nav>
 
@@ -111,14 +129,40 @@
         id="mobile-menu"
         class="hidden md:hidden flex flex-col items-center bg-[#006bb8] absolute top-[100px] left-0 w-full p-4 space-y-4 transition-all duration-300 ease-in-out"
       >
-        <input
-          type="text"
-          placeholder="Search..."
-          id="search-navbar-menu-input"
-          class="btn-primary w-full focus:outline-none focus:ring-1 focus:ring-[#006bb8]"
-        />
-        <button class="btn-primary w-full text-white text-lg py-2">Home</button>
-        <button  id = "restaurants-button" class="btn-primary w-full text-white text-lg py-2">
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+        <!-- change to DropDown -->
+        <div class="relative w-full">
+          <select
+            id="search-main-dropdown-1"
+            class="btn-drop-down text-center !border-0 w-full btn-drop-down-nav hover:cursor-pointer hover:!text-[#ff66c4] focus:outline-none focus:ring-2 focus:ring-[#006bb8] hover:focus:ring-[#ff66c4] appearance-none pl-4 pr-8 py-3"
+          >
+            <!-- Options from database  -->
+            <option value="" selected disabled hidden>City</option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+          >
+            <svg
+              class="fill-current h-4 w-4 text-[#006bb8]"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
+        <button
+          id="home-btn"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
+          Home
+        </button>
+        <button
+          id="restaurants-button-mobile"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
+        >
           Restaurants
         </button>
 
@@ -126,13 +170,13 @@
         <!-- To be shown only when delivery guy is logged in -->
         <button
           id="mobile-deliveries-button"
-          class="btn-primary w-full text-white text-lg py-2 !hidden"
+          class="btn-primary w-full text-white text-lg py-2 !hidden text-start"
         >
           Deliveries
         </button>
         <button
           id="mobile-cart-button"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="btn-primary w-full text-white text-lg py-2 text-start"
         >
           Cart
         </button>
@@ -140,29 +184,30 @@
         <!-- Mobile Login/Account/Register Buttons -->
         <button
           id="mobile-login-button"
-          class="btn-primary w-full text-white text-lg py-2 !hidden"
+          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
         >
           Login
         </button>
         <button
           id="mobile-register-button"
-          class="btn-primary w-full text-white text-lg py-2 !hidden"
+          class="!hidden btn-primary w-full text-white text-lg py-2 text-start"
         >
           Register
         </button>
         <button
           id="mobile-account-button"
-          class="btn-primary w-full text-white text-lg py-2"
+          class="!flex btn-primary w-full text-white text-lg py-2 text-start"
         >
           Account
         </button>
       </div>
+      </div>
     </header>
 
     <main
-      class="flex flex-col justify-center items-center py-[24px] pb-0 text-[#006bb8]"
+      class="flex flex-col justify-center items-center pt-[24px] pb-0 text-[#006bb8]"
     >
-      <h1 class="text-5xl mb-18">Hello, <span id="user-name">Guest</span></h1>
+      <h1 class="text-shadow font-bold text-5xl mb-18">Hello, <span id="user-name">Guest</span></h1>
 
       <section class="grid grid-cols-[auto_1fr] gap-y-4 gap-x-6 items-center">
         <!-- Name Field -->
@@ -171,7 +216,7 @@
         </label>
         <div
           id="name-field"
-          class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
+          class="bg-white border-2 border-[#006bb8] p-3 rounded-lg w-[250px] h-[52px]"
           contenteditable="false"
           data-placeholder="Enter your name"
         ></div>
@@ -182,39 +227,23 @@
         </label>
         <div
           id="email-field"
-          class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
+          class="bg-white border-2 border-[#006bb8] p-3 rounded-lg w-[250px] h-[52px]"
           contenteditable="false"
           data-placeholder="Enter your e-mail"
         ></div>
-
-        <!-- Password Field -->
-        <label
-          for="password-field"
-          class="text-lg font-medium whitespace-nowrap"
-        >
-          Password:
-        </label>
-
-        <div class="relative">
-          <!-- show password as dots -->
-          <div
-            id="password-display"
-            class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
-            data-placeholder="Password hidden"
-          ></div>
 
           <!-- if edit profile ->show input hide div -->
           <input
             type="password"
             id="password-input"
-            class="absolute top-0 left-0 bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px] hidden"
+            class="absolute top-0 left-0 bg-white border-2 border-[#006bb8] p-3 rounded-lg w-[250px] h-[52px] hidden"
             placeholder="Enter new password"
           />
-          <div id="repeat-password-container" class="hidden">
+          <div id="repeat-password-container" class="!hidden">
             <input
               type="password"
               id="repeat-password-input"
-              class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
+              class="bg-white border-2 border-[#006bb8] p-3 rounded-lg w-[250px] h-[52px]"
               placeholder="Repeat new password"
             />
             <p
@@ -232,7 +261,7 @@
         </label>
         <div
           id="phone-field"
-          class="bg-white border-2 border-[#006bb8] p-3 rounded w-[250px] h-[52px]"
+          class="bg-white border-2 border-[#006bb8] p-3 rounded-lg w-[250px] h-[52px]"
           contenteditable="false"
           data-placeholder="Enter your phone"
         ></div>
@@ -242,100 +271,49 @@
       <div class="mt-8 flex gap-4">
         <button
           id="edit-btn"
-          class="px-6 py-2 bg-[#006bb8] text-white rounded-md hover:bg-blue-700 transition"
+          class="px-6 py-2 bg-[#006bb8] text-white rounded-md hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[6px] hover:px-[22px] hover:border-2 active:opacity-70 transition"
         >
           Edit Profile
         </button>
         <button
           id="save-btn"
-          class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition hidden"
+          class="px-6 py-2 bg-green-600 text-white rounded-md hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[6px] hover:px-[22px] hover:border-2 active:opacity-70 transition hidden"
         >
           Save Changes
         </button>
         <button
           id="cancel-btn"
-          class="px-6 py-2 border border-gray-500 text-gray-700 rounded-md hover:bg-gray-100 transition hidden"
+          class="px-6 py-2 border-2 border-gray-500 text-gray-700 rounded-md hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:border-[#ff66c4] hover:py-[8px] hover:px-[24px] active:opacity-70 transition hidden"
         >
           Cancel
         </button>
+        <!-- Logout Button -->
+        <button
+          id="logout-btn"
+          class="px-6 py-2 bg-[#006bb8] text-white rounded-md hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[6px] hover:px-[22px] hover:border-2 active:opacity-70 transition"
+        >
+          Logout
+        </button>
       </div>
+
+      <button
+      id="become-delivery-guy-btn"
+      class="px-6 py-2 mt-8 bg-[#ff66c4] text-white rounded-md hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[6px] hover:px-[22px] hover:border-2 active:opacity-70 transition"
+    >
+      Become a Delivery Guy
+    </button>
+      <button
+      id="quit-delivery-guy-btn"
+      class="hidden px-6 py-2 mt-8 bg-[#ff66c4] text-white rounded-md hover:cursor-pointer hover:bg-white hover:text-[#ff66c4] hover:py-[6px] hover:px-[22px] hover:border-2 active:opacity-70 transition"
+    >
+      Quit as a Delivery Guy
+    </button>
     </main>
 
     <footer class="bg-[#006bb8] text-white flex justify-center py-0.5">
-      <button class="btn-footer">FAQ</button>
-      <button class="btn-footer">About</button>
-      <button class="btn-footer">Contacts</button>
-      <button class="btn-footer">Feedback</button>
+      <button id = "faqBtn" class="btn-footer">FAQ</button>
+      <button id = "aboutBtn" class="btn-footer">About</button>
+      <button id = "feedbackBtn"class="btn-footer">Feedback</button>
     </footer>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // DOM Elements
-        const editBtn = document.getElementById("edit-btn");
-        const saveBtn = document.getElementById("save-btn");
-        const cancelBtn = document.getElementById("cancel-btn");
-        const userNameElement = document.getElementById("user-name");
-        const nameField = document.getElementById("name-field");
-
-        // Initialize with default data
-        function loadUserData() {
-          const currentName = nameField.textContent || "John Doe";
-          userNameElement.textContent = currentName;
-          nameField.textContent = currentName;
-        }
-
-        // Enable edit mode
-        editBtn.addEventListener("click", () => {
-          nameField.setAttribute("contenteditable", "true");
-          nameField.classList.add("ring-2", "ring-[#006bb8]");
-          nameField.focus(); // Focus the field for immediate editing
-
-          editBtn.classList.add("hidden");
-          saveBtn.classList.remove("hidden");
-          cancelBtn.classList.remove("hidden");
-        });
-
-        // Save changes
-        saveBtn.addEventListener("click", () => {
-          const newName = nameField.textContent.trim();
-
-          if (!newName) {
-            alert("Name cannot be empty!");
-            return;
-          }
-
-          userNameElement.textContent = newName;
-          nameField.setAttribute("contenteditable", "false");
-          nameField.classList.remove("ring-2", "ring-[#006bb8]");
-
-          editBtn.classList.remove("hidden");
-          saveBtn.classList.add("hidden");
-          cancelBtn.classList.add("hidden");
-
-          alert("Name updated successfully!");
-        });
-
-        // Cancel edits
-        cancelBtn.addEventListener("click", () => {
-          nameField.setAttribute("contenteditable", "false");
-          nameField.classList.remove("ring-2", "ring-[#006bb8]");
-          loadUserData(); // Reset to original name
-
-          editBtn.classList.remove("hidden");
-          saveBtn.classList.add("hidden");
-          cancelBtn.classList.add("hidden");
-        });
-
-        // Prevent new lines when editing
-        nameField.addEventListener("keydown", function (e) {
-          if (e.key === "Enter") {
-            e.preventDefault();
-          }
-        });
-
-        // Initial load
-        loadUserData();
-      });
-    </script>
   </body>
 </html>

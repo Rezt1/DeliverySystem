@@ -1,9 +1,11 @@
 package com.renascence.backend.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,19 +24,24 @@ public class DeliveryGuy {
     @JoinColumn(name = "id")
     private User user;
 
-    @Column(nullable = false, length = 50, unique = true)
+    @Column(nullable = true, length = 50, unique = true)   // CONVERT TO FALSE IF IT WORKS
     private String iban;
 
+    @Column(nullable = false)
+    private LocalDate startWorkDate;
+
+    private LocalDate endWorkDate;
+
+    @Column(nullable = false)
+    private boolean isFired;
+
     @ManyToOne
-    @JoinColumn(name = "workPlaceId")
-    private Restaurant workPlace;
+    @JoinColumn(name = "workCityId", nullable = false)
+    private City workCity;
 
     @OneToMany(mappedBy = "deliveryGuy")
     List<DeliveryGuySalary> salaries = new ArrayList<>();
 
     @OneToMany(mappedBy = "deliveryGuy")
     List<Delivery> deliveries = new ArrayList<>();
-
-    @OneToMany(mappedBy = "deliveryGuy")
-    List<Contract> contracts = new ArrayList<>();
 }

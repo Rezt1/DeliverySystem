@@ -25,7 +25,7 @@ public class Delivery {
     private User receiver;
 
     @ManyToOne
-    @JoinColumn(name = "deliveryGuyId", nullable = false)
+    @JoinColumn(name = "deliveryGuyId")
     private DeliveryGuy deliveryGuy;
 
     @ManyToOne
@@ -44,7 +44,17 @@ public class Delivery {
     private String address;
 
     @Column(nullable = false)
-    private LocalDateTime date;
+    private double totalPrice;
+
+    @Column(nullable = false)
+    private LocalDateTime creationDate;
+
+    @Column(nullable = false)
+    private LocalDateTime toBeDeliveredHour;
+
+    private LocalDateTime takenByDeliveryGuyDate;
+
+    private LocalDateTime deliveredDate;
 
     @OneToMany(mappedBy = "delivery")
     private List<DeliveryFood> deliveriesFoods = new ArrayList<>();

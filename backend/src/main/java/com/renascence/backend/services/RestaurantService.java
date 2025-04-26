@@ -1,81 +1,93 @@
 package com.renascence.backend.services;
 
-import com.renascence.backend.dtos.Restaurant.CreateRestaurantDto;
-import com.renascence.backend.dtos.Restaurant.RestaurantDto;
+import com.renascence.backend.dtos.restaurant.RestaurantDto;
 import com.renascence.backend.entities.City;
+import com.renascence.backend.entities.Cuisine;
+import com.renascence.backend.entities.Food;
 import com.renascence.backend.entities.Restaurant;
 import com.renascence.backend.repositories.CityRepository;
+import com.renascence.backend.repositories.CuisineRepository;
 import com.renascence.backend.repositories.RestaurantRepository;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
     private final CityRepository cityRepository;
+    private final CuisineRepository cuisineRepository;
 
-    public RestaurantService(RestaurantRepository restaurantRepository, CityRepository cityRepository) {
-        this.restaurantRepository = restaurantRepository;
-        this.cityRepository = cityRepository;
-    }
-
-    public List<RestaurantDto> getAllRestaurants() {
-        return restaurantRepository.findAll().stream()
-                .map(this::convertToDto)
+    public List<RestaurantDto> getAllRestaurants(long cityId, long cuisineId, int sorting) {
+        List<Restaurant> restaurants = restaurantRepository
+                .findAllByOrderByRatingDesc()
+                .stream()
+                .filter(r -> !r.isDeleted())
                 .toList();
-    }
 
-    public List<RestaurantDto> getRestaurantsByCityId(Long cityId) {
-        return restaurantRepository.findByCityId(cityId).stream()
-                .map(this::convertToDto)
-                .toList();
-    }
+        if (cityId != -1) {
+            City filterCity = cityRepository.findById(cityId)
+                    .orElseThrow(() -> new EntityNotFoundException("city not found"));
 
-    public List<RestaurantDto> getTopRatedRestaurants(int count) {
-        return restaurantRepository.findTopRatedRestaurants(count).stream()
-                .map(this::convertToDto)
-                .toList();
-    }
+            if (filterCity.isDeleted()) {
+                throw new EntityNotFoundException("City no longer exists in our system");
+            }
 
-    public List<RestaurantDto> searchByCuisineName(String cuisineName) {
-        return restaurantRepository.findByCuisineNameContainingIgnoreCase(cuisineName)
+            restaurants = restaurants.stream().filter(r -> r.getCity().getId() == filterCity.getId()).toList();
+        }
+
+        if (cuisineId != -1) {
+            Cuisine filterCuisine =  cuisineRepository.findById(cuisineId)
+                    .orElseThrow(() -> new EntityNotFoundException("cuisine not found"));
+
+            restaurants = restaurants.stream().filter(r -> {
+                for (Food food : r.getFoods()) {
+                    return food.getCuisine().getId() == filterCuisine.getId();
+                }
+                return false;
+            }).toList();
+        }
+
+        if (sorting == 0) {
+            restaurants = restaurants
+                    .stream()
+                    .sorted(Comparator.comparing(Restaurant::getName, String.CASE_INSENSITIVE_ORDER))
+                    .toList();
+        } else if (sorting == 1) {
+            restaurants = restaurants
+                    .stream()
+                    .sorted(Comparator.comparing(Restaurant::getName, String.CASE_INSENSITIVE_ORDER).reversed())
+                    .toList();
+        } else if (sorting == 2) {
+            restaurants = restaurants
+                    .stream()
+                    .sorted(Comparator.comparing(Restaurant::getRating).reversed())
+                    .toList();
+        } else if (sorting == 3) {
+            restaurants = restaurants
+                    .stream()
+                    .sorted(Comparator.comparing(Restaurant::getRating))
+                    .toList();
+        }
+
+        return restaurants
                 .stream()
                 .map(this::convertToDto)
                 .toList();
-    }
-
-    public RestaurantDto createRestaurant(CreateRestaurantDto createDto) {
-        // Validate city exists
-        City city = cityRepository.findById(createDto.getCityId())
-                .orElseThrow(() -> new IllegalArgumentException("City not found with ID: " + createDto.getCityId()));
-
-        // Validate owner exists  // SET LATER BY ADMIN
-
-        Restaurant restaurant = new Restaurant();
-        restaurant.setName(createDto.getName());
-        restaurant.setCity(city);
-        //restaurant.setOwner(owner);
-        restaurant.setIban(createDto.getIban());
-        restaurant.setRating(createDto.getRating());
-
-        restaurant.setDeliveryGuySalary(900.0);  // DEFAULT VALUE; IT IS POSSIBLE TO BE CHANGED BY THE ADMIN?
-        //restaurant.setBonusId(null);           // SET LATER BY ADMIN
-
-        Restaurant savedRestaurant = restaurantRepository.save(restaurant);
-        return convertToDto(savedRestaurant);
     }
 
     private RestaurantDto convertToDto(Restaurant restaurant) {
         RestaurantDto dto = new RestaurantDto();
         dto.setId(restaurant.getId());
         dto.setName(restaurant.getName());
-        dto.setCityId(restaurant.getCity().getId());
+        dto.setCityName(restaurant.getCity().getName());
         dto.setRating(restaurant.getRating());
-        //dto.setOwnerId(restaurant.getOwner().getId());
-        //dto.setIban(restaurant.getIban());
-        //dto.setDeliveryGuySalary(restaurant.getDeliveryGuySalary());
+        dto.setIban(restaurant.getIban());
         return dto;
     }
 }
