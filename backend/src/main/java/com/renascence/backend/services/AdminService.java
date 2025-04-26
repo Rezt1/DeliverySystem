@@ -118,6 +118,7 @@ public class AdminService {
         return deliveryGuyRepository
                 .findAll()
                 .stream()
+                .filter(dg -> !dg.isFired())
                 .map(this::convertToDeliveryGuyDto)
                 .toList();
     }
