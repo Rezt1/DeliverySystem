@@ -13,6 +13,8 @@
     <script src="./src/adminRestaurantJs.js" type="module" defer></script>
     <script src="./src/adminMenuJs.js" type="module" defer></script>
     <script src="./src/adminDeliveryGuysJs.js" type="module" defer></script>
+    <script src="./src/adminPaymentsJs.js" type="module" defer></script>
+    <script src="./src/adminReportsJs.js" type="module" defer></script>
     <link href="./custom.css" rel="stylesheet" />
 
     <title>Hexeats - Admin</title>
@@ -1029,14 +1031,14 @@
             >
               <!-- This btn hides this main show the report main automatically fills the id/name of the delivery guy and shows the report of that delivery guy based on the dates we write  -->
               <button
-                id="edit-btn"
+                id="earnings-btn"
                 class="max-lg:w-[80%] lg:!w-[45%] text-white border-2 border-[#006bb8] bg-[#006bb8] rounded-full font-bold py-2 px-4 hover:text-[#ff66c4] hover:border-[#ff66c4] hover:bg-white hover:cursor-pointer active:opacity-70"
               >
                 Earnings
               </button>
               <!-- Same goes for this btn, but this one shows the payments made to the delivery guy -->
               <button
-                id="edit-btn"
+                id="pay-btn"
                 class="max-lg:w-[80%] lg:w-[45%] text-white border-2 border-[#006bb8] bg-[#006bb8] rounded-full font-bold py-2 px-4 hover:text-[#ff66c4] hover:border-[#ff66c4] hover:bg-white hover:cursor-pointer active:opacity-70"
               >
                 Pay
@@ -1246,7 +1248,7 @@
 
               <!-- After selecting the delivery guy, his name will be shown here: -->
               <div
-                id="delivery-guy-id"
+                id="delivery-guy-id-earnings"
                 class="w-full h-[40px] border border-[#006bb8] rounded-lg p-2"
               >
                 ID
@@ -1303,7 +1305,7 @@
             class="w-full flex justify-between items-center bg-white p-4 rounded-xl shadow-md border border-gray-200"
           >
             <div class="text-lg font-bold text-[#006bb8]">Total:</div>
-            <div class="text-xl font-bold text-[#ff66c4]">273.50 лв.</div>
+            <div id="delivery-guy-total" class="text-xl font-bold text-[#ff66c4]">273.50 лв.</div>
           </div>
         </section>
       </main>

@@ -38,12 +38,12 @@ public class AdminController {
         return ResponseEntity.ok(adminService.getStatistics());
     }
 
-    @GetMapping("/get-income")
+    @PostMapping("/get-income")
     public ResponseEntity<IncomeForPeriodOfTimeDto> getReportForIncome(@Valid @RequestBody IncomeForPeriodOfTimeDto dto){
         return ResponseEntity.ok(adminService.getIncome(dto));
     }
 
-    @GetMapping("/get-income-by-delivery-guys")
+    @PostMapping("/get-income-by-delivery-guys")
     public ResponseEntity<List<DeliveryGuyIncomeDto>> getReportForIncomeByDeliveryGuy(@Valid @RequestBody DeliveryGuyIncomeForPeriodOfTimeDto dto) {
         return ResponseEntity.ok(adminService.getIncomeByDeliveryGuy(dto));
     }

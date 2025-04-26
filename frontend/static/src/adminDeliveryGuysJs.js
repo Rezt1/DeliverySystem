@@ -3,7 +3,11 @@ import { hideEverything } from "./adminJs.mjs";
 
 let menuDeliveryGuysBtn = document.getElementById("btn-delivery-guys");
 let deliveryGuysMain = document.getElementById("delivery-guys-main");
+let menuPaymentsBtn = document.getElementById("btn-payments");
+let menuReportsBtn = document.getElementById("btn-reports");
 
+let payDeliveryGuyBtn = document.getElementById("pay-btn");
+let earningsBtn = document.getElementById("earnings-btn");
 let removeDeliveryGuyBtn = document.getElementById("remove-delivery-guy-btn");
 
 let idEl = document.getElementById("delivery-guy-id");
@@ -13,6 +17,8 @@ let cityEl = document.getElementById("delivery-guy-city");
 let deliveryGuyNameEl = document.getElementById("form-delivery-guy-name");
 
 menuDeliveryGuysBtn.addEventListener("click", onMenuDeliveryGuysClick);
+payDeliveryGuyBtn.addEventListener("click", redirectToPayments);
+earningsBtn.addEventListener("click", redirectToEarnings);
 removeDeliveryGuyBtn.addEventListener("click", removeDeliveryGuy);
 
 async function onMenuDeliveryGuysClick(e) {
@@ -114,6 +120,50 @@ async function removeDeliveryGuy(e) {
     } catch (error) {
         console.log(error);
         window.alert(error);
+    }
+}
+
+function redirectToPayments() {
+    try {
+
+        let id = idEl.textContent;
+
+        if (id === "") {
+            throw new Error("Select a delivery guy");
+        }
+
+        if (Number.isNaN(Number.parseInt(id))) {
+            throw new Error("Invalid id");
+        }
+
+        localStorage.setItem("delivery-guy-id", id);
+
+        menuPaymentsBtn.click();
+    
+    } catch (error) {
+        window.alert(error.message);
+    }
+}
+
+function redirectToEarnings() {
+    try {
+
+        let id = idEl.textContent;
+
+        if (id === "") {
+            throw new Error("Select a delivery guy");
+        }
+
+        if (Number.isNaN(Number.parseInt(id))) {
+            throw new Error("Invalid id");
+        }
+
+        localStorage.setItem("delivery-guy-id", id);
+
+        menuReportsBtn.click();
+    
+    } catch (error) {
+        window.alert(error.message);
     }
 }
 
