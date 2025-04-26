@@ -2,6 +2,10 @@ import { ip } from "./ipSearch.mjs";
 import { hideEverything } from "./adminJs.mjs";
 import { fetchingCities } from "./fetchingData.mjs";
 
+let nameInput = document.getElementById("restaurant-name-input");
+let ibanInput = document.getElementById("restaurant-iban-input");
+let ratingInput = document.getElementById("restaurant-rating-input");
+
 let menuRestaurantsBtn = document.getElementById("btn-restaurants");
 let addRestaurantBtn = document.getElementById("btn-add-restaurant");
 
@@ -22,7 +26,7 @@ async function onMenuRestaurantClick(e) {
     restaurantsList.innerHTML = "";
 
     loadingState.classList.remove("hidden");
-
+    removeInputValues();
     restaurantsMain.classList.remove("hidden");
 
     let address = ip() + "/api/restaurants";
@@ -105,16 +109,12 @@ async function removeRestaurant(e) {
     } catch (error) {
         console.log(error);
     }
-
 }
 
 async function addRestaurant(e) {
     try {
         e.preventDefault();
 
-        let nameInput = document.getElementById("restaurant-name-input");
-        let ibanInput = document.getElementById("restaurant-iban-input");
-        let ratingInput = document.getElementById("restaurant-rating-input");
         let cityInput = document.getElementById("city-input");
 
         let name = nameInput.value;
@@ -165,4 +165,10 @@ async function addRestaurant(e) {
     } catch (error) {
         window.alert(error.message);
     }
+}
+
+function removeInputValues() {
+    nameInput.value = "";
+    ibanInput.value = "";
+    ratingInput.value = "";
 }

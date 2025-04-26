@@ -2,6 +2,9 @@ import { fetchingCities } from "./fetchingData.mjs";
 import { ip } from "./ipSearch.mjs";
 import { hideEverything } from "./adminJs.mjs";
 
+let nameInput = document.getElementById("city-name-input");
+let salaryInput = document.getElementById("city-salary-input");
+
 let menuCityBtn = document.getElementById("btn-cities");
 let citiesMain = document.getElementById("cities-main");
 
@@ -14,6 +17,9 @@ async function onMenuCityClick(e) {
     e.preventDefault();
 
     hideEverything();
+
+    nameInput.value = "";
+    salaryInput.value = "";
 
     citiesMain.classList.remove("hidden");
 
@@ -83,14 +89,15 @@ async function addCity(e) {
     try {
         e.preventDefault();
 
-        let nameInput = document.getElementById("city-name-input");
-        let salaryInput = document.getElementById("city-salary-input");
-
         let name = nameInput.value;
         let salary = salaryInput.value;
 
         if (name === "" || salary === "") {
             throw new Error("All fields must be filled");
+        }
+
+        if (Number.isNaN(salary) || Number.isNaN(parseFloat(salary))) {
+            throw new Error("Invalid salary")
         }
 
         let address = ip() + "/api/admin/create-city";

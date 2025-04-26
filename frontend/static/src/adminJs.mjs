@@ -5,6 +5,7 @@ let restaurantsMain = document.getElementById("restaurants-main");
 let deliveryGuysMain = document.getElementById("delivery-guys-main");
 let paymentsMain = document.getElementById("payments-main");
 let reportsMain = document.getElementById("reports-main");
+let menusMain = document.getElementById("menus-main");
 
 export function hideEverything() {
     dashboardMain.classList.add("hidden");
@@ -13,4 +14,5 @@ export function hideEverything() {
     deliveryGuysMain.classList.add("hidden");
     paymentsMain.classList.add("hidden");
     reportsMain.classList.add("hidden");
+    menusMain.classList.add("hidden");
 }
