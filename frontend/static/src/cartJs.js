@@ -1,4 +1,4 @@
-
+import { ifLoggedIn } from "./userWork.mjs";
 
 let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -110,8 +110,16 @@ function addingSubtotal(){
 }
 
 async function checkout(){
-
-  sessionStorage.setItem("subtotal", (document.getElementById("subtotal-price").textContent));
+   if(!ifLoggedIn()){
+              window.location.href = "./login.html";
+              return;
+            }
+    let subtotal = document.getElementById("subtotal-price").textContent;
+    if(parseInt(subtotal.slice(1)) === 0){
+      alert("Can't make an order with no items in cart!");
+      return;
+    }
+  sessionStorage.setItem("subtotal", document.getElementById("total-price").textContent);
   window.location.href = "./checkout.html";
 
 }

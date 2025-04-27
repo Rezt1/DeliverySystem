@@ -10,6 +10,10 @@ let btnToShow = document.getElementById("password-show");
 btnToShow.addEventListener("click", togglePassword);
 loginBtnMob.addEventListener("click", onLogin);
 
+if (document.referrer === `http://localhost:8082/cart.html`) {
+    alert("You must be logged in to order!");
+}
+
 
 async function onLogin(e){
     e.preventDefault();

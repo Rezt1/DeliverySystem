@@ -1,4 +1,5 @@
 import { ip } from "./ipSearch.mjs";
+import { ifLoggedIn } from "./userWork.mjs";
 
 let ipAddress = ip();
 
@@ -24,6 +25,8 @@ paymentCash.addEventListener("click", () => {
 
 confirmOrder.addEventListener("click", ()=> {
     try{
+
+
     console.log(isTimeBetween(deliveryInput.value, deliveryInput.min, deliveryInput.max));
     if(isTimeBetween(deliveryInput.value, deliveryInput.min, deliveryInput.max)){
         if(!addressBlock.value){

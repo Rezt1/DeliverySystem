@@ -1,5 +1,4 @@
-import { ifDeliveryGuy, ifLoggedIn } from "./userWork.mjs";
-
+import { ifAdmin, ifDeliveryGuy, ifLoggedIn } from "./userWork.mjs";
    
   export function navigationStuff(){
     let loginBtn = document.getElementById("mobile-login-button");
