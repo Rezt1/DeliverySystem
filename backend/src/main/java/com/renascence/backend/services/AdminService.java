@@ -170,8 +170,7 @@ public class AdminService {
 
         double totalIncome = deliveries
                 .stream()
-                .flatMap(d -> d.getDeliveriesFoods().stream())
-                .mapToDouble(df -> df.getFood().getPrice() * df.getFoodCount())
+                .mapToDouble(Delivery::getTotalPrice)
                 .sum();
 
         dto.setAmount(totalIncome);
@@ -233,8 +232,7 @@ public class AdminService {
                             .filter(d -> d.getStatus() == DeliveryStatus.DELIVERED
                                     && !d.getDeliveredDate().toLocalDate().isAfter(dto.getEndDate())
                                     && !d.getDeliveredDate().toLocalDate().isBefore(dto.getStartDate()))
-                            .flatMap(d -> d.getDeliveriesFoods().stream())
-                            .mapToDouble(df -> df.getFood().getPrice() * df.getFoodCount())
+                            .mapToDouble(Delivery::getTotalPrice)
                             .sum();
 
                     incomeDto.setAmount(amount);
