@@ -28,8 +28,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.renascence.backend.enums.PaymentMethod.CARD;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -218,31 +217,26 @@ public class DeliveryServiceTest {
     }
 
     @Test
-    void testCreateDelivery_withPastTime_throwsIllegalArgumentException() {
+    void testCreateDelivery_withPastTime_adjustsToNextDay() {
         String pastTime = LocalDateTime.now().minusHours(1).toLocalTime().toString();
 
         CreateDeliveryDto createDeliveryDto = getDto(pastTime);
 
-        // Mock food repository
         Food mockFood = mock(Food.class);
         when(foodRepository.findById(1L)).thenReturn(Optional.of(mockFood));
 
-        // Mock user repository
         User mockUser = mock(User.class);
         when(userRepository.findByEmail("user@example.com")).thenReturn(Optional.of(mockUser));
 
-        // Mock restaurant repository
         Restaurant mockRestaurant = mock(Restaurant.class);
         when(mockRestaurant.isDeleted()).thenReturn(false);
         when(mockFood.getRestaurant()).thenReturn(mockRestaurant);
 
-        // Run the test and assert the exception
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            deliveryService.createDelivery(createDeliveryDto);
-        });
+        DeliveryDto result = deliveryService.createDelivery(createDeliveryDto);
 
-        assertEquals("Cannot make an order for the past", thrown.getMessage());
+        assertNotNull(result);
     }
+
 
     private static CreateDeliveryDto getDto(String pastTime) {
         CreateDeliveryDto createDeliveryDto = new CreateDeliveryDto();

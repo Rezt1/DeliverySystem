@@ -409,6 +409,44 @@ public class AdminServiceTest {
 
     @Test
     void testGetIncome() {
+//        IncomeForPeriodOfTimeDto inputDto = new IncomeForPeriodOfTimeDto();
+//        inputDto.setStartDate(LocalDate.of(2024, 1, 1));
+//        inputDto.setEndDate(LocalDate.of(2024, 12, 31));
+//
+//        Delivery delivery1 = new Delivery();
+//        delivery1.setStatus(DeliveryStatus.DELIVERED);
+//        delivery1.setDeliveredDate(LocalDate.of(2024, 3, 5).atStartOfDay());
+//        delivery1.setTotalPrice(20.00); // (2 * 10)
+//
+//        Food food1 = new Food();
+//        food1.setPrice(10.00);
+//
+//        DeliveryFood deliveryFood1 = new DeliveryFood();
+//        deliveryFood1.setFood(food1);
+//        deliveryFood1.setFoodCount(2);
+//
+//        delivery1.setDeliveriesFoods(List.of(deliveryFood1));
+//
+//        Delivery delivery2 = new Delivery();
+//        delivery2.setStatus(DeliveryStatus.DELIVERED);
+//        delivery2.setDeliveredDate(LocalDate.of(2024, 5, 10).atStartOfDay());
+//        delivery2.setTotalPrice(45.00); // (3 * 15)
+//
+//        Food food2 = new Food();
+//        food2.setPrice(15.00);
+//
+//        DeliveryFood deliveryFood2 = new DeliveryFood();
+//        deliveryFood2.setFood(food2);
+//        deliveryFood2.setFoodCount(3);
+//
+//        delivery2.setDeliveriesFoods(List.of(deliveryFood2));
+//
+//        when(deliveryRepository.findAll()).thenReturn(List.of(delivery1, delivery2));
+//
+//        IncomeForPeriodOfTimeDto result = adminService.getIncome(inputDto);
+//
+//        assertNotNull(result);
+//        assertEquals(65.00, result.getAmount(), 0.01);
         IncomeForPeriodOfTimeDto inputDto = new IncomeForPeriodOfTimeDto();
         inputDto.setStartDate(LocalDate.of(2024, 1, 1));
         inputDto.setEndDate(LocalDate.of(2024, 12, 31));
@@ -425,6 +463,7 @@ public class AdminServiceTest {
         deliveryFood1.setFoodCount(2);
 
         delivery1.setDeliveriesFoods(List.of(deliveryFood1));
+        delivery1.setTotalPrice(2 * 10.00);
 
         Delivery delivery2 = new Delivery();
         delivery2.setStatus(DeliveryStatus.DELIVERED);
@@ -438,13 +477,14 @@ public class AdminServiceTest {
         deliveryFood2.setFoodCount(3);
 
         delivery2.setDeliveriesFoods(List.of(deliveryFood2));
+        delivery2.setTotalPrice(3 * 15.00);
 
         when(deliveryRepository.findAll()).thenReturn(List.of(delivery1, delivery2));
 
         IncomeForPeriodOfTimeDto result = adminService.getIncome(inputDto);
 
         assertNotNull(result);
-        assertEquals(65.00, result.getAmount(), 0.01); // (2 * 10) + (3 * 15)
+        assertEquals(65.00, result.getAmount(), 0.01);
     }
 
 
