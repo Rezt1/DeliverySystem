@@ -1,5 +1,5 @@
 import { fetchingCities } from "./fetchingData.mjs";
-import { ifDeliveryGuy } from "./userWork.mjs";
+import { ifAdmin, ifDeliveryGuy } from "./userWork.mjs";
 
 console.log(sessionStorage.getItem("accessToken"));
 
@@ -20,6 +20,10 @@ if (ifDeliveryGuy()) {
     btnMyDelivery.classList.remove("hidden");
 } else {
     btnMyDelivery.classList.add("hidden");
+}
+
+if(ifAdmin()){
+    window.location.href = "./admin.html"
 }
 
 export async function showOptionsCities(e) {

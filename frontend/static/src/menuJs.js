@@ -39,7 +39,7 @@ async function laodingItems(data) {
             <p class="max-md:text-sm md:!text-md lg:!text-lg text-gray-500 w-[90%] md:w-[85%]">${item.description}</p>
           </div>
           <div class="flex flex-col items-end justify-between gap-2">
-            <h4 class="text-2xl md:text-3xl">€${parseFloat(item.price).toFixed(2)}</h4>
+            <h4 class="text-2xl md:text-3xl">€${parseFloat(item.price)}</h4>
             <button class="border rounded-lg w-9 md:!w-12 h-9 md:!h-12 text-3xl md:!text-4xl bg-blue-50 hover:cursor-pointer hover:text-[#ff66c4] hover:bg-pink-50 active:opacity-70">+</button>
           </div>
       `;

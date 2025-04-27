@@ -1,10 +1,12 @@
 import { ip } from "./ipSearch.mjs";
 import { hideEverything } from "./adminJs.mjs";
+import { logout } from "./userWork.mjs";
 
 let menuDashboardBtn = document.getElementById("btn-dashboard");
 let dashboardMain = document.getElementById("dashboard-main");
 
 menuDashboardBtn.addEventListener("click", onDashboardClick);
+document.getElementById("btn-logout-admin").addEventListener("click", logout);
 menuDashboardBtn.click();
 
 async function onDashboardClick(e) {
@@ -36,4 +38,5 @@ async function onDashboardClick(e) {
     citiesCountEl.textContent = respData.citiesCount;
 
     dashboardMain.classList.remove("hidden");
+
 }
