@@ -1,6 +1,5 @@
 import { ip } from "./ipSearch.mjs";
 
-
 export function sessionStorageSet(response) {
     Object.keys(response).forEach(key => {
         if (key !== "password") { 
@@ -63,32 +62,30 @@ export async function logout(){
 
 export function ifDeliveryGuy(){
 
-        let token = sessionStorage.getItem("accessToken");
-        if (!token) {
-            console.log("No token found");
-            return;
-        }
-    
-        let decodedToken = parseJwt(token);
-    
-        let roles = decodedToken.roles;  
-        if (roles && roles.includes("ROLE_DELIVERY_GUY")) {
-            return true;
-        } else {
-            return false;
-        }
+    let token = sessionStorage.getItem("accessToken");
+    if (!token) {
+        console.log("No token found");
+        return;
+    }
 
-        function parseJwt(token) {
-            let base64Url = token.split('.')[1];
-            let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-        
-            return JSON.parse(jsonPayload);
-        }
+    let decodedToken = parseJwt(token);
+
+    let roles = decodedToken.roles;  
+    if (roles && roles.includes("ROLE_DELIVERY_GUY")) {
+        return true;
+    } else {
+        return false;
+    }
+
+    function parseJwt(token) {
+        let base64Url = token.split('.')[1];
+        let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
     
-    
+        return JSON.parse(jsonPayload);
+    }
     
 }
 
@@ -118,7 +115,5 @@ export function ifAdmin(){
     
         return JSON.parse(jsonPayload);
     }
-
-
 
 }
