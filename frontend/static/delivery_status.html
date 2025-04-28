@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hexeats - Track Your Order</title>
+
+    <link href="./style.css" rel="stylesheet" />
+    <link href="./custom.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+    <script src="./src/deliveryStatusJs.js" type="module" defer></script>
+  </head>
+
+  <body class="flex flex-col min-h-screen bg-[#f9fafb] text-[#006bb8] font-sans">
+    <!-- Header -->
+    <header class="bg-[#006bb8] text-white p-4 flex justify-between items-center">
+      <a href="home.html" class="font-bold text-xl">Hexeats</a>
+      <nav>
+        <a href="home.html" class="px-3 hover:underline">Home</a>
+        <a href="restaurants.html" class="px-3 hover:underline">Restaurants</a>
+        <a href="account.html" class="px-3 hover:underline">Account</a>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col items-center justify-start p-6">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-8 text-center text-[#ff66c4]">Track Your Deliveries 🚴‍♂️</h1>
+
+      <div id ="deliveries-conatiner" class="w-full max-w-3xl bg-white shadow-xl rounded-3xl p-8 space-y-8">
+
+        <!-- Fake Tracking Map -->
+        <div class="relative w-full h-60 bg-gradient-to-br from-[#ff66c4] to-[#006bb8] rounded-2xl flex items-center justify-center">
+          <img src="./Images/delivery_guy2.png" alt="Map Tracker" class="w-40 h-40 animate-bounce opacity-80" />
+          <!--<span class="absolute bottom-4 right-4 text-white text-sm font-bold bg-black bg-opacity-30 px-3 py-1 rounded-full">Estimated: 18:45</span>-->
+        </div>
+
+        <!-- Order Info -->
+       <!-- <section class="space-y-4">
+          <h2 class="text-2xl font-bold text-[#006bb8]">Order Details</h2>
+
+          <div class="grid grid-cols-2 gap-4 text-gray-700">
+            <div>
+              <p class="font-semibold">Order ID:</p>
+              <p>#HEX478921</p>
+            </div>
+            <div>
+              <p class="font-semibold">Status:</p>
+              <p class="text-[#ff66c4]">Courier on the way</p>
+            </div>
+            <div>
+              <p class="font-semibold">Price:</p>
+              <p>$23.99</p>
+            </div>
+            <div>
+              <p class="font-semibold">Estimated Delivery:</p>
+              <p>Today at 18:45</p>
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <p class="font-semibold text-[#006bb8] mb-2">Items:</p>
+            <ul class="list-disc list-inside">
+              <li>🍔 HexBurger Deluxe x1</li>
+              <li>🍟 Sweet Potato Fries x1</li>
+              <li>🥤 Dragonfruit Soda x1</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="flex items-center space-x-4 mt-6">
+          <img src="https://i.imgur.com/7k12EPD.png" alt="Courier" class="w-16 h-16 rounded-full border-4 border-[#ff66c4]" />
+          <div>
+            <p class="font-bold text-lg">Alex Rider</p>
+            <p class="text-sm text-gray-500">Your Delivery Hero 🚴‍♂️</p>
+          </div>
+        </section>
+
+        <section class="pt-6">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col items-center">
+              <div class="w-8 h-8 rounded-full bg-[#ff66c4] flex items-center justify-center text-white font-bold">1</div>
+              <p class="text-sm mt-2 text-[#006bb8]">Order Placed</p>
+            </div>
+
+            <div class="h-1 flex-1 bg-[#ff66c4] mx-2"></div>
+
+            <div class="flex flex-col items-center">
+              <div class="w-8 h-8 rounded-full bg-[#ff66c4] flex items-center justify-center text-white font-bold">2</div>
+              <p class="text-sm mt-2 text-[#006bb8]">Cooking</p>
+            </div>
+
+            <div class="h-1 flex-1 bg-[#ff66c4] mx-2"></div>
+
+            <div class="flex flex-col items-center">
+              <div class="w-8 h-8 rounded-full bg-[#ff66c4] flex items-center justify-center text-white font-bold">3</div>
+              <p class="text-sm mt-2 text-[#006bb8]">Out for Delivery</p>
+            </div>
+
+            <div class="h-1 flex-1 bg-gray-300 mx-2"></div>
+
+            <div class="flex flex-col items-center">
+              <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold">4</div>
+              <p class="text-sm mt-2 text-gray-400">Delivered</p>
+            </div>
+          </div>
+        </section>-->
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#006bb8] text-white flex justify-center py-2 mt-8">
+      <button id="faqBtn" class="btn-footer">FAQ</button>
+      <button id="aboutBtn" class="btn-footer">About</button>
+      <button id="feedbackBtn" class="btn-footer">Feedback</button>
+    </footer>
+
+  </body>
+</html>

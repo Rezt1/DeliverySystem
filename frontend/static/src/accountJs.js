@@ -9,6 +9,10 @@ btnLogout.addEventListener("click", logout);
 
 let token = sessionStorage.getItem("accessToken");
 
+document.getElementById("checkDeliveries-btn").addEventListener("click", () => {
+  window.location.href = "./delivery_status.html"
+})
+
 let nameField = document.getElementById("name-field");
 nameField.textContent = sessionStorage.getItem("username");
 

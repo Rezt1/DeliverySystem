@@ -173,3 +173,24 @@ export async function fetchActiveDel() {
   console.error(e.message);
 }
 }
+
+export async function fetchActiveDeliveriesUser() {
+ try {
+      const response = await fetch(`${ip()}/api/users/my-active-orders`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}` // Assuming the user is authenticated with a token
+          }
+      });
+
+      if (response.ok) {
+          const deliveries = await response.json(); // Parse JSON response
+          return deliveries; // Function to display deliveries
+      } else {
+          console.error('Failed to fetch active deliveries', response.status);
+      }
+  } catch (error) {
+      console.error('Error:', error);
+  }
+}
