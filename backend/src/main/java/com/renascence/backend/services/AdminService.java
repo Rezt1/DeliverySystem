@@ -74,7 +74,6 @@ public class AdminService {
         Restaurant restaurant = restaurantRepository.findById(dto.getRestaurantId())
                 .orElseThrow(() -> new EntityNotFoundException("Restaurant not found"));
 
-        // Convert DTO to Entity
         Food food = new Food();
         food.setName(dto.getName());
         food.setPrice(dto.getPrice());
@@ -170,8 +169,7 @@ public class AdminService {
 
         double totalIncome = deliveries
                 .stream()
-                .flatMap(d -> d.getDeliveriesFoods().stream())
-                .mapToDouble(df -> df.getFood().getPrice() * df.getFoodCount())
+                .mapToDouble(Delivery::getTotalPrice)
                 .sum();
 
         dto.setAmount(totalIncome);
@@ -180,33 +178,6 @@ public class AdminService {
     }
 
     public List<DeliveryGuyIncomeDto> getIncomeByDeliveryGuy(DeliveryGuyIncomeForPeriodOfTimeDto dto) {
-//        List<DeliveryGuy> deliveryGuys = deliveryGuyRepository.findAll();
-//
-//        return deliveryGuys
-//                .stream()
-//                .map(dg -> {
-//                   DeliveryGuyIncomeDto incomeDto = new DeliveryGuyIncomeDto();
-//                   incomeDto.setDeliveryGuyId(dg.getId());
-//                   incomeDto.setDeliveryGuyName(dg.getUser().getName());
-//                   incomeDto.setPhoneNumber(dg.getUser().getPhoneNumber());
-//                   incomeDto.setStartDate(dto.getStartDate());
-//                   incomeDto.setEndDate(dto.getEndDate());
-//
-//                   double amount = dg.getDeliveries()
-//                           .stream()
-//                           .filter(d -> d.getStatus() == DeliveryStatus.DELIVERED
-//                                   && !d.getDeliveredDate().toLocalDate().isAfter(dto.getEndDate())
-//                                   && !d.getDeliveredDate().toLocalDate().isBefore(dto.getStartDate()))
-//                           .flatMap(d -> d.getDeliveriesFoods().stream())
-//                           .mapToDouble(df -> df.getFood().getPrice() * df.getFoodCount())
-//                           .sum();
-//
-//                   incomeDto.setAmount(amount);
-//
-//                   return incomeDto;
-//                })
-//                .toList();
-
         List<DeliveryGuy> deliveryGuys = deliveryGuyRepository.findAll();
 
         return deliveryGuys
@@ -233,8 +204,7 @@ public class AdminService {
                             .filter(d -> d.getStatus() == DeliveryStatus.DELIVERED
                                     && !d.getDeliveredDate().toLocalDate().isAfter(dto.getEndDate())
                                     && !d.getDeliveredDate().toLocalDate().isBefore(dto.getStartDate()))
-                            .flatMap(d -> d.getDeliveriesFoods().stream())
-                            .mapToDouble(df -> df.getFood().getPrice() * df.getFoodCount())
+                            .mapToDouble(Delivery::getTotalPrice)
                             .sum();
 
                     incomeDto.setAmount(amount);
@@ -345,10 +315,8 @@ public class AdminService {
             accessToken.setRevoked(true);
             accessTokenRepository.save(accessToken);
         }
-        //accessToken.setRevoked(true);
 
         deliveryGuyRepository.save(deliveryGuy);
-        //accessTokenRepository.save(accessToken);
 
         return String.format("delivery guy %s with id %d has been successfully fired",
                 deliveryGuy.getUser().getName(), deliveryGuy.getUser().getId());
@@ -461,7 +429,6 @@ public class AdminService {
         dto.setPrice(food.getPrice());
         dto.setDescription(food.getDescription());
         dto.setFoodCategory(food.getFoodCategory());
-        //dto.setCuisineName(food.getCuisine().getName());
         dto.setCuisineName(food.getCuisine() != null ? food.getCuisine().getName() : null);
         dto.setRestaurantName(food.getRestaurant().getName());
         return dto;

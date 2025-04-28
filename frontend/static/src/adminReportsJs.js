@@ -12,15 +12,20 @@ let totalEarningsBtn = document.getElementById("total-earnings-btn");
 let deliveryGuysEarningsBtn = document.getElementById("delivery-guy-earnings-btn");
 
 let getDeliveryGuyEarningReportBtn = document.getElementById("btn-get-delivery-guy-report");
+let getTotalEarningsReportBtn = document.getElementById("btn-get-report");
 
 let deliveryGuyIdEl = document.getElementById("delivery-guy-id-earnings");
 let fromDateInput = document.getElementById("from-date-delivery-guy-report");
 let toDateInput = document.getElementById("to-date-delivery-guy-report");
 
+let totalEarningsFromDateInput = document.getElementById("from-date-report");
+let totalEarningsToDateInput = document.getElementById("to-date-report");
+
 menuReportsBtn.addEventListener("click", onMenuReportsClick);
 totalEarningsBtn.addEventListener("click", showTotalEarnings);
 deliveryGuysEarningsBtn.addEventListener("click", showDeliveryGuyEarnings);
 getDeliveryGuyEarningReportBtn.addEventListener("click", getDeliveryGuyReport);
+getTotalEarningsReportBtn.addEventListener("click", getTotalEarningsReport);
 
 async function onMenuReportsClick(e) {
     e.preventDefault();
@@ -39,6 +44,10 @@ async function onMenuReportsClick(e) {
 }
 
 function showTotalEarnings() {
+    totalEarningsFromDateInput.value = "";
+    totalEarningsToDateInput.value = "";
+    document.querySelector("#total-income").textContent = "€???"
+
     deliveryGuyEarningsSection.classList.add("hidden");
     totalEarningsSection.classList.remove("hidden");
 }
@@ -85,7 +94,7 @@ async function showDeliveryGuyEarnings() {
 
     fromDateInput.value = "";
     toDateInput.value = "";
-    document.querySelector("#delivery-guy-total").textContent = "??? лв."
+    document.querySelector("#delivery-guy-total").textContent = "€???"
 
     totalEarningsSection.classList.add("hidden");
     deliveryGuyEarningsSection.classList.remove("hidden");
@@ -141,10 +150,58 @@ async function getDeliveryGuyReport(e) {
 
         deliveryGuysData.forEach(dg => {
             if (dg.deliveryGuyId == id) {
-                document.querySelector("#delivery-guy-total").textContent = Number(dg.amount).toFixed(2) + " лв."
+                document.querySelector("#delivery-guy-total").textContent = "€" + Number(dg.amount).toFixed(2);
             }
         })
         
+    } catch (error) {
+        window.alert(error.message);
+    }
+}
+
+async function getTotalEarningsReport(e) {
+    try {
+        e.preventDefault();
+        
+        let startDate = totalEarningsFromDateInput.value;
+        let endDate = totalEarningsToDateInput.value;
+
+        if (startDate === "" || endDate === "") {
+            throw new Error("All fields must be filled");
+        }
+
+        let address = ip() + "/api/admin/get-income";
+        let token = sessionStorage.getItem("accessToken");
+
+        let reportObj = {
+            startDate,
+            endDate
+        };        
+
+        let response = await fetch(address, {
+            method: "Post",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }, 
+            body: JSON.stringify(reportObj)
+        })
+
+        if (!response.ok) {
+            
+            let jsonRespone = await response.json();
+
+            let errorMsg = jsonRespone.errors 
+                ? Object.values(jsonRespone.errors).flat().join('\n')
+                : jsonRespone.message || 'Creation failed';
+
+            throw new Error(errorMsg);
+        }
+    
+        let reportData = await response.json();
+
+        document.querySelector("#total-income").textContent = "€" + Number(reportData.amount).toFixed(2);
+
     } catch (error) {
         window.alert(error.message);
     }
