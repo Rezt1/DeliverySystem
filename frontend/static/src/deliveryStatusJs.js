@@ -19,9 +19,9 @@ import { fetchActiveDeliveriesUser, fetchingDelivered } from "./fetchingData.mjs
         }
 
         deliveries.forEach(order => {
-            if(order.status != "PENDING"){
             let section = document.createElement("section");
             section.classList.add("space-y-4");
+            if(order.status != 'PENDING'){
             section.innerHTML = `<h2 class="text-2xl font-bold text-[#006bb8]">Order Details</h2>
 
           <div class="grid grid-cols-2 gap-4 text-gray-700">
@@ -31,7 +31,7 @@ import { fetchActiveDeliveriesUser, fetchingDelivered } from "./fetchingData.mjs
             </div>
             <div>
               <p class="font-semibold">Status:</p>
-              <p class="text-[#ff66c4]">${order.status}</p>
+              <p class="text-[#ff66c4]">OUT FOR DELIVERY</p>
             </div>
             <div>
               <p class="font-semibold">Price:</p>
@@ -52,7 +52,7 @@ import { fetchActiveDeliveriesUser, fetchingDelivered } from "./fetchingData.mjs
 
         <!-- Courier Info -->
         <section class="flex items-center space-x-4 mt-6">
-          <img src="https://i.imgur.com/7k12EPD.png" alt="Courier" class="w-16 h-16 rounded-full border-4 border-[#ff66c4]" />
+          <img src="./Images/icon.png" alt="Courier" class="w-16 h-16 rounded-full border-4 border-[#ff66c4]" />
           <div>
             <p class="font-bold text-lg">${order.deliveryGuyName}</p>
             <p class="text-sm text-gray-500">Your Delivery Hero 🚴‍♂️</p>
@@ -88,6 +88,77 @@ import { fetchActiveDeliveriesUser, fetchingDelivered } from "./fetchingData.mjs
               <p class="text-sm mt-2 text-gray-400">Delivered</p>
             </div>
           </div>`
+            }
+            else{
+                section.innerHTML = `<section class="space-y-4">
+  <h2 class="text-2xl font-bold text-[#006bb8]">Order Details</h2>
+
+  <div class="grid grid-cols-2 gap-4 text-gray-700">
+    <div>
+      <p class="font-semibold">Order ID:</p>
+      <p>#${order.deliveryId}</p>
+    </div>
+    <div>
+      <p class="font-semibold">Status:</p>
+      <p class="text-blue-600">${order.status}</p>
+    </div>
+    <div>
+      <p class="font-semibold">Price:</p>
+      <p>€${order.totalPrice.toFixed(2)}</p>
+    </div>
+    <div>
+      <p class="font-semibold">Estimated Delivery:</p>
+      <p>Today at ${order.toBeDeliveredTime}</p>
+    </div>
+  </div>
+
+  <div class="pt-4">
+    <p class="font-semibold text-[#006bb8] mb-2">Items:</p>
+    <ul id="listFoods" class="list-disc list-inside"></ul>
+  </div>
+</section>
+
+<!-- Courier Info (Not assigned yet) -->
+<section class="flex items-center space-x-4 mt-6">
+  <img src="./Images/icon.png" alt="Courier" class="w-16 h-16 rounded-full opacity-30 grayscale" />
+  <div>
+    <p class="font-bold text-lg text-gray-500">Not Assigned</p>
+    <p class="text-sm text-gray-400">Waiting for restaurant confirmation</p>
+  </div>
+</section>
+
+<!-- Visual Status Tracker -->
+<section class="pt-6">
+  <div class="flex items-center justify-between">
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-[#ff66c4] flex items-center justify-center text-white font-bold">1</div>
+      <p class="text-sm mt-2 text-[#006bb8]">Order Placed</p>
+    </div>
+
+    <div class="h-1 flex-1 bg-gray-300 mx-2"></div>
+
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold">2</div>
+      <p class="text-sm mt-2 text-gray-400">Cooking</p>
+    </div>
+
+    <div class="h-1 flex-1 bg-gray-300 mx-2"></div>
+
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold">3</div>
+      <p class="text-sm mt-2 text-gray-400">Out for Delivery</p>
+    </div>
+
+    <div class="h-1 flex-1 bg-gray-300 mx-2"></div>
+
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold">4</div>
+      <p class="text-sm mt-2 text-gray-400">Delivered</p>
+    </div>
+  </div>
+</section>
+`
+            }
           deliveryContainer.appendChild(section);
           order.foods.forEach(food => {
             console.log(food);
@@ -95,10 +166,6 @@ import { fetchActiveDeliveriesUser, fetchingDelivered } from "./fetchingData.mjs
             item.textContent = food.foodName + " x " + food.quantity;
             section.querySelector("#listFoods").appendChild(item);
             });
-        }
-        else{
-
-        }
         });
     };
 
@@ -116,7 +183,6 @@ import { fetchActiveDeliveriesUser, fetchingDelivered } from "./fetchingData.mjs
     }
     async function displayDeliveredOrders(deliveries){
         deliveries.forEach(order => {
-            if(order.status != "PENDING"){
             let section = document.createElement("section");
             section.classList.add("space-y-4");
             section.innerHTML = `<h2 class="text-2xl font-bold text-[#006bb8]">Order Details</h2>
@@ -128,7 +194,7 @@ import { fetchActiveDeliveriesUser, fetchingDelivered } from "./fetchingData.mjs
             </div>
             <div>
               <p class="font-semibold">Status:</p>
-              <p class="text-[#ff66c4]">${order.status}</p>
+              <p class="text-[#22c55e]">${order.status}</p>
             </div>
             <div>
               <p class="font-semibold">Price:</p>
@@ -149,7 +215,7 @@ import { fetchActiveDeliveriesUser, fetchingDelivered } from "./fetchingData.mjs
 
         <!-- Courier Info -->
         <section class="flex items-center space-x-4 mt-6">
-          <img src="https://i.imgur.com/7k12EPD.png" alt="Courier" class="w-16 h-16 rounded-full border-4 border-[#ff66c4]" />
+          <img src="./Images/icon.png" alt="Courier" class="w-16 h-16 rounded-full border-4 border-[#ff66c4]" />
           <div>
             <p class="font-bold text-lg">${order.deliveryGuyName}</p>
             <p class="text-sm text-gray-500">Your Delivery Hero 🚴‍♂️</p>
@@ -185,6 +251,7 @@ import { fetchActiveDeliveriesUser, fetchingDelivered } from "./fetchingData.mjs
               <p class="text-sm mt-2 text-[#006bb8]">Delivered</p>
             </div>
           </div>`
+
           newDivForTracking.appendChild(section);
           order.foods.forEach(food => {
             console.log(food);
@@ -192,9 +259,9 @@ import { fetchActiveDeliveriesUser, fetchingDelivered } from "./fetchingData.mjs
             item.textContent = food.foodName + " x " + food.quantity;
             section.querySelector("#listFoods").appendChild(item);
             });
+            });
+        
         }
-        });
-    }
    
   displayActiveDeliveries(data);
   displayDeliveredOrders(data2);
