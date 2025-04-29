@@ -194,3 +194,24 @@ export async function fetchActiveDeliveriesUser() {
       console.error('Error:', error);
   }
 }
+
+export async function  fetchingDelivered() {
+  try {
+    const response = await fetch(`${ip()}/api/users/my-past-orders`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}` 
+        }
+    });
+
+    if (response.ok) {
+        const deliveries = await response.json(); 
+        return deliveries; 
+    } else {
+        console.error('Failed to fetch active deliveries', response.status);
+    }
+} catch (error) {
+    console.error('Error:', error);
+}
+}
