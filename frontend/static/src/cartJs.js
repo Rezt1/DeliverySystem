@@ -79,7 +79,7 @@ if(cartItems.length != 0 || localStorage.getItem("cart") === null){
 
          cartItems = cartItems.map(food => {
             if (food.id === item.id) {
-              return { ...food, quantity: amount};
+              food.quantity = amount;
             }
             return food;
           });

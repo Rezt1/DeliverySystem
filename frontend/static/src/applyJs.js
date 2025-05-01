@@ -12,16 +12,16 @@ async function becomeDeliveryGuy(e) {
     e.preventDefault();
     
 try{
-    let citySpace1 = citySpace.dataset.cityId;
+    let spaceForCity = citySpace.dataset.cityId;
 
     let ibanSpace = document.getElementById("iban-input").value;
 
-    console.log(citySpace1);
+    console.log(spaceForCity);
     console.log(ibanSpace);
 
     let objCourier = {
         "iban": ibanSpace,
-        "cityId": citySpace1
+        "cityId": spaceForCity
     }
 
     let token = sessionStorage.getItem("accessToken");
@@ -39,7 +39,7 @@ try{
         throw new Error("You cannot become a delivery guy again!");
       }
     
-      const result = await resp.text();
+      let result = await resp.text();
       alert(result);
       await logout();
       window.location.href = "./home.html";
@@ -58,6 +58,8 @@ async function showOptionsCities(e) {
         let isToggled = target.dataset.customInfo === "istoggled";
 
         target.dataset.customInfo = isToggled ? "nottoggled" : "istoggled";
+
+        console.log(isToggled);
 
         if (!isToggled) {
             while (target.options.length > 1) {

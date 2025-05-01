@@ -354,22 +354,18 @@
       let index = 0;
 
       function showNextText() {
-        // Hide all texts
+
         texts.forEach((text) => {
           text.classList.remove("opacity-100");
         });
 
-        // Show the current text
         texts[index].classList.add("opacity-100");
 
-        // Move to the next text
         index = (index + 1) % texts.length;
       }
 
-      // Show the first text immediately
       showNextText();
 
-      // Set an interval to show the next text every 3 seconds (3000 milliseconds)
       setInterval(showNextText, 3000);
     </script>
   </body>
