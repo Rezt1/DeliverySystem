@@ -13,7 +13,7 @@ import { fetchActiveDeliveriesUser, fetchingDelivered } from "./fetchingData.mjs
             const noDeliveriesDiv = document.createElement('div');
             noDeliveriesDiv.className = 'text-center p-6 text-gray-500 text-lg';
             noDeliveriesDiv.innerHTML = `
-              <p>You haven't made any orders yet or they haven't been picked up!😌</p>
+              <p>You haven't made any orders yet!😌</p>
             `;
             deliveryContainer.appendChild(noDeliveriesDiv);
         }

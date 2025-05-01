@@ -8,7 +8,11 @@ import { ifAdmin, ifDeliveryGuy, ifLoggedIn } from "./userWork.mjs";
     document.getElementsByClassName("flex items-center shrink-0")[0].addEventListener('click', loadHome);
     let restBtn = document.getElementById("restaurants-button");
     let cartBtn = document.getElementsByClassName("btn-cart bg-white rounded-full w-11 h-11 flex items-center justify-center shadow-md relative")[0];
-    
+    document.getElementById("faqBtn").addEventListener("click", () => {
+      window.location.href = "./faq.html"
+    });
+
+
     loginBtn.addEventListener('click', loadLogin);
     registerBtn.addEventListener("click", loadRegister);
     acctountBtn.addEventListener("click", loadAccount);

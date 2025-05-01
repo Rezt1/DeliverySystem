@@ -97,5 +97,12 @@ function addToCart(name, price, description, id){
     cart.push({ name, price, description, id, quantity: 1 });
   }
 
+  let popup = document.getElementById("cart-popup");
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 3000);
+
   localStorage.setItem("cart", JSON.stringify(cart));
 }
