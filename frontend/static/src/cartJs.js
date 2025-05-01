@@ -10,7 +10,7 @@ document.getElementById("continue-shopping").addEventListener("click", () => {
 
 document.getElementById("checkout").addEventListener("click", checkout);
 
-if(cartItems.length != 0 || localStorage.getItem("cart") === null){
+if(cartItems.length != 0 || localStorage.getItem("cart") !== null){
     let classes = "grid grid-cols-[45%_30%_25%] md:grid-cols-[55%_25%_20%] py-4 border-gray-300 border-b-2"
     cartItems.forEach(item => {
         let itemInfo = document.createElement("div");
