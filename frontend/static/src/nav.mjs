@@ -1,5 +1,6 @@
 import { navigationStuff } from "./src.mjs";
-const menuButton = document.getElementById("main-menu");
+
+/*const menuButton = document.getElementById("main-menu");
       const mobileMenu = document.getElementById("mobile-menu");
 
       // Add event listener for toggling the mobile menu
@@ -72,5 +73,5 @@ const menuButton = document.getElementById("main-menu");
       }
 
       // Call the function to set the initial state (login or account button)
-      toggleLoginState();
+      toggleLoginState(); */
       navigationStuff();

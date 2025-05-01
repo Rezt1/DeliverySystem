@@ -62,10 +62,7 @@ if(cartItems.length != 0 || localStorage.getItem("cart") === null){
           itemSummery.removeChild(itemInfo);
 
           if(cartItems.length == 0){
-            itemSummery.innerHTML= `<div id="empty-cart" class="flex flex-col items-center justify-center p-6 text-center text-gray-500">
-            <img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png" alt="Empty Cart" class="w-24 h-24 mb-4 opacity-70" />
-            <h2 class="text-xl font-bold mb-1 text-[#006bb8]">Your cart is empty</h2>
-            <p class="mb-4">You haven't added any items yet.</p>`
+            document.getElementById("empty-cart").classList.remove("hidden");
           } 
 
           addingSubtotal()
@@ -94,10 +91,7 @@ if(cartItems.length != 0 || localStorage.getItem("cart") === null){
     });
 }
 else{
-    itemSummery.innerHTML= `<div id="empty-cart" class="flex flex-col items-center justify-center p-6 text-center text-gray-500">
-  <img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png" alt="Empty Cart" class="w-24 h-24 mb-4 opacity-70" />
-  <h2 class="text-xl font-bold mb-1 text-[#006bb8]">Your cart is empty</h2>
-  <p class="mb-4">You haven't added any items yet.</p>`
+  document.getElementById("empty-cart").classList.remove("hidden");
 }
 
 addingSubtotal();
