@@ -58,7 +58,7 @@ catch(e){
 }
     
 
-logout();
+await logout();
 
 //window.location.href = "/home.html";
     

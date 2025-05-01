@@ -41,7 +41,7 @@ try{
     
       const result = await resp.text();
       alert(result);
-      logout();
+      await logout();
       window.location.href = "./home.html";
 
 }
