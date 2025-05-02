@@ -31,7 +31,7 @@ public class FoodService {
         } else if (category != null) {
             foods = foodRepository.findByFoodCategory(category);
         } else {
-            foods = foodRepository.findAll(); // Or return empty list? Your choice.
+            foods = foodRepository.findAll();
         }
 
         return foods.stream()
