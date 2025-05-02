@@ -19,7 +19,6 @@ let pendingDeliveries = await fetchPendingDel();
 
 console.log(pendingDeliveries);
 
-//let pendingDeliveries = [];
 if(pendingDeliveries.length == 0) {
     console.log("hidden");
     loading.classList.remove("hidden");

@@ -1,15 +1,12 @@
 import { ip } from "./ipSearch.mjs";
-import { ifLoggedIn } from "./userWork.mjs";
 
 let ipAddress = ip();
 
 let addressBlock = document.getElementById("delivery-address");
 
-//let apartmentblock = document.getElementById("delivery-address-optional");
-
 let confirmOrder = document.getElementById("confirm-order-button");
 
-const deliveryInput = document.getElementById('delivery-time');
+let deliveryInput = document.getElementById('delivery-time');
 
 let paymentCard = document.getElementById("card-radio");
 
@@ -99,7 +96,7 @@ setMinDeliveryTime();
 
 function isTimeBetween(time, start, end) {
     console.log(time + " " + start + " " + end);
-    // Convert all times to minutes since midnight for accurate comparison
+    
     const toMinutes = (timeStr) => {
       const [hours, minutes] = timeStr.split(':').map(Number);
       return hours * 60 + minutes;
@@ -110,10 +107,10 @@ function isTimeBetween(time, start, end) {
     const endMins = toMinutes(end);
   
     if (startMins <= endMins) {
-      // Normal case: start and end on same day
+      
       return timeMins >= startMins && timeMins <= endMins;
     } else {
-      // Case where time period crosses midnight
+    
       return timeMins >= startMins || timeMins <= endMins;
     }
   }

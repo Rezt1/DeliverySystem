@@ -58,9 +58,9 @@ catch(e){
 }
     
 
-logout();
+await logout();
 
-//window.location.href = "/home.html";
+window.location.href = "/home.html";
     
 });
 
@@ -76,12 +76,11 @@ else{
     quitDel.classList.add("hidden");
 }
 
-document.addEventListener("DOMContentLoaded", function () {
 
-    const editBtn = document.getElementById("edit-btn");
-    const saveBtn = document.getElementById("save-btn");
-    const cancelBtn = document.getElementById("cancel-btn");
-    const userNameElement = document.getElementById("user-name");
+    let editBtn = document.getElementById("edit-btn");
+    let saveBtn = document.getElementById("save-btn");
+    let cancelBtn = document.getElementById("cancel-btn");
+    let userNameElement = document.getElementById("user-name");
 
 
     editBtn.addEventListener("click", () => {
@@ -90,12 +89,10 @@ document.addEventListener("DOMContentLoaded", function () {
       nameField.focus(); 
 
       emailField.setAttribute("contenteditable", "true");
-      emailField.classList.add("ring-2", "ring-[#006bb8]");
-      emailField.focus(); 
+      emailField.classList.add("ring-2", "ring-[#006bb8]"); 
 
       phoneField.setAttribute("contenteditable", "true");
       phoneField.classList.add("ring-2", "ring-[#006bb8]");
-      phoneField.focus(); 
 
       editBtn.classList.add("hidden");
       saveBtn.classList.remove("hidden");
@@ -119,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       try {
-        const response = await fetch(`${ip()}/api/users/update-account`, {
+        let response = await fetch(`${ip()}/api/users/update-account`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -130,12 +127,18 @@ document.addEventListener("DOMContentLoaded", function () {
     
         if (!response.ok) throw new Error('Failed to update developer info.');
     
-        const data = await response.json();
+        let data = await response.json();
         console.log(data);
         alert("User updated successfully!");
-        userNameElement.textContent = newName;
+        userNameElement.textContent = newName.trim();
         nameField.setAttribute("contenteditable", "false");
         nameField.classList.remove("ring-2", "ring-[#006bb8]");
+
+        emailField.setAttribute("contenteditable", "false");
+        emailField.classList.remove("ring-2", "ring-[#006bb8]");
+  
+        phoneField.setAttribute("contenteditable", "false");
+        phoneField.classList.remove("ring-2", "ring-[#006bb8]");
 
         sessionStorage.setItem("username", newName);
         sessionStorage.setItem("email", newEmail);
@@ -172,4 +175,15 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-  });
+    emailField.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+      }
+    });
+
+    phoneField.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+      }
+    });
+

@@ -10,7 +10,7 @@ document.getElementById("continue-shopping").addEventListener("click", () => {
 
 document.getElementById("checkout").addEventListener("click", checkout);
 
-if(localStorage.getItem("cart") !=  null){
+if(cartItems.length != 0 || localStorage.getItem("cart") !== null){
     let classes = "grid grid-cols-[45%_30%_25%] md:grid-cols-[55%_25%_20%] py-4 border-gray-300 border-b-2"
     cartItems.forEach(item => {
         let itemInfo = document.createElement("div");
@@ -61,6 +61,10 @@ if(localStorage.getItem("cart") !=  null){
 
           itemSummery.removeChild(itemInfo);
 
+          if(cartItems.length == 0){
+            document.getElementById("empty-cart").classList.remove("hidden");
+          } 
+
           addingSubtotal()
 
         });
@@ -75,7 +79,7 @@ if(localStorage.getItem("cart") !=  null){
 
          cartItems = cartItems.map(food => {
             if (food.id === item.id) {
-              return { ...food, quantity: amount};
+              food.quantity = amount;
             }
             return food;
           });
@@ -87,10 +91,7 @@ if(localStorage.getItem("cart") !=  null){
     });
 }
 else{
-    itemSummery.innerHTML= `<div id="empty-cart" class="flex flex-col items-center justify-center p-6 text-center text-gray-500">
-  <img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png" alt="Empty Cart" class="w-24 h-24 mb-4 opacity-70" />
-  <h2 class="text-xl font-bold mb-1 text-[#006bb8]">Your cart is empty</h2>
-  <p class="mb-4">You haven't added any items yet.</p>`
+  document.getElementById("empty-cart").classList.remove("hidden");
 }
 
 addingSubtotal();
