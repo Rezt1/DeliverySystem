@@ -3,8 +3,10 @@ package com.renascence.backend.dtos.authorization;
 import com.renascence.backend.customAnnotations.PasswordMatcher;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @PasswordMatcher
 public class RegisterDto {
 

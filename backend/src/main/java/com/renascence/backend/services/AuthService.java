@@ -120,18 +120,22 @@ public class AuthService {
             }
         }
 
-        Optional<City> city = cityRepository.findById(registerDto.getLocationId());
+        User newUser = new User();
 
-        if (city.isEmpty()){
-            return ResponseEntity.badRequest().body(new ErrorResponse("City does not exist!", LocalDateTime.now()));
+        if (registerDto.getLocationId() != null) {
+            Optional<City> city = cityRepository.findById(registerDto.getLocationId());
+
+            if (city.isEmpty()){
+                return ResponseEntity.badRequest().body(new ErrorResponse("City does not exist!", LocalDateTime.now()));
+            }
+
+            newUser.setLocation(city.get());
         }
 
-        User newUser = new User();
         newUser.setName(registerDto.getName());
         newUser.setEmail(registerDto.getEmail());
         newUser.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         newUser.setPhoneNumber(registerDto.getPhoneNumber());
-        newUser.setLocation(city.get());
 
         userRepository.save(newUser);
 
