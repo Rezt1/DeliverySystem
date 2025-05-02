@@ -2,7 +2,9 @@ package com.renascence.backend.service;
 
 import com.renascence.backend.dtos.authorization.AuthResponseDto;
 import com.renascence.backend.dtos.authorization.LoginRequestDto;
+import com.renascence.backend.dtos.authorization.RegisterDto;
 import com.renascence.backend.entities.AccessToken;
+import com.renascence.backend.entities.City;
 import com.renascence.backend.entities.CustomUserDetails;
 import com.renascence.backend.entities.User;
 import com.renascence.backend.exceptionHandlers.ErrorResponse;
@@ -19,6 +21,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import com.renascence.backend.repositories.UserRepository;
@@ -33,6 +36,10 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @ExtendWith(MockitoExtension.class)
 public class AuthServiceTest {
@@ -55,6 +62,8 @@ public class AuthServiceTest {
     private SecurityContext securityContext;
     @Mock
     private Authentication authentication;
+    @Mock
+    private RegisterDto registerDto;
 
     @BeforeEach
     void setUp() {
@@ -198,6 +207,123 @@ public class AuthServiceTest {
         ErrorResponse errorResponse = (ErrorResponse) response.getBody();
         assertEquals("Logout failed !!", errorResponse.getMessage());
     }
+
+
+
+    @Test
+    void testRegister_whenAuthenticated_returnsForbidden() {
+        // Create mock of a non-anonymous token (e.g., UsernamePasswordAuthenticationToken)
+        Authentication authentication = mock(UsernamePasswordAuthenticationToken.class);
+
+        when(authentication.isAuthenticated()).thenReturn(true);
+        SecurityContext context = mock(SecurityContext.class);
+        when(context.getAuthentication()).thenReturn(authentication);
+
+        SecurityContextHolder.setContext(context);
+
+        RegisterDto dto = new RegisterDto("John", "john@example.com", "123456", "123456", "0897665234",null);
+        ResponseEntity<?> response = authService.register(dto);
+
+        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
+        assertEquals("You are logged in", response.getBody());
+    }
+
+    @Test
+    void testRegister_withDuplicateEmail_returnsBadRequest() {
+        SecurityContextHolder.clearContext(); // simulate unauthenticated
+
+        RegisterDto dto = new RegisterDto("John", "john@example.com", "123456", "123456", "0897665234", null);
+
+        User existingUser = new User();
+        existingUser.setName("John");
+        existingUser.setEmail("john@example.com");
+        existingUser.setPassword("123456");
+
+        when(userRepository.findAll()).thenReturn(List.of(existingUser));
+
+        ResponseEntity<?> response = authService.register(dto);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        ErrorResponse error = (ErrorResponse) response.getBody();
+        assert error != null; // error.getMassage() may produce a null pointer exception
+        assertEquals("Email is already taken!", error.getMessage());
+    }
+
+    @Test
+    void testRegister_withInvalidCity_returnsBadRequest() {
+        SecurityContextHolder.clearContext(); // simulate unauthenticated
+
+        RegisterDto dto = new RegisterDto("John", "john@example.com", "123456", "123456", "0897665234", 99L);
+
+        when(userRepository.findAll()).thenReturn(List.of());
+        when(cityRepository.findById(99L)).thenReturn(Optional.empty());
+
+        ResponseEntity<?> response = authService.register(dto);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        ErrorResponse error = (ErrorResponse) response.getBody();
+        assert error != null;
+        assertEquals("City does not exist!", error.getMessage());
+    }
+
+    @Test
+    void testRegister_successWithoutCity_returnsCreated() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+        SecurityContextHolder.clearContext(); // simulate unauthenticated
+
+        RegisterDto dto = new RegisterDto("John", "john@example.com", "123456", "123456", "0897665234", null);
+
+        when(userRepository.findAll()).thenReturn(List.of());
+        when(jwtService.generateToken(any())).thenReturn("fake-token");
+        when(userRepository.save(any(User.class))).thenAnswer(i -> {
+            User u = i.getArgument(0);
+            u.setId(1L);
+            return u;
+        });
+
+        ResponseEntity<?> response = authService.register(dto);
+
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+
+        AuthResponseDto body = (AuthResponseDto) response.getBody();
+        assertNotNull(body);
+        assertEquals("john@example.com", body.email());
+        assertEquals("fake-token", body.accessToken());
+    }
+
+    @Test
+    void testRegister_successWithCity_returnsCreated() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+        SecurityContextHolder.clearContext(); // simulate unauthenticated
+
+        RegisterDto dto = new RegisterDto("Anna", "anna@example.com", "pass123", "pass123", "0888888888", 5L);
+        City city = new City();
+        city.setId(5L);
+        city.setName("Sofia");
+
+        when(userRepository.findAll()).thenReturn(List.of());
+        when(cityRepository.findById(5L)).thenReturn(Optional.of(city));
+        when(jwtService.generateToken(any())).thenReturn("city-token");
+        when(userRepository.save(any(User.class))).thenAnswer(i -> {
+            User u = i.getArgument(0);
+            u.setId(2L);
+            return u;
+        });
+
+        ResponseEntity<?> response = authService.register(dto);
+
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+
+        AuthResponseDto body = (AuthResponseDto) response.getBody();
+        assertNotNull(body);
+        assertEquals("anna@example.com", body.email());
+        assertEquals("city-token", body.accessToken());
+    }
+
 }
 
 

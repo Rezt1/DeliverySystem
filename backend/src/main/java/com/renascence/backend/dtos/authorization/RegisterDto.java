@@ -3,11 +3,14 @@ package com.renascence.backend.dtos.authorization;
 import com.renascence.backend.customAnnotations.PasswordMatcher;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @PasswordMatcher
+@NoArgsConstructor
 public class RegisterDto {
 
     @NotBlank(message = "Name is required!")
@@ -29,4 +32,13 @@ public class RegisterDto {
     private String phoneNumber;
 
     private Long locationId;
+
+    public RegisterDto(String name, String email, String password, String repeatPassword, String phoneNumber, Long locationId) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.repeatPassword = repeatPassword;
+        this.phoneNumber = phoneNumber;
+        this.locationId = locationId;
+    }
 }
